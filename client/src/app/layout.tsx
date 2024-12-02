@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Noto_Sans } from "next/font/google";
 import Provider from "@/providers/Provider";
 
 export const metadata: Metadata = {
   title: "Veritas",
   description: "Prototype for Veritas",
 };
+
+const notoSans = Noto_Sans({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -14,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={notoSans.className}>
         <Provider>{children}</Provider>
       </body>
     </html>
