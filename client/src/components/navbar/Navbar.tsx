@@ -13,20 +13,20 @@ export default function Navbar() {
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li><Link href="/">Home</Link></li>
+            <li><Link href="#home">Home</Link></li>
             <li>
               <details>
                 <summary>Parent</summary>
                 <ul className="bg-base-300 rounded-t-none p-2">
-                  <li><Link href="/">About</Link></li>
-                  <li><Link href="/">Contact</Link></li>
+                  <li><Link href="#about">About</Link></li>
+                  <li><Link href="#contact">Contact</Link></li>
                 </ul>
               </details>
             </li>
-            <li className="flex items-center justify-center w-10 h-10">
-              <ColorControl />
-            </li>
           </ul>
+        </div>
+        <div className="flex items-center justify-center w-10 h-10">
+          <ColorControl />
         </div>
       </div>
     </nav>
