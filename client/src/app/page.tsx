@@ -1,8 +1,8 @@
 import Navbar from "@/components/navbar/Navbar";
 import CarouselSlide from "@/components/carousel/CarouselSlide";
-import About from "./welcome/about";
-import Contact from "./welcome/contact";
-import HomePage from "./welcome/home";
+import About from "@/components/welcome/about";
+import Contact from "@/components/welcome/contact";
+import HomePage from "@/components/welcome/home";
 import FooterBar from "@/components/footer/FooterBar";
 export default function Home() {
   return (

@@ -38,7 +38,7 @@ export default function Contact() {
               <div className="flex justify-center items-center">
                 <iframe className="absolute top-0 left-0 w-full h-full"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3871.9050690012996!2d100.58411927591945!3d13.964255892337606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2816f1377fc17%3A0x63d330b7f8af6e16!2sRangsit%20University!5e0!3m2!1sen!2sth!4v1733346702826!5m2!1sen!2sth"
-                  frameBorder="0" style={{ border: 0 }} allowFullScreen aria-hidden="false" tabIndex={0}>
+                  style={{ border: 0 }} allowFullScreen aria-hidden="false" tabIndex={0}>
                 </iframe>
               </div>
             </div>
