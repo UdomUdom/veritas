@@ -1,7 +1,14 @@
-import { FlameKindling } from 'lucide-react';
-import Link from 'next/link';
-import ColorControl from '@/components/darkmode/ColorControl';
-export default function Navbar() {
+import { FlameKindling } from "lucide-react";
+import Link from "next/link";
+import ColorControl from "@/components/darkmode/ColorControl";
+
+interface NavbarProps {
+  title: string;
+  href: string;
+  children?: Array<{ title: string; href: string }>;
+}
+
+export default function Navbar({ navMenu }: { navMenu: NavbarProps[] }) {
   return (
     <nav className="bg-base-300 text-base-content">
       <div className="container navbar">
@@ -13,16 +20,24 @@ export default function Navbar() {
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li><Link href="#home">Home</Link></li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="bg-base-300 rounded-t-none p-2">
-                  <li><Link href="#about">About</Link></li>
-                  <li><Link href="#contact">Contact</Link></li>
-                </ul>
-              </details>
-            </li>
+            {navMenu.map((item, index) => (
+              <li key={index}>
+                {item.children ? (
+                  <details>
+                    <summary>{item.title}</summary>
+                    <ul className="bg-base-300 rounded-t-none p-2">
+                      {item.children.map((child, index) => (
+                        <li key={index}>
+                          <Link href={child.href}>{child.title}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                ) : (
+                  <Link href={item.href}>{item.title}</Link>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
         <div className="flex items-center justify-center w-10 h-10">
@@ -30,5 +45,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

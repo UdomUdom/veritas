@@ -5,7 +5,12 @@ interface CardProps {
   color?: string;
 }
 
-export default function Card({ Header, Body, className, color = "base-100" }: CardProps) {
+export default function Card({
+  Header,
+  Body,
+  className,
+  color = "base-100",
+}: CardProps) {
   return (
     <section className={`card ${color} shadow-xl ${className}`}>
       <div className="card-body items-center text-center">
@@ -13,5 +18,5 @@ export default function Card({ Header, Body, className, color = "base-100" }: Ca
         <p>{Body}</p>
       </div>
     </section>
-  )
+  );
 }
