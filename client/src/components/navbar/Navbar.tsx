@@ -40,7 +40,7 @@ export default function Navbar({ navMenu }: { navMenu: NavbarProps[] }) {
             ))}
           </ul>
         </div>
-        <div className="flex items-center justify-center w-10 h-10">
+        <div className="flex items-center justify-center w-10 h-10 mx-2">
           <ColorControl />
         </div>
       </div>
