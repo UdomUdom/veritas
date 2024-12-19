@@ -1,7 +1,9 @@
+import WeekView from "@/components/calendar/WeekView";
+
 export default function Dashboard() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <WeekView />
     </div>
   );
 }
