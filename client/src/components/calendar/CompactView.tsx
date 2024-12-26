@@ -14,7 +14,7 @@ export default function CompactView() {
   const currentTime = `${today.getHours()}.00`;
 
   return (
-    <section className="compact relative bg-base-100 py-24">
+    <section className="compact relative bg-base-200 py-24">
       <div className="card bg-base-300 w-80 shadow-xl">
         <div className="card-body items-center text-center">
           <h2 className="card-title">Schedules</h2>
