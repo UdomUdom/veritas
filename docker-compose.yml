@@ -1,0 +1,34 @@
+services:
+  pgdb:
+    container_name: veritas-pgdb
+    image: "postgres:alpine"
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=veritas
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+    networks:
+      - veritas
+
+  redis:
+    container_name: veritas-redis
+    image: "redis:alpine"
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - cache:/data
+    networks:
+      - veritas
+
+volumes:
+  pgdb:
+  cache:
+
+networks:
+  veritas:
+    driver: bridge

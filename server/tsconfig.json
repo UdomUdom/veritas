@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "ES2022",                       // Use modern JavaScript target for async/await and newer syntax.
+    "module": "ESNext",                       // ES Module system for compatibility with modern tooling.
+    "lib": ["ES2022"],                        // Include necessary libraries (ES2022 features).
+    "types": ["node"],                        // Include type definitions for Node.js.
+    "allowJs": false,                         // Avoid including JavaScript files in the build.
+    "checkJs": false,                         // No need to check JavaScript files.
+    "outDir": "./dist",                       // Output directory for compiled files.
+    "rootDir": ".",                           // Source code directory.
+    "declaration": true,                      // Generate .d.ts files for type definitions.
+    "declarationMap": true,                   // Map declarations to source files for debugging.
+    "sourceMap": true,                        // Generate source maps for easier debugging.
+    "strict": true,                           // Enable all strict type-checking options.
+
+    /* Module Resolution */
+    "moduleResolution": "Node",               // Resolve modules using Node.js-style resolution.
+    "esModuleInterop": true,                  // Allow default imports from CommonJS modules.
+    "resolveJsonModule": true,                // Enable importing JSON modules.
+    "forceConsistentCasingInFileNames": true, // Prevent mismatched casing in imports.
+
+    /* Type Checking */
+    "strictNullChecks": true,                 // Ensure null and undefined are handled explicitly.
+    "noImplicitAny": true,                    // Disallow variables with an implicit `any` type.
+    "noImplicitReturns": true,                // Warn if a function doesn't return a value in all code paths.
+    "noUnusedLocals": true,                   // Report unused local variables.
+    "noUnusedParameters": true,               // Report unused function parameters.
+
+    /* Emit */
+    "noEmitOnError": true,                    // Avoid emitting files if there are any type errors.
+    "incremental": true,                      // Speed up subsequent builds.
+
+    /* Additional Options */
+    "skipLibCheck": true,                     // Skip type checking of declaration files (improves build speed).
+    "useUnknownInCatchVariables": true,       // Use `unknown` type for catch clause variables.
+    "experimentalDecorators": true,           // Enable support for decorators (useful for frameworks like TypeORM).
+
+    /* Paths Mapping (Optional) */
+    "baseUrl": "./",                          // Base directory for non-relative imports.
+    "paths": {
+      "@/*": ["src/*"]                        // Allow importing files using the @/ prefix.
+    }
+  },
+  "include": ["src/**/*.ts"],                 // Include all TypeScript files in the `src` directory.
+  "exclude": [
+    "node_modules",
+    "dist", 
+    "**/*.test.ts"]                           // Exclude unnecessary directories and files.
+}
