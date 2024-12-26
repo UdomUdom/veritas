@@ -1,4 +1,5 @@
 "use client";
+import { days, hours } from "@/data/calendar";
 // Mock preview data from the backend
 const events = [
   { day: "Monday", hour: "9.00", event: "learn" },
@@ -6,37 +7,13 @@ const events = [
   { day: "Friday", hour: "16.00", event: "party" },
 ];
 
-const hours = [
-  "9.00",
-  "10.00",
-  "11.00",
-  "12.00",
-  "13.00",
-  "14.00",
-  "15.00",
-  "16.00",
-  "17.00",
-  "18.00",
-  "19.00",
-];
-
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
 export default function WeekView({ height = "auto" }) {
   const today = new Date();
   const currentDay = days[today.getDay()];
-  // const currentTime = `${today.getHours()}.00`;
+  const currentTime = `${today.getHours()}.00`;
 
   return (
-    <section className="relative bg-base-200 py-24" style={{ height }}>
+    <section className="relative bg-base-100 py-24" style={{ height }}>
       <div className="max-w-7xl mx-auto" style={{ overflowX: "auto" }}>
         <table className="table w-full text-base-content">
           <thead className="sticky top-0 bg-base-100 z-10">
@@ -70,8 +47,12 @@ export default function WeekView({ height = "auto" }) {
                   return (
                     <td
                       key={dayIndex}
-                      className={`border-r border-base-100 p-2 text-center hover:bg-info hover:text-info-content ${
+                      className={`border-r border-base-100 p-2 text-center hover:bg-info hover:text-info-content duration-300 ${
                         event ? "bg-base-300" : ""
+                      } ${
+                        day === currentDay && hour === currentTime
+                          ? "bg-info text-info-content"
+                          : ""
                       }`}
                     >
                       {event ? event.event : ""}

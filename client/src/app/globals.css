@@ -13,3 +13,16 @@
   max-width: 1280px;
   margin: 0 auto;
 }
+
+@media screen and (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .compact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
