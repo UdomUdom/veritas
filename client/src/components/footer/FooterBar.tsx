@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function FooterBar() {
   return (
-    <footer className="footer bg-neutral text-neutral-content p-10">
+    <footer className="footer bg-base-300 text-base-content p-10">
       <div className="container flex flex-col md:flex-row justify-between mx-auto max-w-7xl px-16">
         <nav className="mb-6 md:mb-0">
           <h6 className="footer-title mb-2">Services</h6>
