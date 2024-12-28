@@ -4,11 +4,11 @@ services:
     image: "postgres:alpine"
     restart: always
     ports:
-      - 5432:5432
+      - ${DB_PORT}:5432
     environment:
-      - POSTGRES_DB=veritas
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=toor
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
     volumes:
       - pgdb:/var/lib/postgresql/data
     networks:

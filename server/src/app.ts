@@ -1,11 +1,27 @@
-import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
+import swagger from "@elysiajs/swagger";
+import routes from "./routes";
 
-const PORT = process.env.PORT || 3020;
-
-export default new Elysia()
-  .use(swagger())
+const app = new Elysia()
+  .use(
+    swagger({
+      exclude: ["/swagger"],
+      autoDarkMode: true,
+      documentation: {
+        info: {
+          title: "Veritas API",
+          description: "Bun + ElysiaJS + PostgreSQL",
+          version: "0.0.1",
+          license: {
+            name: "MIT",
+            url: "https://opensource.org/license/mit/",
+          },
+        },
+      },
+    })
+  )
   .get("/helloworld", () => "Hello World!")
-  .listen(PORT, () =>
-    console.log(`Server is running on http://localhost:${PORT}`)
-  );
+  .use(routes)
+  .listen({ port: process.env.PORT || 3020 });
+
+console.log(`Server running at ${app.server?.hostname}:${app.server?.port}`);
