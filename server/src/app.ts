@@ -22,6 +22,6 @@ const app = new Elysia()
   )
   .get("/helloworld", () => "Hello World!")
   .use(routes)
-  .listen({ port: process.env.PORT || 3020 });
+  .listen({ port: process.env.PORT });
 
 console.log(`Server running at ${app.server?.hostname}:${app.server?.port}`);
