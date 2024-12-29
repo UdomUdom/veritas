@@ -1,10 +1,10 @@
 {
   "name": "veritas",
-  "module": "src/app.js",
   "version": "0.0.1",
   "scripts": {
     "dev": "bun run --watch src/app.ts",
-    "start": "bun run src/app.ts"
+    "start": "bun run src/app.ts",
+    "db:push": "bun drizzle-kit push"
   },
   "dependencies": {
     "@elysiajs/swagger": "^1.2.0",

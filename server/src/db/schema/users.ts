@@ -7,8 +7,10 @@ export const users = pgTable("users", {
   username: text("username").unique().notNull(),
   email: text("email").notNull(),
   password: text("password").notNull(),
+  status: text("status").notNull(),
   role_id: uuid("role_id").references(() => roles.id),
   department_id: uuid("department_id").references(() => departments.id),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull().$onUpdate(() => new Date()),
+  deletedAt: timestamp("deleted_at"),
 });
