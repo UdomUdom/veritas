@@ -1,7 +1,7 @@
-"use client";
 import { FlameKindling } from "lucide-react";
 import Link from "next/link";
 import ColorControl from "@/components/darkmode/ColorControl";
+import NavResponsive from "./NavResponsive";
 
 interface NavbarProps {
   title: string;
@@ -19,29 +19,7 @@ export default function Navbar({ navMenu }: { navMenu: NavbarProps[] }) {
             Veritas
           </Link>
         </div>
-        <div className="flex-none lg:hidden">
-          <button
-            className="btn btn-square btn-ghost"
-            onClick={() =>
-              document.getElementById("mobile-menu")?.classList.toggle("hidden")
-            }
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
-        </div>
+        <NavResponsive />
         <div className="flex-none hidden lg:block">
           <ul className="menu menu-horizontal px-1">
             {navMenu.map((item, index) => (
