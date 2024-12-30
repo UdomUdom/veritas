@@ -1,9 +1,8 @@
-export type IconKey = "Shapes" | "FileStack" | "BookHeart";
-
+import { Shapes, FileStack, BookHeart } from "lucide-react";
 export interface PathDataProps {
   title: string;
   detail: string;
-  icon: IconKey;
+  icon: any;
   href: string;
   button: string;
   bgClass: string;
@@ -13,7 +12,7 @@ export const pathData: PathDataProps[] = [
   {
     title: "Class",
     detail: "Schedule & Assignment",
-    icon: "Shapes",
+    icon: Shapes,
     href: "/classroom",
     button: "Click me ↗",
     bgClass: "bg-gradient-to-bl to-primary from-secondary text-primary-content",
@@ -21,7 +20,7 @@ export const pathData: PathDataProps[] = [
   {
     title: "Information",
     detail: "Course info & Registration",
-    icon: "FileStack",
+    icon: FileStack,
     href: "/information",
     button: "Click me ↗",
     bgClass:
@@ -30,7 +29,7 @@ export const pathData: PathDataProps[] = [
   {
     title: "Organization",
     detail: "Clubs & Meeting",
-    icon: "BookHeart",
+    icon: BookHeart,
     href: "/organization",
     button: "Click me ↗",
     bgClass: "bg-gradient-to-bl to-accent from-success text-secondary-content",

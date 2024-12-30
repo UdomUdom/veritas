@@ -1,13 +1,6 @@
 import React from "react";
 import PathCompactView from "./PathCompactView";
-import { pathData, IconKey } from "@/data/dashboard";
-import { Shapes, FileStack, BookHeart } from "lucide-react";
-
-const icons: Record<IconKey, JSX.Element> = {
-  Shapes: <Shapes size={48} />,
-  FileStack: <FileStack size={48} />,
-  BookHeart: <BookHeart size={48} />,
-};
+import { pathData } from "@/data/dashboard";
 
 export default function DashboardPath() {
   return (
@@ -20,14 +13,10 @@ export default function DashboardPath() {
           <PathCompactView
             title={path.title}
             detail={path.detail}
+            Icon={path.icon}
             href={path.href}
             button={path.button}
-          >
-            {React.cloneElement(icons[path.icon], {
-              size: 94,
-              className: "m-4",
-            })}
-          </PathCompactView>
+          />
         </div>
       ))}
     </div>
