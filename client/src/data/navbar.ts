@@ -25,11 +25,17 @@ export const insideMenu = [
     href: "/dashboard",
   },
   {
-    title: "Settings",
-    href: "/settings",
-  },
-  {
     title: "Profile",
-    href: "/profile",
+    href: "#",
+    children: [
+      {
+        title: "Settings",
+        href: "/settings",
+      },
+      {
+        title: "Logout",
+        href: "",
+      },
+    ],
   },
 ];
