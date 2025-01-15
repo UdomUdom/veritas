@@ -1,6 +1,6 @@
-import { pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { pgTable, serial, text } from "drizzle-orm/pg-core";
 
 export const faculties = pgTable("faculties", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: serial("id").primaryKey(),
   name: text("name").unique().notNull(),
 });

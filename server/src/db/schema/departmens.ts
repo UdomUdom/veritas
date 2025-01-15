@@ -1,8 +1,10 @@
-import { pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { pgTable, serial, text } from "drizzle-orm/pg-core";
+import { roles } from "./roles";
 import { faculties } from "./faculties";
 
 export const departments = pgTable("departments", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: serial("id").primaryKey(),
   name: text("name").unique().notNull(),
-  faculty_id: uuid("faculty_id").references(() => faculties.id),
+  roles_id: serial("roles_id").references(() => roles.id),
+  faculty_id: serial("faculty_id").references(() => faculties.id),
 });

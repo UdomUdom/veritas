@@ -1,10 +1,10 @@
 import { t } from "elysia";
 
 export const InstructorModel = t.Object({
-  id: t.Number(),
   user_id: t.Number(),
-  number: t.String(),
   hire_date: t.Date(),
+  salary: t.Number(),
+  academic_degree: t.String(),
 });
 
 export type InstructorType = typeof InstructorModel.static;

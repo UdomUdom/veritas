@@ -1,11 +1,10 @@
-import { UserLoginType, UserRegisterType } from "@/models/user";
+import { informationsType } from "@/models/informations";
+import { UserType } from "@/models/user";
 
-export const userRegister = (data: UserRegisterType) => {
-  console.log(data);
+export const userRegister = async (data: informationsType) => {
   return data;
 };
 
-export const userLogin = (data: UserLoginType) => {
-  console.log(data);
+export const userLogin = async (data: UserType) => {
   return data;
 };

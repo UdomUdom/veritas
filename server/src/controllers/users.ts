@@ -1,9 +1,14 @@
 import Elysia from "elysia";
 import { userLogin, userRegister } from "@/services/users/user";
-import { UserLoginModel, UserRegisterModel } from "@/models/user";
 import { ErrorHandler } from "@/utils/ErrorHandler";
+import { informationsModel } from "@/models/informations";
+import { UserModel } from "@/models/user";
 
-export const userController = new Elysia().group("/users", (app) =>
+export const userController = new Elysia({
+  detail: {
+    tags: ["users"],
+  },
+}).group("users", (app) =>
   app
     .post(
       "/register",
@@ -17,7 +22,7 @@ export const userController = new Elysia().group("/users", (app) =>
         }
       },
       {
-        body: UserRegisterModel,
+        body: informationsModel,
       }
     )
     .post(
@@ -32,7 +37,7 @@ export const userController = new Elysia().group("/users", (app) =>
         }
       },
       {
-        body: UserLoginModel,
+        body: UserModel,
       }
     )
 );
