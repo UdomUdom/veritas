@@ -8,17 +8,18 @@ const rolesMock = [
 ];
 
 const facultiesMock = [
-  { name: "[Test] Arts" },
-  { name: "[Test] Business" },
-  { name: "[Test] Engineering" },
   { name: "[Test] Science" },
+  { name: "[Test] Arts" },
+  { name: "[Test] Engineering" },
 ];
 
 const departmentsMock = [
-  { name: "[Test] Arts", faculty_id: 1, roles_id: 1 },
-  { name: "[Test] Business", faculty_id: 2, roles_id: 2 },
-  { name: "[Test] Engineering", faculty_id: 3, roles_id: 3 },
-  { name: "[Test] Science", faculty_id: 4, roles_id: 1 },
+  { name: "[Test] Physics", faculty_id: 1, role_id: 1 },
+  { name: "[Test] Chemistry", faculty_id: 1, role_id: 1 },
+  { name: "[Test] History", faculty_id: 2, role_id: 1 },
+  { name: "[Test] Literature", faculty_id: 2, role_id: 2 },
+  { name: "[Test] Mechanical Engineering", faculty_id: 3, role_id: 2 },
+  { name: "[Test] Electrical Engineering", faculty_id: 3, role_id: 2 },
 ];
 
 (async function () {

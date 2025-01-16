@@ -4,7 +4,6 @@ export const config = {
   COOKIE_OPTIONS: {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
     maxAge: 3600000,
   },
   BCRYPT_SALT_ROUNDS: parseInt(process.env.BCRYPT_SALT_ROUNDS || "10"),
