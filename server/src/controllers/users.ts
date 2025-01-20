@@ -4,11 +4,12 @@ import {
   approveStudent,
   userLogin,
   userRegistration,
+  userResetPassword,
 } from "@/services/users/user";
 import { ErrorHandler } from "@/utils/ErrorHandler";
 import { UserModel } from "@/models/user";
 import { InstructorModel } from "@/models/instructor";
-import { InformationsModel } from "@/models/informations";
+import { InformationsModel } from "@/models/information";
 
 export const userController = new Elysia({
   detail: {
@@ -29,18 +30,29 @@ export const userController = new Elysia({
         }
       },
       {
+        detail: {
+          summary: "registration",
+        },
         body: InformationsModel,
       }
     )
-    .post("/approve/student/:id", async ({ params, set }) => {
-      try {
-        const result = await approveStudent(params.id);
-        return { status: "ok", message: "User approved", id: result.id };
-      } catch (error) {
-        set.status = 400;
-        return ErrorHandler(error);
+    .post(
+      "/approve/student/:id",
+      async ({ params, set }) => {
+        try {
+          const result = await approveStudent(params.id);
+          return { status: "ok", message: "User approved", id: result.id };
+        } catch (error) {
+          set.status = 400;
+          return ErrorHandler(error);
+        }
+      },
+      {
+        detail: {
+          summary: "approve student",
+        },
       }
-    })
+    )
     .post(
       "/approve/instructor/:id",
       async ({ params, body, set }) => {
@@ -53,15 +65,18 @@ export const userController = new Elysia({
         }
       },
       {
+        detail: {
+          summary: "approve instructor",
+        },
         body: InstructorModel,
       }
     )
     .post(
       "/login",
-      async ({ body, set, cookie: { user } }) => {
+      async ({ body, set, cookie: { token } }) => {
         try {
           const result = await userLogin(body);
-          user.value = result.token;
+          token.value = result.token;
           return { status: "ok", message: "Login success" };
         } catch (error) {
           set.status = 400;
@@ -69,6 +84,39 @@ export const userController = new Elysia({
         }
       },
       {
+        detail: {
+          summary: "login",
+        },
+        body: UserModel,
+      }
+    )
+    .post(
+      "/logout",
+      async ({ cookie: { token } }) => {
+        token.remove();
+        return { status: "ok", message: "Logout success" };
+      },
+      {
+        detail: {
+          summary: "logout",
+        },
+      }
+    )
+    .post(
+      "/reset/password",
+      async ({ body, set }) => {
+        try {
+          await userResetPassword(body);
+          return { status: "ok", message: "Password reset success" };
+        } catch (error) {
+          set.status = 400;
+          return ErrorHandler(error);
+        }
+      },
+      {
+        detail: {
+          summary: "reset password",
+        },
         body: UserModel,
       }
     )

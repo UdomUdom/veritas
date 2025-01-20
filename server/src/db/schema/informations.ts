@@ -1,9 +1,11 @@
 import { pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { roles } from "./roles";
 import { departments } from "./departmens";
+import { users } from "./users";
+import { relations } from "drizzle-orm";
 
 export const informations = pgTable("informations", {
   id: uuid("id").primaryKey().defaultRandom(),
+  user_id: uuid("user_id").references(() => users.id),
   firstname: text("firstname").notNull(),
   lastname: text("lastname").notNull(),
   email: text("email").notNull(),
@@ -14,8 +16,17 @@ export const informations = pgTable("informations", {
   status: text("status").notNull(),
   bio: text("bio"),
   picture: text("picture"),
-  role_id: serial("role_id").references(() => roles.id),
   department_id: serial("departments_id").references(() => departments.id),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull().$onUpdate(() => new Date()),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .notNull()
+    .$onUpdate(() => new Date()),
 });
+
+export const informationRealtions = relations(informations, ({ one }) => ({
+  user: one(users, {
+    fields: [informations.user_id],
+    references: [users.id],
+  }),
+}));

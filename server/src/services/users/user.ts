@@ -1,6 +1,6 @@
 import db from "@/db";
 import { informations, instructors, students, users } from "@/db/schema";
-import { InformationsType } from "@/models/informations";
+import { InformationsType } from "@/models/information";
 import { InstructorType } from "@/models/instructor";
 import { UserType } from "@/models/user";
 import { generateToken } from "@/utils/Auth";
@@ -44,22 +44,23 @@ const createUser = async (id: string) => {
       where: eq(informations.id, id),
     });
     if (!info) throw new Error("Informations not found");
-    [info] = await tx
-      .update(informations)
-      .set({
-        status: "active",
-      })
-      .where(eq(informations.id, id))
-      .returning();
     const newUser = `${info.firstname}.${info.lastname.slice(0, 2)}`;
     const [user] = await tx
       .insert(users)
       .values({
         username: `${newUser}${thisYear().slice(-2)}@veritas.ac.th`,
         password: await hashPassword(newUser),
-        information_id: info.id,
       })
       .returning();
+    [info] = await tx
+      .update(informations)
+      .set({
+        user_id: user.id,
+        status: "active",
+      })
+      .where(eq(informations.id, id))
+      .returning();
+
     return { user, info };
   });
   return result;
@@ -107,13 +108,34 @@ export const userLogin = async (data: UserType) => {
   const result = await db.transaction(async (tx) => {
     const user = await tx.query.users.findFirst({
       where: and(eq(users.username, data.username)),
+      with: {
+        role: true,
+      },
     });
     if (!user) throw new Error("User not found");
     if (!(await verifyPassword(data.password, user.password))) {
       throw new Error("Password not match");
     }
+    return {
+      id: user.id,
+      username: user.username,
+      role: user.role?.name,
+    };
+  });
+  const token = generateToken(result);
+  return { token };
+};
+
+export const userResetPassword = async (data: UserType) => {
+  const result = await db.transaction(async (tx) => {
+    const [user] = await tx
+      .update(users)
+      .set({
+        password: await hashPassword(data.password),
+      })
+      .where(eq(users.username, data.username))
+      .returning();
     return user;
   });
-  const token = generateToken({ id: result.id });
-  return { token, user: result };
+  return result;
 };

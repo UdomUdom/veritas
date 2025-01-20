@@ -2,15 +2,15 @@ import { config } from "./config";
 import { Elysia } from "elysia";
 import swagger from "@elysiajs/swagger";
 import routes from "./routes";
-import cookie from "@elysiajs/cookie";
 
-const app = new Elysia()
-  .use(
-    cookie({
-      ...config.COOKIE_OPTIONS,
-      secret: config.SECRET_KEY,
-    })
-  )
+const app = new Elysia({
+  cookie: {
+    secrets: config.SECRET_KEY,
+    sameSite: "strict",
+    priority: "high",
+    ...config.COOKIE_OPTIONS,
+  },
+})
   .use(
     swagger({
       exclude: ["/swagger"],
