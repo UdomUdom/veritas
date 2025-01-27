@@ -35,3 +35,10 @@ export const pathData: PathDataProps[] = [
     bgClass: "bg-gradient-to-bl to-accent from-success text-secondary-content",
   },
 ];
+
+export const UserRole = {
+  STAFF: "staff",
+  TEACHER: "teacher",
+  STUDENT: "student",
+  ADMIN: "admin",
+};

@@ -1,7 +1,8 @@
 "use client";
-
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { SquareArrowOutUpRight } from "lucide-react";
+import Link from "next/link";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -19,8 +20,16 @@ export default function Chart() {
   };
 
   return (
-    <div className="card bg-base-100 shadow-xl p-4">
-      <h2 className="card-title">Chart</h2>
+    <div className="card bg-base-100 shadow-xl p-6 rounded-lg">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="card-title text-xl font-semibold">Chart</h2>
+        <Link href="/admin/dashboard">
+          <SquareArrowOutUpRight
+            size={24}
+            className="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+          />
+        </Link>
+      </div>
       <Pie data={data} />
     </div>
   );
