@@ -1,36 +1,55 @@
+import fs from "fs";
+import path from "path";
+import csv from "csv-parser";
 import db from ".";
-import { departments, faculties, roles } from "./schema";
+import { position } from "./schema/position";
+import { faculty } from "./schema/faculty";
+import { major } from "./schema/major";
 
-const rolesMock = [
-  { name: "[Test] student" },
-  { name: "[Test] teacher" },
-  { name: "[Test] admin" },
+const raw = [
+  {
+    path: path.join(__dirname, "raw/positions.csv"),
+    schema: position,
+  },
+  {
+    path: path.join(__dirname, "raw/faculties.csv"),
+    schema: faculty,
+  },
+  {
+    path: path.join(__dirname, "raw/majors.csv"),
+    schema: major,
+  },
 ];
 
-const facultiesMock = [
-  { name: "[Test] Science" },
-  { name: "[Test] Arts" },
-  { name: "[Test] Engineering" },
-];
+const processFile = async (filePath: string, schema: any) => {
+  return new Promise<void>((resolve, reject) => {
+    fs.createReadStream(filePath)
+      .pipe(csv())
+      .on("data", async (row: any) => {
+        await db.insert(schema).values(row);
+      })
+      .on("end", () => {
+        console.log(`>> ${filePath} imported!`);
+        resolve();
+      })
+      .on("error", (err: any) => {
+        console.error(`Error reading file ${filePath}:`, err);
+        reject(err);
+      });
+  });
+};
 
-const departmentsMock = [
-  { name: "[Test] Physics", faculty_id: 1, role_id: 1 },
-  { name: "[Test] Chemistry", faculty_id: 1, role_id: 1 },
-  { name: "[Test] History", faculty_id: 2, role_id: 1 },
-  { name: "[Test] Literature", faculty_id: 2, role_id: 2 },
-  { name: "[Test] Mechanical Engineering", faculty_id: 3, role_id: 2 },
-  { name: "[Test] Electrical Engineering", faculty_id: 3, role_id: 2 },
-];
-
-(async function () {
+(async function seed() {
   try {
-    // Roles
-    await db.insert(roles).values(rolesMock);
-    // Faculties
-    await db.insert(faculties).values(facultiesMock);
-    // Departments
-    await db.insert(departments).values(departmentsMock);
+    for (const item of raw) {
+      if (!fs.existsSync(item.path)) {
+        console.error(`File not found: ${item.path}`);
+        continue;
+      }
+
+      await processFile(item.path, item.schema);
+    }
   } catch (error: unknown) {
-    throw new Error(`Seed fail: ${error}`);
+    throw new Error(`>> Failed: ${error}`);
   }
 })();

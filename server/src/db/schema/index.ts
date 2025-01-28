@@ -1,7 +1,8 @@
-export * from "./informations";
-export * from "./users";
-export * from "./roles";
-export * from "./departmens";
-export * from "./faculties";
-export * from "./students";
-export * from "./instructors";
+export { position } from "./position";
+export { faculty } from "./faculty";
+export { major } from "./major";
+export { person } from "./person";
+export { user } from "./user";
+export { student } from "./student";
+export { staff } from "./staff";
+export { instructor } from "./instructor";

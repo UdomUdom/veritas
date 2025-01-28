@@ -1,6 +1,6 @@
 import { pgTable, serial, text } from "drizzle-orm/pg-core";
 
-export const faculties = pgTable("faculties", {
+export const position = pgTable("position", {
   id: serial("id").primaryKey(),
   name: text("name").unique().notNull(),
 });
