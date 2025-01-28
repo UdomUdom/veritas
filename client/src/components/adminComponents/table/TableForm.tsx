@@ -23,6 +23,10 @@ export default function TableForm({
       birthdate: "",
       email: "",
       role: "",
+      avatar: "",
+      faculty: "",
+      address: "",
+      phoneNumber: "",
     }
   );
 

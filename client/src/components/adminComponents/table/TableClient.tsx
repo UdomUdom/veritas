@@ -15,7 +15,7 @@ import TableDetails from "./TableDetails";
 import TableForm from "./TableForm";
 import Link from "next/link";
 import Dropdown from "@/components/adminComponents/uiElements/Dropdown";
-import Searchbar from "@/components/adminComponents/uiElements/Searchbar"; // Import the new Searchbar component
+import Searchbar from "@/components/adminComponents/uiElements/Searchbar";
 
 const useTableRows = (initialRows: TableRow[]) => {
   const [rows, setRows] = useState<TableRow[]>(initialRows);
