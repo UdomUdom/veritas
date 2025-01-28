@@ -26,19 +26,19 @@ export default function Dropdown({
   return (
     <div className={`dropdown ${className}`}>
       <button
-        className="btn btn-outline dropdown-toggle hover:bg-base-200"
+        className="btn btn-outline dropdown-toggle hover:bg-primary w-20"
         onClick={() => setIsOpen(!isOpen)}
       >
         {options.find((opt) => opt.value === selectedValue)?.label ||
           placeholder}
       </button>
       {isOpen && (
-        <ul className="dropdown-menu bg-base-100 shadow-lg rounded-lg mt-2">
+        <ul className="dropdown-menu absolute bg-base-100 shadow-lg rounded-lg mt-2 z-10">
           {options.map((option) => (
             <li
               key={option.value}
               onClick={() => handleSelect(option.value)}
-              className="px-4 py-2 hover:bg-base-200 cursor-pointer"
+              className="px-4 py-2 hover:bg-primary cursor-pointer"
             >
               {option.label}
             </li>
