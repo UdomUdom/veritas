@@ -1,21 +1,24 @@
-import { pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { person } from "./person";
-import { position } from "./position";
+import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { profile } from ".";
+import { relations } from "drizzle-orm";
 
 export const user = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
-  person_id: uuid("person_id")
-    .references(() => person.id)
+  profile_id: uuid("person_id")
+    .references(() => profile.id)
     .notNull(),
   username: text("username").unique().notNull(),
-  email: text("email").unique().notNull(),
   password: text("password").notNull(),
-  position: serial("position")
-    .references(() => position.id)
-    .notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()
     .notNull()
     .$onUpdate(() => new Date()),
 });
+
+export const userRelations = relations(user, ({ one }) => ({
+  person: one(profile, {
+    fields: [user.id],
+    references: [profile.id],
+  }),
+}));

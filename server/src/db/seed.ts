@@ -2,24 +2,13 @@ import fs from "fs";
 import path from "path";
 import csv from "csv-parser";
 import db from ".";
-import { position } from "./schema/position";
-import { faculty } from "./schema/faculty";
-import { major } from "./schema/major";
 
-const raw = [
-  {
-    path: path.join(__dirname, "raw/positions.csv"),
-    schema: position,
-  },
-  {
-    path: path.join(__dirname, "raw/faculties.csv"),
-    schema: faculty,
-  },
-  {
-    path: path.join(__dirname, "raw/majors.csv"),
-    schema: major,
-  },
-];
+// const raw = [
+//   {
+//     path: path.join(__dirname, "raw/roles.csv"),
+//     schema: role,
+//   },
+// ];
 
 const processFile = async (filePath: string, schema: any) => {
   return new Promise<void>((resolve, reject) => {
@@ -41,14 +30,13 @@ const processFile = async (filePath: string, schema: any) => {
 
 (async function seed() {
   try {
-    for (const item of raw) {
-      if (!fs.existsSync(item.path)) {
-        console.error(`File not found: ${item.path}`);
-        continue;
-      }
-
-      await processFile(item.path, item.schema);
-    }
+    // for (const item of raw) {
+    //   if (!fs.existsSync(item.path)) {
+    //     console.error(`File not found: ${item.path}`);
+    //     continue;
+    //   }
+    //   await processFile(item.path, item.schema);
+    // }
   } catch (error: unknown) {
     throw new Error(`>> Failed: ${error}`);
   }
