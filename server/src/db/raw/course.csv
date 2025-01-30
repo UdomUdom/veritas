@@ -1,1 +1,17 @@
-id,major_id,name
+id,name,department_id
+1,Civil Engineering,1
+2,Mechanical Engineering,1
+3,Electrical Engineering,1
+4,Computer Engineering,1
+5,Chemical Engineering,1
+6,Physics,2
+7,Chemistry,2
+8,Biology,2
+9,Mathematics,2
+10,Computer Science,2
+11,Criminal Law,3
+12,Civil Law,3
+13,Corporate Law,3
+14,Intellectual Property Law,3
+15,Cyber Law,3
+16,Environmental Law,3

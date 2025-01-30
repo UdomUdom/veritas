@@ -4,17 +4,17 @@
   "scripts": {
     "dev": "bun run --watch src/app.ts",
     "start": "bun run src/app.ts",
-    "db:gen": "bun drizzle-kit generate",
+    "db:gen": "bun drizzle-kit generate --name=init",
     "db:push": "bun drizzle-kit push",
     "db:seed": "bun run src/db/seed.ts",
-    "db:std": "bun drizzle-kit studio"
+    "db:std": "bun drizzle-kit studio --verbose"
   },
   "dependencies": {
     "@elysiajs/cookie": "^0.8.0",
     "@elysiajs/swagger": "^1.2.0",
     "bcrypt": "^5.1.1",
-    "csv-parser": "^3.1.0",
-    "drizzle-orm": "^0.39.0",
+    "csv-parser": "^3.2.0",
+    "drizzle-orm": "^0.39.1",
     "elysia": "^1.2.10",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1"
@@ -22,10 +22,10 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.8",
-    "@types/node": "^22.10.10",
+    "@types/node": "^22.12.0",
     "@types/pg": "^8.11.11",
     "@types/supertest": "^6.0.2",
-    "drizzle-kit": "^0.30.3",
+    "drizzle-kit": "^0.30.4",
     "supertest": "^7.0.0",
     "tsx": "^4.19.2"
   }

@@ -1,2 +1,11 @@
 export { profile } from "./profile";
 export { user } from "./user";
+export { role } from "./role";
+export { student } from "./student";
+export { instructor } from "./instructor";
+export { department } from "./department";
+export { course } from "./course";
+export { subject } from "./subject";
+export { enrollment } from "./enrollment";
+export { group_enrollment } from "./group_enrollment";
+export { group_member } from "./group_member";

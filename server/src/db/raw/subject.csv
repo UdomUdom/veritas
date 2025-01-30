@@ -1,0 +1,35 @@
+id,code,name,course_id
+1,SE,Structural Engineering,1
+2,GE,Geotechnical Engineering,1
+3,TE,Transportation Engineering,1
+4,TD,Thermodynamics,2
+5,FM,Fluid Mechanics,2
+6,HT,Heat Transfer,2
+7,PS,Power Systems,3
+8,EL,Electronics,3
+9,ES,Embedded Systems,4
+10,NT,Networking,4
+11,CRE,Chemical Reaction Engineering,5
+12,PD,Process Design,5
+13,CM,Classical Mechanics,6
+14,QM,Quantum Mechanics,6
+15,OC,Organic Chemistry,7
+16,IC,Inorganic Chemistry,7
+17,GEN,Genetics,8
+18,MB,Microbiology,8
+19,ALG,Algebra,9
+20,CALC,Calculus,9
+21,DSA,Data Structures & Algorithms,10
+22,AI,Artificial Intelligence,10
+23,CP,Criminal Procedure,11
+24,FS,Forensic Science,11
+25,CL,Contract Law,12
+26,PL,Property Law,12
+27,BT,Business Transactions,13
+28,CG,Corporate Governance,13
+29,CLW,Copyright Law,14
+30,PTL,Patent Law,14
+31,DPL,Data Privacy Law,15
+32,CCL,Cybercrime Law,15
+33,CCLM,Climate Change Law,16
+34,ELW,Energy Law,16
