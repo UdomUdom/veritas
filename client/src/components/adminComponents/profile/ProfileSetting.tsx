@@ -1,23 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StaffProfile } from "@/types/type";
-import Modal from "@/components/adminComponents/uiElements/Modal";
+import { useRouter } from "next/navigation";
 
 interface ProfileSettingProps {
   user: StaffProfile;
   onSave: (updatedUser: StaffProfile) => Promise<void>;
-  onClose: () => void;
   isLoading?: boolean;
 }
 
 export default function ProfileSetting({
   user,
   onSave,
-  onClose,
   isLoading: externalLoading,
 }: ProfileSettingProps) {
   const [editedUser, setEditedUser] = useState<StaffProfile>(user);
   const [internalLoading, setInternalLoading] = useState(false);
+  const router = useRouter();
 
   const isLoading = externalLoading || internalLoading;
 
@@ -27,6 +26,7 @@ export default function ProfileSetting({
 
     try {
       await onSave(editedUser);
+      router.push("/admin/profile");
     } catch (error) {
       console.error("Error updating profile:", error);
     } finally {
@@ -35,7 +35,10 @@ export default function ProfileSetting({
   };
 
   return (
-    <Modal title="Edit Profile" onClose={onClose}>
+    <div className="p-6 bg-base-100 rounded-lg shadow-md">
+      <h2 className="card-title text-center text-2xl font-bold mb-6">
+        Edit Profile
+      </h2>
       <form onSubmit={handleSave} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="form-control">
@@ -116,7 +119,7 @@ export default function ProfileSetting({
           <button
             type="button"
             className="btn btn-ghost"
-            onClick={onClose}
+            onClick={() => router.push("/admin/profile")}
             disabled={isLoading}
           >
             Cancel
@@ -130,6 +133,6 @@ export default function ProfileSetting({
           </button>
         </div>
       </form>
-    </Modal>
+    </div>
   );
 }

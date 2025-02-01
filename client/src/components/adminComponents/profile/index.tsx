@@ -1,24 +1,14 @@
 "use client";
 import { useState } from "react";
 import { StaffProfile } from "@/types/type";
-import ProfileSetting from "./ProfileSetting";
+import Link from "next/link";
 
 interface ProfileProps {
   user: StaffProfile;
 }
 
 export default function Profile({ user }: ProfileProps) {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editedUser, setEditedUser] = useState<StaffProfile>(user);
-
-  const handleEdit = () => {
-    setIsEditModalOpen(true);
-  };
-
-  const handleSave = async (updatedUser: StaffProfile) => {
-    setEditedUser(updatedUser);
-    setIsEditModalOpen(false);
-  };
 
   return (
     <div className="p-6 bg-base-100 rounded-lg shadow-md">
@@ -47,20 +37,10 @@ export default function Profile({ user }: ProfileProps) {
           </p>
           <p className="text-md text-gray-500">Faculty: {editedUser.faculty}</p>
         </div>
-
-        <button className="btn btn-primary mt-4" onClick={handleEdit}>
-          Edit Profile
-        </button>
+        <Link href={`/admin/profile/edit/${editedUser.id}`}>
+          <button className="btn btn-primary mt-4">Edit Profile</button>
+        </Link>
       </div>
-
-      {isEditModalOpen && (
-        <ProfileSetting
-          user={editedUser}
-          onSave={handleSave}
-          onClose={() => setIsEditModalOpen(false)}
-          isLoading={false}
-        />
-      )}
     </div>
   );
 }

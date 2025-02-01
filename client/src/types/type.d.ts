@@ -16,7 +16,7 @@ interface TableDetailsProps {
 }
 
 interface StaffProfile {
-  id: string;
+  id: number;
   avatar: string;
   firstName: string;
   lastName: string;
