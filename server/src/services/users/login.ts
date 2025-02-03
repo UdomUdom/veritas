@@ -18,6 +18,6 @@ export const userLogin = async (body: LoginType) => {
     if (!(await verifyPassword(body.password, found.password)))
       throw new Error("Invalid password");
 
-    return found;
+    return { id: found.id, role: found.role.name };
   });
 };

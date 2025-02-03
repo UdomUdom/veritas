@@ -39,7 +39,7 @@ export const userController = new Elysia({
           set.status = 200;
           session.value = generateToken({
             id: result.id,
-            role: result.role.name,
+            role: result.role,
           });
           return { status: "ok", message: "Login success" };
         } catch (error) {
