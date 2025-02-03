@@ -6,15 +6,20 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { instructor, profile, role, student } from ".";
 import { relations } from "drizzle-orm";
+import { instructor, profile, role, student } from ".";
 
-export const eStatus = pgEnum("status", ["active", "inactive"]);
+export const eStatus = pgEnum("status", [
+  "pending",
+  "rejected",
+  "active",
+  "inactive",
+]);
 
 export const user = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
   profile_id: uuid("person_id")
-    .references(() => profile.id)
+    .references(() => profile.id, { onDelete: "cascade" })
     .notNull(),
   username: text("username").unique().notNull(),
   password: text("password").notNull(),

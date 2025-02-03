@@ -21,7 +21,7 @@ export const studentRelations = relations(student, ({ one, many }) => ({
     fields: [student.user_id],
     references: [user.id],
   }),
-  enrollment: many(enrollment),
-  leader: many(group_enrollment),
-  group_member: many(group_member),
+  enrollments: many(enrollment),
+  leaders: many(group_enrollment),
+  group_members: many(group_member),
 }));

@@ -13,6 +13,6 @@ export const department = pgTable("department", {
 });
 
 export const departmentRelations = relations(department, ({ many }) => ({
-  instructor: many(instructor),
-  course: many(course),
+  instructors: many(instructor),
+  courses: many(course),
 }));

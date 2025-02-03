@@ -20,7 +20,7 @@ export const courseRelations = relations(course, ({ one, many }) => ({
     fields: [course.department_id],
     references: [department.id],
   }),
-  subject: many(subject),
-  enrollment: many(enrollment),
-  group_enrollment: many(group_enrollment),
+  subjects: many(subject),
+  enrollments: many(enrollment),
+  group_enrollments: many(group_enrollment),
 }));

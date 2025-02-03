@@ -69,9 +69,9 @@ const processFile = async (filePath: string, schema: any) => {
         const [new_profile] = await tx
           .insert(profile)
           .values({
-            firstname: "Admin",
-            lastname: "Admin",
-            email: "Admin@veritas.co",
+            firstname: "admin",
+            lastname: "admin",
+            email: "admin@veritas.co",
             date_of_birth: "2024-12-31",
             gender: "other",
             phone_number: "0123456789",

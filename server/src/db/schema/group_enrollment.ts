@@ -38,6 +38,6 @@ export const group_enrollmentRelations = relations(
       fields: [group_enrollment.course_id],
       references: [course.id],
     }),
-    member: many(group_member),
+    members: many(group_member),
   })
 );

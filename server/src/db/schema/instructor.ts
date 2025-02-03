@@ -16,9 +16,7 @@ export const instructor = pgTable("instructor", {
     .notNull(),
   number: text("number").unique().notNull(),
   hire_date: date("hire_date").notNull(),
-  department_id: serial("department_id")
-    .references(() => department.id)
-    .notNull(),
+  department_id: serial("department_id").references(() => department.id),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()

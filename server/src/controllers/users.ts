@@ -1,7 +1,8 @@
 import Elysia from "elysia";
 import { ErrorHandler } from "@/utils/ErrorHandler";
-import { ProfileModel } from "@/models/profile";
-import { userRegister } from "@/services/users/register";
+import { upgradeRegister, userRegister } from "@/services/users/register";
+import { LoginModel, RegisterModel, UpgradeRegisterModel } from "@/models/user";
+import { userLogin } from "@/services/users/login";
 
 export const userController = new Elysia({
   detail: {
@@ -15,7 +16,7 @@ export const userController = new Elysia({
         try {
           const result = await userRegister(body);
           set.status = 201;
-          return { status: "ok" };
+          return { status: "ok", username: result.username };
         } catch (error) {
           set.status = 400;
           return ErrorHandler(error);
@@ -23,26 +24,80 @@ export const userController = new Elysia({
       },
       {
         detail: {
-          summary: "register",
+          summary: "register user",
         },
-        body: ProfileModel,
+        body: RegisterModel,
       }
     )
-    .post("/login", async ({ body, set, cookie: { session } }) => {
-      try {
-        session.value = "secret";
-        return { status: "ok", message: "Login success" };
-      } catch (error) {
-        set.status = 400;
-        return ErrorHandler(error);
+    .post(
+      "/login",
+      async ({ body, set, cookie: { session } }) => {
+        try {
+          const result = await userLogin(body);
+          set.status = 200;
+          session.value = result.id;
+          return { status: "ok", message: "Login success" };
+        } catch (error) {
+          set.status = 400;
+          return ErrorHandler(error);
+        }
+      },
+      {
+        detail: {
+          summary: "login",
+        },
+        body: LoginModel,
       }
-    })
-    .post("/logout", async ({ cookie: { session } }) => {
-      try {
-        session.remove();
-        return { status: "ok", message: "Logout success" };
-      } catch (error) {
-        return ErrorHandler(error);
+    )
+    .post(
+      "/logout",
+      async ({ cookie: { session } }) => {
+        try {
+          session.remove();
+          return { status: "ok", message: "Logout success" };
+        } catch (error) {
+          return ErrorHandler(error);
+        }
+      },
+      {
+        detail: {
+          summary: "logout",
+        },
       }
-    })
+    )
+    .post(
+      "/register/student/:id",
+      async ({ params, set }) => {
+        try {
+          const result = await upgradeRegister("student", params.id);
+          set.status = 201;
+          return { status: "ok", number: result.number };
+        } catch (error) {
+          return ErrorHandler(error);
+        }
+      },
+      {
+        detail: {
+          summary: "user to student",
+        },
+      }
+    )
+    .post(
+      "/register/instructor/:id",
+      async ({ body, params, set }) => {
+        try {
+          const result = await upgradeRegister("instructor", params.id, body);
+          set.status = 201;
+          return { status: "ok", number: result.number };
+        } catch (error) {
+          return ErrorHandler(error);
+        }
+      },
+      {
+        detail: {
+          summary: "user to instructor",
+        },
+        body: UpgradeRegisterModel,
+      }
+    )
 );
