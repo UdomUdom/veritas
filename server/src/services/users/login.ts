@@ -8,6 +8,9 @@ export const userLogin = async (body: LoginType) => {
   return await db.transaction(async (tx) => {
     const found = await tx.query.user.findFirst({
       where: eq(user.username, body.username.toLowerCase()),
+      with: {
+        role: true,
+      },
     });
 
     if (!found) throw new Error("User not found");

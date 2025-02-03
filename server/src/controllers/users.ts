@@ -3,6 +3,8 @@ import { ErrorHandler } from "@/utils/ErrorHandler";
 import { upgradeRegister, userRegister } from "@/services/users/register";
 import { LoginModel, RegisterModel, UpgradeRegisterModel } from "@/models/user";
 import { userLogin } from "@/services/users/login";
+import { generateToken } from "@/utils/Auth";
+import { isAdmin } from "@/middlewares";
 
 export const userController = new Elysia({
   detail: {
@@ -35,7 +37,10 @@ export const userController = new Elysia({
         try {
           const result = await userLogin(body);
           set.status = 200;
-          session.value = result.id;
+          session.value = generateToken({
+            id: result.id,
+            role: result.role.name,
+          });
           return { status: "ok", message: "Login success" };
         } catch (error) {
           set.status = 400;
@@ -80,6 +85,7 @@ export const userController = new Elysia({
         detail: {
           summary: "user to student",
         },
+        beforeHandle: isAdmin,
       }
     )
     .post(
@@ -97,6 +103,7 @@ export const userController = new Elysia({
         detail: {
           summary: "user to instructor",
         },
+        beforeHandle: isAdmin,
         body: UpgradeRegisterModel,
       }
     )
