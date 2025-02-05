@@ -24,10 +24,12 @@ export default function TableClient() {
     () => [
       {
         id: 1,
-        firstName: "John",
-        lastName: "Doe",
-        birthdate: "1998-12-12",
-        email: "john@example.com",
+        profile: {
+          firstName: "John",
+          lastName: "Doe",
+          birthdate: "1998-12-12",
+          email: "john@example.com",
+        },
         role: UserRole.STAFF,
         avatar: "",
         faculty: "",
@@ -36,22 +38,25 @@ export default function TableClient() {
       },
       {
         id: 2,
-        firstName: "Jane",
+        profile: {
+          firstName: "Jane",
+          lastName: "Smith",
+          birthdate: "1998-12-12",
+          email: "jane@example.com",
+        },
+
         role: UserRole.TEACHER,
         avatar: "",
         faculty: "",
         address: "",
         phoneNumber: "",
-        lastName: "Smith",
-        birthdate: "1998-12-12",
-        email: "jane@example.com",
       },
     ],
     []
   );
 
-  const { rows, handleSave, handleAdd, handleDelete } =
-    useTableRows(initialRows);
+  const { rows, handleSave, handleAddInitialRows, handleDelete } =
+    useTableRows();
   const [editRow, setEditRow] = useState<TableRow | null>(null);
   const [details, setDetails] = useState<TableRow | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -115,9 +120,9 @@ export default function TableClient() {
                 className="hover:bg-base-200 transition-colors border-b border-base-100"
               >
                 <td className="p-4">
-                  {row.firstName} {row.lastName}
+                  {row.profile.firstname} {row.profile.lastname}
                 </td>
-                <td className="p-4">{row.email}</td>
+                <td className="p-4">{row.profile.email}</td>
                 <td className="p-4 flex gap-2">
                   <button
                     className="btn btn-sm btn-ghost hover:bg-base-300"

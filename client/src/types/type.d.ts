@@ -1,10 +1,22 @@
 export interface TableRow {
-  role: string;
   id: number;
-  firstName: string;
-  lastName: string;
-  birthdate: string;
-  email: string;
+  profile_id: number;
+  username: string;
+  password: string;
+  status: string;
+  role_id: keyof typeof RoleMapping;
+  profile: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    date_of_birth: string;
+    gender: string;
+    phone_number: string;
+    address: string;
+    bio: string;
+    avatar: string;
+  };
 }
 
 interface TableDetailsProps {
@@ -61,14 +73,17 @@ interface StaffProfile {
   role: string;
 }
 
-interface TableRow extends StaffProfile {
-  id: number;
-}
-
 interface TableDetailsProps {
   editRow?: boolean;
   details?: boolean;
   user: StaffProfile;
   onClose: () => void;
   onSave: (row: TableRow) => Promise<void>;
+}
+
+interface ProfileSettingProps {
+  user: StaffProfile;
+  onSave: (updatedUser: StaffProfile) => Promise<void>;
+  isLoading?: boolean;
+  onClose?: () => void;
 }

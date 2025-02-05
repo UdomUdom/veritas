@@ -1,19 +1,25 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import Searchbar from "./Searchbar";
-import { UserRole } from "@/data/dashboard";
+
+const RoleMapping = {
+  1: "Admin",
+  2: "Instructors",
+  3: "Students",
+} as const;
+
+type RoleId = keyof typeof RoleMapping;
 
 interface FilterOptionProps {
   onSearchChange: (query: string) => void;
-  onRoleChange: (role: (typeof UserRole)[keyof typeof UserRole] | "") => void;
+  onRoleChange: (roleId: RoleId | "") => void;
 }
 
 const roleOptions = [
-  { value: UserRole.STAFF, label: "Staff" },
-  { value: UserRole.TEACHER, label: "Teacher" },
-  { value: UserRole.STUDENT, label: "Student" },
-  { value: UserRole.ADMIN, label: "Admin" },
-  { value: "", label: "All" },
+  { value: 1 as const, label: "Admin" },
+  { value: 2 as const, label: "Instructors" },
+  { value: 3 as const, label: "Students" },
+  { value: "" as const, label: "All" },
 ];
 
 export default function FilterOption({
@@ -21,20 +27,16 @@ export default function FilterOption({
   onRoleChange,
 }: FilterOptionProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRole, setSelectedRole] = useState<
-    (typeof UserRole)[keyof typeof UserRole] | ""
-  >("");
+  const [selectedRole, setSelectedRole] = useState<RoleId | "">("");
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
     onSearchChange(query);
   };
 
-  const handleRoleChange = (
-    role: (typeof UserRole)[keyof typeof UserRole] | ""
-  ) => {
-    setSelectedRole(role);
-    onRoleChange(role);
+  const handleRoleChange = (roleId: RoleId | "") => {
+    setSelectedRole(roleId);
+    onRoleChange(roleId);
   };
 
   return (

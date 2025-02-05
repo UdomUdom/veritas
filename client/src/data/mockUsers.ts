@@ -1,8 +1,10 @@
 export interface UserProfile {
   id: number;
-  name: string;
-  lastname: string;
-  email: string;
+  profile: {
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
   birthdate: string;
   faculty: string;
   avatar: string;
@@ -11,9 +13,11 @@ export interface UserProfile {
 export const mockUsers: UserProfile[] = [
   {
     id: 1,
-    name: "John",
-    lastname: "Doe",
-    email: "john.doe@example.com",
+    profile: {
+      firstname: "John",
+      lastname: "Doe",
+      email: "john.doe@example.com",
+    },
     birthdate: "1990-05-15",
     faculty: "Computer Science",
     avatar:
@@ -21,9 +25,11 @@ export const mockUsers: UserProfile[] = [
   },
   {
     id: 2,
-    name: "Jane",
-    lastname: "Smith",
-    email: "jane.smith@example.com",
+    profile: {
+      firstname: "Jane",
+      lastname: "Smith",
+      email: "jane.smith@example.com",
+    },
     birthdate: "1995-08-22",
     faculty: "Engineering",
     avatar:

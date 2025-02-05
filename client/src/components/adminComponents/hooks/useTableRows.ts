@@ -1,26 +1,28 @@
-import { useState, useCallback } from "react";
+"use client";
+import { useState } from "react";
 import { TableRow } from "@/types/type";
 
-export const useTableRows = (initialRows: TableRow[]) => {
-  const [rows, setRows] = useState<TableRow[]>(initialRows);
+export const useTableRows = () => {
+  const [rows, setRows] = useState<TableRow[]>([]);
 
-  const handleSave = useCallback((updatedRow: TableRow) => {
-    if (!updatedRow.firstName || !updatedRow.email || !updatedRow.birthdate) {
-      alert("Please fill in all fields correctly.");
-      return;
-    }
-    setRows((prevRows) =>
-      prevRows.map((row) => (row.id === updatedRow.id ? updatedRow : row))
+  const handleAddInitialRows = (initialRows: TableRow[]) => {
+    setRows(initialRows);
+  };
+
+  const handleSave = (updatedRow: TableRow) => {
+    setRows((prev) =>
+      prev.map((row) => (row.id === updatedRow.id ? updatedRow : row))
     );
-  }, []);
+  };
 
-  const handleAdd = useCallback((newRow: TableRow) => {
-    setRows((prevRows) => [...prevRows, newRow]);
-  }, []);
+  const handleDelete = (id: number) => {
+    setRows((prev) => prev.filter((row) => row.id !== id));
+  };
 
-  const handleDelete = useCallback((id: number) => {
-    setRows((prevRows) => prevRows.filter((row) => row.id !== id));
-  }, []);
-
-  return { rows, handleSave, handleAdd, handleDelete };
+  return {
+    rows,
+    handleSave,
+    handleDelete,
+    handleAddInitialRows,
+  };
 };

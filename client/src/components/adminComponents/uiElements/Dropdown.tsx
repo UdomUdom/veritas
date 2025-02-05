@@ -1,24 +1,24 @@
 "use client";
 import { useState } from "react";
 
-export interface DropdownProps {
-  options: { value: string; label: string }[];
-  selectedValue: string;
-  onSelect: (value: string) => void;
+export interface DropdownProps<T extends string | number> {
+  options: { value: T; label: string }[];
+  selectedValue: T;
+  onSelect: (value: T) => void;
   placeholder?: string;
   className?: string;
 }
 
-export default function Dropdown({
+export default function Dropdown<T extends string | number>({
   options,
   selectedValue,
   onSelect,
   placeholder = "Select an option",
   className = "",
-}: DropdownProps) {
+}: DropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSelect = (value: string) => {
+  const handleSelect = (value: T) => {
     onSelect(value);
     setIsOpen(false);
   };

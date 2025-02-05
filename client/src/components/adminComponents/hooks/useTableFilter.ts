@@ -1,23 +1,41 @@
+"use client";
 import { useState, useMemo } from "react";
 import { TableRow } from "@/types/type";
-import { UserRole } from "@/data/dashboard";
 
-export const useTableFilter = (rows: TableRow[]) => {
+const RoleMapping = {
+  1: "admin",
+  2: "instructors",
+  3: "students",
+} as const;
+
+export const useTableFilter = (byrows: TableRow[] = []) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRole, setSelectedRole] = useState<
-    (typeof UserRole)[keyof typeof UserRole] | ""
+    keyof typeof RoleMapping | ""
   >("");
 
-  const filteredRows = useMemo(
-    () =>
-      rows.filter(
-        (row) =>
-          (row.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            row.email.toLowerCase().includes(searchQuery.toLowerCase())) &&
-          (selectedRole === "" || row.role === selectedRole)
-      ),
-    [rows, searchQuery, selectedRole]
-  );
+  const filteredRows = useMemo(() => {
+    return byrows.filter((row) => {
+      const profile = row.profile;
+      if (
+        !profile ||
+        !profile.firstname ||
+        !profile.lastname ||
+        !profile.email
+      ) {
+        return false;
+      }
+      const matchesSearchQuery =
+        profile.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        profile.lastname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        profile.email.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesRole =
+        selectedRole === "" ||
+        RoleMapping[row.role_id as keyof typeof RoleMapping] ===
+          RoleMapping[selectedRole];
+      return matchesSearchQuery && matchesRole;
+    });
+  }, [byrows, searchQuery, selectedRole]);
 
   return {
     searchQuery,
