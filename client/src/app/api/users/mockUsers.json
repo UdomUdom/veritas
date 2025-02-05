@@ -98,5 +98,41 @@
       "bio": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       "avatar": "https://via.placeholder.com/150"
     }
+  },
+  {
+    "id": 6,
+    "username": "testuser",
+    "password": "password123",
+    "status": "active",
+    "role_id": 1,
+    "profile": {
+      "firstname": "John",
+      "lastname": "Doe",
+      "email": "john.doe@example.com",
+      "date_of_birth": "1990-01-01",
+      "gender": "male",
+      "phone_number": "1234567890",
+      "address": "123 Main St",
+      "bio": "Test bio",
+      "avatar": "https://example.com/avatar.jpg"
+    }
+  },
+  {
+    "id": 7,
+    "username": "tony",
+    "password": "123456789",
+    "status": "active",
+    "role_id": 1,
+    "profile": {
+      "firstname": "Tony",
+      "lastname": "Smith",
+      "email": "tony.admin@admin.com",
+      "date_of_birth": "1990-01-01",
+      "gender": "male",
+      "phone_number": "1234567890",
+      "address": "123 Main St",
+      "bio": "Test bio",
+      "avatar": "https://example.com/avatar.jpg"
+    }
   }
 ]

@@ -31,9 +31,9 @@ export default function TableList() {
               className="hover:bg-base-200 transition-colors border-b border-base-100"
             >
               <td className="p-4">
-                {row.firstName} {row.lastName}
+                {row.profile.firstname} {row.profile.lastname}
               </td>
-              <td className="p-4">{row.email}</td>
+              <td className="p-4">{row.profile.email}</td>
               <td className="p-4 flex gap-2">
                 <button className="btn btn-sm btn-ghost hover:bg-base-300">
                   <LucideEdit className="w-4 h-4" />

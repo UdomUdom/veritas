@@ -13,17 +13,14 @@ import { useTableFilter } from "../hooks/useTableFilter";
 import { useTableRows } from "../hooks/useTableRows";
 import TableDetails from "./TableDetails";
 import { TableRow } from "@/types/type";
+import Modal from "../uiElements/Modal";
 
 export default function index() {
   //data fetching
-  interface Data {
-    users: TableRow[];
-  }
-
   async function fetchData() {
     const res = await fetch("http://localhost:3000/api/users");
-    const data: Data = await res.json();
-    handleAddInitialRows(data.users);
+    const data: TableRow[] = await res.json();
+    handleAddInitialRows(data);
   }
 
   useEffect(() => {
@@ -32,7 +29,7 @@ export default function index() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState();
-  const openModal = () => {
+  const openModal = (row: any) => {
     setSelectedRow(row);
     setIsModalOpen(true);
   };
@@ -41,6 +38,9 @@ export default function index() {
   const { filteredRows, setSearchQuery, setSelectedRole } =
     useTableFilter(rows);
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="card bg-base-100 shadow-xl p-6">
       <div className="flex justify-between items-center mb-6">
@@ -100,7 +100,7 @@ export default function index() {
                 <td className="p-4">
                   <button
                     className="btn btn-sm btn-ghost hover:bg-base-300"
-                    onClick={() => openModal()}
+                    onClick={() => openModal(row)}
                   >
                     <LucideInfo className="w-4 h-4" />
                   </button>
@@ -111,12 +111,8 @@ export default function index() {
         </table>
       </div>
       {isModalOpen && selectedRow && (
-        <Modal title="Staff Profile" onClose={closeModal}>
-          <TableDetails
-            user={selectedRow}
-            onSave={handleSave}
-            onClose={closeModal}
-          />
+        <Modal title="Profile List" onClose={closeModal}>
+          <TableDetails user={selectedRow} onClose={closeModal} />
         </Modal>
       )}
     </div>
