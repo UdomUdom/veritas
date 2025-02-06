@@ -5,6 +5,7 @@ import Button from "@/components/button/Button";
 import { User, KeyRound, Vegan } from "lucide-react";
 import actionLogin from "@/utils/actionLogin";
 import ColorControl from "@/components/darkmode/ColorControl";
+import FormPassword from "@/components/form/FormPassword";
 
 export default function Login() {
   return (
@@ -16,22 +17,17 @@ export default function Login() {
       <FormCard>
         <FormCover action={actionLogin}>
           <FormInput
-            Icon={User}
+            title="Username"
+            Icon={""}
             name="username"
             type="text"
-            placeholder="Username"
-            className="input input-bordered"
+            placeholder=""
+            className=""
           />
-          <FormInput
-            Icon={KeyRound}
-            name="password"
-            type="password"
-            placeholder="Password"
-            className="input input-bordered"
-          />
+          <FormPassword />
           <Button
             type="submit"
-            className="btn btn-primary font-semibold text-lg tracking-wide duration-300"
+            className="btn btn-primary font-semibold text-lg tracking-wide duration-300 my-2"
             text="LOGIN"
           />
         </FormCover>

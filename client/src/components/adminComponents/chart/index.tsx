@@ -2,19 +2,41 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { SquareArrowOutUpRight } from "lucide-react";
+import { useEffect } from "react";
 import Link from "next/link";
+import { TableRow } from "@/types/type";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const RoleMapping = {
+  1: "admin",
+  2: "instructors",
+  3: "students",
+} as const;
+
+import { useState } from "react";
+
 export default function Chart() {
-  const data = {
-    labels: ["Red", "Blue", "Yellow"],
+  const [data, setData] = useState<TableRow[]>([]);
+
+  async function fetchData() {
+    const res = await fetch("/api/users");
+    const data: TableRow[] = await res.json();
+    setData(data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const roleData = {
+    labels: ["Admin", "Teacher", "Student"],
     datasets: [
       {
-        label: "My First Dataset",
-        data: [300, 50, 100],
+        label: "Role",
+        data: data.map((item) => item.role_id),
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverOffset: 4,
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
     ],
   };
@@ -30,7 +52,7 @@ export default function Chart() {
           />
         </Link>
       </div>
-      <Pie data={data} />
+      <Pie data={roleData} />
     </div>
   );
 }
