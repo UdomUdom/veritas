@@ -1,10 +1,17 @@
 import Elysia from "elysia";
 import { ErrorHandler } from "@/utils/ErrorHandler";
 import { upgradeRegister, userRegister } from "@/services/users/register";
-import { LoginModel, RegisterModel, UpgradeRegisterModel } from "@/models/user";
+import {
+  LoginModel,
+  RegisterModel,
+  ResetPasswordModel,
+  UpgradeRegisterModel,
+} from "@/models/users";
 import { userLogin } from "@/services/users/login";
-import { generateToken } from "@/utils/Auth";
-import { isAdmin } from "@/middlewares";
+import { generateToken } from "@/utils/Token";
+import { isAuthenticated } from "@/middlewares";
+import { getUserById, getUsers } from "@/services/users";
+import { resetPassword } from "@/services/users/password";
 
 export const userController = new Elysia({
   detail: {
@@ -14,14 +21,12 @@ export const userController = new Elysia({
   app
     .post(
       "/register",
-      async ({ body, set }) => {
+      async ({ body, error }) => {
         try {
           const result = await userRegister(body);
-          set.status = 201;
           return { status: "ok", username: result.username };
-        } catch (error) {
-          set.status = 400;
-          return ErrorHandler(error);
+        } catch (err) {
+          return error(400, ErrorHandler(err));
         }
       },
       {
@@ -33,18 +38,16 @@ export const userController = new Elysia({
     )
     .post(
       "/login",
-      async ({ body, set, cookie: { session } }) => {
+      async ({ body, cookie: { session }, error }) => {
         try {
           const result = await userLogin(body);
-          set.status = 200;
           session.value = generateToken({
             id: result.id,
             role: result.role,
           });
           return { status: "ok", message: "Login success" };
-        } catch (error) {
-          set.status = 400;
-          return ErrorHandler(error);
+        } catch (err) {
+          return error(400, ErrorHandler(err));
         }
       },
       {
@@ -54,14 +57,32 @@ export const userController = new Elysia({
         body: LoginModel,
       }
     )
+    .put(
+      "/reset-password",
+      async ({ body, error }) => {
+        try {
+          await resetPassword(body);
+          return { status: "ok", message: "Password reset success" };
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: {
+          summary: "reset password",
+        },
+        beforeHandle: (ctx) => isAuthenticated(ctx),
+        body: ResetPasswordModel,
+      }
+    )
     .post(
       "/logout",
-      async ({ cookie: { session } }) => {
+      async ({ cookie: { session }, error }) => {
         try {
           session.remove();
           return { status: "ok", message: "Logout success" };
-        } catch (error) {
-          return ErrorHandler(error);
+        } catch (err) {
+          return error(400, ErrorHandler(err));
         }
       },
       {
@@ -72,39 +93,93 @@ export const userController = new Elysia({
     )
     .post(
       "/register/student/:id",
-      async ({ params, set }) => {
+      async ({ params, headers: { permission }, error }) => {
         try {
+          if (permission !== "admin") throw new Error("Permission denied");
           const result = await upgradeRegister("student", params.id);
-          set.status = 201;
           return { status: "ok", number: result.number };
-        } catch (error) {
-          return ErrorHandler(error);
+        } catch (err) {
+          return error(400, ErrorHandler(err));
         }
       },
       {
         detail: {
           summary: "user to student",
         },
-        beforeHandle: isAdmin,
+        beforeHandle: (ctx) => isAuthenticated(ctx),
       }
     )
     .post(
       "/register/instructor/:id",
-      async ({ body, params, set }) => {
+      async ({ body, params, headers, error }) => {
         try {
+          if (headers["permission"] !== "admin")
+            throw new Error("Permission denied");
           const result = await upgradeRegister("instructor", params.id, body);
-          set.status = 201;
           return { status: "ok", number: result.number };
-        } catch (error) {
-          return ErrorHandler(error);
+        } catch (err) {
+          return error(400, ErrorHandler(err));
         }
       },
       {
         detail: {
           summary: "user to instructor",
         },
-        beforeHandle: isAdmin,
+        beforeHandle: (ctx) => isAuthenticated(ctx),
         body: UpgradeRegisterModel,
+      }
+    )
+    .get(
+      "/me",
+      async ({ headers, error }) => {
+        try {
+          const id = headers["authorization"]?.split(" ")[1] as string;
+          const result = await getUserById(id);
+          return { status: "ok", data: result };
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: {
+          summary: "get user profile",
+        },
+        beforeHandle: (ctx) => isAuthenticated(ctx),
+      }
+    )
+    .get(
+      "/",
+      async ({ error }) => {
+        try {
+          const result = await getUsers();
+          return { status: "ok", data: result };
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: {
+          summary: "get all users",
+        },
+        beforeHandle: (ctx) => isAuthenticated(ctx),
+      }
+    )
+    .get(
+      "/:id",
+      async ({ params, error }) => {
+        try {
+          if (!params.id) throw new Error("Invalid id");
+          const result = await getUserById(params.id);
+          return { status: "ok", data: result };
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: {
+          summary: "get user by id",
+        },
+        beforeHandle: (ctx) => isAuthenticated(ctx),
       }
     )
 );

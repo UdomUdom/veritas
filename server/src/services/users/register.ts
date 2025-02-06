@@ -1,6 +1,6 @@
 import db from "@/db";
 import { instructor, profile, role, student, user } from "@/db/schema";
-import { UpgradeRegisterType, RegisterType } from "@/models/user";
+import { UpgradeRegisterType, RegisterType } from "@/models/users";
 import { hashPassword } from "@/utils/Hash";
 import { seqNumber } from "@/utils/Year";
 import { eq } from "drizzle-orm";

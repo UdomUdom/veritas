@@ -27,3 +27,10 @@ export const UpgradeRegisterModel = t.Object({
 });
 
 export type UpgradeRegisterType = typeof UpgradeRegisterModel.static;
+
+export const ResetPasswordModel = t.Object({
+  email: t.String(),
+  new_password: t.String(),
+});
+
+export type ResetPasswordType = typeof ResetPasswordModel.static;
