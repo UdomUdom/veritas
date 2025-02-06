@@ -6,5 +6,12 @@ export const generateToken = (payload: object) => {
 };
 
 export const verifyToken = (token: string) => {
-  return jwt.verify(token, config.SECRET_KEY);
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, config.SECRET_KEY, (err, decoded) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(decoded);
+    });
+  });
 };

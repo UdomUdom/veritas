@@ -1,6 +1,6 @@
 import db from "@/db";
 import { user } from "@/db/schema";
-import { LoginType } from "@/models/user";
+import { LoginType } from "@/models/users";
 import { verifyPassword } from "@/utils/Hash";
 import { eq } from "drizzle-orm";
 
