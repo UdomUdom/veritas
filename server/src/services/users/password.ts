@@ -23,7 +23,8 @@ export const resetPassword = async (body: ResetPasswordType) => {
       .set({
         password: await hashPassword(body.new_password),
       })
-      .where(eq(user.id, profile_user.id))
-      .returning();
+      .where(eq(user.id, profile_user.id));
+
+    return "Password reset success";
   });
 };

@@ -61,8 +61,8 @@ export const userController = new Elysia({
       "/reset-password",
       async ({ body, error }) => {
         try {
-          await resetPassword(body);
-          return { status: "ok", message: "Password reset success" };
+          const result = await resetPassword(body);
+          return { status: "ok", message: result };
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
