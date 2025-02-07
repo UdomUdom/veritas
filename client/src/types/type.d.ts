@@ -27,7 +27,7 @@ interface TableDetailsProps {
   onClose: () => void;
 }
 
-interface StaffProfile {
+interface Profile {
   id: number;
   avatar: string;
   firstName: string;
@@ -59,20 +59,6 @@ interface TeachersProfile {
   };
   children?: React.ReactNode;
 }
-
-interface StaffProfile {
-  id: string;
-  avatar: string;
-  firstName: string;
-  lastName: string;
-  faculty: string;
-  email: string;
-  birthdate: string;
-  address: string;
-  phoneNumber: string;
-  role: string;
-}
-
 interface TableDetailsProps {
   editRow?: boolean;
   details?: boolean;

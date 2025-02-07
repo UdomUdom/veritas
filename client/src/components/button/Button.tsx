@@ -5,7 +5,9 @@ import { CircleDashed } from "lucide-react";
 interface ButtonProps {
   type: "submit" | "reset" | "button";
   className: string;
-  text: string;
+  text: string | any;
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
 export default function Button(props: ButtonProps) {

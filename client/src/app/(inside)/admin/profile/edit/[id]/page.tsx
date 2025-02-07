@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import ProfileSetting from "@/components/adminComponents/profile/ProfileSetting";
-import { StaffProfile } from "@/types/type";
+import { TableRow } from "@/types/type";
 
 export default function EditProfilePage() {
   const params = useParams();
-  const [user, setUser] = useState<StaffProfile | null>(null);
+  const [user, setUser] = useState<TableRow[] | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -18,7 +18,7 @@ export default function EditProfilePage() {
     fetchUser();
   }, [params.id]);
 
-  const handleSave = async (updatedUser: StaffProfile) => {
+  const handleSave = async (updatedUser: TableRow) => {
     const response = await fetch(`/api/users/${params.id}`, {
       method: "PUT",
       headers: {

@@ -40,7 +40,7 @@ export default function FilterOption({
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 ">
       <Searchbar
         searchQuery={searchQuery}
         onSearchChange={handleSearchChange}

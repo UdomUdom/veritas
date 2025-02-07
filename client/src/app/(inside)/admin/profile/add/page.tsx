@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Breadcrumb from "@/components/adminComponents/breadcrumb";
 import Button from "@/components/button/Button";
+import { UserPlus } from "lucide-react";
 
 const RoleMapping = {
   1: "admin",
@@ -14,40 +15,43 @@ type RoleId = keyof typeof RoleMapping;
 export default function AddProfilePage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    // username: "",
-    // password: "",
-    // status: "active" as "active" | "inactive",
-    // role_id: 1 as RoleId,
-    // profile: {
-    //   firstname: "",
-    //   lastname: "",
-    //   email: "",
-    //   date_of_birth: "",
-    //   gender: "other",
-    //   phone_number: "",
-    //   address: "",
-    //   bio: "",
-    //   avatar: "",
-    // },
-    username: "testuser",
-    password: "password123",
-    status: "active",
-    role_id: 1,
+    username: "",
+    password: "",
+    status: "active" as "active" | "inactive",
+    role_id: 1 as RoleId,
     profile: {
-      firstname: "John",
-      lastname: "Doe",
-      email: "john.doe@example.com",
-      date_of_birth: "1990-01-01",
-      gender: "male",
-      phone_number: "1234567890",
-      address: "123 Main St",
-      bio: "Test bio",
-      avatar: "https://example.com/avatar.jpg",
+      firstname: "",
+      lastname: "",
+      email: "",
+      date_of_birth: "",
+      gender: "other",
+      phone_number: "",
+      address: "",
+      bio: "",
+      avatar: "",
     },
+    /* ==================== Mock user for add ==================== */
+    //
+    // username: "testuser",
+    // password: "password123",
+    // status: "active",
+    // role_id: 1,
+    // profile: {
+    //   firstname: "John",
+    //   lastname: "Doe",
+    //   email: "john.doe@example.com",
+    //   date_of_birth: "1990-01-01",
+    //   gender: "male",
+    //   phone_number: "1234567890",
+    //   address: "123 Main St",
+    //   bio: "Test bio",
+    //   avatar: "https://example.com/avatar.jpg",
+    // },
+    //
+    /* ==================== Mock user for add ==================== */
   });
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -105,7 +109,10 @@ export default function AddProfilePage() {
           ]}
         />
         <div className="max-w-4xl mx-auto p-6">
-          <h1 className="text-3xl font-bold text-center mb-8">Add Profile</h1>
+          <h1 className="text-3xl font-bold text-center flex justify-center items-center">
+            <UserPlus className="w-8 h-8 inline-block mr-2" />
+            Add Profile
+          </h1>
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
               <span className="block sm:inline">{error}</span>
@@ -113,9 +120,9 @@ export default function AddProfilePage() {
           )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Username
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Username</span>
                 </label>
                 <input
                   type="text"
@@ -126,9 +133,9 @@ export default function AddProfilePage() {
                   className="input input-bordered w-full"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Password
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
                 </label>
                 <input
                   type="password"
@@ -139,11 +146,91 @@ export default function AddProfilePage() {
                   className="input input-bordered w-full"
                 />
               </div>
-            </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">First Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="profile.firstname"
+                  value={formData.profile.firstname}
+                  onChange={handleChange}
+                  required
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Last Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="profile.lastname"
+                  value={formData.profile.lastname}
+                  onChange={handleChange}
+                  required
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  name="profile.email"
+                  value={formData.profile.email}
+                  onChange={handleChange}
+                  required
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Phone Number</span>
+                </label>
+                <input
+                  type="tel"
+                  name="profile.phone_number"
+                  value={formData.profile.phone_number}
+                  onChange={handleChange}
+                  required
+                  className="input input-bordered w-full"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Date of Birth</span>
+                </label>
+                <input
+                  type="date"
+                  name="profile.date_of_birth"
+                  value={formData.profile.date_of_birth}
+                  onChange={handleChange}
+                  required
+                  className="input input-bordered w-full"
+                />
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-1">Status</label>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Gender</span>
+                </label>
+                <select
+                  name="profile.gender"
+                  value={formData.profile.gender}
+                  onChange={handleChange}
+                  className="select select-bordered w-full"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Status</span>
+                </label>
                 <select
                   name="status"
                   value={formData.status}
@@ -154,8 +241,10 @@ export default function AddProfilePage() {
                   <option value="inactive">Inactive</option>
                 </select>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Role</label>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Role</span>
+                </label>
                 <select
                   name="role_id"
                   value={formData.role_id}
@@ -169,118 +258,38 @@ export default function AddProfilePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  name="profile.firstname"
-                  value={formData.profile.firstname}
-                  onChange={handleChange}
-                  required
-                  className="input input-bordered w-full"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  name="profile.lastname"
-                  value={formData.profile.lastname}
-                  onChange={handleChange}
-                  required
-                  className="input input-bordered w-full"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <input
-                  type="email"
-                  name="profile.email"
-                  value={formData.profile.email}
-                  onChange={handleChange}
-                  required
-                  className="input input-bordered w-full"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Date of Birth
-                </label>
-                <input
-                  type="date"
-                  name="profile.date_of_birth"
-                  value={formData.profile.date_of_birth}
-                  onChange={handleChange}
-                  required
-                  className="input input-bordered w-full"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-1">Gender</label>
-                <select
-                  name="profile.gender"
-                  value={formData.profile.gender}
-                  onChange={handleChange}
-                  className="select select-bordered w-full"
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  name="profile.phone_number"
-                  value={formData.profile.phone_number}
-                  onChange={handleChange}
-                  required
-                  className="input input-bordered w-full"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium mb-1">Address</label>
-              <input
-                type="text"
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Address</span>
+              </label>
+              <textarea
                 name="profile.address"
                 value={formData.profile.address}
                 onChange={handleChange}
                 required
-                className="input input-bordered w-full"
+                className="textarea textarea-bordered w-full"
+                placeholder="Address"
+                rows={3}
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Bio</label>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Bio</span>
+              </label>
               <textarea
                 name="profile.bio"
                 value={formData.profile.bio}
                 onChange={handleChange}
                 className="textarea textarea-bordered w-full"
                 placeholder="Bio"
-                rows={4}
+                rows={3}
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Avatar URL
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Avatar</span>
               </label>
               <input
                 type="url"
@@ -290,12 +299,20 @@ export default function AddProfilePage() {
                 className="input input-bordered w-full"
               />
             </div>
-
-            <Button
-              type="submit"
-              className="btn btn-primary w-full mt-6"
-              text={isSubmitting ? "Submitting..." : "Add Profile"}
-            />
+            <div className="flex justify-end space-x-4 mt-6">
+              <Button
+                type="button"
+                className="btn btn-ghost"
+                text="Cancel"
+                onClick={() => router.push("/admin/profile")}
+                disabled={isSubmitting}
+              />
+              <Button
+                type="submit"
+                className="btn btn-primary"
+                text={isSubmitting ? "Submitting..." : "Add Profile"}
+              />
+            </div>
           </form>
         </div>
       </div>

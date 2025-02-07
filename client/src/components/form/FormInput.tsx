@@ -1,4 +1,5 @@
 interface FormInputProps {
+  title: string;
   name: string;
   type: string;
   placeholder: string;
@@ -7,16 +8,21 @@ interface FormInputProps {
 }
 
 export default function FormInput(props: FormInputProps) {
-  const { name, type, placeholder, className, Icon } = props;
+  const { title, name, type, placeholder, className, Icon } = props;
   return (
-    <label className="input input-bordered flex items-center gap-2">
-      {Icon ? <Icon /> : null}
-      <input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        className={className}
-      />
-    </label>
+    <div className="form-control relative">
+      <label className="label">
+        <span className="label-text">{title}</span>
+      </label>
+      <label className="input input-bordered flex items-center gap-2">
+        {Icon ? <Icon /> : null}
+        <input
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          className={className}
+        />
+      </label>
+    </div>
   );
 }

@@ -1,3 +1,5 @@
+import Button from "@/components/button/Button";
+
 export default function FormElements() {
   return (
     <div className="card bg-base-100 shadow-xl p-4">
@@ -15,9 +17,7 @@ export default function FormElements() {
           </label>
           <input type="email" className="input input-bordered" />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Save
-        </button>
+        <Button type="submit" className="btn btn-primary" text="Save" />
       </form>
     </div>
   );

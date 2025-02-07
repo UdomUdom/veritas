@@ -26,7 +26,7 @@ export default function Dropdown<T extends string | number>({
   return (
     <div className={`dropdown ${className}`}>
       <button
-        className="btn btn-outline dropdown-toggle hover:bg-primary w-20"
+        className="btn btn-outline-primary dropdown-toggle w-20"
         onClick={() => setIsOpen(!isOpen)}
       >
         {options.find((opt) => opt.value === selectedValue)?.label ||
