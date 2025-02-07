@@ -4,7 +4,7 @@ export interface TableRow {
   username: string;
   password: string;
   status: string;
-  role_id: keyof typeof RoleMapping;
+  role_id: number;
   profile: {
     id: number;
     firstname: string;
