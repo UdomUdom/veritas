@@ -2,13 +2,16 @@ import { config } from "./config";
 import { Elysia } from "elysia";
 import swagger from "@elysiajs/swagger";
 import routes from "./routes";
+import cors from "@elysiajs/cors";
 
 const app = new Elysia({
   cookie: {
     secrets: config.SECRET_KEY,
+    httpOnly: true,
     sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
     priority: "high",
-    ...config.COOKIE_OPTIONS,
+    maxAge: 3600000,
   },
 })
   .use(
@@ -26,6 +29,13 @@ const app = new Elysia({
           },
         },
       },
+    })
+  )
+  .use(
+    cors({
+      origin: [`${process.env.CLIENT_URL}`],
+      allowedHeaders: ["Content-Type", "Authorization"],
+      credentials: true,
     })
   )
   .get("/helloworld", () => "Hello World!")

@@ -9,7 +9,7 @@ export interface verifyType {
 
 export const isAuthenticated = async (c: Context) => {
   try {
-    const session = c.cookie.session.value;
+    const session = c.headers.authorization;
 
     const verify = (await verifyToken(session!)) as verifyType;
 
