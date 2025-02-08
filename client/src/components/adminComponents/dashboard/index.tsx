@@ -1,22 +1,22 @@
+"use client";
 import Chart from "@/components/adminComponents/chart";
 import TableForm from "@/components/adminComponents/tableform";
-import { fetchData } from "@/libs/fetch";
-import { getCookie } from "@/libs/cookies";
-import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
-const fetchRole = async () => {
-  const res = await fetchData("GET", "/api/roles");
-  const data = await res.json();
-  console.log(data, "role ha");
+const FetchRole = async () => {
+  const res = await fetch(process.env.API_URL + "/api/roles", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+  });
+  return res;
 };
-
-export default async function Dashboard() {
-  const session = await getCookie("session");
-  if (!session || session.role !== "admin") {
-    redirect("/login");
-  }
-
-  fetchRole();
+export default function Dashboard() {
+  useEffect(() => {
+    FetchRole().then((data) => {
+      console.log(data);
+    });
+  }, []);
   return (
     <div className="space-y-6 p-4 in-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
