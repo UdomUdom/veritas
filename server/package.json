@@ -2,7 +2,10 @@
   "name": "veritas",
   "version": "0.0.1",
   "scripts": {
-    "dev": "bun run --watch src/app.ts"
+    "dev": "bun run --watch src/app.ts",
+    "db:push": "bun drizzle-kit push",
+    "db:seed": "bun run src/db/seed.ts",
+    "db:std": "bun drizzle-kit studio --verbose"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
