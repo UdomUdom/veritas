@@ -5,10 +5,23 @@
     "dev": "bun run --watch src/app.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/swagger": "^1.2.0",
+    "bcrypt": "^5.1.1",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.2",
+    "elysia": "^1.2.12",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/pg": "^8.11.11",
+    "bun-types": "^1.2.2",
+    "drizzle-kit": "^0.30.4",
+    "tsx": "^4.19.2"
   },
   "module": "src/index.js"
 }
