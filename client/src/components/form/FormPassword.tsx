@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Button from "../button/Button";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function FormPassword() {
@@ -15,17 +14,19 @@ export default function FormPassword() {
         <input
           type={showPassword ? "text" : "password"}
           value={password}
+          name="password"
           placeholder=""
           className="input-ghost w-full pr-10"
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button
+        <button
           type="button"
           className=""
           onClick={() => setShowPassword(!showPassword)}
-          text={showPassword ? <EyeOff /> : <Eye />}
-        />
+        >
+          {showPassword ? <EyeOff /> : <Eye />}
+        </button>
       </label>
     </div>
   );

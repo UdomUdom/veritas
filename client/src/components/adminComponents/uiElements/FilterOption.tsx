@@ -2,13 +2,7 @@ import { useState } from "react";
 import Dropdown from "./Dropdown";
 import Searchbar from "./Searchbar";
 
-const RoleMapping = {
-  1: "Admin",
-  2: "Instructors",
-  3: "Students",
-} as const;
-
-type RoleId = keyof typeof RoleMapping;
+type RoleId = { 1: "Admin"; 2: "Instructors"; 3: "Students" };
 
 interface FilterOptionProps {
   onSearchChange: (query: string) => void;

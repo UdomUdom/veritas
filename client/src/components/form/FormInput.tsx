@@ -5,10 +5,11 @@ interface FormInputProps {
   placeholder: string;
   className: string;
   Icon?: any;
+  required?: boolean;
 }
 
 export default function FormInput(props: FormInputProps) {
-  const { title, name, type, placeholder, className, Icon } = props;
+  const { title, name, type, placeholder, className, Icon, required } = props;
   return (
     <div className="form-control relative">
       <label className="label">
@@ -21,6 +22,7 @@ export default function FormInput(props: FormInputProps) {
           type={type}
           placeholder={placeholder}
           className={className}
+          required={required}
         />
       </label>
     </div>

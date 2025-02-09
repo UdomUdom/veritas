@@ -23,6 +23,7 @@ export default function Login() {
             type="text"
             placeholder=""
             className=""
+            required={true}
           />
           <FormPassword />
           <Button
