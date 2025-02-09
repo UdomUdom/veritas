@@ -16,21 +16,23 @@ import { TableRow } from "@/types/type";
 import Modal from "../uiElements/Modal";
 import Pagination from "../uiElements/Pagination";
 
-const RoleMapping = {
-  1: "admin",
-  2: "instructors",
-  3: "students",
-} as const;
-export default function Index() {
-  //data fetching
-  async function fetchData() {
-    const res = await fetch("/api/users");
-    const data: TableRow[] = await res.json();
-    handleAddInitialRows(data);
-  }
+export interface RoleMapping {
+  id: number;
+  name: string;
+}
+
+export default function TableForm({
+  role,
+  user,
+}: {
+  role: RoleMapping[];
+  user: TableRow[];
+}) {
+  const [roles, setRoles] = useState<RoleMapping[]>([]);
 
   useEffect(() => {
-    fetchData();
+    setRoles(role);
+    handleAddInitialRows(user);
   }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,6 +79,7 @@ export default function Index() {
         <FilterOption
           onSearchChange={setSearchQuery}
           onRoleChange={setSelectedRole}
+          roles={roles}
         />
       </div>
 
@@ -99,7 +102,7 @@ export default function Index() {
                 <td className="p-4">{row.profile.firstname}</td>
                 <td className="p-4"> {row.profile.lastname}</td>
                 <td className="p-4">
-                  {RoleMapping[row.role_id as keyof typeof RoleMapping]}
+                  {roles.find((r) => r.id === row.role_id)?.name}
                 </td>
                 <td className="p-4 flex gap-2">
                   <button

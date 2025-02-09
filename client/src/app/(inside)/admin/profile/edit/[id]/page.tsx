@@ -8,24 +8,24 @@ export default function EditProfilePage() {
   const params = useParams();
   const [user, setUser] = useState<TableRow[] | null>(null);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await fetch(`/api/users/${params.id}`);
-      const data = await response.json();
-      setUser(data);
-    };
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const response = await fetch(`/api/users/${params.id}`);
+  //     const data = await response.json();
+  //     setUser(data);
+  //   };
 
-    fetchUser();
-  }, [params.id]);
+  //   fetchUser();
+  // }, [params.id]);
 
-  const handleSave = async (updatedUser: TableRow) => {
-    const response = await fetch(`/api/users/${params.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedUser),
-    });
+  // const handleSave = async (updatedUser: TableRow) => {
+  //   const response = await fetch(`/api/users/${params.id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(updatedUser),
+  //   });
 
     if (!response.ok) {
       throw new Error("Failed to update user");

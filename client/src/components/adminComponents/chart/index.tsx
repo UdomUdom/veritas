@@ -8,25 +8,13 @@ import { TableRow } from "@/types/type";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const RoleMapping = {
-  1: "admin",
-  2: "instructors",
-  3: "students",
-} as const;
-
 import { useState } from "react";
 
-export default function Chart() {
+export default function Chart({ role }: { role: any }) {
   const [data, setData] = useState<TableRow[]>([]);
 
-  async function fetchData() {
-    const res = await fetch("/api/users");
-    const data: TableRow[] = await res.json();
-    setData(data);
-  }
-
   useEffect(() => {
-    fetchData();
+    setData(role);
   }, []);
 
   const roleData = {

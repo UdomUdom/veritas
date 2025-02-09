@@ -1,21 +1,16 @@
 "use client";
 import { useState, useMemo } from "react";
 import { TableRow } from "@/types/type";
+import { RoleMapping } from "../tableform/index";
 
-const RoleMapping = {
-  1: "admin",
-  2: "instructors",
-  3: "students",
-} as const;
-
-export const useTableFilter = (byrows: TableRow[] = []) => {
+export const useTableFilter = (byrows: TableRow[] | null | undefined = []) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRole, setSelectedRole] = useState<
-    keyof typeof RoleMapping | ""
-  >("");
+  const [selectedRole, setSelectedRole] = useState<RoleMapping | "">("");
+
+  const rows = Array.isArray(byrows) ? byrows : [];
 
   const filteredRows = useMemo(() => {
-    return byrows.filter((row) => {
+    return rows.filter((row) => {
       const profile = row.profile;
       if (
         !profile ||
@@ -30,12 +25,10 @@ export const useTableFilter = (byrows: TableRow[] = []) => {
         profile.lastname.toLowerCase().includes(searchQuery.toLowerCase()) ||
         profile.email.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesRole =
-        selectedRole === "" ||
-        RoleMapping[row.role_id as keyof typeof RoleMapping] ===
-          RoleMapping[selectedRole];
+        selectedRole === "" || row.role_id === selectedRole.id;
       return matchesSearchQuery && matchesRole;
     });
-  }, [byrows, searchQuery, selectedRole]);
+  }, [rows, searchQuery, selectedRole]);
 
   return {
     searchQuery,

@@ -8,6 +8,7 @@ export default async function actionLogin(prevState: any, formData: FormData) {
   const res = await fetch(process.env.API_URL + "/api/users/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify(rawData),
   });
   const setCookieHeader = res.headers.get("set-cookie");
@@ -15,11 +16,7 @@ export default async function actionLogin(prevState: any, formData: FormData) {
     ? setCookieHeader.split(";")[0].split("=")[1]
     : null;
   if (session) {
-    cookieStore.set("session", session, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-    });
+    cookieStore.set("session", session);
   }
 
   redirect("/admin");

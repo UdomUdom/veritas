@@ -79,24 +79,24 @@ export default function AddProfilePage() {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    try {
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to create profile");
-      }
-      router.push("/admin/profile");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //   try {
+  //     const response = await fetch("/api/users", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error("Failed to create profile");
+  //     }
+  //     router.push("/admin/profile");
+  //   } catch (err) {
+  //     setError(err instanceof Error ? err.message : "Something went wrong");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <div className="container mx-auto bg-base-200 pt-8">

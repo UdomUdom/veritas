@@ -14,22 +14,20 @@ import { useTableFilter } from "@/components/adminComponents/hooks/useTableFilte
 import { useTableRows } from "@/components/adminComponents/hooks/useTableRows";
 import Link from "next/link";
 import Pagination from "@/components/adminComponents/uiElements/Pagination";
+import { RoleMapping } from "@/components/adminComponents/tableform/index";
 
-const RoleMapping = {
-  1: "admin",
-  2: "instructors",
-  3: "students",
-} as const;
-
-export default function Profile() {
-  async function fetchData() {
-    const res = await fetch("/api/users");
-    const data: TableRow[] = await res.json();
-    handleAddInitialRows(data);
-  }
+export default function Profile({
+  role,
+  user,
+}: {
+  role: any;
+  user: TableRow[];
+}) {
+  const [roles, setRoles] = useState<RoleMapping[]>([]);
 
   useEffect(() => {
-    fetchData();
+    setRoles(role);
+    handleAddInitialRows(user);
   }, []);
 
   const { rows, handleDelete, handleAddInitialRows } = useTableRows();
@@ -68,6 +66,7 @@ export default function Profile() {
               <FilterOption
                 onSearchChange={setSearchQuery}
                 onRoleChange={setSelectedRole}
+                roles={roles}
               />
             </div>
             <div className="overflow-x-auto rounded-lg shadow-sm">
@@ -93,7 +92,7 @@ export default function Profile() {
                       <td className="p-4">{row.profile?.gender}</td>
                       <td className="p-4">{row.profile?.date_of_birth}</td>
                       <td className="p-4">
-                        {RoleMapping[row.role_id as keyof typeof RoleMapping]}
+                        {roles.find((r) => r.id === row.role_id)?.name}
                       </td>
                       <td className="p-4">{row.status}</td>
                       <td className="p-4">
