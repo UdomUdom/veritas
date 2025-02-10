@@ -1,3 +1,2 @@
-export { users, userRelations } from "./users";
-export { profiles, profileRelations } from "./profiles";
-export { roles, roleRelations } from "./roles";
+export { user, userRelations } from "./user";
+export { role, roleRelations } from "./role";

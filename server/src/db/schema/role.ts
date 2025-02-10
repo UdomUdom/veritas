@@ -1,12 +1,12 @@
 import { pgTable, serial, text } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { users } from ".";
+import { user } from ".";
 
-export const roles = pgTable("roles", {
+export const role = pgTable("role", {
   id: serial("id").primaryKey(),
   name: text("name").notNull().unique(),
 });
 
-export const roleRelations = relations(roles, ({ many }) => ({
-  users: many(users),
+export const roleRelations = relations(role, ({ many }) => ({
+  users: many(user),
 }));
