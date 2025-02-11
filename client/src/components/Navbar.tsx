@@ -25,21 +25,13 @@ export const AcmeLogo = () => {
   );
 };
 
-export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+interface NavbarProps {
+  href: string;
+  name: string;
+}
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+export default function Navbar({ NavbarList }: { NavbarList: NavbarProps[] }) {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
     <Nb onMenuOpenChange={setIsMenuOpen} maxWidth="2xl">
@@ -53,23 +45,18 @@ export default function Navbar() {
           <p className="font-bold text-inherit">VERITAS</p>
         </NavbarBrand>
       </NavbarContent>
-
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
+        {NavbarList.map((item: NavbarProps, index: number) => (
+          <NavbarItem key={index}>
+            <Link
+              color="foreground"
+              href={item.href}
+              className="font-medium mx-4"
+            >
+              {item.name}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
@@ -83,21 +70,13 @@ export default function Navbar() {
         <ThemeSwitcher />
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              href="#"
-              size="lg"
-            >
-              {item}
+        {NavbarList.map((item: NavbarProps, index: number) => (
+          <NavbarMenuItem
+            key={`${item}-${index}`}
+            className="mx-auto leading-loose"
+          >
+            <Link className="w-full" color="foreground" href={item.href}>
+              <span className="text-3xl leading-loose">{item.name}</span>
             </Link>
           </NavbarMenuItem>
         ))}
