@@ -60,10 +60,10 @@ export default function Navbar({ NavbarList }: { NavbarList: NavbarProps[] }) {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="/login">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="/register" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
