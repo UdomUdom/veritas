@@ -7,11 +7,29 @@ import { Button } from "@heroui/react";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
 
+const NavbarList = [
+  {
+    name: "Home",
+    href: "#home",
+  },
+  {
+    name: "Details",
+    href: "#details",
+  },
+  {
+    name: "Contact",
+    href: "#contact",
+  },
+];
+
 export default function Home() {
   return (
     <div className="container mx-auto">
-      <Navbar />
-      <header className="min-h-screen flex flex-col justify-center items-center">
+      <Navbar NavbarList={NavbarList} />
+      <header
+        id="home"
+        className="min-h-screen flex flex-col justify-center items-center"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Hero className=" text-center md:text-left px-4 ">
             <h1 className="text-3xl font-bold md:text-5xl leading-tight">
