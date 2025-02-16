@@ -4,6 +4,11 @@ import { UserAuthModel } from "@/models/users";
 import { signin, signup } from "@/services/users/auth";
 import { getUserProfile, getUserById, getUsers } from "@/services/users/users";
 import { ErrorHandler } from "@/utils/ErrorHandler";
+import { InstructorModel } from "@/models/instructor";
+import {
+  createInstructor,
+  updateInstructor,
+} from "@/services/users/instructor";
 
 export const userController = new Elysia({
   detail: {
@@ -101,6 +106,42 @@ export const userController = new Elysia({
       {
         detail: { summary: "profile" },
         beforeHandle: (ctx) => isAuthorized(ctx),
+      }
+    )
+    .post(
+      "/instuctor/create",
+      async ({ body, error }) => {
+        try {
+          const result = await createInstructor(body);
+          return {
+            status: "ok",
+            data: result,
+          };
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: { summary: "create instructor" },
+        body: InstructorModel,
+      }
+    )
+    .post(
+      "/instuctor/update",
+      async ({ body, error }) => {
+        try {
+          const result = await updateInstructor(body);
+          return {
+            status: "ok",
+            data: result,
+          };
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: { summary: "create instructor" },
+        body: InstructorModel,
       }
     )
 );

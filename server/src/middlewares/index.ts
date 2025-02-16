@@ -17,3 +17,5 @@ export const isAuthorized = async (c: Context) => {
     throw c.error(400, ErrorHandler(err));
   }
 };
+
+export const isAdmin = async (c: Context) => {};
