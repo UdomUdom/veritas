@@ -8,7 +8,7 @@ export const isAuthorized = async (c: Context) => {
 
     const { data, error } = await Supabase.auth.getUser(access_token.value);
 
-    if (error) throw error;
+    if (error) throw new Error("Unauthorized");
 
     c.headers = {
       authorization: data.user.id,

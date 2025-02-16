@@ -31,10 +31,11 @@ export const userController = new Elysia({
     )
     .post(
       "/signin",
-      async ({ body, cookie: { access_token }, error }) => {
+      async ({ body, cookie: { access_token, refresh_token }, error }) => {
         try {
           const result = await signin(body);
           access_token.value = result.session.access_token;
+          refresh_token.value = result.session.refresh_token;
           return {
             status: "ok",
             data: result.user.email,
@@ -48,24 +49,7 @@ export const userController = new Elysia({
         body: UserAuthModel,
       }
     )
-    // .post(
-    //   "/reset-password",
-    //   async ({ body, error }) => {
-    //     try {
-    //       const result = await resetPassword(body);
-    //       return {
-    //         status: "ok",
-    //         data: result,
-    //       };
-    //     } catch (err) {
-    //       return error(400, ErrorHandler(err));
-    //     }
-    //   },
-    //   {
-    //     detail: { summary: "reset password" },
-    //     body: UserAuthModel,
-    //   }
-    // )
+    // Reset password & Refresh token
     .get(
       "/",
       async ({ error }) => {
