@@ -1,10 +1,9 @@
-import { isAuthorized } from "@/middlewares";
-import { UserSignInModel, UserSignUpModel } from "@/models/users";
-import { signin, signup } from "@/services/users/auth";
-import { getUserById, getUsers } from "@/services/users/users";
-import { ErrorHandler } from "@/utils/ErrorHandler";
-import { generateToken } from "@/utils/Token";
 import Elysia from "elysia";
+import { isAuthorized } from "@/middlewares";
+import { UserAuthModel } from "@/models/users";
+import { signin, signup } from "@/services/users/auth";
+import { getUserProfile, getUserById, getUsers } from "@/services/users/users";
+import { ErrorHandler } from "@/utils/ErrorHandler";
 
 export const userController = new Elysia({
   detail: {
@@ -19,7 +18,7 @@ export const userController = new Elysia({
           const result = await signup(body);
           return {
             status: "ok",
-            data: result.username,
+            data: result.email,
           };
         } catch (err) {
           return error(400, ErrorHandler(err));
@@ -27,20 +26,19 @@ export const userController = new Elysia({
       },
       {
         detail: { summary: "signup" },
-        body: UserSignUpModel,
+        body: UserAuthModel,
       }
     )
     .post(
       "/signin",
-      async ({ body, cookie: { session }, error }) => {
+      async ({ body, cookie: { access_token, refresh_token }, error }) => {
         try {
           const result = await signin(body);
-          session.value = generateToken({
-            id: result.id,
-          });
+          access_token.value = result.session.access_token;
+          refresh_token.value = result.session.refresh_token;
           return {
             status: "ok",
-            data: result.username,
+            data: result.user.email,
           };
         } catch (err) {
           return error(400, ErrorHandler(err));
@@ -48,26 +46,10 @@ export const userController = new Elysia({
       },
       {
         detail: { summary: "signin" },
-        body: UserSignInModel,
+        body: UserAuthModel,
       }
     )
-    .post(
-      "/signout",
-      async ({ cookie: { session }, error }) => {
-        try {
-          session.remove();
-          return {
-            status: "ok",
-            data: "Signout success",
-          };
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
-      {
-        detail: { summary: "signout" },
-      }
-    )
+    // Reset password & Refresh token
     .get(
       "/",
       async ({ error }) => {
@@ -107,7 +89,7 @@ export const userController = new Elysia({
       async ({ headers, error }) => {
         try {
           if (!headers["authorization"]) throw new Error("Unauthorized");
-          const result = await getUserById(headers["authorization"]);
+          const result = await getUserProfile(headers["authorization"]);
           return {
             status: "ok",
             data: result,

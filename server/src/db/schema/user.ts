@@ -1,11 +1,4 @@
-import {
-  pgEnum,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { role } from ".";
 
@@ -13,9 +6,10 @@ export const eStatus = pgEnum("status", ["active", "inactive"]);
 
 export const user = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
+  auth_id: text("auth_id").unique().notNull(),
   username: text("username").unique().notNull(),
-  password: text("password").notNull(),
-  role_id: serial("role_id")
+  email: text("email").unique().notNull(),
+  role_id: uuid("role_id")
     .references(() => role.id)
     .notNull(),
   status: eStatus().notNull(),
