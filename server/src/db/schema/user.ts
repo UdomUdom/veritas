@@ -14,7 +14,7 @@ export const eStatus = pgEnum("status", ["active", "inactive"]);
 export const user = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
   username: text("username").unique().notNull(),
-  password: text("password").notNull(),
+  email: text("email").unique().notNull(),
   role_id: serial("role_id")
     .references(() => role.id)
     .notNull(),
