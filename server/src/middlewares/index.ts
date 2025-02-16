@@ -1,23 +1,17 @@
 import { ErrorHandler } from "@/utils/ErrorHandler";
-import { verifyToken } from "@/utils/Token";
+import Supabase from "@/utils/Supabase";
 import { Context } from "elysia";
 
 export const isAuthorized = async (c: Context) => {
   try {
-    if (!c.headers["authorization"]?.startsWith("Bearer ")) {
-      throw new Error("Unauthorized");
-    }
+    const { access_token } = c.cookie;
 
-    const session = c.headers["authorization"]?.split(" ")[1];
+    const { data, error } = await Supabase.auth.getUser(access_token.value);
 
-    if (!session) throw new Error("Unauthorized");
-
-    const verify = (await verifyToken(session!)) as { id: string };
-
-    if (!verify) throw new Error("Unauthorized");
+    if (error) throw error;
 
     c.headers = {
-      authorization: verify.id,
+      authorization: data.user.id,
     };
   } catch (err) {
     throw c.error(400, ErrorHandler(err));

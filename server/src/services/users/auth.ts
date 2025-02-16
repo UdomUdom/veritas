@@ -1,53 +1,46 @@
 import db from "@/db";
-import * as table from "@/db/schema";
-import { UserSignUpType, UserSignInType } from "@/models/users";
-import { hashPassword, verifyPassword } from "@/utils/Hash";
+import { role, user } from "@/db/schema";
+import { UserAuthType } from "@/models/users";
+import Supabase from "@/utils/Supabase";
 import { eq } from "drizzle-orm";
 
-export const signup = async (body: UserSignUpType) => {
+export const signup = async (body: UserAuthType) => {
+  const { data, error } = await Supabase.auth.signUp({
+    email: body.email,
+    password: body.password,
+  });
+
+  if (error) throw error;
+
   const result = await db.transaction(async (tx) => {
-    const already = await tx.query.user.findFirst({
-      where: eq(table.user.username, body.username),
-    });
-
-    if (already) throw new Error("User already exists");
-
     const role_user = await tx.query.role.findFirst({
-      where: eq(table.role.name, "user"),
+      where: eq(role.name, "user"),
     });
 
-    const [new_user] = await tx
-      .insert(table.user)
+    const [new_user] = await db
+      .insert(user)
       .values({
-        username: body.username,
-        password: await hashPassword(body.password),
+        auth_id: data.user!.id,
+        email: body.email,
+        username: body.email.split("@")[0],
+        role_id: role_user!.id,
         status: "active",
-        role_id: role_user?.id,
       })
       .returning();
 
     return new_user;
   });
+
   return result;
 };
 
-export const signin = async (body: UserSignInType) => {
-  const result = await db.transaction(async (tx) => {
-    const already = await tx.query.user.findFirst({
-      where: eq(table.user.username, body.username),
-    });
-
-    if (!already) throw new Error("User not found");
-
-    const isPasswordMatch = await verifyPassword(
-      body.password,
-      already.password
-    );
-
-    if (!isPasswordMatch) throw new Error("Password not match");
-
-    return already;
+export const signin = async (body: UserAuthType) => {
+  const { data, error } = await Supabase.auth.signInWithPassword({
+    email: body.email,
+    password: body.password,
   });
 
-  return result;
+  if (error) throw error;
+
+  return data;
 };

@@ -1,6 +1,6 @@
 services:
   database:
-    container_name: veritas-postgresql
+    container_name: database
     image: "postgres:alpine"
     restart: always
     ports:
@@ -15,7 +15,7 @@ services:
       - veritas
 
   redis:
-    container_name: veritas-redis
+    container_name: redis
     image: "redis:alpine"
     restart: always
     ports:
