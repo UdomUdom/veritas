@@ -1,14 +1,9 @@
 import Elysia from "elysia";
 import { isAuthorized } from "@/middlewares";
 import { UserAuthModel } from "@/models/users";
-import { signin, signup } from "@/services/users/auth";
+import { refreshToken, signin, signup } from "@/services/users/auth";
 import { getUserProfile, getUserById, getUsers } from "@/services/users/users";
 import { ErrorHandler } from "@/utils/ErrorHandler";
-import { InstructorModel } from "@/models/instructor";
-import {
-  createInstructor,
-  updateInstructor,
-} from "@/services/users/instructor";
 
 export const userController = new Elysia({
   detail: {
@@ -54,7 +49,45 @@ export const userController = new Elysia({
         body: UserAuthModel,
       }
     )
-    // Reset password & Refresh token
+    .get(
+      "/profile",
+      async ({ headers, error }) => {
+        try {
+          if (!headers["authorization"]) throw new Error("Unauthorized");
+          const result = await getUserProfile(headers["authorization"]);
+          return {
+            status: "ok",
+            data: result,
+          };
+        } catch (err) {
+          return error(403, ErrorHandler(err));
+        }
+      },
+      {
+        detail: { summary: "get user profile" },
+        beforeHandle: (ctx) => isAuthorized(ctx),
+      }
+    )
+    .get(
+      "/refresh",
+      async ({ headers, cookie: { refresh_token }, error }) => {
+        try {
+          if (!headers["refresh_token"]) throw new Error("refresh_token");
+          const result = await refreshToken(headers["refresh_token"]!);
+          refresh_token.value = result.session?.refresh_token;
+          return {
+            status: "ok",
+            data: result.user?.email,
+          };
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: { summary: "refresh token" },
+        beforeHandle: (ctx) => isAuthorized(ctx),
+      }
+    )
     .get(
       "/",
       async ({ error }) => {
@@ -69,7 +102,7 @@ export const userController = new Elysia({
         }
       },
       {
-        detail: { summary: "all users" },
+        detail: { summary: "get all users" },
       }
     )
     .get(
@@ -86,62 +119,7 @@ export const userController = new Elysia({
         }
       },
       {
-        detail: { summary: "user by id" },
-      }
-    )
-    .get(
-      "/profile",
-      async ({ headers, error }) => {
-        try {
-          if (!headers["authorization"]) throw new Error("Unauthorized");
-          const result = await getUserProfile(headers["authorization"]);
-          return {
-            status: "ok",
-            data: result,
-          };
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
-      {
-        detail: { summary: "profile" },
-        beforeHandle: (ctx) => isAuthorized(ctx),
-      }
-    )
-    .post(
-      "/instuctor/create",
-      async ({ body, error }) => {
-        try {
-          const result = await createInstructor(body);
-          return {
-            status: "ok",
-            data: result,
-          };
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
-      {
-        detail: { summary: "create instructor" },
-        body: InstructorModel,
-      }
-    )
-    .post(
-      "/instuctor/update",
-      async ({ body, error }) => {
-        try {
-          const result = await updateInstructor(body);
-          return {
-            status: "ok",
-            data: result,
-          };
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
-      {
-        detail: { summary: "create instructor" },
-        body: InstructorModel,
+        detail: { summary: "get user by id" },
       }
     )
 );

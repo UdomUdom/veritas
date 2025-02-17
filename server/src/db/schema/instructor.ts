@@ -1,9 +1,9 @@
+import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { user } from ".";
+import { workshop_instructor } from ".";
 
 export const instructor = pgTable("instructor", {
   id: uuid("id").primaryKey().defaultRandom(),
-  user_id: uuid("user_id").references(() => user.id),
   firstname: text("firstname").notNull(),
   lastname: text("lastname").notNull(),
   bio: text("bio"),
@@ -14,3 +14,7 @@ export const instructor = pgTable("instructor", {
     .notNull()
     .$onUpdate(() => new Date()),
 });
+
+export const workshopRelations = relations(instructor, ({ many }) => ({
+  workshop_instructor: many(workshop_instructor),
+}));
