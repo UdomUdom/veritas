@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Data Structure",
+    "description": "Basic Data Structure with Java, Algorithm",
+    "image": "https://picsum.photos/500",
+    "category": "IT",
+    "instructor": [
+      {
+        "id": 1,
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "john.doe@mail.com"
+      }
+    ],
+    "schedule": "2021-01-01 - 2021-01-02 09:00-17:00",
+    "prommotion_id": 1,
+    "price": 100,
+    "detail": "Lorem ipsum dolor sit amet",
+    "content": "Lorem ipsum dolor sit amet"
+  },
+  {
+    "id": 2,
+    "title": "Web Development with React",
+    "description": "Learn to build modern web applications",
+    "image": "https://picsum.photos/501",
+    "category": "IT",
+    "instructor": [
+      {
+        "id": 2,
+        "firstname": "Jane",
+        "lastname": "Smith",
+        "email": "jane.smith@mail.com"
+      }
+    ],
+    "schedule": "2021-02-15 - 2021-02-17 10:00-18:00",
+    "prommotion_id": 2,
+    "price": 150,
+    "detail": "Build interactive user interfaces",
+    "content": "React fundamentals and advanced concepts"
+  },
+  {
+    "id": 3,
+    "title": "Python Programming",
+    "description": "Introduction to Python and its applications",
+    "image": "https://picsum.photos/502",
+    "category": "IT",
+    "instructor": [
+      {
+        "id": 3,
+        "firstname": "David",
+        "lastname": "Lee",
+        "email": "david.lee@mail.com"
+      }
+    ],
+    "schedule": "2021-03-01 - 2021-03-05 09:00-12:00",
+    "prommotion_id": 2,
+    "price": 80,
+    "detail": "Learn the basics of Python programming",
+    "content": "Variables, data types, loops, and functions"
+  },
+  {
+    "id": 4,
+    "title": "Mobile App Development with Flutter",
+    "description": "Create cross-platform mobile apps",
+    "image": "https://picsum.photos/503",
+    "category": "IT",
+    "instructor": [
+      {
+        "id": 4,
+        "firstname": "Sarah",
+        "lastname": "Jones",
+        "email": "sarah.jones@mail.com"
+      }
+    ],
+    "schedule": "2021-04-10 - 2021-04-14 13:00-17:00",
+    "prommotion_id": 1,
+    "price": 200,
+    "detail": "Build beautiful and performant mobile apps",
+    "content": "Flutter widgets, layouts, and state management"
+  },
+  {
+    "id": 5,
+    "title": "Data Science with R",
+    "description": "Analyze and visualize data with R",
+    "image": "https://picsum.photos/504",
+    "category": "IT",
+    "instructor": [
+      {
+        "id": 5,
+        "firstname": "Michael",
+        "lastname": "Brown",
+        "email": "michael.brown@mail.com"
+      }
+    ],
+    "schedule": "2021-05-01 - 2021-05-03 10:00-16:00",
+    "prommotion_id": 1,
+    "price": 120,
+    "detail": "Learn data manipulation and statistical analysis",
+    "content": "Data frames, ggplot2, and machine learning basics"
+  },
+  {
+    "id": 6,
+    "title": "Cybersecurity Fundamentals",
+    "description": "Introduction to cybersecurity concepts",
+    "image": "https://picsum.photos/505",
+    "category": "IT",
+    "instructor": [
+      {
+        "id": 6,
+        "firstname": "Emily",
+        "lastname": "Davis",
+        "email": "emily.davis@mail.com"
+      }
+    ],
+    "schedule": "2021-06-15 - 2021-06-17 09:00-17:00",
+    "prommotion_id": 2,
+    "price": 180,
+    "detail": "Protecting systems and networks from threats",
+    "content": "Network security, cryptography, and ethical hacking"
+  },
+  {
+    "id": 7,
+    "title": "Cloud Computing with AWS",
+    "description": "Deploy and manage applications on AWS",
+    "image": "https://picsum.photos/506",
+    "category": "IT",
+    "instructor": [
+      {
+        "id": 7,
+        "firstname": "Christopher",
+        "lastname": "Wilson",
+        "email": "christopher.wilson@mail.com"
+      }
+    ],
+    "schedule": "2021-07-01 - 2021-07-05 10:00-18:00",
+    "prommotion_id": 2,
+    "price": 250,
+    "detail": "Learn AWS services and best practices",
+    "content": "EC2, S3, Lambda, and IAM"
+  },
+  {
+    "id": 8,
+    "title": "UX/UI Design",
+    "description": "Creating user-centered designs",
+    "image": "https://picsum.photos/507",
+    "category": "Design",
+    "instructor": [
+      {
+        "id": 8,
+        "firstname": "Jessica",
+        "lastname": "Garcia",
+        "email": "jessica.garcia@mail.com"
+      }
+    ],
+    "schedule": "2021-08-10 - 2021-08-12 13:00-17:00",
+    "prommotion_id": 2,
+    "price": 160,
+    "detail": "User research, wireframing, and prototyping",
+    "content": "Design thinking and usability testing"
+  },
+  {
+    "id": 9,
+    "title": "Graphic Design",
+    "description": "Fundamentals of graphic design",
+    "image": "https://picsum.photos/508",
+    "category": "Design",
+    "instructor": [
+      {
+        "id": 9,
+        "firstname": "Kevin",
+        "lastname": "Rodriguez",
+        "email": "kevin.rodriguez@mail.com"
+      }
+    ],
+    "schedule": "2021-09-01 - 2021-09-03 09:00-12:00",
+    "prommotion_id": 1,
+    "price": 100,
+    "detail": "Typography, color theory, and layout design",
+    "content": "Adobe Photoshop and Illustrator basics"
+  },
+  {
+    "id": 10,
+    "title": "Photography Basics",
+    "description": "Introduction to photography techniques",
+    "image": "https://picsum.photos/509",
+    "category": "Design",
+    "instructor": [
+      {
+        "id": 10,
+        "firstname": "Laura",
+        "lastname": "Martinez",
+        "email": "laura.martinez@mail.com"
+      }
+    ],
+    "schedule": "2021-10-15 - 2021-10-17 10:00-16:00",
+    "prommotion_id": 1,
+    "price": 120,
+    "detail": "Camera settings, composition, and lighting",
+    "content": "DSLR basics and photo editing software"
+  },
+  {
+    "id": 11,
+    "title": "Project Management",
+    "description": "Mastering project planning and execution",
+    "image": "https://picsum.photos/510",
+    "category": "Business",
+    "instructor": [
+      {
+        "id": 11,
+        "firstname": "Brian",
+        "lastname": "Williams",
+        "email": "brian.williams@mail.com"
+      }
+    ],
+    "schedule": "2021-11-01 - 2021-11-05 09:00-17:00",
+    "prommotion_id": 1,
+    "price": 180,
+    "detail": "Agile methodologies and risk management",
+    "content": "Project initiation, planning, execution, monitoring, and closure"
+  },
+  {
+    "id": 12,
+    "title": "Financial Accounting",
+    "description": "Understanding financial statements and reports",
+    "image": "https://picsum.photos/511",
+    "category": "Business",
+    "instructor": [
+      {
+        "id": 12,
+        "firstname": "Megan",
+        "lastname": "Miller",
+        "email": "megan.miller@mail.com"
+      }
+    ],
+    "schedule": "2021-12-10 - 2021-12-12 10:00-16:00",
+    "prommotion_id": 1,
+    "price": 130,
+    "detail": "Balance sheets, income statements, and cash flow statements",
+    "content": "Accounting principles and financial analysis"
+  }
+]
