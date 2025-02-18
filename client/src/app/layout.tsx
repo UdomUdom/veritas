@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Noto_Sans } from "next/font/google";
 import { Providers } from "@/provider";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Veritas",
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="light">
       <body className={noto.className}>
         <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );

@@ -1,5 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import { Button } from "@heroui/react";
 import Link from "next/link";
@@ -79,7 +78,6 @@ export default function Home() {
           </p>
         </section>
       </main>
-      <Footer />
     </div>
   );
 }

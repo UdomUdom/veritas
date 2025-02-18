@@ -111,13 +111,14 @@ export const ActionCard = (props: CardProps): React.ReactElement => {
   };
 
   return (
-    <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {list.map((item, index) => (
         <Cd
           isFooterBlurred
+          radius="sm"
           key={index}
           isPressable
-          shadow="sm"
+          shadow="md"
           onPress={() => console.log("item pressed")}
           className="relative w-full h-auto aspect-square md:aspect-[3/4]"
         >
@@ -136,6 +137,7 @@ export const ActionCard = (props: CardProps): React.ReactElement => {
             </p>
           </CardHeader>
           <Image
+            radius="sm"
             removeWrapper
             alt="Relaxing app background"
             className="z-0 w-full h-full object-cover"
@@ -148,7 +150,7 @@ export const ActionCard = (props: CardProps): React.ReactElement => {
                 <p>{getStartTime(item.schedule)}</p>
               </div>
               <div className="text-sm md:text-base">
-                {item.instructor.firstname} {item.instructor.lastname}
+                {item.instructor[0].firstname} {item.instructor[0].lastname}
               </div>
             </div>
           </CardFooter>
