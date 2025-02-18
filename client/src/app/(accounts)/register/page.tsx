@@ -73,7 +73,16 @@ export default function Login() {
             type="text"
             variant="bordered"
           />
-
+          <Input
+            isRequired
+            className="max-w-xs"
+            errorMessage="Please enter a valid email"
+            label="Email"
+            name="email"
+            placeholder="Enter your email"
+            type="text"
+            variant="bordered"
+          />
           <Input
             className="max-w-xs"
             isRequired
@@ -118,16 +127,7 @@ export default function Login() {
             type={isVisible ? "text" : "password"}
             variant="bordered"
           />
-          <Input
-            isRequired
-            className="max-w-xs"
-            errorMessage="Please enter a valid email"
-            label="Email"
-            name="email"
-            placeholder="Enter your email"
-            type="text"
-            variant="bordered"
-          />
+
           <div className="w-full">
             <Link href="/login">
               <h1 className="flex text-small text-default-500 justify-end hover:text-default-700 duration-300">
