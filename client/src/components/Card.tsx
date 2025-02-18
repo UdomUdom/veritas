@@ -7,6 +7,7 @@ import {
   Link,
   Image,
   Chip,
+  Avatar,
 } from "@heroui/react";
 import { Button } from "@heroui/react";
 import React from "react";
@@ -17,6 +18,7 @@ interface CardProps {
   className?: string;
   altimg?: string;
   image?: string;
+  logo?: any;
   title?: string;
   subtitle?: string;
   paragraph?: string;
@@ -35,6 +37,34 @@ export const SimpleCard = (props: CardProps) => {
         <h2>{title}</h2>
         <p>{paragraph}</p>
       </CardBody>
+    </Cd>
+  );
+};
+
+export const FeatureCard = (props: CardProps) => {
+  const { logo, title, paragraph } = props;
+  return (
+    <Cd
+      isBlurred
+      className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
+      shadow="sm"
+    >
+      <CardHeader className="justify-between">
+        <div className="flex gap-5">
+          <div className="flex justify-center p-2 rounded-full items-center bg-default-100/80">
+            {logo}
+          </div>
+          <div className="flex flex-col gap-1 items-start justify-center">
+            <h4 className="text-small font-semibold leading-none text-default-600">
+              {title}
+            </h4>
+          </div>
+        </div>
+      </CardHeader>
+      <CardBody className="px-3 py-0 text-small text-default-400">
+        {paragraph}
+      </CardBody>
+      <CardFooter className="gap-3"></CardFooter>
     </Cd>
   );
 };
@@ -177,5 +207,6 @@ export default function Card() {
     DividerCard,
     ImageCard,
     ActionCard,
+    FeatureCard,
   };
 }
