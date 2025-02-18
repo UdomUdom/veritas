@@ -35,7 +35,7 @@ export default function Navbar({ NavbarList }: { NavbarList: NavbarProps[] }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <Nb onMenuOpenChange={setIsMenuOpen} maxWidth="2xl">
+    <Nb isBordered onMenuOpenChange={setIsMenuOpen} maxWidth="2xl">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}

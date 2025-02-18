@@ -10,6 +10,7 @@ import {
 } from "@heroui/react";
 import { Button } from "@heroui/react";
 import React from "react";
+import { UserRoundPen, Calendar, Timer } from "lucide-react";
 
 interface CardProps {
   children?: React.ReactNode;
@@ -120,7 +121,7 @@ export const ActionCard = (props: CardProps): React.ReactElement => {
           isPressable
           shadow="md"
           onPress={() => console.log("item pressed")}
-          className="relative w-full h-auto aspect-square md:aspect-[3/4]"
+          className="relative w-full h-auto aspect-[3/4]"
         >
           <CardHeader className="absolute z-10 top-1 flex flex-col items-start text-start p-4 space-y-2">
             <Chip radius="md" className="mb-2 bg-default font-semibold text-xs">
@@ -132,7 +133,7 @@ export const ActionCard = (props: CardProps): React.ReactElement => {
             <h4 className="text-white font-semibold text-xl md:text-2xl">
               {item.title}
             </h4>
-            <p className="text-white/65 text-sm md:text-base leading-relaxed">
+            <p className="text-white/65 text-sm leading-relaxed">
               {item.description}
             </p>
           </CardHeader>
@@ -145,12 +146,22 @@ export const ActionCard = (props: CardProps): React.ReactElement => {
           />
           <CardFooter className="absolute bg-black/40 bottom-0 border-t-1 border-default-600 dark:border-default-100 text-small p-4 w-full">
             <div className="flex flex-col justify-between w-full">
-              <div className="flex items-center justify-between text-white">
-                <b>{getStartDate(item.schedule)}</b>
-                <p>{getStartTime(item.schedule)}</p>
-              </div>
-              <div className="text-sm md:text-base">
-                {item.instructor[0].firstname} {item.instructor[0].lastname}
+              <div className=" text-white"></div>
+              <div className="flex flex-col text-sm items-start text-white">
+                <p className="flex ">
+                  <UserRoundPen size={14} className="mr-4" />
+                  {item.instructor[0].firstname} {item.instructor[0].lastname}
+                </p>
+
+                <p className="flex ">
+                  <Calendar size={14} className="mr-4" />
+                  {getStartDate(item.schedule)}
+                </p>
+
+                <p className="flex ">
+                  <Timer size={14} className="mr-4" />
+                  {getStartTime(item.schedule)}
+                </p>
               </div>
             </div>
           </CardFooter>
