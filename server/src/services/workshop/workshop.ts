@@ -1,11 +1,27 @@
 import db from "@/db";
-import { eq } from "drizzle-orm";
+import { eq, ilike } from "drizzle-orm";
 import { workshop } from "@/db/schema";
 import { WorkshopType, WorkshopTypeUpdate } from "@/models/workshop";
 import { FormatDate, FormatTime } from "@/utils/FormatDate";
 
-export const getWorkshops = async () => {
-  const result = await db.query.workshop.findMany();
+interface WorkshopsQuery {
+  q?: string;
+  offset?: number;
+  limit?: number;
+}
+
+export const getWorkshops = async ({ q, offset, limit }: WorkshopsQuery) => {
+  const result = await db.query.workshop.findMany({
+    columns: {
+      category_id: false,
+    },
+    where: q ? ilike(workshop.title, `%${q}%`) : undefined,
+    with: {
+      category: true,
+    },
+    limit: limit || 12,
+    offset: offset || 0,
+  });
 
   return result;
 };

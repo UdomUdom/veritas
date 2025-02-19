@@ -16,9 +16,9 @@ export const workshopController = new Elysia({
   app
     .get(
       "/",
-      async ({ error }) => {
+      async ({ query, error }) => {
         try {
-          const result = await getWorkshops();
+          const result = await getWorkshops(query);
           return {
             status: "ok",
             data: result,
