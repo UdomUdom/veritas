@@ -44,3 +44,13 @@ export const signin = async (body: UserAuthType) => {
 
   return data;
 };
+
+export const refreshToken = async (refresh_token: string) => {
+  const { data, error } = await Supabase.auth.refreshSession({
+    refresh_token,
+  });
+
+  if (error) throw error;
+
+  return data;
+};
