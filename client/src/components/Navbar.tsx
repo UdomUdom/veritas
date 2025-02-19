@@ -42,8 +42,10 @@ export default function Navbar({ NavbarList }: { NavbarList: NavbarProps[] }) {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">VERITAS</p>
+          <Link color="foreground" href="/">
+            <AcmeLogo />
+            <p className="font-bold text-inherit">VERITAS</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">

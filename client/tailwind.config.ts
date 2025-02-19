@@ -9,7 +9,27 @@ export default {
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        "bounce-slow": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
+        },
+      },
+      animation: {
+        "bounce-slow": "bounce-slow 3s infinite ease-in-out",
+        "spin-slow": "spin-slow 10s linear infinite",
+        float: "float 4s infinite ease-in-out",
+      },
+    },
   },
   darkMode: "class",
   plugins: [heroui()],
