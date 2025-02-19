@@ -1,242 +1,587 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "title": "Data Structure",
     "description": "Basic Data Structure with Java, Algorithm",
-    "image": "https://picsum.photos/500",
-    "category": "IT",
-    "instructor": [
-      {
-        "id": 1,
-        "firstname": "John",
-        "lastname": "Doe",
-        "email": "john.doe@mail.com"
-      }
-    ],
-    "schedule": "2021-01-01 - 2021-01-02 09:00-17:00",
-    "prommotion_id": 1,
-    "price": 100,
-    "detail": "Lorem ipsum dolor sit amet",
-    "content": "Lorem ipsum dolor sit amet"
-  },
-  {
-    "id": 2,
-    "title": "Web Development with React",
-    "description": "Learn to build modern web applications",
-    "image": "https://picsum.photos/501",
-    "category": "IT",
-    "instructor": [
-      {
-        "id": 2,
-        "firstname": "Jane",
-        "lastname": "Smith",
-        "email": "jane.smith@mail.com"
-      }
-    ],
-    "schedule": "2021-02-15 - 2021-02-17 10:00-18:00",
-    "prommotion_id": 2,
-    "price": 150,
-    "detail": "Build interactive user interfaces",
-    "content": "React fundamentals and advanced concepts"
-  },
-  {
-    "id": 3,
-    "title": "Python Programming",
-    "description": "Introduction to Python and its applications",
-    "image": "https://picsum.photos/502",
-    "category": "IT",
-    "instructor": [
-      {
-        "id": 3,
-        "firstname": "David",
-        "lastname": "Lee",
-        "email": "david.lee@mail.com"
-      }
-    ],
-    "schedule": "2021-03-01 - 2021-03-05 09:00-12:00",
-    "prommotion_id": 2,
-    "price": 80,
+    "image_url": "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmg5YTg3MjUxdW80emh2OXI4am5yaDY4YXV1ODAyZjhrNGY2azE0MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26n6G8lRMOrYC6rFS/giphy.gif",
+    "start_date": "2025-01-01",
+    "end_date": "2025-01-02",
+    "start_time": "20:30",
+    "end_time": "22:30",
+    "price": "1000",
     "detail": "Learn the basics of Python programming",
-    "content": "Variables, data types, loops, and functions"
-  },
-  {
-    "id": 4,
-    "title": "Mobile App Development with Flutter",
-    "description": "Create cross-platform mobile apps",
-    "image": "https://picsum.photos/503",
-    "category": "IT",
-    "instructor": [
+    "content": "con",
+    "created_at": "2025-02-19T18:01:00.935Z",
+    "updated_at": "2025-02-19T18:01:00.935Z",
+    "category": {
+      "id": "1",
+      "name": "IT"
+    },
+    "workshop_instructor": [
       {
-        "id": 4,
-        "firstname": "Sarah",
-        "lastname": "Jones",
-        "email": "sarah.jones@mail.com"
-      }
-    ],
-    "schedule": "2021-04-10 - 2021-04-14 13:00-17:00",
-    "prommotion_id": 1,
-    "price": 200,
-    "detail": "Build beautiful and performant mobile apps",
-    "content": "Flutter widgets, layouts, and state management"
-  },
-  {
-    "id": 5,
-    "title": "Data Science with R",
-    "description": "Analyze and visualize data with R",
-    "image": "https://picsum.photos/504",
-    "category": "IT",
-    "instructor": [
+        "id": "1",
+        "workshop_id": "1",
+        "instructor_id": "1",
+        "instructor": {
+          "id": "1",
+          "firstname": "John",
+          "lastname": "Doe",
+          "bio": null,
+          "avatar": null
+        }
+      },
       {
-        "id": 5,
-        "firstname": "Michael",
-        "lastname": "Brown",
-        "email": "michael.brown@mail.com"
+        "id": "2",
+        "workshop_id": "2",
+        "instructor_id": "2",
+        "instructor": {
+          "id": "2",
+          "firstname": "Jane",
+          "lastname": "Smith",
+          "bio": null,
+          "avatar": null
+        }
       }
-    ],
-    "schedule": "2021-05-01 - 2021-05-03 10:00-16:00",
-    "prommotion_id": 1,
-    "price": 120,
-    "detail": "Learn data manipulation and statistical analysis",
-    "content": "Data frames, ggplot2, and machine learning basics"
+    ]
   },
   {
-    "id": 6,
-    "title": "Cybersecurity Fundamentals",
-    "description": "Introduction to cybersecurity concepts",
-    "image": "https://picsum.photos/505",
-    "category": "IT",
-    "instructor": [
+    "id": "2",
+    "title": "Machine Learning Fundamentals",
+    "description": "Introduction to Machine Learning using Python and Scikit-learn",
+    "image_url": "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif",
+    "start_date": "2025-02-15",
+    "end_date": "2025-02-16",
+    "start_time": "14:00",
+    "end_time": "17:00",
+    "price": "1500",
+    "detail": "Learn how to build predictive models with real-world datasets.",
+    "content": "Introduction to supervised and unsupervised learning techniques.",
+    "created_at": "2025-03-01T10:15:00.000Z",
+    "updated_at": "2025-03-01T10:15:00.000Z",
+    "category": {
+      "id": "2",
+      "name": "Data Science"
+    },
+    "workshop_instructor": [
       {
-        "id": 6,
-        "firstname": "Emily",
-        "lastname": "Davis",
-        "email": "emily.davis@mail.com"
+        "id": "3",
+        "workshop_id": "2",
+        "instructor_id": "3",
+        "instructor": {
+          "id": "3",
+          "firstname": "Alice",
+          "lastname": "Johnson",
+          "bio": "AI Researcher with 5 years of experience in deep learning.",
+          "avatar": "https://example.com/avatars/alice.jpg"
+        }
+      },
+      {
+        "id": "4",
+        "workshop_id": "2",
+        "instructor_id": "4",
+        "instructor": {
+          "id": "4",
+          "firstname": "Bob",
+          "lastname": "Brown",
+          "bio": "Data Scientist specializing in NLP and computer vision.",
+          "avatar": "https://example.com/avatars/bob.jpg"
+        }
       }
-    ],
-    "schedule": "2021-06-15 - 2021-06-17 09:00-17:00",
-    "prommotion_id": 2,
-    "price": 180,
-    "detail": "Protecting systems and networks from threats",
-    "content": "Network security, cryptography, and ethical hacking"
+    ]
   },
   {
-    "id": 7,
+    "id": "3",
+    "title": "Web Development Bootcamp",
+    "description": "Full-stack web development with React, Node.js, and MongoDB",
+    "image_url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    "start_date": "2025-02-28",
+    "end_date": "2025-03-04",
+    "start_time": "09:00",
+    "end_time": "16:00",
+    "price": "2500",
+    "detail": "Master front-end and back-end development in just one week!",
+    "content": "Hands-on projects including building an e-commerce platform.",
+    "created_at": "2025-01-20T12:45:00.000Z",
+    "updated_at": "2025-01-20T12:45:00.000Z",
+    "category": {
+      "id": "3",
+      "name": "Web Development"
+    },
+    "workshop_instructor": [
+      {
+        "id": "5",
+        "workshop_id": "3",
+        "instructor_id": "5",
+        "instructor": {
+          "id": "5",
+          "firstname": "Emily",
+          "lastname": "Davis",
+          "bio": "Senior Full-stack Developer with expertise in cloud deployment.",
+          "avatar": "https://example.com/avatars/emily.jpg"
+        }
+      },
+      {
+        "id": "6",
+        "workshop_id": "3",
+        "instructor_id": "6",
+        "instructor": {
+          "id": "6",
+          "firstname": "Michael",
+          "lastname": "Wilson",
+          "bio": "Front-end specialist focusing on responsive design.",
+          "avatar": "https://example.com/avatars/michael.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Cybersecurity Essentials",
+    "description": "Learn the fundamentals of cybersecurity and ethical hacking",
+    "image_url": "https://media.giphy.com/media/3o7aD2d81tX6n9zKkY/giphy.gif",
+    "start_date": "2025-04-05",
+    "end_date": "2025-04-06",
+    "start_time": "10:00",
+    "end_time": "18:00",
+    "price": "1200",
+    "detail": "Understand how to protect systems from cyber threats and vulnerabilities.",
+    "content": "Introduction to network security, cryptography, and penetration testing.",
+    "created_at": "2025-02-22T08:30:00.000Z",
+    "updated_at": "2025-02-22T08:30:00.000Z",
+    "category": {
+      "id": "4",
+      "name": "Cybersecurity"
+    },
+    "workshop_instructor": [
+      {
+        "id": "7",
+        "workshop_id": "4",
+        "instructor_id": "7",
+        "instructor": {
+          "id": "7",
+          "firstname": "Sophia",
+          "lastname": "Martinez",
+          "bio": "Certified Ethical Hacker with over 7 years of experience.",
+          "avatar": "https://example.com/avatars/sophia.jpg"
+        }
+      },
+      {
+        "id": "8",
+        "workshop_id": "4",
+        "instructor_id": "8",
+        "instructor": {
+          "id": "8",
+          "firstname": "Daniel",
+          "lastname": "Taylor",
+          "bio": "Cybersecurity consultant specializing in threat intelligence.",
+          "avatar": "https://example.com/avatars/daniel.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "title": "UX/UI Design Masterclass",
+    "description": "Design user-friendly interfaces with Figma and Adobe XD",
+    "image_url": "https://media.giphy.com/media/l4FGwvE8zqBmFV3dy/giphy.gif",
+    "start_date": "2025-05-12",
+    "end_date": "2025-05-14",
+    "start_time": "09:30",
+    "end_time": "15:30",
+    "price": "1800",
+    "detail": "Create stunning designs that enhance user experience and engagement.",
+    "content": "Hands-on sessions on wireframing, prototyping, and usability testing.",
+    "created_at": "2025-03-10T14:20:00.000Z",
+    "updated_at": "2025-03-10T14:20:00.000Z",
+    "category": {
+      "id": "5",
+      "name": "Design"
+    },
+    "workshop_instructor": [
+      {
+        "id": "9",
+        "workshop_id": "5",
+        "instructor_id": "9",
+        "instructor": {
+          "id": "9",
+          "firstname": "Olivia",
+          "lastname": "Anderson",
+          "bio": "Senior UX Designer at a leading tech company.",
+          "avatar": "https://example.com/avatars/olivia.jpg"
+        }
+      },
+      {
+        "id": "10",
+        "workshop_id": "5",
+        "instructor_id": "10",
+        "instructor": {
+          "id": "10",
+          "firstname": "Liam",
+          "lastname": "Harris",
+          "bio": "UI Specialist with expertise in mobile app design.",
+          "avatar": "https://example.com/avatars/liam.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "title": "Blockchain Development Workshop",
+    "description": "Build decentralized applications using Ethereum and Solidity",
+    "image_url": "https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif",
+    "start_date": "2025-06-20",
+    "end_date": "2025-06-22",
+    "start_time": "11:00",
+    "end_time": "19:00",
+    "price": "2200",
+    "detail": "Explore blockchain technology and smart contract development.",
+    "content": "Deploy your own DApp and integrate it with Web3 wallets.",
+    "created_at": "2025-04-05T16:45:00.000Z",
+    "updated_at": "2025-04-05T16:45:00.000Z",
+    "category": {
+      "id": "6",
+      "name": "Blockchain"
+    },
+    "workshop_instructor": [
+      {
+        "id": "11",
+        "workshop_id": "6",
+        "instructor_id": "11",
+        "instructor": {
+          "id": "11",
+          "firstname": "Noah",
+          "lastname": "Clark",
+          "bio": "Blockchain architect with experience in DeFi projects.",
+          "avatar": "https://example.com/avatars/noah.jpg"
+        }
+      },
+      {
+        "id": "12",
+        "workshop_id": "6",
+        "instructor_id": "12",
+        "instructor": {
+          "id": "12",
+          "firstname": "Ava",
+          "lastname": "Lewis",
+          "bio": "Smart contract developer and blockchain educator.",
+          "avatar": "https://example.com/avatars/ava.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "7",
     "title": "Cloud Computing with AWS",
-    "description": "Deploy and manage applications on AWS",
-    "image": "https://picsum.photos/506",
-    "category": "IT",
-    "instructor": [
+    "description": "Master cloud infrastructure using Amazon Web Services (AWS)",
+    "image_url": "https://media.giphy.com/media/3o7aD2d81tX6n9zKkY/giphy.gif",
+    "start_date": "2025-07-01",
+    "end_date": "2025-07-03",
+    "start_time": "09:00",
+    "end_time": "17:00",
+    "price": "2000",
+    "detail": "Learn how to deploy scalable applications on AWS.",
+    "content": "Hands-on labs covering EC2, S3, Lambda, and more.",
+    "created_at": "2025-05-15T11:00:00.000Z",
+    "updated_at": "2025-05-15T11:00:00.000Z",
+    "category": {
+      "id": "7",
+      "name": "Cloud Computing"
+    },
+    "workshop_instructor": [
       {
-        "id": 7,
-        "firstname": "Christopher",
-        "lastname": "Wilson",
-        "email": "christopher.wilson@mail.com"
+        "id": "13",
+        "workshop_id": "7",
+        "instructor_id": "13",
+        "instructor": {
+          "id": "13",
+          "firstname": "Ethan",
+          "lastname": "Walker",
+          "bio": "AWS Certified Solutions Architect with 6 years of experience.",
+          "avatar": "https://example.com/avatars/ethan.jpg"
+        }
+      },
+      {
+        "id": "14",
+        "workshop_id": "7",
+        "instructor_id": "14",
+        "instructor": {
+          "id": "14",
+          "firstname": "Mia",
+          "lastname": "Hall",
+          "bio": "DevOps Engineer specializing in CI/CD pipelines on AWS.",
+          "avatar": "https://example.com/avatars/mia.jpg"
+        }
       }
-    ],
-    "schedule": "2021-07-01 - 2021-07-05 10:00-18:00",
-    "prommotion_id": 2,
-    "price": 250,
-    "detail": "Learn AWS services and best practices",
-    "content": "EC2, S3, Lambda, and IAM"
+    ]
   },
   {
-    "id": 8,
-    "title": "UX/UI Design",
-    "description": "Creating user-centered designs",
-    "image": "https://picsum.photos/507",
-    "category": "Design",
-    "instructor": [
+    "id": "8",
+    "title": "Game Development with Unity",
+    "description": "Create interactive games using Unity and C#",
+    "image_url": "https://media.giphy.com/media/l4FGwvE8zqBmFV3dy/giphy.gif",
+    "start_date": "2025-08-10",
+    "end_date": "2025-08-12",
+    "start_time": "13:00",
+    "end_time": "19:00",
+    "price": "1700",
+    "detail": "Develop 2D and 3D games from scratch with Unity.",
+    "content": "Learn game mechanics, physics, animations, and asset integration.",
+    "created_at": "2025-06-20T09:45:00.000Z",
+    "updated_at": "2025-06-20T09:45:00.000Z",
+    "category": {
+      "id": "8",
+      "name": "Game Development"
+    },
+    "workshop_instructor": [
       {
-        "id": 8,
-        "firstname": "Jessica",
-        "lastname": "Garcia",
-        "email": "jessica.garcia@mail.com"
+        "id": "15",
+        "workshop_id": "8",
+        "instructor_id": "15",
+        "instructor": {
+          "id": "15",
+          "firstname": "Lucas",
+          "lastname": "Young",
+          "bio": "Indie game developer with multiple published titles.",
+          "avatar": "https://example.com/avatars/lucas.jpg"
+        }
+      },
+      {
+        "id": "16",
+        "workshop_id": "8",
+        "instructor_id": "16",
+        "instructor": {
+          "id": "16",
+          "firstname": "Amelia",
+          "lastname": "King",
+          "bio": "Unity expert specializing in AR/VR game development.",
+          "avatar": "https://example.com/avatars/amelia.jpg"
+        }
       }
-    ],
-    "schedule": "2021-08-10 - 2021-08-12 13:00-17:00",
-    "prommotion_id": 2,
-    "price": 160,
-    "detail": "User research, wireframing, and prototyping",
-    "content": "Design thinking and usability testing"
+    ]
   },
   {
-    "id": 9,
-    "title": "Graphic Design",
-    "description": "Fundamentals of graphic design",
-    "image": "https://picsum.photos/508",
-    "category": "Design",
-    "instructor": [
+    "id": "9",
+    "title": "Data Visualization with Tableau",
+    "description": "Transform raw data into compelling visual stories",
+    "image_url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    "start_date": "2025-09-05",
+    "end_date": "2025-09-06",
+    "start_time": "10:30",
+    "end_time": "16:30",
+    "price": "1300",
+    "detail": "Learn how to create dashboards and reports for business insights.",
+    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
+    "created_at": "2025-07-12T13:15:00.000Z",
+    "updated_at": "2025-07-12T13:15:00.000Z",
+    "category": {
+      "id": "9",
+      "name": "Data Analytics"
+    },
+    "workshop_instructor": [
       {
-        "id": 9,
-        "firstname": "Kevin",
-        "lastname": "Rodriguez",
-        "email": "kevin.rodriguez@mail.com"
+        "id": "17",
+        "workshop_id": "9",
+        "instructor_id": "17",
+        "instructor": {
+          "id": "17",
+          "firstname": "James",
+          "lastname": "Scott",
+          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
+          "avatar": "https://example.com/avatars/james.jpg"
+        }
+      },
+      {
+        "id": "18",
+        "workshop_id": "9",
+        "instructor_id": "18",
+        "instructor": {
+          "id": "18",
+          "firstname": "Charlotte",
+          "lastname": "Adams",
+          "bio": "Data visualization consultant for Fortune 500 companies.",
+          "avatar": "https://example.com/avatars/charlotte.jpg"
+        }
       }
-    ],
-    "schedule": "2021-09-01 - 2021-09-03 09:00-12:00",
-    "prommotion_id": 1,
-    "price": 100,
-    "detail": "Typography, color theory, and layout design",
-    "content": "Adobe Photoshop and Illustrator basics"
+    ]
   },
   {
-    "id": 10,
-    "title": "Photography Basics",
-    "description": "Introduction to photography techniques",
-    "image": "https://picsum.photos/509",
-    "category": "Design",
-    "instructor": [
+    "id": "9",
+    "title": "Data Visualization with Tableau",
+    "description": "Transform raw data into compelling visual stories",
+    "image_url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    "start_date": "2025-09-05",
+    "end_date": "2025-09-06",
+    "start_time": "10:30",
+    "end_time": "16:30",
+    "price": "1300",
+    "detail": "Learn how to create dashboards and reports for business insights.",
+    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
+    "created_at": "2025-07-12T13:15:00.000Z",
+    "updated_at": "2025-07-12T13:15:00.000Z",
+    "category": {
+      "id": "9",
+      "name": "Data Analytics"
+    },
+    "workshop_instructor": [
       {
-        "id": 10,
-        "firstname": "Laura",
-        "lastname": "Martinez",
-        "email": "laura.martinez@mail.com"
+        "id": "17",
+        "workshop_id": "9",
+        "instructor_id": "17",
+        "instructor": {
+          "id": "17",
+          "firstname": "James",
+          "lastname": "Scott",
+          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
+          "avatar": "https://example.com/avatars/james.jpg"
+        }
+      },
+      {
+        "id": "18",
+        "workshop_id": "9",
+        "instructor_id": "18",
+        "instructor": {
+          "id": "18",
+          "firstname": "Charlotte",
+          "lastname": "Adams",
+          "bio": "Data visualization consultant for Fortune 500 companies.",
+          "avatar": "https://example.com/avatars/charlotte.jpg"
+        }
       }
-    ],
-    "schedule": "2021-10-15 - 2021-10-17 10:00-16:00",
-    "prommotion_id": 1,
-    "price": 120,
-    "detail": "Camera settings, composition, and lighting",
-    "content": "DSLR basics and photo editing software"
+    ]
   },
   {
-    "id": 11,
-    "title": "Project Management",
-    "description": "Mastering project planning and execution",
-    "image": "https://picsum.photos/510",
-    "category": "Business",
-    "instructor": [
+    "id": "9",
+    "title": "Data Visualization with Tableau",
+    "description": "Transform raw data into compelling visual stories",
+    "image_url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    "start_date": "2025-09-05",
+    "end_date": "2025-09-06",
+    "start_time": "10:30",
+    "end_time": "16:30",
+    "price": "1300",
+    "detail": "Learn how to create dashboards and reports for business insights.",
+    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
+    "created_at": "2025-07-12T13:15:00.000Z",
+    "updated_at": "2025-07-12T13:15:00.000Z",
+    "category": {
+      "id": "9",
+      "name": "Data Analytics"
+    },
+    "workshop_instructor": [
       {
-        "id": 11,
-        "firstname": "Brian",
-        "lastname": "Williams",
-        "email": "brian.williams@mail.com"
+        "id": "17",
+        "workshop_id": "9",
+        "instructor_id": "17",
+        "instructor": {
+          "id": "17",
+          "firstname": "James",
+          "lastname": "Scott",
+          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
+          "avatar": "https://example.com/avatars/james.jpg"
+        }
+      },
+      {
+        "id": "18",
+        "workshop_id": "9",
+        "instructor_id": "18",
+        "instructor": {
+          "id": "18",
+          "firstname": "Charlotte",
+          "lastname": "Adams",
+          "bio": "Data visualization consultant for Fortune 500 companies.",
+          "avatar": "https://example.com/avatars/charlotte.jpg"
+        }
       }
-    ],
-    "schedule": "2021-11-01 - 2021-11-05 09:00-17:00",
-    "prommotion_id": 1,
-    "price": 180,
-    "detail": "Agile methodologies and risk management",
-    "content": "Project initiation, planning, execution, monitoring, and closure"
+    ]
   },
   {
-    "id": 12,
-    "title": "Financial Accounting",
-    "description": "Understanding financial statements and reports",
-    "image": "https://picsum.photos/511",
-    "category": "Business",
-    "instructor": [
+    "id": "9",
+    "title": "Data Visualization with Tableau",
+    "description": "Transform raw data into compelling visual stories",
+    "image_url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    "start_date": "2025-09-05",
+    "end_date": "2025-09-06",
+    "start_time": "10:30",
+    "end_time": "16:30",
+    "price": "1300",
+    "detail": "Learn how to create dashboards and reports for business insights.",
+    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
+    "created_at": "2025-07-12T13:15:00.000Z",
+    "updated_at": "2025-07-12T13:15:00.000Z",
+    "category": {
+      "id": "9",
+      "name": "Data Analytics"
+    },
+    "workshop_instructor": [
       {
-        "id": 12,
-        "firstname": "Megan",
-        "lastname": "Miller",
-        "email": "megan.miller@mail.com"
+        "id": "17",
+        "workshop_id": "9",
+        "instructor_id": "17",
+        "instructor": {
+          "id": "17",
+          "firstname": "James",
+          "lastname": "Scott",
+          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
+          "avatar": "https://example.com/avatars/james.jpg"
+        }
+      },
+      {
+        "id": "18",
+        "workshop_id": "9",
+        "instructor_id": "18",
+        "instructor": {
+          "id": "18",
+          "firstname": "Charlotte",
+          "lastname": "Adams",
+          "bio": "Data visualization consultant for Fortune 500 companies.",
+          "avatar": "https://example.com/avatars/charlotte.jpg"
+        }
       }
-    ],
-    "schedule": "2021-12-10 - 2021-12-12 10:00-16:00",
-    "prommotion_id": 1,
-    "price": 130,
-    "detail": "Balance sheets, income statements, and cash flow statements",
-    "content": "Accounting principles and financial analysis"
+    ]
+  },
+  {
+    "id": "9",
+    "title": "Data Visualization with Tableau",
+    "description": "Transform raw data into compelling visual stories",
+    "image_url": "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    "start_date": "2025-09-05",
+    "end_date": "2025-09-06",
+    "start_time": "10:30",
+    "end_time": "16:30",
+    "price": "1300",
+    "detail": "Learn how to create dashboards and reports for business insights.",
+    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
+    "created_at": "2025-07-12T13:15:00.000Z",
+    "updated_at": "2025-07-12T13:15:00.000Z",
+    "category": {
+      "id": "9",
+      "name": "Data Analytics"
+    },
+    "workshop_instructor": [
+      {
+        "id": "17",
+        "workshop_id": "9",
+        "instructor_id": "17",
+        "instructor": {
+          "id": "17",
+          "firstname": "James",
+          "lastname": "Scott",
+          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
+          "avatar": "https://example.com/avatars/james.jpg"
+        }
+      },
+      {
+        "id": "18",
+        "workshop_id": "9",
+        "instructor_id": "18",
+        "instructor": {
+          "id": "18",
+          "firstname": "Charlotte",
+          "lastname": "Adams",
+          "bio": "Data visualization consultant for Fortune 500 companies.",
+          "avatar": "https://example.com/avatars/charlotte.jpg"
+        }
+      }
+    ]
   }
 ]

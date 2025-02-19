@@ -29,6 +29,7 @@ export default function Banner() {
               height={280}
               alt="A juicy red apple with a leaf"
               priority
+              className=" animate-bounce-slow"
             />
           </div>
         </div>

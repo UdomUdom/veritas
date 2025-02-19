@@ -1,16 +1,33 @@
-import CardList from "@/mock/workshop.json";
 import { BannerCard } from "@/components/Card";
+import mockWorkshop from "@/mock/workshop.json";
 
 export default async function WorkshopList({
   params,
 }: {
   params: { id: string };
 }) {
-  const workshopId = (await params).id;
-  const workshop = CardList.find((item) => item.id === Number(workshopId));
+  // const fetchworkshop = async () => {
+  //   const response = await fetch(
+  //     `${process.env.API_URL}/api/workshop/${params.id}`
+  //   );
+  //   const data = await response.json();
+  //   return data.data;
+  // };
+
+  // const workshop = await fetchworkshop();
+  // console.log(workshop);
+
+  const mockworkshop = (await params).id;
+  const workshop = mockWorkshop.find((item) => item.id === mockworkshop);
 
   if (!workshop) {
-    return <div>Workshop not found</div>;
+    return (
+      <div className="container mx-auto">
+        <h1 className="text-center text-4xl font-semibold mt-16">
+          Workshop not found
+        </h1>
+      </div>
+    );
   }
 
   return (
@@ -19,13 +36,16 @@ export default async function WorkshopList({
         <div className="container mx-auto">
           <div className="flex justify-center items-center ">
             <BannerCard
-              header={workshop.category}
-              title={workshop.title}
-              paragraph={workshop.description}
-              image={workshop.image}
-              altimg={workshop.title}
-              time={workshop.schedule}
-              price={workshop.price}
+              header={workshop?.category?.name}
+              title={workshop?.title}
+              paragraph={workshop?.description}
+              image={workshop?.image_url}
+              altimg={workshop?.title}
+              date={workshop?.start_date}
+              sub_date={workshop?.end_date}
+              time={workshop?.start_time}
+              sub_time={workshop?.end_time}
+              price={Number(workshop?.price)}
             />
           </div>
         </div>

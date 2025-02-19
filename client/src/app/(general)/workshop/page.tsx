@@ -1,14 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActionCard } from "@/components/Card";
 import { Button, Divider } from "@heroui/react";
 import { SearchInput } from "@/components/SearchInput";
-import CardList from "@/mock/workshop.json";
 import { useRouter } from "next/navigation";
+import mockWorkshop from "@/mock/workshop.json";
 
 export default function Workshop() {
+  const list = mockWorkshop;
+  // const [list, setList] = useState([]);
   const router = useRouter();
-  const list = CardList;
   const [visibleItems, setVisibleItems] = useState(8);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -23,11 +24,24 @@ export default function Workshop() {
   const filteredList = list.filter(
     (item) =>
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      `${item.instructor[0].firstname} ${item.instructor[0].lastname}`
+      item.category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      `${item.workshop_instructor[0].instructor.firstname} ${item.workshop_instructor[0].instructor.firstname}`
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
   );
+
+  // const prepareFetchWorkshop = async () => {
+  //   const response = await fetch(`${process.env.API_URL}/api/workshop`);
+  //   const data = await response.json();
+  //   console.log(data);
+  //   return data.data;
+  // };
+
+  // useEffect(() => {
+  //   prepareFetchWorkshop().then((data) => {
+  //     setList(data);
+  //   });
+  // }, []);
 
   return (
     <section className="container">
@@ -46,7 +60,7 @@ export default function Workshop() {
             onClick={handleCardClick}
           />
         </div>
-        {visibleItems < filteredList.length && (
+        {visibleItems < list.length && (
           <div className="flex justify-center mt-6">
             <Button
               color="primary"
