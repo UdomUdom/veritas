@@ -10,7 +10,7 @@
     "end_time": "22:30",
     "price": "1000",
     "detail": "Learn the basics of Python programming",
-    "content": "con",
+    "content": "## Workshop Content\n\nThis *workshop* covers basic data structures such as arrays, linked lists, stacks, and queues.\n\n### Topics Covered:\n\n- **Arrays**: A collection of elements stored at contiguous memory locations.\n- **Linked Lists**: A sequence of data structures, which are connected together via links.\n- **Stacks**: A linear data structure that follows the LIFO (Last In First Out) principle.\n- **Queues**: A linear data structure that follows the FIFO (First In First Out) principle.\n\n#### Code Example:\n\n```javascript\n// Example of a simple array\nconst arr = [1, 2, 3, 4, 5];\n\n// Example of a stack implementation\nconst stack = [];\nstack.push(1); // Add to stack\nstack.pop();  // Remove from stack\n```\n\n> Note: This workshop assumes basic knowledge of programming concepts.\n\n### Additional Resources:\n\n- [GeeksforGeeks - Data Structures](https://www.geeksforgeeks.org/data-structures/)\n- [JavaScript Data Structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)\n\n---\n\nFeel free to ask questions during the workshop!",
     "created_at": "2025-02-19T18:01:00.935Z",
     "updated_at": "2025-02-19T18:01:00.935Z",
     "category": {

@@ -1,5 +1,7 @@
 import { BannerCard } from "@/components/Card";
 import mockWorkshop from "@/mock/workshop.json";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
+import SelectionBar from "@/components/SelectionBar";
 
 export default async function WorkshopList({
   params,
@@ -32,7 +34,7 @@ export default async function WorkshopList({
 
   return (
     <>
-      <div className="bg-gradient-to-tr from-primary-200/80 to-secondary/80 p-8 mb-8">
+      <div className="bg-gradient-to-tr from-primary-200/80 to-secondary/80 p-8">
         <div className="container mx-auto">
           <div className="flex justify-center items-center ">
             <BannerCard
@@ -50,7 +52,28 @@ export default async function WorkshopList({
           </div>
         </div>
       </div>
-      <section className="container mx-auto"></section>
+      <div className="flex justify-center items-center text-center">
+        <SelectionBar
+          NavbarList={[
+            { href: "#content", name: "Content" },
+            { href: "#instructor", name: "Instructor" },
+            { href: "#faq", name: "FAQ" },
+          ]}
+        />
+      </div>
+      <section id="content" className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="p-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl dark:prose-invert max-w-none">
+            <MarkdownRenderer content={workshop?.content} />
+          </div>
+        </div>
+      </section>
+      <section id="instructor" className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">instructor</div>
+      </section>
+      <section id="faq" className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">faq</div>
+      </section>
     </>
   );
 }
