@@ -18,6 +18,22 @@ export const getWorkshops = async ({ q, offset, limit }: WorkshopsQuery) => {
     where: q ? ilike(workshop.title, `%${q}%`) : undefined,
     with: {
       category: true,
+      workshop_instructor: {
+        with: {
+          instructor: {
+            columns: {
+              created_at: false,
+              updated_at: false,
+            },
+          },
+        },
+        columns: {
+          workshop_id: false,
+          instructor_id: false,
+          created_at: false,
+          updated_at: false,
+        },
+      },
     },
     limit: limit || 12,
     offset: offset || 0,
@@ -28,7 +44,29 @@ export const getWorkshops = async ({ q, offset, limit }: WorkshopsQuery) => {
 
 export const getWorkshopById = async (id: string) => {
   const result = await db.query.workshop.findFirst({
+    columns: {
+      category_id: false,
+    },
     where: eq(workshop.id, id),
+    with: {
+      category: true,
+      workshop_instructor: {
+        with: {
+          instructor: {
+            columns: {
+              created_at: false,
+              updated_at: false,
+            },
+          },
+        },
+        columns: {
+          workshop_id: false,
+          instructor_id: false,
+          created_at: false,
+          updated_at: false,
+        },
+      },
+    },
   });
 
   return result;
