@@ -48,6 +48,7 @@ export default async function WorkshopList({
               time={workshop?.start_time}
               sub_time={workshop?.end_time}
               price={Number(workshop?.price)}
+              location={workshop?.location}
             />
           </div>
         </div>
@@ -77,6 +78,19 @@ export default async function WorkshopList({
                   <h1 className="text-2xl font-semibold">{`${item.instructor.firstname} ${item.instructor.lastname}`}</h1>
                 </div>
               ))}
+            </div>
+          </section>
+          <section
+            id="location"
+            className="p-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl dark:prose-invert max-w-none bg-default/10  "
+          >
+            <blockquote className="border-l-4 border-primary-300/40 pl-4 text-default-700 my-6">
+              <p className="text-3xl font-sans font-semibold">Location</p>
+            </blockquote>
+            <div className="flex flex-col gap-4">
+              <div>
+                <h1 className="text-2xl font-semibold">{workshop?.location}</h1>
+              </div>
             </div>
           </section>
           <section

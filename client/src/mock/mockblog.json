@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "John Doe",
+    "title": "Software Engineer News",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et quam in nunc.",
+    "category_id": 1,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et quam in nunc. Nullam auctor"
+  },
+  {
+    "id": 2,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Jane Smith",
+    "title": "Tech Trends 2023",
+    "description": "Curabitur ac leo nunc. Vestibulum et mauris vel ante finibus maximus.",
+    "category_id": 2,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Curabitur ac leo nunc. Vestibulum et mauris vel ante finibus maximus. Sed et quam in nunc."
+  },
+  {
+    "id": 3,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Alice Johnson",
+    "title": "AI in Healthcare",
+    "description": "Praesent commodo cursus magna, vel scelerisque nisl consectetur et.",
+    "category_id": 3,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed et quam in nunc."
+  },
+  {
+    "id": 4,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Bob Brown",
+    "title": "Blockchain Basics",
+    "description": "Donec ullamcorper nulla non metus auctor fringilla.",
+    "category_id": 4,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Donec ullamcorper nulla non metus auctor fringilla. Sed et quam in nunc."
+  },
+  {
+    "id": 5,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Charlie Davis",
+    "title": "Cybersecurity Tips",
+    "description": "Aenean lacinia bibendum nulla sed consectetur.",
+    "category_id": 5,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Aenean lacinia bibendum nulla sed consectetur. Sed et quam in nunc."
+  },
+  {
+    "id": 6,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Diana Evans",
+    "title": "Cloud Computing",
+    "description": "Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+    "category_id": 6,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Sed et quam in nunc."
+  },
+  {
+    "id": 7,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Ethan Hunt",
+    "title": "Machine Learning Basics",
+    "description": "Maecenas faucibus mollis interdum.",
+    "category_id": 7,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Maecenas faucibus mollis interdum. Sed et quam in nunc."
+  },
+  {
+    "id": 8,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Fiona Gallagher",
+    "title": "Data Science Insights",
+    "description": "Vestibulum id ligula porta felis euismod semper.",
+    "category_id": 8,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Vestibulum id ligula porta felis euismod semper. Sed et quam in nunc."
+  },
+  {
+    "id": 9,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "George Martin",
+    "title": "Quantum Computing",
+    "description": "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.",
+    "category_id": 9,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed et quam in nunc."
+  },
+  {
+    "id": 10,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Hannah Lee",
+    "title": "Internet of Things",
+    "description": "Etiam porta sem malesuada magna mollis euismod.",
+    "category_id": 10,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Etiam porta sem malesuada magna mollis euismod. Sed et quam in nunc."
+  },
+  {
+    "id": 11,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Ian Wright",
+    "title": "Big Data Analytics",
+    "description": "Nullam id dolor id nibh ultricies vehicula ut id elit.",
+    "category_id": 11,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Nullam id dolor id nibh ultricies vehicula ut id elit. Sed et quam in nunc."
+  },
+  {
+    "id": 12,
+    "author_avatar": "https://dummyimage.com/300",
+    "author_name": "Jessica Adams",
+    "title": "DevOps Practices",
+    "description": "Curabitur blandit tempus porttitor.",
+    "category_id": 12,
+    "image_url": "https://dummyimage.com/600x400/",
+    "content": "Curabitur blandit tempus porttitor. Sed et quam in nunc."
+  }
+]

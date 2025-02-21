@@ -25,7 +25,7 @@ export default function Workshop() {
     (item) =>
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      `${item.workshop_instructor[0].instructor.firstname} ${item.workshop_instructor[0].instructor.firstname}`
+      `${item.workshop_instructor[0].instructor.firstname}`
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
   );
@@ -53,7 +53,7 @@ export default function Workshop() {
       </div>
       <Divider />
       <div className="p-8 md:p-12">
-        <h1 className="font-semibold text-xl">WORKSHOP</h1>
+        <h1 className="font-semibold text-xl font-sans">WORKSHOP</h1>
         <div className="py-8">
           <ActionCard
             list={filteredList.slice(0, visibleItems)}

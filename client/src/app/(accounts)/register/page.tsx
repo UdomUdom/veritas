@@ -131,7 +131,7 @@ export default function Login() {
           <div className="w-full">
             <Link href="/login">
               <h1 className="flex text-small text-default-500 justify-end hover:text-default-700 duration-300">
-                Already have an account?{" "}
+                Already have an account?&nbsp;
                 <ExternalLinkIcon
                   className="ml-2 text-default-500 gap-4"
                   size={18}
