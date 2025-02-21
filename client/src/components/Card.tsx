@@ -288,7 +288,9 @@ export const BlogCard = (props: CardProps) => {
               />
             </div>
             <div className="flex flex-col gap-2 mt-4">
-              <p className="text-sm text-default-500">{item.description}</p>
+              <p className="text-sm text-default-500 line-clamp-3">
+                {item.description}
+              </p>
             </div>
           </CardBody>
           <CardFooter className="gap-3 px-4 py-2">
