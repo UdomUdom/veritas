@@ -8,11 +8,11 @@ import {
   Link,
   Image,
   Chip,
-  Avatar,
 } from "@heroui/react";
 import { Button } from "@heroui/react";
 import React from "react";
 import { UserRoundPen, Calendar, Timer } from "lucide-react";
+import { start } from "repl";
 
 interface CardProps {
   children?: React.ReactNode;
@@ -27,24 +27,49 @@ interface CardProps {
   linkdetails?: string;
   onUse?: boolean;
   time?: string;
+  sub_time?: string;
   price?: number;
+  date?: string;
+  sub_date?: string;
   list?: any[];
   header?: string;
   onClick?: (id: string) => void;
 }
 
-export const getStartDate = (schedule: string) => {
-  const [startDate, endDateWithTime] = schedule.split(" - ");
-  const [endDate, timeRange] = endDateWithTime.split(" ");
-  const [startTime] = timeRange.split("-");
-  return `${startDate}`;
-};
+const getDateRange = (startDate: Date, endDate: Date) => {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
 
-export const getStartTime = (schedule: string) => {
-  const [startDate, endDateWithTime] = schedule.split(" - ");
-  const [endDate, timeRange] = endDateWithTime.split(" ");
-  const [startTime] = timeRange.split("-");
-  return `${startTime}`;
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const startMonth = start.getMonth();
+  const startYear = start.getFullYear();
+  const startDay = start.getDate();
+
+  const endMonth = end.getMonth();
+  const endYear = end.getFullYear();
+  const endDay = end.getDate();
+
+  if (startMonth === endMonth && startYear === endYear) {
+    return `${startDay} - ${endDay} ${monthNames[startMonth]} ${startYear}`;
+  } else {
+    const formattedStartDate = `${startDay} ${monthNames[startMonth]} `;
+    const formattedEndDate = `${endDay} ${monthNames[endMonth]} `;
+    return `${formattedStartDate} - ${formattedEndDate} ${startYear}`;
+  }
 };
 
 export const SimpleCard = (props: CardProps) => {
@@ -143,7 +168,18 @@ export const ImageCard = (props: CardProps) => {
 };
 
 export const BannerCard = (props: CardProps) => {
-  const { altimg, image, title, paragraph, header, time, price } = props;
+  const {
+    altimg,
+    image,
+    title,
+    paragraph,
+    header,
+    date,
+    sub_date,
+    time,
+    sub_time,
+    price,
+  } = props;
   return (
     <Cd
       className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px] rounded-lg shadow-md transition-shadow duration-300 hover:shadow-lg"
@@ -160,7 +196,7 @@ export const BannerCard = (props: CardProps) => {
           </div>
 
           <div className="flex flex-col col-span-1 md:col-span-8">
-            <div className="flex flex-col gap-2 items-start md:items-end">
+            <div className="flex flex-col gap-2 items-start md:items-end text-start md:text-end">
               <Chip className="font-semibold text-foreground/90 bg-primary/20 rounded-full px-4 py-1.5 text-sm">
                 {header}
               </Chip>
@@ -190,11 +226,13 @@ export const BannerCard = (props: CardProps) => {
           <div className="flex flex-col text-sm items-start text-black dark:text-white">
             <p className="flex items-center">
               <Calendar size={14} className="mr-2" />
-              {getStartDate(time || "")}
+              {date && sub_date
+                ? getDateRange(new Date(date), new Date(sub_date))
+                : "Invalid date"}
             </p>
             <p className="flex items-center">
               <Timer size={14} className="mr-2" />
-              {getStartTime(time || "")}
+              {time} - {sub_time}
             </p>
           </div>
         </div>
@@ -215,11 +253,11 @@ export const ActionCard = (props: CardProps) => {
           isPressable
           shadow="md"
           onPress={() => onClick?.(item.id)}
-          className="relative w-full h-auto aspect-[3/4]"
+          className="relative w-full h-auto aspect-[3/4] hover:-translate-y-3 "
         >
           <CardHeader className="absolute z-10 top-1 flex flex-col items-start text-start p-4 space-y-2">
             <Chip radius="md" className="mb-2 bg-default font-semibold text-xs">
-              {item.category}
+              {item.category.name}
             </Chip>
             <p className="text-primary-400 font-semibold text-sm uppercase tracking-wider">
               Workshop
@@ -236,23 +274,25 @@ export const ActionCard = (props: CardProps) => {
             removeWrapper
             alt="Relaxing app background"
             className="z-0 w-full h-full object-cover"
-            src={item.image}
+            src={item.image_url}
           />
-          <CardFooter className="absolute bg-default/40 bottom-0 border-t-1 border-default-600 dark:border-default-100 text-small p-4 w-full rounded-sm">
+          <CardFooter className="absolute bg-default/10 bottom-0 border-default-600 dark:border-default-100 text-small p-4 w-full rounded-sm">
             <div className="flex flex-col justify-between w-full">
-              <div className="flex flex-col text-sm items-start text-default">
-                <p className="flex ">
+              <div className="flex flex-col text-sm items-start text-white gap-1">
+                <p className="flex items-center">
                   <UserRoundPen size={14} className="mr-4" />
-                  {item.instructor[0].firstname} {item.instructor[0].lastname}
+                  {item.workshop_instructor.map(
+                    (staff: any) =>
+                      `${staff.instructor.firstname} ${staff.instructor.lastname}`
+                  )}
                 </p>
-                <p className="flex ">
+                <p className="flex items-center">
                   <Calendar size={14} className="mr-4" />
-                  {getStartDate(item.schedule)}
+                  {getDateRange(item.start_date, item.end_date)}
                 </p>
-
-                <p className="flex ">
+                <p className="flex items-center">
                   <Timer size={14} className="mr-4" />
-                  {getStartTime(item.schedule)}
+                  {item.start_time} - {item.end_time}
                 </p>
               </div>
             </div>
