@@ -1,7 +1,7 @@
 import { BannerCard } from "@/components/Card";
 import mockWorkshop from "@/mock/workshop.json";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-import SelectionBar from "@/components/SelectionBar";
+import Detail from "@/components/Detail";
 
 export default async function WorkshopList({
   params,
@@ -52,28 +52,44 @@ export default async function WorkshopList({
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center text-center">
-        <SelectionBar
-          NavbarList={[
-            { href: "#content", name: "Content" },
-            { href: "#instructor", name: "Instructor" },
-            { href: "#faq", name: "FAQ" },
-          ]}
-        />
-      </div>
-      <section id="content" className="container mx-auto px-4 py-8">
+      <div id="selectionBar" className=""></div>
+      <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="p-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl dark:prose-invert max-w-none">
+          <section
+            id="details"
+            className="p-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl dark:prose-invert max-w-none bg-default/10 rounded-t-md "
+          >
+            <blockquote className="border-l-4 border-primary-300/40 pl-4 text-default-700 my-6">
+              <p className="text-3xl font-sans font-semibold">Detail</p>
+            </blockquote>
             <MarkdownRenderer content={workshop?.content} />
-          </div>
+          </section>
+          <section
+            id="instructor"
+            className="p-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl dark:prose-invert max-w-none bg-default/10  "
+          >
+            <blockquote className="border-l-4 border-primary-300/40 pl-4 text-default-700 my-6">
+              <p className="text-3xl font-sans font-semibold">Instructor</p>
+            </blockquote>
+            <div className="flex flex-col gap-4">
+              {workshop?.workshop_instructor.map((item) => (
+                <div key={item.id}>
+                  <h1 className="text-2xl font-semibold">{`${item.instructor.firstname} ${item.instructor.lastname}`}</h1>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section
+            id="faq"
+            className="p-6 prose prose-sm sm:prose lg:prose-lg xl:prose-xl dark:prose-invert max-w-none bg-default/10 rounded-b-md "
+          >
+            <blockquote className="border-l-4 border-primary-300/40 pl-4 text-default-700 my-6">
+              <p className="text-3xl font-sans font-semibold">FAQ</p>
+            </blockquote>
+            <Detail />
+          </section>
         </div>
-      </section>
-      <section id="instructor" className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">instructor</div>
-      </section>
-      <section id="faq" className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">faq</div>
-      </section>
+      </main>
     </>
   );
 }

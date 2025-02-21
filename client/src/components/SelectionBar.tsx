@@ -13,7 +13,7 @@ export default function SelectionBar({
   NavbarList: NavbarProps[];
 }) {
   return (
-    <Nb isBordered position="static" className="w-full">
+    <Nb isBordered position="static" className="w-full relative">
       <NavbarContent
         className="flex justify-center items-center w-full"
         justify="center"

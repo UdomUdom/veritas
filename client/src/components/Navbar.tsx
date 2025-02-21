@@ -8,10 +8,11 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
   Button,
 } from "@heroui/react";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import Link from "next/link";
+import { tr } from "framer-motion/client";
 
 export const AcmeLogo = () => {
   return (
@@ -50,11 +51,11 @@ export default function Navbar({ NavbarList }: { NavbarList: NavbarProps[] }) {
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {NavbarList.map((item: NavbarProps, index: number) => (
-          <NavbarItem key={index}>
+          <NavbarItem key={index} isActive={true}>
             <Link
               color="foreground"
               href={item.href}
-              className="font-medium mx-4"
+              className="font-semibold mx-4 font-sans"
             >
               {item.name}
             </Link>
