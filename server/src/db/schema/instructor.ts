@@ -15,6 +15,6 @@ export const instructor = pgTable("instructor", {
     .$onUpdate(() => new Date()),
 });
 
-export const workshopRelations = relations(instructor, ({ many }) => ({
+export const instructorRelations = relations(instructor, ({ many }) => ({
   workshop_instructor: many(workshop_instructor),
 }));

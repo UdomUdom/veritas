@@ -10,7 +10,7 @@ interface WorkshopsQuery {
   limit?: number;
 }
 
-export const getWorkshops = async ({ q, offset, limit }: WorkshopsQuery) => {
+export const getWorkshops = async ({ q }: WorkshopsQuery) => {
   const result = await db.query.workshop.findMany({
     columns: {
       category_id: false,
@@ -35,8 +35,6 @@ export const getWorkshops = async ({ q, offset, limit }: WorkshopsQuery) => {
         },
       },
     },
-    limit: limit || 12,
-    offset: offset || 0,
   });
 
   return result;

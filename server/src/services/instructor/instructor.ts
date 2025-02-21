@@ -4,7 +4,26 @@ import { instructor } from "@/db/schema";
 import { InstructorType } from "@/models/instructor";
 
 export const getInstructors = async () => {
-  const result = db.query.instructor.findMany();
+  const result = db.query.instructor.findMany({
+    with: {
+      workshop_instructor: {
+        with: {
+          workshop: {
+            columns: {
+              created_at: false,
+              updated_at: false,
+            },
+          },
+        },
+        columns: {
+          instructor_id: false,
+          workshop_id: false,
+          created_at: false,
+          updated_at: false,
+        },
+      },
+    },
+  });
 
   return result;
 };
@@ -12,6 +31,24 @@ export const getInstructors = async () => {
 export const getInstructorById = async (id: string) => {
   const result = db.query.instructor.findFirst({
     where: eq(instructor.id, id),
+    with: {
+      workshop_instructor: {
+        with: {
+          workshop: {
+            columns: {
+              created_at: false,
+              updated_at: false,
+            },
+          },
+        },
+        columns: {
+          instructor_id: false,
+          workshop_id: false,
+          created_at: false,
+          updated_at: false,
+        },
+      },
+    },
   });
 
   return result;

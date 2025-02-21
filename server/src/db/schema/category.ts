@@ -1,5 +1,5 @@
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
-import { workshop } from ".";
+import { blog, bootcamp, workshop } from ".";
 import { relations } from "drizzle-orm";
 
 export const category = pgTable("category", {
@@ -9,4 +9,6 @@ export const category = pgTable("category", {
 
 export const categoryRelations = relations(category, ({ many }) => ({
   workshop: many(workshop),
+  bootcamp: many(bootcamp),
+  blog: many(blog),
 }));

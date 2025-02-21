@@ -8,6 +8,7 @@ export const WorkshopModel = t.Object({
   start_date: t.Date(),
   end_date: t.Optional(t.Date()),
   price: t.String(),
+  location: t.String(),
   detail: t.String(),
   content: t.String(),
 });
@@ -22,6 +23,7 @@ export const WorkshopModelUpdate = t.Object({
   start_date: t.Optional(t.Date()),
   end_date: t.Optional(t.Date()),
   price: t.Optional(t.String()),
+  location: t.Optional(t.String()),
   detail: t.Optional(t.String()),
   content: t.Optional(t.String()),
 });

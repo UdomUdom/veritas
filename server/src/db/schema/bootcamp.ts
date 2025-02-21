@@ -1,8 +1,8 @@
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { category, workshop_instructor } from ".";
+import { integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { category } from ".";
 import { relations } from "drizzle-orm";
 
-export const workshop = pgTable("workshop", {
+export const bootcamp = pgTable("bootcamp", {
   id: uuid("id").primaryKey().defaultRandom(),
   title: text("title").notNull(),
   description: text("description").notNull(),
@@ -18,6 +18,7 @@ export const workshop = pgTable("workshop", {
   location: text("location").notNull(),
   detail: text("detail").notNull(),
   content: text("content"),
+  max_participants: integer("max_participants").default(0),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()
@@ -25,10 +26,9 @@ export const workshop = pgTable("workshop", {
     .$onUpdate(() => new Date()),
 });
 
-export const workshopRelations = relations(workshop, ({ one, many }) => ({
-  workshop_instructor: many(workshop_instructor),
+export const bootcampRelations = relations(bootcamp, ({ one }) => ({
   category: one(category, {
-    fields: [workshop.category_id],
+    fields: [bootcamp.category_id],
     references: [category.id],
   }),
 }));
