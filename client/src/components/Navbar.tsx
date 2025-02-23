@@ -12,7 +12,6 @@ import {
 } from "@heroui/react";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Link from "next/link";
-import { tr } from "framer-motion/client";
 
 export const AcmeLogo = () => {
   return (
@@ -43,7 +42,7 @@ export default function Navbar({ NavbarList }: { NavbarList: NavbarProps[] }) {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <Link color="foreground" href="/">
+          <Link color="foreground" href="/" className="flex items-center gap-2">
             <AcmeLogo />
             <p className="font-bold text-inherit">VERITAS</p>
           </Link>

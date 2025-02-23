@@ -8,10 +8,13 @@ import {
   Link,
   Image,
   Chip,
+  Avatar,
+  AvatarGroup,
+  avatar,
 } from "@heroui/react";
 import { Button } from "@heroui/react";
 import React from "react";
-import { UserRoundPen, Calendar, Timer } from "lucide-react";
+import { UserRoundPen, Calendar, Timer, Pin } from "lucide-react";
 import { start } from "repl";
 
 interface CardProps {
@@ -32,7 +35,9 @@ interface CardProps {
   date?: string;
   sub_date?: string;
   list?: any[];
+  avatar?: string;
   header?: string;
+  location?: string;
   onClick?: (id: string) => void;
 }
 
@@ -138,6 +143,19 @@ export const DividerCard = (props: CardProps) => {
   );
 };
 
+export const BlogImageCard = (props: CardProps) => {
+  const { image } = props;
+  return (
+    <Cd shadow="lg" className="rounded-md col-span-12 sm:col-span-4 h-[300px]">
+      <Image
+        removeWrapper
+        className="z-0 w-full h-full object-cover rounded-sm"
+        src={image}
+      />
+    </Cd>
+  );
+};
+
 export const ImageCard = (props: CardProps) => {
   const { altimg, image, title, subtitle, onUse } = props;
   return (
@@ -174,6 +192,7 @@ export const BannerCard = (props: CardProps) => {
     title,
     paragraph,
     header,
+    location,
     date,
     sub_date,
     time,
@@ -225,6 +244,10 @@ export const BannerCard = (props: CardProps) => {
         <div className="flex flex-col mt-3 gap-1 col-span-1 md:col-span-12">
           <div className="flex flex-col text-sm items-start text-black dark:text-white">
             <p className="flex items-center">
+              <Pin size={14} className="mr-2" />
+              {location}
+            </p>
+            <p className="flex items-center">
               <Calendar size={14} className="mr-2" />
               {date && sub_date
                 ? getDateRange(new Date(date), new Date(sub_date))
@@ -238,6 +261,47 @@ export const BannerCard = (props: CardProps) => {
         </div>
       </CardFooter>
     </Cd>
+  );
+};
+
+export const BlogCard = (props: CardProps) => {
+  const { onClick, list = [] } = props;
+  return (
+    <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      {list.map((item, index) => (
+        <Cd
+          isBlurred
+          isPressable
+          key={index}
+          onPress={() => onClick?.(item.id)}
+          className="rounded-lg py-4 border-none bg-background/60 dark:bg-default-100/50 shadow-lg transition-shadow hover:-translate-y-2"
+        >
+          <CardHeader className="pb-0 pt-2 px-4 flex flex-col justify-center items-start">
+            <h2 className="font-bold text-xl pb-2">{item.title}</h2>
+          </CardHeader>
+          <CardBody className="overflow-visible py-2 px-4">
+            <div className="relative w-full h-48 overflow-hidden rounded-xl">
+              <Image
+                className="object-cover w-full h-full"
+                src={item.image_url}
+                alt={item.title}
+              />
+            </div>
+            <div className="flex flex-col gap-2 mt-4">
+              <p className="text-sm text-default-500 line-clamp-3">
+                {item.description}
+              </p>
+            </div>
+          </CardBody>
+          <CardFooter className="gap-3 px-4 py-2">
+            <div className="flex flex-row w-full justify-between items-center">
+              <p className="text-xs text-default-500">{item.author_name}</p>
+              <Avatar size="md" src={item.author_avatar} className="w-8 h-8" />
+            </div>
+          </CardFooter>
+        </Cd>
+      ))}
+    </div>
   );
 };
 
@@ -279,13 +343,25 @@ export const ActionCard = (props: CardProps) => {
           <CardFooter className="absolute bg-default/10 bottom-0 border-default-600 dark:border-default-100 text-small p-4 w-full rounded-sm">
             <div className="flex flex-col justify-between w-full">
               <div className="flex flex-col text-sm items-start text-white gap-1">
-                <p className="flex items-center">
-                  <UserRoundPen size={14} className="mr-4" />
-                  {item.workshop_instructor.map(
-                    (staff: any) =>
-                      `${staff.instructor.firstname} ${staff.instructor.lastname}`
-                  )}
-                </p>
+                <div className="flex items-center">
+                  <AvatarGroup
+                    className="p-1"
+                    max={3}
+                    renderCount={(count) => (
+                      <p className="text-small text-foreground font-medium ms-2">
+                        +{count} others
+                      </p>
+                    )}
+                  >
+                    {item.workshop_instructor.map((staff: any) => (
+                      <Avatar
+                        key={staff.instructor.id}
+                        size="sm"
+                        src={staff.instructor.avatar}
+                      />
+                    ))}
+                  </AvatarGroup>
+                </div>
                 <p className="flex items-center">
                   <Calendar size={14} className="mr-4" />
                   {getDateRange(item.start_date, item.end_date)}
@@ -311,5 +387,7 @@ export default function Card() {
     ActionCard,
     FeatureCard,
     BannerCard,
+    BlogCard,
+    BlogImageCard,
   };
 }
