@@ -1,5 +1,5 @@
 import Elysia from "elysia";
-import { ErrorHandler } from "@/utils/ErrorHandler";
+import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 import {
   createInstructor,
   deleteInstructor,
@@ -20,10 +20,7 @@ export const instructorController = new Elysia({
       async ({ error }) => {
         try {
           const result = await getInstructors();
-          return {
-            status: "ok",
-            data: result,
-          };
+          return SuccessHandler(result);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -37,10 +34,7 @@ export const instructorController = new Elysia({
       async ({ params, error }) => {
         try {
           const result = await getInstructorById(params.id);
-          return {
-            status: "ok",
-            data: result,
-          };
+          return SuccessHandler(result);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -54,10 +48,7 @@ export const instructorController = new Elysia({
       async ({ body, error }) => {
         try {
           const result = await createInstructor(body);
-          return {
-            status: "ok",
-            data: `Instructor ${result.id} created`,
-          };
+          return SuccessHandler(`Instructor ${result.id} created`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -72,10 +63,7 @@ export const instructorController = new Elysia({
       async ({ params, body, error }) => {
         try {
           const result = await updateInstructor(params.id, body);
-          return {
-            status: "ok",
-            data: `Instructor ${result.id} updated`,
-          };
+          return SuccessHandler(`Instructor ${result.id} updated`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -90,10 +78,7 @@ export const instructorController = new Elysia({
       async ({ params, error }) => {
         try {
           const result = await deleteInstructor(params.id);
-          return {
-            status: "ok",
-            data: `Instructor ${result.id} deleted`,
-          };
+          return SuccessHandler(`Instructor ${result.id} deleted`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }

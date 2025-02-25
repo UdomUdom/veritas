@@ -4,12 +4,11 @@ import { relations } from "drizzle-orm";
 
 export const blog = pgTable("blog", {
   id: uuid("id").primaryKey().defaultRandom(),
-  author: text("author").notNull(),
+  author_avatar: text("author_avatar"),
+  author_name: text("author_name"),
   title: text("title").notNull(),
   description: text("description").notNull(),
-  category_id: uuid("category")
-    .references(() => category.id)
-    .notNull(),
+  category_id: uuid("category").references(() => category.id),
   image_url: text("image_url"),
   content: text("content"),
   created_at: timestamp("created_at").defaultNow().notNull(),

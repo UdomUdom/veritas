@@ -4,3 +4,10 @@ export const ErrorHandler = (error: unknown) => {
     message: error instanceof Error ? error.message : "An error occurred",
   };
 };
+
+export const SuccessHandler = (data: unknown) => {
+  return {
+    status: "ok",
+    data,
+  };
+};

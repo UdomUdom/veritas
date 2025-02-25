@@ -1,4 +1,4 @@
-import { ErrorHandler } from "@/utils/ErrorHandler";
+import { ErrorHandler } from "@/utils/Handler";
 import Supabase from "@/utils/Supabase";
 import { Context } from "elysia";
 

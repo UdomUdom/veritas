@@ -3,7 +3,7 @@ import { isAuthorized } from "@/middlewares";
 import { UserAuthModel } from "@/models/users";
 import { refreshToken, signin, signup } from "@/services/users/auth";
 import { getUserProfile, getUserById, getUsers } from "@/services/users/users";
-import { ErrorHandler } from "@/utils/ErrorHandler";
+import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
 export const userController = new Elysia({
   detail: {
@@ -16,10 +16,7 @@ export const userController = new Elysia({
       async ({ body, error }) => {
         try {
           const result = await signup(body);
-          return {
-            status: "ok",
-            data: result.email,
-          };
+          return SuccessHandler(`User ${result.email} created`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -36,10 +33,7 @@ export const userController = new Elysia({
           const result = await signin(body);
           access_token.value = result.session.access_token;
           refresh_token.value = result.session.refresh_token;
-          return {
-            status: "ok",
-            data: result.user.email,
-          };
+          return SuccessHandler(`User ${result.user.email} signed in`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -55,10 +49,7 @@ export const userController = new Elysia({
         try {
           if (!headers["authorization"]) throw new Error("Unauthorized");
           const result = await getUserProfile(headers["authorization"]);
-          return {
-            status: "ok",
-            data: result,
-          };
+          return SuccessHandler(result);
         } catch (err) {
           return error(403, ErrorHandler(err));
         }
@@ -75,10 +66,7 @@ export const userController = new Elysia({
           if (!headers["refresh_token"]) throw new Error("refresh_token");
           const result = await refreshToken(headers["refresh_token"]!);
           refresh_token.value = result.session?.refresh_token;
-          return {
-            status: "ok",
-            data: result.user?.email,
-          };
+          return SuccessHandler(`Token refreshed`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -93,10 +81,7 @@ export const userController = new Elysia({
       async ({ error }) => {
         try {
           const result = await getUsers();
-          return {
-            status: "ok",
-            data: result,
-          };
+          return SuccessHandler(result);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
@@ -110,10 +95,7 @@ export const userController = new Elysia({
       async ({ params: { id }, error }) => {
         try {
           const result = await getUserById(id);
-          return {
-            status: "ok",
-            data: result,
-          };
+          return SuccessHandler(result);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
