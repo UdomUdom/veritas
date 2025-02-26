@@ -7,6 +7,7 @@ import {
   updateWorkshop,
 } from "@/services/workshop/workshop";
 import { WorkshopModel, WorkshopModelUpdate } from "@/models/workshop";
+import { SuccessHandler } from "@/utils/Handler";
 
 export const workshopController = new Elysia({
   detail: {
@@ -19,10 +20,7 @@ export const workshopController = new Elysia({
       async ({ query, error }) => {
         try {
           const result = await getWorkshops(query);
-          return {
-            status: "ok",
-            data: result,
-          };
+          return SuccessHandler(result);
         } catch (err) {
           return error(400, err);
         }
@@ -36,10 +34,7 @@ export const workshopController = new Elysia({
       async ({ params, error }) => {
         try {
           const result = await getWorkshopById(params.id);
-          return {
-            status: "ok",
-            data: result,
-          };
+          return SuccessHandler(result);
         } catch (err) {
           return error(400, err);
         }
@@ -53,10 +48,7 @@ export const workshopController = new Elysia({
       async ({ body, error }) => {
         try {
           const result = await createWorkshop(body);
-          return {
-            status: "ok",
-            data: `Workshop ${result.title} created`,
-          };
+          return SuccessHandler(`Workshop ${result.title} created`);
         } catch (err) {
           return error(400, err);
         }
@@ -71,10 +63,7 @@ export const workshopController = new Elysia({
       async ({ params, body, error }) => {
         try {
           const result = await updateWorkshop(params.id, body);
-          return {
-            status: "ok",
-            data: `Workshop ${result.title} updated`,
-          };
+          return SuccessHandler(`Workshop ${result.title} updated`);
         } catch (err) {
           return error(400, err);
         }
@@ -89,10 +78,7 @@ export const workshopController = new Elysia({
       async ({ params, error }) => {
         try {
           const result = await deleteWorkshop(params.id);
-          return {
-            status: "ok",
-            data: `Workshop ${result.title} deleted`,
-          };
+          return SuccessHandler(`Workshop ${result.title} deleted`);
         } catch (err) {
           return error(400, err);
         }

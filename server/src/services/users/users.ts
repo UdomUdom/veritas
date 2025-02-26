@@ -3,7 +3,7 @@ import * as table from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export const getUsers = async () => {
-  return await db.query.user.findMany({
+  const result = await db.query.user.findMany({
     columns: {
       auth_id: false,
       role_id: false,
@@ -14,6 +14,8 @@ export const getUsers = async () => {
       role: true,
     },
   });
+
+  return result;
 };
 
 export const getUserById = async (id: string) => {

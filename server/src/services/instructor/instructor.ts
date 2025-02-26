@@ -51,19 +51,18 @@ export const getInstructorById = async (id: string) => {
     },
   });
 
+  if (!result) throw new Error("Instructor not found");
+
   return result;
 };
 
 export const createInstructor = async (body: InstructorType) => {
   const result = db.transaction(async (tx) => {
-    const [new_instructor] = await tx
-      .insert(instructor)
-      .values(body)
-      .returning();
+    const [created] = await tx.insert(instructor).values(body).returning();
 
-    if (!new_instructor) throw new Error("Failed to create instructor");
+    if (!created) throw new Error("Failed to create instructor");
 
-    return new_instructor;
+    return created;
   });
 
   return result;
@@ -71,31 +70,27 @@ export const createInstructor = async (body: InstructorType) => {
 
 export const updateInstructor = async (id: string, body: InstructorType) => {
   const result = db.transaction(async (tx) => {
-    const [update_ins] = await tx
+    const [updated] = await tx
       .update(instructor)
       .set(body)
       .where(eq(instructor.id, id))
       .returning();
 
-    if (!update_ins) throw new Error("Failed to update instructor");
+    if (!updated) throw new Error("Failed to update instructor");
 
-    return update_ins;
+    return updated;
   });
 
   return result;
 };
 
 export const deleteInstructor = async (id: string) => {
-  const result = db.transaction(async (tx) => {
-    const [delete_ins] = await tx
-      .delete(instructor)
-      .where(eq(instructor.id, id))
-      .returning();
+  const [result] = await db
+    .delete(instructor)
+    .where(eq(instructor.id, id))
+    .returning();
 
-    if (!delete_ins) throw new Error("Failed to delete instructor");
-
-    return delete_ins;
-  });
+  if (!result) throw new Error("Failed to delete instructor");
 
   return result;
 };

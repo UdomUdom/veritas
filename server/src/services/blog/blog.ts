@@ -32,25 +32,35 @@ export const getBlogById = async (id: string) => {
     },
   });
 
+  if (!result) throw new Error("Blog not found");
+
   return result;
 };
 
 export const createBlog = async (body: BlogType) => {
-  const [result] = await db.insert(blog).values(body).returning();
+  const result = await db.transaction(async (tx) => {
+    const [created] = await tx.insert(blog).values(body).returning();
 
-  if (!result) throw new Error("Failed to create blog");
+    if (!created) throw new Error("Failed to create blog");
+
+    return created;
+  });
 
   return result;
 };
 
 export const updateBlog = async (id: string, body: BlogUpdateType) => {
-  const [result] = await db
-    .update(blog)
-    .set(body)
-    .where(eq(blog.id, id))
-    .returning();
+  const result = await db.transaction(async (tx) => {
+    const [updated] = await tx
+      .update(blog)
+      .set(body)
+      .where(eq(blog.id, id))
+      .returning();
 
-  if (!result) throw new Error("Failed to update blog");
+    if (!updated) throw new Error("Failed to update blog");
+
+    return updated;
+  });
 
   return result;
 };

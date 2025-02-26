@@ -17,7 +17,7 @@ export const signup = async (body: UserAuthType) => {
       where: eq(role.name, "user"),
     });
 
-    const [new_user] = await db
+    const [created] = await tx
       .insert(user)
       .values({
         auth_id: data.user!.id,
@@ -28,7 +28,7 @@ export const signup = async (body: UserAuthType) => {
       })
       .returning();
 
-    return new_user;
+    return created;
   });
 
   return result;

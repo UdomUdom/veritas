@@ -10,11 +10,13 @@ interface WorkshopsQuery {
   limit?: number;
 }
 
+const ignoreColumns = {
+  category_id: false,
+};
+
 export const getWorkshops = async ({ q }: WorkshopsQuery) => {
   const result = await db.query.workshop.findMany({
-    columns: {
-      category_id: false,
-    },
+    columns: ignoreColumns,
     where: q ? ilike(workshop.title, `%${q}%`) : undefined,
     with: {
       category: true,
@@ -42,9 +44,7 @@ export const getWorkshops = async ({ q }: WorkshopsQuery) => {
 
 export const getWorkshopById = async (id: string) => {
   const result = await db.query.workshop.findFirst({
-    columns: {
-      category_id: false,
-    },
+    columns: ignoreColumns,
     where: eq(workshop.id, id),
     with: {
       category: true,
@@ -72,7 +72,7 @@ export const getWorkshopById = async (id: string) => {
 
 export const createWorkshop = async (body: WorkshopType) => {
   const result = await db.transaction(async (tx) => {
-    const [new_workshop] = await tx
+    const [created] = await tx
       .insert(workshop)
       .values({
         ...body,
@@ -83,9 +83,9 @@ export const createWorkshop = async (body: WorkshopType) => {
       })
       .returning();
 
-    if (!new_workshop) throw new Error("Failed to create workshop");
+    if (!created) throw new Error("Failed to create workshop");
 
-    return new_workshop;
+    return created;
   });
 
   return result;
@@ -93,7 +93,7 @@ export const createWorkshop = async (body: WorkshopType) => {
 
 export const updateWorkshop = async (id: string, body: WorkshopTypeUpdate) => {
   const result = await db.transaction(async (tx) => {
-    const [update_workshop] = await tx
+    const [updated] = await tx
       .update(workshop)
       .set({
         ...body,
@@ -105,9 +105,9 @@ export const updateWorkshop = async (id: string, body: WorkshopTypeUpdate) => {
       .where(eq(workshop.id, id))
       .returning();
 
-    if (!update_workshop) throw new Error("Failed to update workshop");
+    if (!updated) throw new Error("Failed to update workshop");
 
-    return update_workshop;
+    return updated;
   });
 
   return result;

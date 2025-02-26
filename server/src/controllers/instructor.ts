@@ -69,7 +69,7 @@ export const instructorController = new Elysia({
         }
       },
       {
-        detail: { summary: "create instructor" },
+        detail: { summary: "update instructor" },
         body: InstructorModel,
       }
     )
