@@ -49,6 +49,7 @@ export default function Workshop() {
         <SearchInput
           placeholder="by title, category, or instructor"
           onSearch={(value) => setSearchQuery(value)}
+          className="w-full md:w-3/4 lg:w-1/2"
         />
       </div>
       <Divider />
