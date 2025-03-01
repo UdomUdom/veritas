@@ -5,7 +5,7 @@ import {
   getBlogById,
   getBlogs,
   updateBlog,
-} from "@/services/blog/blog";
+} from "@/services/blog";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 import Elysia from "elysia";
 

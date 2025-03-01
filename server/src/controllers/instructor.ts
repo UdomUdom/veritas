@@ -6,7 +6,7 @@ import {
   getInstructorById,
   getInstructors,
   updateInstructor,
-} from "@/services/instructor/instructor";
+} from "@/services/instructor";
 import { InstructorModel } from "@/models/instructor";
 
 export const instructorController = new Elysia({

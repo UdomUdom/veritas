@@ -2,7 +2,7 @@ import Elysia from "elysia";
 import { isAuthorized } from "@/middlewares";
 import { UserAuthModel } from "@/models/users";
 import { refreshToken, signin, signup } from "@/services/users/auth";
-import { getUserProfile, getUserById, getUsers } from "@/services/users/users";
+import { getUserProfile, getUserById, getUsers } from "@/services/users";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
 export const userController = new Elysia({
