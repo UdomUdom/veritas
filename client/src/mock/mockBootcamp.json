@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Full Stack Web Development",
+    "description": "Learn Full Stack Web Development with the best online coding bootcamp",
+    "category_id": 1,
+    "image_url": "https://dummyimage.com/600x400/",
+    "start_date": "2021-09-01",
+    "end_date": "2022-02-28",
+    "start_time": "09:00",
+    "end_time": "17:00",
+    "price": 3000,
+    "location": "Online",
+    "detail": "Learn Full Stack Web Development with the best online coding bootcamp. Our Full Stack Web Development course is designed to give you the skills you need to build dynamic web applications and become a full stack web developer.",
+    "content": "Learn Full Stack Web Development with the best online coding bootcamp. Our Full Stack Web Development course is designed to give you the skills you need to build dynamic web applications and become a full stack web developer. You will learn the fundamentals of web development, front-end development, back-end development, databases, and more. Our Full Stack Web Development course is taught by industry professionals who have years of experience in web development. You will learn from the best and gain the skills you need to succeed in the tech industry. Our Full Stack Web Development course is perfect for beginners who want to learn web development from scratch, as well as experienced developers who want to expand their skill set. Enroll in our Full Stack Web Development course today and start your journey to becoming a full stack web developer.",
+    "max_participants": 50
+  }
+]
