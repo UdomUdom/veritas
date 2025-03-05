@@ -10,12 +10,12 @@ import {
   Chip,
   Avatar,
   AvatarGroup,
+  Button,
   avatar,
 } from "@heroui/react";
-import { Button } from "@heroui/react";
 import React from "react";
 import { UserRoundPen, Calendar, Timer, Pin } from "lucide-react";
-import { start } from "repl";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 interface CardProps {
   children?: React.ReactNode;
@@ -23,6 +23,8 @@ interface CardProps {
   altimg?: string;
   image?: string;
   logo?: any;
+  fname?: string;
+  lname?: string;
   title?: string;
   subtitle?: string;
   paragraph?: string;
@@ -37,6 +39,7 @@ interface CardProps {
   list?: any[];
   avatar?: string;
   header?: string;
+  bio?: string;
   location?: string;
   onClick?: (id: string) => void;
 }
@@ -113,6 +116,45 @@ export const FeatureCard = (props: CardProps) => {
         {paragraph}
       </CardBody>
       <CardFooter className="gap-3"></CardFooter>
+    </Cd>
+  );
+};
+
+export const InstructorsCard = (props: CardProps) => {
+  const { avatar, fname, lname, bio } = props;
+
+  const extractDetails = (markdown: string) => {
+    const detailsRegex = /## Details\n([\s\S]*?)(\n##|$)/;
+    const match = markdown.match(detailsRegex);
+    return match ? match[1].trim() : "No details available.";
+  };
+
+  const detailsContent = extractDetails(bio || "");
+
+  return (
+    <Cd
+      shadow="lg"
+      className="rounded-lg py-4 border-none bg-background/60 dark:bg-default-100/50 shadow-lg transition-all hover:-translate-y-2 hover:shadow-xl"
+    >
+      <CardHeader className="pb-0 pt-2 px-4 flex justify-center">
+        <Image
+          alt="Instructor avatar"
+          className="rounded-full w-24 h-24 object-cover bg-black"
+          src={avatar}
+        />
+      </CardHeader>
+      <CardBody className="overflow-visible py-2 text-center">
+        <p className="text-default-500 font-sans text-xl font-semibold">
+          {fname} {lname}
+        </p>
+
+        <div className="py-2 mx-6 line-clamp-2">
+          <MarkdownRenderer content={detailsContent} />
+        </div>
+      </CardBody>
+      <CardFooter className="flex justify-center px-4 py-2">
+        <Divider />
+      </CardFooter>
     </Cd>
   );
 };
@@ -389,5 +431,6 @@ export default function Card() {
     BannerCard,
     BlogCard,
     BlogImageCard,
+    InstructorsCard,
   };
 }
