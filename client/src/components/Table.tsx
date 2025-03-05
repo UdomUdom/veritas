@@ -22,11 +22,13 @@ import {
 } from "@heroui/react";
 import { MoreVertical, Plus, SearchIcon, ChevronDown } from "lucide-react";
 import mockUsers from "@/mock/MockData.json";
+
 const users = mockUsers;
 
 export function capitalize(s: string) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : "";
 }
+
 export const columns = [
   { name: "ID", uid: "id", sortable: true },
   { name: "NAME", uid: "name", sortable: true },
@@ -83,14 +85,12 @@ export default function Tabler({ filterBy, filterButton }: TablerType) {
     column: "age",
     direction: "ascending",
   });
-
   const [page, setPage] = React.useState(1);
 
   const hasSearchFilter = Boolean(filterValue);
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
-
     return columns.filter((column) =>
       Array.from(visibleColumns).includes(column.uid)
     );
