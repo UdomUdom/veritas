@@ -1,23 +1,6 @@
-import Navbar from "@/components/Navbar";
-
-const NavbarList = [
-  {
-    name: "Home",
-    href: "/",
-  },
-  {
-    name: "Workshop",
-    href: "/workshop",
-  },
-  {
-    name: "Bootcamp",
-    href: "/bootcamp",
-  },
-  {
-    name: "Blog",
-    href: "/blog",
-  },
-];
+// layout.tsx
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/Sidebar";
 
 export default function RootLayout({
   children,
@@ -25,9 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section>
-      <Navbar NavbarList={NavbarList} />
-      {children}
-    </section>
+    <SidebarProvider>
+      <AppSidebar />
+      <main className="flex-1 p-6 overflow-y-auto">{children}</main>
+    </SidebarProvider>
   );
 }
