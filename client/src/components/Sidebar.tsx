@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Calendar, Home, User2, Search, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,13 +19,13 @@ interface MenuItem {
 const items: MenuItem[] = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/dashboard",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "/inbox",
-    icon: Inbox,
+    title: "User",
+    url: "/user",
+    icon: User2,
   },
   {
     title: "Calendar",
