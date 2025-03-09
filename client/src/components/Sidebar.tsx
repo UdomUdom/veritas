@@ -1,4 +1,3 @@
-// components/Sidebar.tsx
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 import {
   Sidebar,
@@ -9,6 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 interface MenuItem {
   title: string;
@@ -19,7 +19,7 @@ interface MenuItem {
 const items: MenuItem[] = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "#",
     icon: Home,
   },
   {
@@ -47,7 +47,11 @@ const items: MenuItem[] = [
 const SidebarMenuItemComponent = ({ item }: { item: MenuItem }) => (
   <SidebarMenuItem key={item.url}>
     <SidebarMenuButton asChild>
-      <a href={item.url} aria-label={item.title}>
+      <a
+        href={item.url}
+        aria-label={item.title}
+        className="flex items-center p-2 text-default-700 hover:bg-default-200 rounded-md transition-colors duration-200"
+      >
         <item.icon className="w-5 h-5" />
         <span className="ml-3">{item.title}</span>
       </a>
@@ -57,11 +61,15 @@ const SidebarMenuItemComponent = ({ item }: { item: MenuItem }) => (
 
 export function AppSidebar() {
   return (
-    <Sidebar className="w-64">
+    <Sidebar variant="floating">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <div className="flex items-center justify-between p-4 bg-default-100 rounded-md">
+              <p className="font-semibold text-inherit">VERITAS Management</p>
+              <ThemeSwitcher />
+            </div>
+            <SidebarMenu className="flex-col gap-6 my-4">
               {items.map((item) => (
                 <SidebarMenuItemComponent key={item.url} item={item} />
               ))}

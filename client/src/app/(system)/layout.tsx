@@ -1,5 +1,5 @@
 // layout.tsx
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar";
 
 export default function RootLayout({
@@ -10,7 +10,10 @@ export default function RootLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="flex-1 p-6 overflow-y-auto">{children}</main>
+      <main className="flex-1 p-6 overflow-y-auto">
+        <SidebarTrigger className="flex md:hidden " />
+        {children}
+      </main>
     </SidebarProvider>
   );
 }

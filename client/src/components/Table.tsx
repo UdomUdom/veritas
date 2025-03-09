@@ -22,6 +22,7 @@ import {
 } from "@heroui/react";
 import { MoreVertical, Plus, SearchIcon, ChevronDown } from "lucide-react";
 import mockUsers from "@/mock/MockData.json";
+import Link from "next/link";
 
 const users = mockUsers;
 
@@ -289,9 +290,11 @@ export default function Tabler({ filterBy, filterButton }: TablerType) {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<Plus size={24} />}>
-              Add New
-            </Button>
+            <Link href="#">
+              <Button color="primary" endContent={<Plus size={24} />}>
+                Add New
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="flex justify-between items-center">
