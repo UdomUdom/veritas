@@ -1,13 +1,15 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { Button } from "@heroui/react";
 import { ChevronLeftIcon } from "lucide-react";
+import Link from "next/link";
 
-export default function PreviousPage() {
-  const router = useRouter();
+export default function PreviousPage({ path }: { path: string }) {
   return (
-    <Button variant="light" onPress={() => router.back()} className="-ml-6">
-      <ChevronLeftIcon /> Go Back
-    </Button>
+    <Link href={path}>
+      <Button variant="light" className="-ml-6">
+        <ChevronLeftIcon size={16} />
+        <span>Back</span>
+      </Button>
+    </Link>
   );
 }

@@ -10,10 +10,8 @@ export default function RootLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="flex-1 p-6 overflow-y-auto">
-        <SidebarTrigger className="flex md:hidden " />
-        {children}
-      </main>
+      <SidebarTrigger className="flex md:hidden " />
+      {children}
     </SidebarProvider>
   );
 }

@@ -13,7 +13,14 @@ import {
 import { ChevronDownIcon, PlusIcon } from "lucide-react";
 
 export default function User() {
-  const userHead = ["ID", "Username", "Email", "Role", "Status", "Action"];
+  const userHead = [
+    { label: "Avatar", key: "avatar", sortable: false },
+    { label: "Username", key: "username", sortable: true },
+    { label: "Email", key: "email", sortable: true },
+    { label: "Role", key: "role", sortable: false },
+    { label: "Status", key: "status", sortable: true },
+    { label: "", key: "actions", sortable: false },
+  ];
   const userList = MockUser;
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -71,19 +78,21 @@ export default function User() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-
-            <Button
-              className="bg-foreground text-background"
-              endContent={<PlusIcon />}
-              size="sm"
-            >
-              Add New
-            </Button>
+            {/* <Link href="/user/create" passHref>
+              <Button
+                className="bg-foreground text-background"
+                endContent={<PlusIcon />}
+                size="sm"
+              >
+                Add New
+              </Button>
+            </Link> */}
           </div>
         </div>
 
         <div className="mt-8 w-full overflow-x-auto">
           <Table
+            path="user"
             header={userHead}
             body={filteredList}
             className="min-w-full shadow-md rounded-lg overflow-hidden"
