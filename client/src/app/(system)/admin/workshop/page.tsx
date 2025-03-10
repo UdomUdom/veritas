@@ -8,7 +8,7 @@ import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
 interface Instructor {
-  id: string;
+  id: number;
   firstname: string;
   lastname: string;
   bio: string | null;
@@ -16,14 +16,14 @@ interface Instructor {
 }
 
 interface WorkshopInstructorLink {
-  id: string;
-  workshop_id: string;
-  instructor_id: string;
+  id: number;
+  workshop_id: number;
+  instructor_id: number;
   instructor: Instructor;
 }
 
 interface Workshop {
-  id: string;
+  id: number;
   title: string;
   description: string;
   image_url: string;
@@ -38,7 +38,7 @@ interface Workshop {
   created_at: string;
   updated_at: string;
   category: {
-    id: string;
+    id: number;
     name: string;
   };
   workshop_instructor: WorkshopInstructorLink[];
@@ -53,7 +53,7 @@ export default function Workshop() {
       sortable: true,
     },
     { label: "Location", key: "location", sortable: false },
-    { label: "Price", key: "price", sortable: false },
+    { label: "Price", key: "price", sortable: true },
     { label: "Start date", key: "start_date", sortable: false },
     { label: "", key: "actions", sortable: false },
   ];
@@ -96,7 +96,7 @@ export default function Workshop() {
             className="w-full sm:max-w-[44%]"
           />
           <div className="flex gap-3">
-            <Link href="/admin/instructor/create" passHref>
+            <Link href="/admin/workshop/create" passHref>
               <Button
                 className="bg-foreground text-background"
                 endContent={<PlusIcon />}

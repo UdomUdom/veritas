@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "title": "Data Structure",
     "description": "Basic Data Structure with Java, Algorithm",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -11,20 +11,20 @@
     "price": "1000",
     "location": "Online",
     "detail": "Learn the basics of Python programming",
-    "content": "## Workshop Content\n\nThis *workshop* covers basic data structures such as arrays, linked lists, stacks, and queues.\n\n### Topics Covered:\n\n- **Arrays**: A collection of elements stored at contiguous memory locations.\n- **Linked Lists**: A sequence of data structures, which are connected together via links.\n- **Stacks**: A linear data structure that follows the LIFO (Last In First Out) principle.\n- **Queues**: A linear data structure that follows the FIFO (First In First Out) principle.\n\n#### Code Example:\n\n```javascript\n// Example of a simple array\nconst arr = [1, 2, 3, 4, 5];\n\n// Example of a stack implementation\nconst stack = [];\nstack.push(1); // Add to stack\nstack.pop();  // Remove from stack\n```\n\n> Note: This workshop assumes basic knowledge of programming concepts.\n\n### Additional Resources:\n\n- [GeeksforGeeks - Data Structures](https://www.geeksforgeeks.org/data-structures/)\n- [JavaScript Data Structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)\n\n---\n\nFeel free to ask questions during the workshop!",
+    "content": "## Workshop Content\nThis *workshop* covers basic data structures such as arrays, linked lists, stacks, and queues.\n### Topics Covered:\n- **Arrays**: A collection of elements stored at contiguous memory locations.\n- **Linked Lists**: A sequence of data structures, which are connected together via links.\n- **Stacks**: A linear data structure that follows the LIFO (Last In First Out) principle.\n- **Queues**: A linear data structure that follows the FIFO (First In First Out) principle.\n#### Code Example:\n```javascript\n// Example of a simple array\nconst arr = [1, 2, 3, 4, 5];\n// Example of a stack implementation\nconst stack = [];\nstack.push(1); // Add to stack\nstack.pop();  // Remove from stack\n```\n> Note: This workshop assumes basic knowledge of programming concepts.\n### Additional Resources:\n- [GeeksforGeeks - Data Structures](https://www.geeksforgeeks.org/data-structures/)\n- [JavaScript Data Structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)\n---\nFeel free to ask questions during the workshop!",
     "created_at": "2025-02-19T18:01:00.935Z",
     "updated_at": "2025-02-19T18:01:00.935Z",
     "category": {
-      "id": "1",
+      "id": 1,
       "name": "IT"
     },
     "workshop_instructor": [
       {
-        "id": "1",
-        "workshop_id": "1",
-        "instructor_id": "1",
+        "id": 1,
+        "workshop_id": 1,
+        "instructor_id": 1,
         "instructor": {
-          "id": "1",
+          "id": 1,
           "firstname": "John",
           "lastname": "Doe",
           "bio": null,
@@ -32,11 +32,11 @@
         }
       },
       {
-        "id": "2",
-        "workshop_id": "2",
-        "instructor_id": "2",
+        "id": 2,
+        "workshop_id": 2,
+        "instructor_id": 2,
         "instructor": {
-          "id": "2",
+          "id": 2,
           "firstname": "Jane",
           "lastname": "Smith",
           "bio": null,
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "id": "2",
+    "id": 2,
     "title": "Machine Learning Fundamentals",
     "description": "Introduction to Machine Learning using Python and Scikit-learn",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -61,16 +61,16 @@
     "created_at": "2025-03-01T10:15:00.000Z",
     "updated_at": "2025-03-01T10:15:00.000Z",
     "category": {
-      "id": "2",
+      "id": 2,
       "name": "Data Science"
     },
     "workshop_instructor": [
       {
-        "id": "3",
-        "workshop_id": "2",
-        "instructor_id": "3",
+        "id": 3,
+        "workshop_id": 2,
+        "instructor_id": 3,
         "instructor": {
-          "id": "3",
+          "id": 3,
           "firstname": "Alice",
           "lastname": "Johnson",
           "bio": "AI Researcher with 5 years of experience in deep learning.",
@@ -78,11 +78,11 @@
         }
       },
       {
-        "id": "4",
-        "workshop_id": "2",
-        "instructor_id": "4",
+        "id": 4,
+        "workshop_id": 2,
+        "instructor_id": 4,
         "instructor": {
-          "id": "4",
+          "id": 4,
           "firstname": "Bob",
           "lastname": "Brown",
           "bio": "Data Scientist specializing in NLP and computer vision.",
@@ -92,7 +92,7 @@
     ]
   },
   {
-    "id": "3",
+    "id": 3,
     "title": "Web Development Bootcamp",
     "description": "Full-stack web development with React, Node.js, and MongoDB",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -107,16 +107,16 @@
     "created_at": "2025-01-20T12:45:00.000Z",
     "updated_at": "2025-01-20T12:45:00.000Z",
     "category": {
-      "id": "3",
+      "id": 3,
       "name": "Web Development"
     },
     "workshop_instructor": [
       {
-        "id": "5",
-        "workshop_id": "3",
-        "instructor_id": "5",
+        "id": 5,
+        "workshop_id": 3,
+        "instructor_id": 5,
         "instructor": {
-          "id": "5",
+          "id": 5,
           "firstname": "Emily",
           "lastname": "Davis",
           "bio": "Senior Full-stack Developer with expertise in cloud deployment.",
@@ -124,11 +124,11 @@
         }
       },
       {
-        "id": "6",
-        "workshop_id": "3",
-        "instructor_id": "6",
+        "id": 6,
+        "workshop_id": 3,
+        "instructor_id": 6,
         "instructor": {
-          "id": "6",
+          "id": 6,
           "firstname": "Michael",
           "lastname": "Wilson",
           "bio": "Front-end specialist focusing on responsive design.",
@@ -138,7 +138,7 @@
     ]
   },
   {
-    "id": "4",
+    "id": 4,
     "title": "Cybersecurity Essentials",
     "description": "Learn the fundamentals of cybersecurity and ethical hacking",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -153,16 +153,16 @@
     "created_at": "2025-02-22T08:30:00.000Z",
     "updated_at": "2025-02-22T08:30:00.000Z",
     "category": {
-      "id": "4",
+      "id": 4,
       "name": "Cybersecurity"
     },
     "workshop_instructor": [
       {
-        "id": "7",
-        "workshop_id": "4",
-        "instructor_id": "7",
+        "id": 7,
+        "workshop_id": 4,
+        "instructor_id": 7,
         "instructor": {
-          "id": "7",
+          "id": 7,
           "firstname": "Sophia",
           "lastname": "Martinez",
           "bio": "Certified Ethical Hacker with over 7 years of experience.",
@@ -170,11 +170,11 @@
         }
       },
       {
-        "id": "8",
-        "workshop_id": "4",
-        "instructor_id": "8",
+        "id": 8,
+        "workshop_id": 4,
+        "instructor_id": 8,
         "instructor": {
-          "id": "8",
+          "id": 8,
           "firstname": "Daniel",
           "lastname": "Taylor",
           "bio": "Cybersecurity consultant specializing in threat intelligence.",
@@ -184,7 +184,7 @@
     ]
   },
   {
-    "id": "5",
+    "id": 5,
     "title": "UX/UI Design Masterclass",
     "description": "Design user-friendly interfaces with Figma and Adobe XD",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -199,16 +199,16 @@
     "created_at": "2025-03-10T14:20:00.000Z",
     "updated_at": "2025-03-10T14:20:00.000Z",
     "category": {
-      "id": "5",
+      "id": 5,
       "name": "Design"
     },
     "workshop_instructor": [
       {
-        "id": "9",
-        "workshop_id": "5",
-        "instructor_id": "9",
+        "id": 9,
+        "workshop_id": 5,
+        "instructor_id": 9,
         "instructor": {
-          "id": "9",
+          "id": 9,
           "firstname": "Olivia",
           "lastname": "Anderson",
           "bio": "Senior UX Designer at a leading tech company.",
@@ -216,11 +216,11 @@
         }
       },
       {
-        "id": "10",
-        "workshop_id": "5",
-        "instructor_id": "10",
+        "id": 10,
+        "workshop_id": 5,
+        "instructor_id": 10,
         "instructor": {
-          "id": "10",
+          "id": 10,
           "firstname": "Liam",
           "lastname": "Harris",
           "bio": "UI Specialist with expertise in mobile app design.",
@@ -230,7 +230,7 @@
     ]
   },
   {
-    "id": "6",
+    "id": 6,
     "title": "Blockchain Development Workshop",
     "description": "Build decentralized applications using Ethereum and Solidity",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -245,16 +245,16 @@
     "created_at": "2025-04-05T16:45:00.000Z",
     "updated_at": "2025-04-05T16:45:00.000Z",
     "category": {
-      "id": "6",
+      "id": 6,
       "name": "Blockchain"
     },
     "workshop_instructor": [
       {
-        "id": "11",
-        "workshop_id": "6",
-        "instructor_id": "11",
+        "id": 11,
+        "workshop_id": 6,
+        "instructor_id": 11,
         "instructor": {
-          "id": "11",
+          "id": 11,
           "firstname": "Noah",
           "lastname": "Clark",
           "bio": "Blockchain architect with experience in DeFi projects.",
@@ -262,11 +262,11 @@
         }
       },
       {
-        "id": "12",
-        "workshop_id": "6",
-        "instructor_id": "12",
+        "id": 12,
+        "workshop_id": 6,
+        "instructor_id": 12,
         "instructor": {
-          "id": "12",
+          "id": 12,
           "firstname": "Ava",
           "lastname": "Lewis",
           "bio": "Smart contract developer and blockchain educator.",
@@ -276,7 +276,7 @@
     ]
   },
   {
-    "id": "7",
+    "id": 7,
     "title": "Cloud Computing with AWS",
     "description": "Master cloud infrastructure using Amazon Web Services (AWS)",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -291,16 +291,16 @@
     "created_at": "2025-05-15T11:00:00.000Z",
     "updated_at": "2025-05-15T11:00:00.000Z",
     "category": {
-      "id": "7",
+      "id": 7,
       "name": "Cloud Computing"
     },
     "workshop_instructor": [
       {
-        "id": "13",
-        "workshop_id": "7",
-        "instructor_id": "13",
+        "id": 13,
+        "workshop_id": 7,
+        "instructor_id": 13,
         "instructor": {
-          "id": "13",
+          "id": 13,
           "firstname": "Ethan",
           "lastname": "Walker",
           "bio": "AWS Certified Solutions Architect with 6 years of experience.",
@@ -308,11 +308,11 @@
         }
       },
       {
-        "id": "14",
-        "workshop_id": "7",
-        "instructor_id": "14",
+        "id": 14,
+        "workshop_id": 7,
+        "instructor_id": 14,
         "instructor": {
-          "id": "14",
+          "id": 14,
           "firstname": "Mia",
           "lastname": "Hall",
           "bio": "DevOps Engineer specializing in CI/CD pipelines on AWS.",
@@ -322,7 +322,7 @@
     ]
   },
   {
-    "id": "8",
+    "id": 8,
     "title": "Game Development with Unity",
     "description": "Create interactive games using Unity and C#",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -337,16 +337,16 @@
     "created_at": "2025-06-20T09:45:00.000Z",
     "updated_at": "2025-06-20T09:45:00.000Z",
     "category": {
-      "id": "8",
+      "id": 8,
       "name": "Game Development"
     },
     "workshop_instructor": [
       {
-        "id": "15",
-        "workshop_id": "8",
-        "instructor_id": "15",
+        "id": 15,
+        "workshop_id": 8,
+        "instructor_id": 15,
         "instructor": {
-          "id": "15",
+          "id": 15,
           "firstname": "Lucas",
           "lastname": "Young",
           "bio": "Indie game developer with multiple published titles.",
@@ -354,11 +354,11 @@
         }
       },
       {
-        "id": "16",
-        "workshop_id": "8",
-        "instructor_id": "16",
+        "id": 16,
+        "workshop_id": 8,
+        "instructor_id": 16,
         "instructor": {
-          "id": "16",
+          "id": 16,
           "firstname": "Amelia",
           "lastname": "King",
           "bio": "Unity expert specializing in AR/VR game development.",
@@ -368,7 +368,7 @@
     ]
   },
   {
-    "id": "9",
+    "id": 9,
     "title": "Data Visualization with Tableau",
     "description": "Transform raw data into compelling visual stories",
     "image_url": "https://dummyimage.com/300x300/000/fff",
@@ -383,16 +383,16 @@
     "created_at": "2025-07-12T13:15:00.000Z",
     "updated_at": "2025-07-12T13:15:00.000Z",
     "category": {
-      "id": "9",
+      "id": 9,
       "name": "Data Analytics"
     },
     "workshop_instructor": [
       {
-        "id": "17",
-        "workshop_id": "9",
-        "instructor_id": "17",
+        "id": 17,
+        "workshop_id": 9,
+        "instructor_id": 17,
         "instructor": {
-          "id": "17",
+          "id": 17,
           "firstname": "James",
           "lastname": "Scott",
           "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
@@ -400,195 +400,11 @@
         }
       },
       {
-        "id": "18",
-        "workshop_id": "9",
-        "instructor_id": "18",
+        "id": 18,
+        "workshop_id": 9,
+        "instructor_id": 18,
         "instructor": {
-          "id": "18",
-          "firstname": "Charlotte",
-          "lastname": "Adams",
-          "bio": "Data visualization consultant for Fortune 500 companies.",
-          "avatar": "https://example.com/avatars/charlotte.jpg"
-        }
-      }
-    ]
-  },
-  {
-    "id": "9",
-    "title": "Data Visualization with Tableau",
-    "description": "Transform raw data into compelling visual stories",
-    "image_url": "https://dummyimage.com/300x300/000/fff",
-    "start_date": "2025-09-05",
-    "end_date": "2025-09-06",
-    "start_time": "10:30",
-    "end_time": "16:30",
-    "price": "1300",
-    "location": "Onsite - Central World",
-    "detail": "Learn how to create dashboards and reports for business insights.",
-    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
-    "created_at": "2025-07-12T13:15:00.000Z",
-    "updated_at": "2025-07-12T13:15:00.000Z",
-    "category": {
-      "id": "9",
-      "name": "Data Analytics"
-    },
-    "workshop_instructor": [
-      {
-        "id": "17",
-        "workshop_id": "9",
-        "instructor_id": "17",
-        "instructor": {
-          "id": "17",
-          "firstname": "James",
-          "lastname": "Scott",
-          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
-          "avatar": "https://example.com/avatars/james.jpg"
-        }
-      },
-      {
-        "id": "18",
-        "workshop_id": "9",
-        "instructor_id": "18",
-        "instructor": {
-          "id": "18",
-          "firstname": "Charlotte",
-          "lastname": "Adams",
-          "bio": "Data visualization consultant for Fortune 500 companies.",
-          "avatar": "https://example.com/avatars/charlotte.jpg"
-        }
-      }
-    ]
-  },
-  {
-    "id": "9",
-    "title": "Data Visualization with Tableau",
-    "description": "Transform raw data into compelling visual stories",
-    "image_url": "https://dummyimage.com/300x300/000/fff",
-    "start_date": "2025-09-05",
-    "end_date": "2025-09-06",
-    "start_time": "10:30",
-    "end_time": "16:30",
-    "price": "1300",
-    "location": "Annoucement",
-    "detail": "Learn how to create dashboards and reports for business insights.",
-    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
-    "created_at": "2025-07-12T13:15:00.000Z",
-    "updated_at": "2025-07-12T13:15:00.000Z",
-    "category": {
-      "id": "9",
-      "name": "Data Analytics"
-    },
-    "workshop_instructor": [
-      {
-        "id": "17",
-        "workshop_id": "9",
-        "instructor_id": "17",
-        "instructor": {
-          "id": "17",
-          "firstname": "James",
-          "lastname": "Scott",
-          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
-          "avatar": "https://example.com/avatars/james.jpg"
-        }
-      },
-      {
-        "id": "18",
-        "workshop_id": "9",
-        "instructor_id": "18",
-        "instructor": {
-          "id": "18",
-          "firstname": "Charlotte",
-          "lastname": "Adams",
-          "bio": "Data visualization consultant for Fortune 500 companies.",
-          "avatar": "https://example.com/avatars/charlotte.jpg"
-        }
-      }
-    ]
-  },
-  {
-    "id": "9",
-    "title": "Data Visualization with Tableau",
-    "description": "Transform raw data into compelling visual stories",
-    "image_url": "https://dummyimage.com/300x300/000/fff",
-    "start_date": "2025-09-05",
-    "end_date": "2025-09-06",
-    "start_time": "10:30",
-    "end_time": "16:30",
-    "price": "1300",
-    "location": "Annoucement",
-    "detail": "Learn how to create dashboards and reports for business insights.",
-    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
-    "created_at": "2025-07-12T13:15:00.000Z",
-    "updated_at": "2025-07-12T13:15:00.000Z",
-    "category": {
-      "id": "9",
-      "name": "Data Analytics"
-    },
-    "workshop_instructor": [
-      {
-        "id": "17",
-        "workshop_id": "9",
-        "instructor_id": "17",
-        "instructor": {
-          "id": "17",
-          "firstname": "James",
-          "lastname": "Scott",
-          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
-          "avatar": "https://example.com/avatars/james.jpg"
-        }
-      },
-      {
-        "id": "18",
-        "workshop_id": "9",
-        "instructor_id": "18",
-        "instructor": {
-          "id": "18",
-          "firstname": "Charlotte",
-          "lastname": "Adams",
-          "bio": "Data visualization consultant for Fortune 500 companies.",
-          "avatar": "https://example.com/avatars/charlotte.jpg"
-        }
-      }
-    ]
-  },
-  {
-    "id": "9",
-    "title": "Data Visualization with Tableau",
-    "description": "Transform raw data into compelling visual stories",
-    "image_url": "https://dummyimage.com/300x300/000/fff",
-    "start_date": "2025-09-05",
-    "end_date": "2025-09-06",
-    "start_time": "10:30",
-    "end_time": "16:30",
-    "price": "1300",
-    "location": "Annoucement",
-    "detail": "Learn how to create dashboards and reports for business insights.",
-    "content": "Hands-on exercises with real-world datasets and Tableau tools.",
-    "created_at": "2025-07-12T13:15:00.000Z",
-    "updated_at": "2025-07-12T13:15:00.000Z",
-    "category": {
-      "id": "9",
-      "name": "Data Analytics"
-    },
-    "workshop_instructor": [
-      {
-        "id": "17",
-        "workshop_id": "9",
-        "instructor_id": "17",
-        "instructor": {
-          "id": "17",
-          "firstname": "James",
-          "lastname": "Scott",
-          "bio": "Data Analyst with expertise in BI tools like Tableau and Power BI.",
-          "avatar": "https://example.com/avatars/james.jpg"
-        }
-      },
-      {
-        "id": "18",
-        "workshop_id": "9",
-        "instructor_id": "18",
-        "instructor": {
-          "id": "18",
+          "id": 18,
           "firstname": "Charlotte",
           "lastname": "Adams",
           "bio": "Data visualization consultant for Fortune 500 companies.",
