@@ -1,403 +1,153 @@
 "use client";
-import React from "react";
+import { useState } from "react";
 import {
-  Table,
-  TableHeader,
-  TableColumn,
+  Table as Tb,
   TableBody,
-  TableRow,
   TableCell,
-  Input,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
   Button,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Chip,
-  User,
-  Pagination,
-  Selection,
-  ChipProps,
-  SortDescriptor,
 } from "@heroui/react";
-import { MoreVertical, Plus, SearchIcon, ChevronDown } from "lucide-react";
-import mockUsers from "@/mock/MockData.json";
+import { LucideEdit, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
+import Link from "next/link";
 
-const users = mockUsers;
-
-export function capitalize(s: string) {
-  return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : "";
+interface Header {
+  label: string;
+  key: string;
+  sortable: boolean;
 }
 
-export const columns = [
-  { name: "ID", uid: "id", sortable: true },
-  { name: "NAME", uid: "name", sortable: true },
-  { name: "AGE", uid: "age", sortable: true },
-  { name: "ROLE", uid: "role", sortable: true },
-  { name: "TEAM", uid: "team" },
-  { name: "EMAIL", uid: "email" },
-  { name: "STATUS", uid: "status", sortable: true },
-  { name: "ACTIONS", uid: "actions" },
-];
+interface TableProps {
+  header: Header[];
+  body: Array<{ [key: string]: any }>;
+  className?: string;
+  path: string;
+}
 
-export const RolesOptions = [
-  { name: "CEO", uid: "ceo" },
-  { name: "CTO", uid: "cto" },
-  { name: "COO", uid: "coo" },
-  { name: "CFO", uid: "cfo" },
-  { name: "CMO", uid: "cmo" },
-];
+type SortDirection = "asc" | "desc" | null;
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
-
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
-
-type User = (typeof users)[0];
-
-type TablerType = {
-  filterBy:
-    | "id"
-    | "name"
-    | "role"
-    | "team"
-    | "status"
-    | "age"
-    | "avatar"
-    | "email";
-  filterButton: "role" | "status";
-};
-
-export default function Tabler({ filterBy, filterButton }: TablerType) {
-  const [filterValue, setFilterValue] = React.useState("");
-  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
-    new Set([])
-  );
-  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
-    new Set(INITIAL_VISIBLE_COLUMNS)
-  );
-  const [buttonFilter, setButtonFilter] = React.useState<Selection>("all");
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: "age",
-    direction: "ascending",
+export default function Table({ header, body, className, path }: TableProps) {
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: SortDirection;
+  }>({
+    key: "",
+    direction: null,
   });
-  const [page, setPage] = React.useState(1);
 
-  const hasSearchFilter = Boolean(filterValue);
-
-  const headerColumns = React.useMemo(() => {
-    if (visibleColumns === "all") return columns;
-    return columns.filter((column) =>
-      Array.from(visibleColumns).includes(column.uid)
-    );
-  }, [visibleColumns]);
-
-  const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...users];
-
-    if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        String(user[filterBy!])
-          .toLowerCase()
-          .includes(filterValue.toLowerCase())
-      );
-    }
-    if (
-      buttonFilter !== "all" &&
-      Array.from(buttonFilter).length !== RolesOptions.length
-    ) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(buttonFilter).includes(user[filterButton])
-      );
+  const sortedData = [...body].sort((a, b) => {
+    if (sortConfig.direction === null) {
+      return 0;
     }
 
-    return filteredUsers;
-  }, [users, filterValue, buttonFilter]);
+    const aValue = a[sortConfig.key];
+    const bValue = b[sortConfig.key];
 
-  const pages = Math.ceil(filteredItems.length / rowsPerPage);
-
-  const items = React.useMemo(() => {
-    const start = (page - 1) * rowsPerPage;
-    const end = start + rowsPerPage;
-
-    return filteredItems.slice(start, end);
-  }, [page, filteredItems, rowsPerPage]);
-
-  const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: User, b: User) => {
-      const first = a[sortDescriptor.column as keyof User] as number;
-      const second = b[sortDescriptor.column as keyof User] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
-    });
-  }, [sortDescriptor, items]);
-
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
-
-    switch (columnKey) {
-      case "name":
-        return (
-          <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <MoreVertical size={24} className="text-default-300" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem key="view">View</DropdownItem>
-                <DropdownItem key="edit">Edit</DropdownItem>
-                <DropdownItem key="delete">Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
+    if (aValue === undefined || bValue === undefined) {
+      return 0;
     }
-  }, []);
 
-  const onNextPage = React.useCallback(() => {
-    if (page < pages) {
-      setPage(page + 1);
-    }
-  }, [page, pages]);
+    const aString = String(aValue);
+    const bString = String(bValue);
 
-  const onPreviousPage = React.useCallback(() => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  }, [page]);
-
-  const onRowsPerPageChange = React.useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setRowsPerPage(Number(e.target.value));
-      setPage(1);
-    },
-    []
-  );
-
-  const onSearchChange = React.useCallback((value?: string) => {
-    if (value) {
-      setFilterValue(value);
-      setPage(1);
+    if (sortConfig.direction === "asc") {
+      return aString.localeCompare(bString);
     } else {
-      setFilterValue("");
+      return bString.localeCompare(aString);
     }
-  }, []);
+  });
 
-  const onClear = React.useCallback(() => {
-    setFilterValue("");
-    setPage(1);
-  }, []);
+  const handleSort = (key: string) => {
+    let direction: SortDirection = "asc";
+    if (sortConfig.key === key) {
+      if (sortConfig.direction === "asc") {
+        direction = "desc";
+      } else if (sortConfig.direction === "desc") {
+        direction = null;
+      } else {
+        direction = "asc";
+      }
+    }
+    setSortConfig({ key, direction });
+  };
 
-  const topContent = React.useMemo(() => {
-    return (
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between gap-3 items-end">
-          <Input
-            isClearable
-            className="w-full sm:max-w-[44%]"
-            placeholder={`Search by ${capitalize(filterBy)}`}
-            startContent={<SearchIcon size={24} />}
-            value={filterValue}
-            onClear={() => onClear()}
-            onValueChange={onSearchChange}
-          />
-          <div className="flex gap-3">
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={<ChevronDown size={24} className="text-small" />}
-                  variant="flat"
-                >
-                  Status
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={buttonFilter}
-                selectionMode="multiple"
-                onSelectionChange={setButtonFilter}
-              >
-                {RolesOptions.map((status) => (
-                  <DropdownItem key={status.uid} className="capitalize">
-                    {capitalize(status.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-            <Dropdown>
-              <DropdownTrigger className="hidden sm:flex">
-                <Button
-                  endContent={<ChevronDown size={24} className="text-small" />}
-                  variant="flat"
-                >
-                  Columns
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                disallowEmptySelection
-                aria-label="Table Columns"
-                closeOnSelect={false}
-                selectedKeys={visibleColumns}
-                selectionMode="multiple"
-                onSelectionChange={setVisibleColumns}
-              >
-                {columns.map((column) => (
-                  <DropdownItem key={column.uid} className="capitalize">
-                    {capitalize(column.name)}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-            <Button color="primary" endContent={<Plus size={24} />}>
-              Add New
-            </Button>
-          </div>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {users.length} users
-          </span>
-          <label className="flex items-center text-default-400 text-small">
-            Rows per page:
-            <select
-              className="bg-transparent outline-none text-default-400 text-small"
-              onChange={onRowsPerPageChange}
-            >
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-            </select>
-          </label>
-        </div>
-      </div>
-    );
-  }, [
-    filterValue,
-    buttonFilter,
-    visibleColumns,
-    onSearchChange,
-    onRowsPerPageChange,
-    users.length,
-    hasSearchFilter,
-  ]);
-
-  const bottomContent = React.useMemo(() => {
-    return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
-          {selectedKeys === "all"
-            ? "All items selected"
-            : `${selectedKeys.size} of ${filteredItems.length} selected`}
-        </span>
-        <Pagination
-          isCompact
-          showControls
-          showShadow
-          color="primary"
-          page={page}
-          total={pages}
-          onChange={setPage}
-        />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onPreviousPage}
-          >
-            Previous
-          </Button>
-          <Button
-            isDisabled={pages === 1}
-            size="sm"
-            variant="flat"
-            onPress={onNextPage}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
-    );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  const getSortIcon = (key: string) => {
+    if (sortConfig.key !== key) {
+      return <ArrowUpDown size={16} />;
+    }
+    if (sortConfig.direction === "asc") {
+      return <ArrowUp size={16} />;
+    }
+    if (sortConfig.direction === "desc") {
+      return <ArrowDown size={16} />;
+    }
+    return <ArrowUpDown size={16} />;
+  };
 
   return (
-    <Table
-      isHeaderSticky
-      aria-label="Example table with custom cells, pagination and sorting"
-      bottomContent={bottomContent}
-      bottomContentPlacement="outside"
-      classNames={{
-        wrapper: "max-h-[382px]",
-      }}
-      selectedKeys={selectedKeys}
-      selectionMode="multiple"
-      sortDescriptor={sortDescriptor}
-      topContent={topContent}
-      topContentPlacement="outside"
-      onSelectionChange={setSelectedKeys}
-      onSortChange={setSortDescriptor}
-    >
-      <TableHeader columns={headerColumns}>
-        {(column) => (
-          <TableColumn
-            key={column.uid}
-            align={column.uid === "actions" ? "center" : "start"}
-            allowsSorting={column.sortable}
-          >
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
-            )}
+    <div className={className}>
+      <Tb>
+        <TableHeader>
+          <TableRow className="font-bold text-lg font-mono">
+            {header.map((item) => (
+              <TableHead
+                key={item.key}
+                onClick={() => item.sortable && handleSort(item.key)}
+                style={{ cursor: item.sortable ? "pointer" : "default" }}
+              >
+                <div className="flex items-center gap-1">
+                  {item.label}
+                  {item.sortable && (
+                    <span className="ml-1">{getSortIcon(item.key)}</span>
+                  )}
+                </div>
+              </TableHead>
+            ))}
           </TableRow>
-        )}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {sortedData.map((row, rowIndex) => (
+            <TableRow key={rowIndex}>
+              {header.map((head, colIndex) => {
+                if (head.key === "actions") {
+                  return (
+                    <TableCell key={`${rowIndex}-${colIndex}`}>
+                      <Link href={`/admin/${path}/${row.id}`}>
+                        <Button isIconOnly size="sm" variant="light">
+                          <LucideEdit size={18} className="text-default-500" />
+                        </Button>
+                      </Link>
+                    </TableCell>
+                  );
+                }
+                if (head.key === "avatar") {
+                  return (
+                    <TableCell key={`${rowIndex}-${colIndex}`}>
+                      <img
+                        src={row[head.key] as string}
+                        alt="avatar"
+                        className="w-8 h-8 rounded-full"
+                      />
+                    </TableCell>
+                  );
+                }
+
+                const value = row[head.key];
+                return (
+                  <TableCell key={`${rowIndex}-${colIndex}`}>{value}</TableCell>
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Tb>
+    </div>
   );
 }

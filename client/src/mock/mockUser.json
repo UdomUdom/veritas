@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "username": "john_doe",
+    "email": "john_doe@mail.com",
+    "role": "admin",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "username": "jane_doe",
+    "email": "jane_doe@mail.com",
+    "role": "user",
+    "status": "active"
+  },
+  {
+    "id": 3,
+    "username": "alice_smith",
+    "email": "alice_smith@mail.com",
+    "role": "staff",
+    "status": "inactive"
+  },
+  {
+    "id": 4,
+    "username": "bob_jones",
+    "email": "bob_jones@mail.com",
+    "role": "admin",
+    "status": "active"
+  },
+  {
+    "id": 5,
+    "username": "charlie_brown",
+    "email": "charlie_brown@mail.com",
+    "role": "user",
+    "status": "inactive"
+  },
+  {
+    "id": 6,
+    "username": "david_clark",
+    "email": "david_clark@mail.com",
+    "role": "staff",
+    "status": "active"
+  },
+  {
+    "id": 7,
+    "username": "eve_adams",
+    "email": "eve_adams@mail.com",
+    "role": "user",
+    "status": "active"
+  },
+  {
+    "id": 8,
+    "username": "frank_wright",
+    "email": "frank_wright@mail.com",
+    "role": "admin",
+    "status": "inactive"
+  },
+  {
+    "id": 9,
+    "username": "grace_hall",
+    "email": "grace_hall@mail.com",
+    "role": "staff",
+    "status": "active"
+  },
+  {
+    "id": 10,
+    "username": "henry_king",
+    "email": "henry_king@mail.com",
+    "role": "user",
+    "status": "inactive"
+  }
+]

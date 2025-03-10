@@ -12,7 +12,7 @@ export default async function BlogList({ params }: { params: { id: string } }) {
     <div className="relative container mx-auto max-w-7xl z-10 px-6 min-h-[calc(100vh_-_64px_-_108px)] mb-12 flex-grow">
       <div className="w-full mt-12 flex flex-col justify-center items-start prose prose-neutral dark:prose-invert">
         <div className="absolute top-0 left-6">
-          <PreviousPage />
+          <PreviousPage path="/blog" />
         </div>
         <div className="w-full">
           <div className="text-start font-sans mt-14 text-lg text-default ">

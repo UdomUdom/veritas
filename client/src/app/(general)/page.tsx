@@ -1,11 +1,10 @@
 "use client";
 import { Button } from "@heroui/react";
 import Link from "next/link";
-import { MoveRight } from "lucide-react";
+import { MoveRight, FireExtinguisher } from "lucide-react";
 import Banner from "@/components/Banner";
 import Detail from "@/components/Detail";
 import { FeatureCard } from "@/components/Card";
-import { FireExtinguisher } from "lucide-react";
 
 export default function Home() {
   const item = [
