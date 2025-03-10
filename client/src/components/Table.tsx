@@ -26,7 +26,7 @@ interface Header {
 
 interface TableProps {
   header: Header[];
-  body: { [key: string]: React.ReactNode }[];
+  body: Array<{ [key: string]: any }>;
   className?: string;
   path: string;
 }
