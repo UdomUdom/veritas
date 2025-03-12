@@ -1,5 +1,6 @@
 import db from "@/db";
 import * as table from "@/db/schema";
+import { UserProfileType } from "@/models/users";
 import { eq } from "drizzle-orm";
 
 export const getUsers = async () => {
@@ -50,6 +51,23 @@ export const getUserProfile = async (auth_id: string) => {
       role: true,
     },
   });
+
+  if (!user) throw new Error("User not found");
+
+  return user;
+};
+
+export const updateUser = async (id: string, body: UserProfileType) => {
+  const user = await db
+    .update(table.user)
+    .set({
+      username: body.username || undefined,
+      email: body.email || undefined,
+      role_id: body.role_id || undefined,
+      status: body.status as "active" | "inactive",
+      avartar: body.avartar || undefined,
+    })
+    .where(eq(table.user.id, id));
 
   if (!user) throw new Error("User not found");
 

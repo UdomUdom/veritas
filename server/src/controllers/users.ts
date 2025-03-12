@@ -1,8 +1,13 @@
 import Elysia from "elysia";
 import { isAuthorized } from "@/middlewares";
-import { UserAuthModel } from "@/models/users";
+import { UserAuthModel, UserProfileModel } from "@/models/users";
 import { refreshToken, signin, signup } from "@/services/users/auth";
-import { getUserProfile, getUserById, getUsers } from "@/services/users";
+import {
+  getUserProfile,
+  getUserById,
+  getUsers,
+  updateUser,
+} from "@/services/users";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
 export const userController = new Elysia({
@@ -102,6 +107,21 @@ export const userController = new Elysia({
       },
       {
         detail: { summary: "get user by id" },
+      }
+    )
+    .put(
+      "/:id",
+      async ({ params: { id }, body, error }) => {
+        try {
+          const result = await updateUser(id, body);
+          return SuccessHandler(result);
+        } catch (err) {
+          return error(400, ErrorHandler(err));
+        }
+      },
+      {
+        detail: { summary: "update user by id" },
+        body: UserProfileModel,
       }
     )
 );

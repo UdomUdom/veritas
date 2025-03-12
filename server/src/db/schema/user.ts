@@ -13,6 +13,7 @@ export const user = pgTable("user", {
     .references(() => role.id)
     .notNull(),
   status: eStatus().notNull(),
+  avartar: text("avartar"),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()
