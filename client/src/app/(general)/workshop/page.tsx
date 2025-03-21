@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import mockWorkshop from "@/mock/workshop.json";
 
 export default function Workshop() {
-  const list = mockWorkshop;
-  // const [list, setList] = useState([]);
+  // const list = mockWorkshop;
+  const [list, setList] = useState([]);
   const router = useRouter();
   const [visibleItems, setVisibleItems] = useState(8);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,18 +30,18 @@ export default function Workshop() {
         .includes(searchQuery.toLowerCase())
   );
 
-  // const prepareFetchWorkshop = async () => {
-  //   const response = await fetch(`${process.env.API_URL}/api/workshop`);
-  //   const data = await response.json();
-  //   console.log(data);
-  //   return data.data;
-  // };
+  const prepareFetchWorkshop = async () => {
+    const response = await fetch(`${process.env.API_URL}/api/workshop`);
+    const data = await response.json();
+    console.log(data);
+    return data.data;
+  };
 
-  // useEffect(() => {
-  //   prepareFetchWorkshop().then((data) => {
-  //     setList(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    prepareFetchWorkshop().then((data) => {
+      setList(data);
+    });
+  }, []);
 
   return (
     <section className="container">

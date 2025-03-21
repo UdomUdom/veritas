@@ -128,10 +128,14 @@ export default function Table({ header, body, className, path }: TableProps) {
                   );
                 }
                 if (head.key === "avatar") {
+                  const avatarSrc = row[head.key] as string | null;
                   return (
                     <TableCell key={`${rowIndex}-${colIndex}`}>
                       <img
-                        src={row[head.key] as string}
+                        src={
+                          avatarSrc ||
+                          "https://static-00.iconduck.com/assets.00/user-avatar-happy-icon-1023x1024-bve9uom6.png"
+                        }
                         alt="avatar"
                         className="w-8 h-8 rounded-full"
                       />

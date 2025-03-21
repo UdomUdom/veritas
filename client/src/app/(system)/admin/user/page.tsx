@@ -1,8 +1,7 @@
 "use client";
 import Table from "@/components/Table";
-import MockUser from "@/mock/mockUser.json";
 import { SearchInput } from "@/components/SearchInput";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Dropdown,
@@ -10,7 +9,16 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
-import { ChevronDownIcon, PlusIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
+
+interface User {
+  avatar?: string;
+  username: string;
+  email: string;
+  role: { name: string };
+  status: string;
+  actions?: string;
+}
 
 export default function User() {
   const userHead = [
@@ -21,25 +29,50 @@ export default function User() {
     { label: "Status", key: "status", sortable: true },
     { label: "", key: "actions", sortable: false },
   ];
-  const userList = MockUser;
 
+  const [userList, setList] = useState<User[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRoles, setSelectedRoles] = useState<string[]>([]);
 
+  const prepareFetchUsers = async () => {
+    try {
+      const response = await fetch(`${process.env.API_URL}/api/users`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch users");
+      }
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    prepareFetchUsers().then((data) => {
+      setList(data || []);
+    });
+  }, []);
+
   const roleOptions = Array.from(
-    new Set(userList.map((item) => item.role.toLowerCase()))
+    new Set(userList.map((item) => item?.role?.name?.toLowerCase()))
   );
-  const filteredList = userList.filter((item) => {
-    const matchesSearch =
-      item.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.email.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesRole =
-      selectedRoles.length === 0 ||
-      selectedRoles.includes(item.role.toLowerCase());
+  const filteredList = userList
+    .filter((item) => {
+      const matchesSearch =
+        item.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.email.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return matchesSearch && matchesRole;
-  });
+      const matchesRole =
+        selectedRoles.length === 0 ||
+        selectedRoles.includes(item.role.name.toLowerCase());
+
+      return matchesSearch && matchesRole;
+    })
+    .map((item) => ({
+      ...item,
+      role: item.role.name,
+    }));
 
   return (
     <section className="relative container mx-auto max-w-7xl z-10 px-6 min-h-[calc(100vh_-_64px_-_108px)] mb-12 flex-grow">
@@ -78,15 +111,6 @@ export default function User() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            {/* <Link href="/user/create" passHref>
-              <Button
-                className="bg-foreground text-background"
-                endContent={<PlusIcon />}
-                size="sm"
-              >
-                Add New
-              </Button>
-            </Link> */}
           </div>
         </div>
 

@@ -8,26 +8,26 @@ import { ArrowUpRightFromSquare } from "lucide-react";
 import Link from "next/link";
 
 export default function Blog() {
-  const list = mockBlog;
-  // const [list, setList] = useState([]);
+  // const list = mockBlog;
+  const [list, setList] = useState([]);
   const router = useRouter();
 
   const handleCardClick = (id: string) => {
     router.push(`/blog/${id}`);
   };
 
-  // const prepareFetchWorkshop = async () => {
-  //   const response = await fetch(`${process.env.API_URL}/api/workshop`);
-  //   const data = await response.json();
-  //   console.log(data);
-  //   return data.data;
-  // };
+  const prepareFetchBlog = async () => {
+    const response = await fetch(`${process.env.API_URL}/api/blog`);
+    const data = await response.json();
+    console.log(data);
+    return data.data;
+  };
 
-  // useEffect(() => {
-  //   prepareFetchWorkshop().then((data) => {
-  //     setList(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    prepareFetchBlog().then((data) => {
+      setList(data);
+    });
+  }, []);
 
   return (
     <div className="container">
