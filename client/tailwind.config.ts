@@ -47,6 +47,10 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
         border: "hsl(var(--border))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

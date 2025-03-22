@@ -8,11 +8,12 @@ export default function UserForm({ data }: { data: any }) {
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData.entries());
 
-    const res = await fetch(`${process.env.API_URL}/api/user/${data.id}`, {
+    const res = await fetch(`${process.env.API_URL}/api/users/${data.id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
     });
   };
+  console.log(data);
 
   return (
     <Form
@@ -47,9 +48,9 @@ export default function UserForm({ data }: { data: any }) {
         labelPlacement="outside"
         label="Role"
         name="role"
-        value={data.role}
+        value={data.role.name}
         placeholder="Select a role"
-        defaultSelectedKeys={[data.role]}
+        defaultSelectedKeys={[data.role.name]}
         selectorIcon={<LucideTextSelection />}
       >
         <SelectItem key="admin">Admin</SelectItem>

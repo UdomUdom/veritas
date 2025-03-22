@@ -1,15 +1,15 @@
 "use client";
 import Table from "@/components/Table";
-import MockInstrctor from "@/mock/mockInstructors.json";
 import { SearchInput } from "@/components/SearchInput";
-import React, { useState } from "react";
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@heroui/react";
+import React, { useState, useEffect } from "react";
+
+interface Instructor {
+  avatar: string;
+  firstname: string;
+  lastname: string;
+  [key: string]: any;
+}
+import { Button } from "@heroui/react";
 import { ChevronDownIcon, PlusIcon } from "lucide-react";
 import Link from "next/link";
 
@@ -20,7 +20,27 @@ export default function Instructor() {
     { label: "Lastname", key: "lastname", sortable: true },
     { label: "", key: "actions", sortable: false },
   ];
-  const userList = MockInstrctor;
+
+  const [userList, setList] = useState<Instructor[]>([]);
+
+  const prepareFetchInstructor = async () => {
+    try {
+      const response = await fetch(`${process.env.API_URL}/api/instructor`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch instructor");
+      }
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    prepareFetchInstructor().then((data) => {
+      setList(data || []);
+    });
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
   const filteredList = userList.filter((item) => {
