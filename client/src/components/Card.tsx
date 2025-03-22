@@ -363,16 +363,16 @@ export const ActionCard = (props: CardProps) => {
         >
           <CardHeader className="absolute z-10 top-1 flex flex-col items-start text-start p-4 space-y-2">
             <Chip radius="md" className="mb-2 bg-default font-semibold text-xs">
-              {item.category.name}
+              {item.category.name || "Category"}
             </Chip>
             <p className="text-primary-400 font-semibold text-sm uppercase tracking-wider">
               Workshop
             </p>
             <h4 className="text-white font-semibold text-xl md:text-2xl">
-              {item.title}
+              {item.title || "Title"}
             </h4>
             <p className="text-white/65 text-sm leading-relaxed">
-              {item.description}
+              {item.description || "Description"}
             </p>
           </CardHeader>
           <Image
@@ -380,7 +380,7 @@ export const ActionCard = (props: CardProps) => {
             removeWrapper
             alt="Relaxing app background"
             className="z-0 w-full h-full object-cover"
-            src={item.image_url}
+            src={item.image_url || "https://placehold.co/500x500"}
           />
           <CardFooter className="absolute bg-default/10 bottom-0 border-default-600 dark:border-default-100 text-small p-4 w-full rounded-sm">
             <div className="flex flex-col justify-between w-full">
@@ -397,9 +397,9 @@ export const ActionCard = (props: CardProps) => {
                   >
                     {item.workshop_instructor.map((staff: any) => (
                       <Avatar
-                        key={staff.instructor.id}
+                        key={staff.instructor.id || "staff"}
                         size="sm"
-                        src={staff.instructor.avatar}
+                        src={staff.instructor.avatar || ""}
                       />
                     ))}
                   </AvatarGroup>

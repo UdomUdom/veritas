@@ -9,8 +9,11 @@ import {
   DatePicker,
   TimeInput,
   SelectItem,
+  Image,
 } from "@heroui/react";
 import { LucideTextSelection } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import MDXEditor from "@/components/MDXeditor";
 
 interface WorkshopFormProps {
   method: "POST" | "PUT";
@@ -34,24 +37,43 @@ export default function WorkshopForm({ data, method }: WorkshopFormProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, content }),
       }
     );
-    console.log(await res.json());
   };
+
+  const [categories, setCategories] = useState<{ id: string; name: string }[]>(
+    []
+  );
+
+  const fetchCategories = async () => {
+    const response = await fetch(`${process.env.API_URL}/api/category`);
+    const data = await response.json();
+
+    return data.data;
+  };
+
+  useEffect(() => {
+    fetchCategories().then((data) => {
+      setCategories(data);
+    });
+  }, []);
+
+  const [content, setContent] = useState(data?.content || "");
 
   return (
     <Form
-      className="w-full max-w-md mx-auto p-4 shadow-md rounded-lg flex flex-col gap-6"
+      className="w-full max-w-4xl mx-auto p-4 shadow-md rounded-lg flex flex-col gap-6 items-center md:grid md:grid-cols-2"
       onSubmit={onSubmit}
     >
-      <Avatar
-        className="w-50 h-50 mx-auto rounded-full"
-        name="avatar"
-        src={data?.image_url || "https://placehold.co/250x250"}
-        alt="Workshop Image"
-      />
-
+      <div className="flex justify-center items-center w-full md:col-span-2 p-4 rounded-lg text-center">
+        <Image
+          className="w-full h-auto object-cover"
+          src={data?.image_url || "https://placehold.co/500x250"}
+          alt="Workshop Image"
+          height={250}
+        />
+      </div>
       <Input
         isRequired
         errorMessage="Please enter a valid title"
@@ -88,7 +110,7 @@ export default function WorkshopForm({ data, method }: WorkshopFormProps) {
         labelPlacement="outside"
         name="start_date"
         // defaultValue={data?.start_date || ""}
-        // defaultValue={data?.start_date ? new Date(data.start_date) : null}
+        // defaultValue={data?.start_date ? new Date(data.end_date) : null}
         className="w-full"
       />
 
@@ -136,25 +158,6 @@ export default function WorkshopForm({ data, method }: WorkshopFormProps) {
         type="text"
         className="w-full"
       />
-
-      <Textarea
-        label="Detail"
-        labelPlacement="outside"
-        name="detail"
-        placeholder="Enter workshop details"
-        defaultValue={data?.detail || ""}
-        className="w-full"
-      />
-
-      <Textarea
-        label="Content"
-        labelPlacement="outside"
-        name="content"
-        placeholder="Enter workshop content"
-        defaultValue={data?.content || ""}
-        className="w-full"
-      />
-
       <Select
         label="Category"
         labelPlacement="outside"
@@ -164,18 +167,39 @@ export default function WorkshopForm({ data, method }: WorkshopFormProps) {
         className="w-full"
         selectorIcon={<LucideTextSelection />}
       >
-        <SelectItem key="1">IT</SelectItem>
-        <SelectItem key="2">Data Science</SelectItem>
-        <SelectItem key="3">Web Development</SelectItem>
-        <SelectItem key="4">Cybersecurity</SelectItem>
-        <SelectItem key="5">Design</SelectItem>
-        <SelectItem key="6">Blockchain</SelectItem>
-        <SelectItem key="7">Cloud Computing</SelectItem>
-        <SelectItem key="8">Game Development</SelectItem>
-        <SelectItem key="9">Data Analytics</SelectItem>
+        {categories.map((category: { id: string; name: string }) => (
+          <SelectItem key={category.id}>{category.name}</SelectItem>
+        ))}
       </Select>
 
-      <div className="flex justify-end w-full gap-4">
+      <Textarea
+        label="Detail"
+        labelPlacement="outside"
+        name="detail"
+        placeholder="Enter workshop details"
+        defaultValue={data?.detail || ""}
+        className="w-full md:col-span-2 rounded-lg text-left"
+      />
+
+      {/* <Textarea
+        label="Content"
+        labelPlacement="outside"
+        name="content"
+        placeholder="Enter workshop content"
+        defaultValue={data?.content || ""}
+        className="w-full md:col-span-2 rounded-lg text-left"
+      /> */}
+
+      <div className="flex flex-col w-full md:col-span-2 gap-2">
+        <span className="text-left w-full text-md ">Content</span>
+        <MDXEditor
+          className="container w-full md:col-span-2 rounded-lg text-center"
+          data={content}
+          setData={setContent}
+        />
+      </div>
+
+      <div className="flex justify-end items-end w-full md:col-span-2 rounded-lg text-center gap-4">
         <Button variant="flat" color="primary" type="submit">
           Submit
         </Button>

@@ -72,6 +72,46 @@ export default function InstructorForm({ data, method }: InstructorFormProps) {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.API_URL}/api/instructor/${data?.id}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "DELETE",
+        }
+      );
+      const result = await res.json();
+      if (result.status === "error") {
+        return toast({
+          title: "Failed",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+      toast({
+        title: "Success",
+        description: result.message,
+        variant: "default",
+      });
+      router.push("/admin/instructor");
+    } catch (error) {
+      toast({
+        title: "Error",
+        // description: `${error}`,
+        description: "An error occurred, please try again later",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const confirmDelete = async () => {
+    const result = confirm("Are you sure you want to delete this instructor?");
+    if (result) {
+      handleDelete();
+    }
+  };
+
   const [avatarUrl, setAvatarUrl] = useState(data?.avatar || "");
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAvatarUrl(e.target.value);
@@ -157,10 +197,12 @@ export default function InstructorForm({ data, method }: InstructorFormProps) {
         </Button>
         <Button
           variant="flat"
-          color="warning"
-          onPress={() => window.history.back()}
+          color="danger"
+          type="button"
+          onPress={confirmDelete}
+          className={method === "POST" ? "hidden" : ""}
         >
-          Cancel
+          Delete
         </Button>
       </div>
     </Form>

@@ -4,11 +4,15 @@ import { ActionCard } from "@/components/Card";
 import { Button, Divider } from "@heroui/react";
 import { SearchInput } from "@/components/SearchInput";
 import { useRouter } from "next/navigation";
-import mockWorkshop from "@/mock/workshop.json";
 
 export default function Workshop() {
-  // const list = mockWorkshop;
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<
+    {
+      title: string;
+      category: { name: string };
+      workshop_instructor: { instructor: { firstname: string } }[];
+    }[]
+  >([]);
   const router = useRouter();
   const [visibleItems, setVisibleItems] = useState(8);
   const [searchQuery, setSearchQuery] = useState("");

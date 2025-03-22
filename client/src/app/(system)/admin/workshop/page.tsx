@@ -2,7 +2,7 @@
 import Table from "@/components/Table";
 import MockWorkshop from "@/mock/workshop.json";
 import { SearchInput } from "@/components/SearchInput";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/react";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
@@ -58,7 +58,26 @@ export default function Workshop() {
     { label: "", key: "actions", sortable: false },
   ];
 
-  const userList = MockWorkshop;
+  const [userList, setList] = useState<Workshop[]>([]);
+
+  const prepareFetchWorkshop = async () => {
+    try {
+      const response = await fetch(`${process.env.API_URL}/api/workshop`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch workshop");
+      }
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    prepareFetchWorkshop().then((data) => {
+      setList(data || []);
+    });
+  }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -110,7 +129,7 @@ export default function Workshop() {
 
         <div className="mt-8 w-full overflow-x-auto">
           <Table
-            path="instructor"
+            path="workshop"
             header={userHead}
             body={workshopsWithInstructors}
             className="min-w-full shadow-md rounded-lg overflow-hidden"

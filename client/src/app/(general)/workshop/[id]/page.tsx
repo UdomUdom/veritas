@@ -1,28 +1,32 @@
 import { BannerCard } from "@/components/Card";
-import mockWorkshop from "@/mock/workshop.json";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Detail from "@/components/Detail";
+
+interface WorkshopInstructor {
+  id: string;
+  instructor: {
+    firstname: string;
+    lastname: string;
+  };
+}
 
 export default async function WorkshopList({
   params,
 }: {
   params: { id: string };
 }) {
-  // const fetchworkshop = async () => {
-  //   const response = await fetch(
-  //     `${process.env.API_URL}/api/workshop/${params.id}`
-  //   );
-  //   const data = await response.json();
-  //   return data.data;
-  // };
+  const fetchWorkshop = async (id: string) => {
+    const response = await fetch(
+      `${process.env.API_URL}/api/workshop/${params.id}`
+    );
+    const data = await response.json();
 
-  // const workshop = await fetchworkshop();
-  // console.log(workshop);
+    return data.data;
+  };
+  const { id } = await params;
+  const data = await fetchWorkshop(id);
 
-  const mockworkshop = (await params).id;
-  const workshop = mockWorkshop.find((item) => item.id === mockworkshop);
-
-  if (!workshop) {
+  if (!data) {
     return (
       <div className="container mx-auto">
         <h1 className="text-center text-4xl font-semibold mt-16">
@@ -38,17 +42,17 @@ export default async function WorkshopList({
         <div className="container mx-auto">
           <div className="flex justify-center items-center ">
             <BannerCard
-              header={workshop?.category?.name}
-              title={workshop?.title}
-              paragraph={workshop?.description}
-              image={workshop?.image_url}
-              altimg={workshop?.title}
-              date={workshop?.start_date}
-              sub_date={workshop?.end_date}
-              time={workshop?.start_time}
-              sub_time={workshop?.end_time}
-              price={Number(workshop?.price)}
-              location={workshop?.location}
+              header={data?.category?.name || "Workshop"}
+              title={data?.title || "Workshop"}
+              paragraph={data?.description || "Workshop"}
+              image={data?.image_url || "https://placehold.co/500x500"}
+              altimg={data?.title || "Workshop"}
+              date={data?.start_date || "Workshop"}
+              sub_date={data?.end_date || "Workshop"}
+              time={data?.start_time}
+              sub_time={data?.end_time}
+              price={Number(data?.price)}
+              location={data?.location || "Workshop"}
             />
           </div>
         </div>
@@ -63,7 +67,10 @@ export default async function WorkshopList({
             <blockquote className="border-l-4 border-primary-300/40 pl-4 text-default-700 my-6">
               <p className="text-3xl font-sans font-semibold">Detail</p>
             </blockquote>
-            <MarkdownRenderer content={workshop?.content} />
+            <h2 className="text-xl font-mono border-b-2 border-primary-300/40 my-6 py-4">
+              {data?.detail}
+            </h2>
+            <MarkdownRenderer content={data?.content} />
           </section>
           <section
             id="instructor"
@@ -73,11 +80,13 @@ export default async function WorkshopList({
               <p className="text-3xl font-sans font-semibold">Instructor</p>
             </blockquote>
             <div className="flex flex-col gap-4">
-              {workshop?.workshop_instructor.map((item) => (
-                <div key={item.id}>
-                  <h1 className="text-2xl font-semibold">{`${item.instructor.firstname} ${item.instructor.lastname}`}</h1>
-                </div>
-              ))}
+              {(data?.workshop_instructor as WorkshopInstructor[]).map(
+                (item) => (
+                  <div key={item.id}>
+                    <h1 className="text-2xl font-semibold">{`${item.instructor.firstname} ${item.instructor.lastname}`}</h1>
+                  </div>
+                )
+              )}
             </div>
           </section>
           <section
@@ -89,7 +98,7 @@ export default async function WorkshopList({
             </blockquote>
             <div className="flex flex-col gap-4">
               <div>
-                <h1 className="text-2xl font-semibold">{workshop?.location}</h1>
+                <h1 className="text-2xl font-semibold">{data?.location}</h1>
               </div>
             </div>
           </section>

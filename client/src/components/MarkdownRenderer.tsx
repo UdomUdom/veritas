@@ -65,9 +65,9 @@ export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
           const { inline } = props as { inline: boolean };
           const match = /language-(\w+)/.exec(className || "");
           return !inline && match ? (
-            <pre className="my-6 rounded-md overflow-x-auto bg-default-800/70">
+            <pre className="my-6 rounded-md overflow-x-auto bg-default-500/70">
               <code
-                className={`block p-4 text-sm text-default ${className}`}
+                className={`block p-4 text-sm text-default-900 ${className}`}
                 {...props}
                 children={String(children).replace(/\n$/, "")}
               />
