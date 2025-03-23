@@ -2,7 +2,7 @@ import { Elysia } from "elysia";
 import { config } from "./config";
 import swagger from "@elysiajs/swagger";
 import routes from "./routes";
-import cors from "@elysiajs/cors";
+import { cors } from "@elysiajs/cors";
 
 const app = new Elysia({
   cookie: {
@@ -31,13 +31,7 @@ const app = new Elysia({
       },
     })
   )
-  .use(
-    cors({
-      origin: [`${process.env.CLIENT_URL}`],
-      allowedHeaders: ["Content-Type", "Authorization"],
-      credentials: true,
-    })
-  )
+  .use(cors())
   .get("/helloworld", () => "Hello World!")
   .use(routes)
   .listen({ port: config.PORT });

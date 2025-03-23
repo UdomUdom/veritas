@@ -5,10 +5,10 @@ import { relations } from "drizzle-orm";
 export const workshop_instructor = pgTable("workshop_instructor", {
   id: uuid("id").primaryKey().defaultRandom(),
   workshop_id: uuid("workshop_id")
-    .references(() => workshop.id)
+    .references(() => workshop.id, { onDelete: "cascade" })
     .notNull(),
   instructor_id: uuid("instructor_id")
-    .references(() => instructor.id)
+    .references(() => instructor.id, { onDelete: "cascade" })
     .notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")

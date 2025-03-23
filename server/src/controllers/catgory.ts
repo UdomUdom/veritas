@@ -1,17 +1,17 @@
 import Elysia from "elysia";
-import { BlogModel, BlogUpdateModel } from "@/models/blog";
+import { CategoryModel } from "@/models/category";
 import {
-  createBlog,
-  deleteBlog,
-  getBlogById,
-  getBlogs,
-  updateBlog,
-} from "@/services/blog";
+  createCategory,
+  deleteCategory,
+  getCategory,
+  getCategoryById,
+  updateCategory,
+} from "@/services/category";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
-const controller = "blog";
+const controller = "category";
 
-export const blogController = new Elysia({
+export const categoryController = new Elysia({
   detail: {
     tags: [controller],
   },
@@ -21,72 +21,72 @@ export const blogController = new Elysia({
       "/",
       async ({ query, error }) => {
         try {
-          const result = await getBlogs(query);
+          const result = await getCategory(query);
           return SuccessHandler(result);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "get all blogs" },
+        detail: { summary: "get all categories" },
       }
     )
     .get(
       "/:id",
       async ({ params, error }) => {
         try {
-          const result = await getBlogById(params.id);
+          const result = await getCategoryById(params.id);
           return SuccessHandler(result);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "get blog by id" },
+        detail: { summary: "get category by id" },
       }
     )
     .post(
       "/",
       async ({ body, error }) => {
         try {
-          const result = await createBlog(body);
-          return SuccessHandler(`Blog ${result.title} created`);
+          const result = await createCategory(body);
+          return SuccessHandler(`Category ${result.name} created`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "create blog" },
-        body: BlogModel,
+        detail: { summary: "create category" },
+        body: CategoryModel,
       }
     )
     .put(
       "/:id",
       async ({ params, body, error }) => {
         try {
-          const result = await updateBlog(params.id, body);
-          return SuccessHandler(`Blog ${result.title} updated`);
+          const result = await updateCategory(params.id, body);
+          return SuccessHandler(`Category ${result.name} updated`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "update blog" },
-        body: BlogUpdateModel,
+        detail: { summary: "update category" },
+        body: CategoryModel,
       }
     )
     .delete(
       "/:id",
       async ({ params, error }) => {
         try {
-          const result = await deleteBlog(params.id);
-          return SuccessHandler(`Blog ${result.title} deleted`);
+          const result = await deleteCategory(params.id);
+          return SuccessHandler(`Category ${result.name} deleted`);
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "delete blog" },
+        detail: { summary: "delete category" },
       }
     )
 );

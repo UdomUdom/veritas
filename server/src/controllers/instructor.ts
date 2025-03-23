@@ -1,5 +1,4 @@
 import Elysia from "elysia";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 import {
   createInstructor,
   deleteInstructor,
@@ -8,12 +7,15 @@ import {
   updateInstructor,
 } from "@/services/instructor";
 import { InstructorModel } from "@/models/instructor";
+import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+
+const controller = "instructor";
 
 export const instructorController = new Elysia({
   detail: {
-    tags: ["instructor"],
+    tags: [controller],
   },
-}).group("instructor", (app) =>
+}).group(controller, (app) =>
   app
     .get(
       "/",

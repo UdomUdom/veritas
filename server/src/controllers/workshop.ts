@@ -5,15 +5,17 @@ import {
   getWorkshopById,
   getWorkshops,
   updateWorkshop,
-} from "@/services/workshop/workshop";
+} from "@/services/workshop";
 import { WorkshopModel, WorkshopModelUpdate } from "@/models/workshop";
-import { SuccessHandler } from "@/utils/Handler";
+import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+
+const controller = "workshop";
 
 export const workshopController = new Elysia({
   detail: {
-    tags: ["workshop"],
+    tags: [controller],
   },
-}).group("workshop", (app) =>
+}).group(controller, (app) =>
   app
     .get(
       "/",
@@ -22,7 +24,7 @@ export const workshopController = new Elysia({
           const result = await getWorkshops(query);
           return SuccessHandler(result);
         } catch (err) {
-          return error(400, err);
+          return error(400, ErrorHandler(err));
         }
       },
       {
@@ -36,7 +38,7 @@ export const workshopController = new Elysia({
           const result = await getWorkshopById(params.id);
           return SuccessHandler(result);
         } catch (err) {
-          return error(400, err);
+          return error(400, ErrorHandler(err));
         }
       },
       {
@@ -50,7 +52,7 @@ export const workshopController = new Elysia({
           const result = await createWorkshop(body);
           return SuccessHandler(`Workshop ${result.title} created`);
         } catch (err) {
-          return error(400, err);
+          return error(400, ErrorHandler(err));
         }
       },
       {
@@ -65,7 +67,7 @@ export const workshopController = new Elysia({
           const result = await updateWorkshop(params.id, body);
           return SuccessHandler(`Workshop ${result.title} updated`);
         } catch (err) {
-          return error(400, err);
+          return error(400, ErrorHandler(err));
         }
       },
       {
@@ -80,7 +82,7 @@ export const workshopController = new Elysia({
           const result = await deleteWorkshop(params.id);
           return SuccessHandler(`Workshop ${result.title} deleted`);
         } catch (err) {
-          return error(400, err);
+          return error(400, ErrorHandler(err));
         }
       },
       {

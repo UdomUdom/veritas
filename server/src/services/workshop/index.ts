@@ -1,6 +1,6 @@
 import db from "@/db";
 import { eq, ilike } from "drizzle-orm";
-import { workshop } from "@/db/schema";
+import { workshop, workshop_instructor } from "@/db/schema";
 import { WorkshopType, WorkshopTypeUpdate } from "@/models/workshop";
 import { FormatDate, FormatTime } from "@/utils/FormatDate";
 
@@ -80,10 +80,25 @@ export const createWorkshop = async (body: WorkshopType) => {
         start_time: body.end_date ? FormatDate(body.end_date) : "",
         end_date: body.start_date ? FormatTime(body.start_date) : "",
         end_time: body.end_date ? FormatTime(body.end_date) : "",
+        price: body.price ? body.price.toString() : undefined,
       })
       .returning();
 
     if (!created) throw new Error("Failed to create workshop");
+
+    if (body.instructor) {
+      const [instructor] = await tx
+        .insert(workshop_instructor)
+        .values(
+          body.instructor.map((id) => ({
+            workshop_id: created.id,
+            instructor_id: id,
+          }))
+        )
+        .returning();
+
+      if (!instructor) throw new Error("Failed to create workshop instructor");
+    }
 
     return created;
   });
@@ -101,11 +116,26 @@ export const updateWorkshop = async (id: string, body: WorkshopTypeUpdate) => {
         start_time: body.end_date ? FormatDate(body.end_date) : "",
         end_date: body.start_date ? FormatTime(body.start_date) : "",
         end_time: body.end_date ? FormatTime(body.end_date) : "",
+        price: body.price ? body.price.toString() : undefined,
       })
       .where(eq(workshop.id, id))
       .returning();
 
     if (!updated) throw new Error("Failed to update workshop");
+
+    if (body.instructor) {
+      const [instructor] = await tx
+        .insert(workshop_instructor)
+        .values(
+          body.instructor.map((id) => ({
+            workshop_id: updated.id,
+            instructor_id: id,
+          }))
+        )
+        .returning();
+
+      if (!instructor) throw new Error("Failed to create workshop instructor");
+    }
 
     return updated;
   });
@@ -114,12 +144,14 @@ export const updateWorkshop = async (id: string, body: WorkshopTypeUpdate) => {
 };
 
 export const deleteWorkshop = async (id: string) => {
-  const [result] = await db
-    .delete(workshop)
-    .where(eq(workshop.id, id))
-    .returning();
+  const result = await db.transaction(async (tx) => {
+    const [deleted] = await tx
+      .delete(workshop)
+      .where(eq(workshop.id, id))
+      .returning();
 
-  if (!result) throw new Error("Failed to delete workshop");
+    if (!deleted) throw new Error("Failed to delete workshop");
+  });
 
   return result;
 };

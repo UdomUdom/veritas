@@ -1,6 +1,6 @@
 import db from "@/db";
 import * as table from "@/db/schema";
-import { UserProfileType } from "@/models/users";
+import { UserProfileType } from "@/models/user";
 import { eq } from "drizzle-orm";
 
 export const getUsers = async () => {
@@ -58,18 +58,36 @@ export const getUserProfile = async (auth_id: string) => {
 };
 
 export const updateUser = async (id: string, body: UserProfileType) => {
-  const user = await db
-    .update(table.user)
-    .set({
-      username: body.username || undefined,
-      email: body.email || undefined,
-      role_id: body.role_id || undefined,
-      status: body.status as "active" | "inactive",
-      avartar: body.avartar || undefined,
-    })
-    .where(eq(table.user.id, id));
+  const result = await db.transaction(async (tx) => {
+    const [updated] = await tx
+      .update(table.user)
+      .set({
+        username: body.username || undefined,
+        email: body.email || undefined,
+        role_id: body.role_id || undefined,
+        status: body.status as "active" | "inactive",
+        avatar: body.avatar || undefined,
+      })
+      .where(eq(table.user.id, id))
+      .returning();
 
-  if (!user) throw new Error("User not found");
+    if (!updated) throw new Error("Failed to update user");
 
-  return user;
+    return updated;
+  });
+
+  return result;
+};
+
+export const deleteUser = async (id: string) => {
+  const result = await db.transaction(async (tx) => {
+    const [deleted] = await tx
+      .delete(table.user)
+      .where(eq(table.user.id, id))
+      .returning();
+
+    if (!deleted) throw new Error("Failed to delete user");
+  });
+
+  return result;
 };

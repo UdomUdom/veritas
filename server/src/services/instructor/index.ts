@@ -58,6 +58,12 @@ export const getInstructorById = async (id: string) => {
 
 export const createInstructor = async (body: InstructorType) => {
   const result = db.transaction(async (tx) => {
+    const existing = await tx.query.instructor.findFirst({
+      where: eq(instructor.firstname, body.firstname),
+    });
+
+    if (existing) throw new Error("Instructor already exists");
+
     const [created] = await tx.insert(instructor).values(body).returning();
 
     if (!created) throw new Error("Failed to create instructor");
@@ -85,12 +91,16 @@ export const updateInstructor = async (id: string, body: InstructorType) => {
 };
 
 export const deleteInstructor = async (id: string) => {
-  const [result] = await db
-    .delete(instructor)
-    .where(eq(instructor.id, id))
-    .returning();
+  const result = await db.transaction(async (tx) => {
+    const [deleted] = await tx
+      .delete(instructor)
+      .where(eq(instructor.id, id))
+      .returning();
 
-  if (!result) throw new Error("Failed to delete instructor");
+    if (!deleted) throw new Error("Failed to delete instructor");
+
+    return deleted;
+  });
 
   return result;
 };

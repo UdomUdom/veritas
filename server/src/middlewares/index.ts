@@ -1,5 +1,5 @@
+import { handleGetUser } from "@/utils/Auth";
 import { ErrorHandler } from "@/utils/Handler";
-import Supabase from "@/utils/Supabase";
 import { Context } from "elysia";
 
 export const isAuthorized = async (c: Context) => {
@@ -7,9 +7,7 @@ export const isAuthorized = async (c: Context) => {
     const access_token = c.headers["access_token"];
     const refresh_token = c.headers["refresh_token"];
 
-    const { data, error } = await Supabase.auth.getUser(access_token);
-
-    if (error) throw new Error("Unauthorized");
+    const data = await handleGetUser(access_token);
 
     c.headers = {
       authorization: data.user.id,
@@ -21,4 +19,4 @@ export const isAuthorized = async (c: Context) => {
   }
 };
 
-export const isAdmin = async (c: Context) => {};
+// export const isAdmin = async (c: Context) => {};

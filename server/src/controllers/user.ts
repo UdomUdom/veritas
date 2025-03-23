@@ -1,20 +1,23 @@
 import Elysia from "elysia";
 import { isAuthorized } from "@/middlewares";
-import { UserAuthModel, UserProfileModel } from "@/models/users";
-import { refreshToken, signin, signup } from "@/services/users/auth";
+import { UserAuthModel, UserProfileModel } from "@/models/user";
+import { refreshToken, signin, signup } from "@/services/user/auth";
 import {
   getUserProfile,
   getUserById,
   getUsers,
   updateUser,
-} from "@/services/users";
+  deleteUser,
+} from "@/services/user";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+
+const controller = "user";
 
 export const userController = new Elysia({
   detail: {
-    tags: ["users"],
+    tags: [controller],
   },
-}).group("users", (app) =>
+}).group(controller, (app) =>
   app
     .post(
       "/signup",
@@ -124,4 +127,12 @@ export const userController = new Elysia({
         body: UserProfileModel,
       }
     )
+    .delete("/:id", async ({ params: { id }, error }) => {
+      try {
+        const result = await deleteUser(id);
+        return SuccessHandler(result);
+      } catch (err) {
+        return error(400, ErrorHandler(err));
+      }
+    })
 );

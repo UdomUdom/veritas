@@ -8,5 +8,5 @@ export const role = pgTable("role", {
 });
 
 export const roleRelations = relations(role, ({ many }) => ({
-  users: many(user),
+  user: many(user),
 }));

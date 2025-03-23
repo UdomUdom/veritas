@@ -7,7 +7,7 @@ export const blog = pgTable("blog", {
   author_avatar: text("author_avatar"),
   author_name: text("author_name"),
   title: text("title").notNull(),
-  description: text("description").notNull(),
+  description: text("description"),
   category_id: uuid("category").references(() => category.id),
   image_url: text("image_url"),
   content: text("content"),

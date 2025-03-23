@@ -66,9 +66,13 @@ export const updateBlog = async (id: string, body: BlogUpdateType) => {
 };
 
 export const deleteBlog = async (id: string) => {
-  const [result] = await db.delete(blog).where(eq(blog.id, id)).returning();
+  const result = await db.transaction(async (tx) => {
+    const [deleted] = await tx.delete(blog).where(eq(blog.id, id)).returning();
 
-  if (!result) throw new Error("Failed to delete blog");
+    if (!deleted) throw new Error("Failed to delete blog");
+
+    return deleted;
+  });
 
   return result;
 };

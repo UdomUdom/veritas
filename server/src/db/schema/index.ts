@@ -7,5 +7,4 @@ export {
   workshop_instructor,
   workshop_instructorRelations,
 } from "./workshop_instructor";
-export { bootcamp, bootcampRelations } from "./bootcamp";
 export { blog, blogRelations } from "./blog";
