@@ -14,6 +14,8 @@ import {
 import { LucideTextSelection } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import MDXEditor from "@/components/MDXeditor";
+import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 interface WorkshopFormProps {
   method: "POST" | "PUT";
@@ -21,25 +23,64 @@ interface WorkshopFormProps {
 }
 
 export default function WorkshopForm({ data, method }: WorkshopFormProps) {
+  const router = useRouter();
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData.entries());
 
-    if (payload.price) {
-      payload.price = parseFloat(payload.price as string).toString();
-    }
+    // if (payload.price) {
+    //   payload.price = parseFloat(payload.price as string).toString();
+    // }
 
-    const res = await fetch(
-      `${process.env.API_URL}/api/workshop/${method === "PUT" ? data.id : ""}`,
-      {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...payload, content }),
+    // const res = await fetch(
+    //   `${process.env.API_URL}/api/workshop/${method === "PUT" ? data.id : ""}`,
+    //   {
+    //     method,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ ...payload, content }),
+    //   }
+    // );
+
+    try {
+      const res = await fetch(
+        `${process.env.API_URL}/api/workshop/${
+          method === "PUT" ? data.id : ""
+        }`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method,
+          body: JSON.stringify({ ...payload, content }),
+        }
+      );
+
+      const result = await res.json();
+
+      if (result.status === "error") {
+        return toast({
+          title: "Failed",
+          description: result.message,
+          variant: "destructive",
+        });
       }
-    );
+
+      toast({
+        title: "Success",
+        description: result.message,
+        variant: "default",
+      });
+
+      router.push("/admin/workshop");
+    } catch (error) {
+      toast({
+        title: "Error",
+        // description: `${error}`,
+        description: "An error occurred, please try again later",
+        variant: "destructive",
+      });
+    }
   };
 
   const [categories, setCategories] = useState<{ id: string; name: string }[]>(
@@ -60,6 +101,46 @@ export default function WorkshopForm({ data, method }: WorkshopFormProps) {
   }, []);
 
   const [content, setContent] = useState(data?.content || "");
+
+  const handleDelete = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.API_URL}/api/workshop/${data?.id}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          method: "DELETE",
+        }
+      );
+      const result = await res.json();
+      if (result.status === "error") {
+        return toast({
+          title: "Failed",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+      toast({
+        title: "Success",
+        description: result.message,
+        variant: "default",
+      });
+      router.push("/admin/workshop");
+    } catch (error) {
+      toast({
+        title: "Error",
+        // description: `${error}`,
+        description: "An error occurred, please try again later",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const confirmDelete = async () => {
+    const result = confirm("Are you sure you want to delete this instructor?");
+    if (result) {
+      handleDelete();
+    }
+  };
 
   return (
     <Form
@@ -205,10 +286,11 @@ export default function WorkshopForm({ data, method }: WorkshopFormProps) {
         </Button>
         <Button
           variant="flat"
-          color="warning"
-          onPress={() => window.history.back()}
+          color="danger"
+          onPress={confirmDelete}
+          className={method === "POST" ? "hidden" : ""}
         >
-          Cancel
+          Delete
         </Button>
       </div>
     </Form>
