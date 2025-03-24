@@ -1,27 +1,18 @@
+import { CONFIG } from "./config";
 import { Elysia } from "elysia";
-import { config } from "./config";
 import swagger from "@elysiajs/swagger";
+import cors from "@elysiajs/cors";
 import routes from "./routes";
-import { cors } from "@elysiajs/cors";
 
-const app = new Elysia({
-  cookie: {
-    secrets: config.SECRET_KEY,
-    httpOnly: config.COOKIE.httpOnly,
-    sameSite: config.COOKIE.sameSite,
-    secure: config.COOKIE.secure,
-    priority: config.COOKIE.priority,
-    maxAge: config.COOKIE.maxAge,
-  },
-})
+const app = new Elysia()
   .use(
     swagger({
       exclude: ["/swagger"],
       autoDarkMode: true,
       documentation: {
         info: {
-          title: "Veritas API",
-          description: "Bun + ElysiaJS + PostgreSQL",
+          title: "Veritas Open API",
+          description: "Bun + ElysiaJS + Supabase",
           version: "0.0.1",
           license: {
             name: "MIT",
@@ -32,8 +23,13 @@ const app = new Elysia({
     })
   )
   .use(cors())
-  .get("/helloworld", () => "Hello World!")
+  .get("/hello", () => ({ status: "ok", message: "Hello Veritas!" }), {
+    detail: {
+      summary: "Hello Veritas",
+      description: "A simple `Hello Veritas!` endpoint",
+    },
+  })
   .use(routes)
-  .listen({ port: config.PORT });
+  .listen({ port: CONFIG.PORT });
 
 console.log(`Server running at ${app.server?.hostname}:${app.server?.port}`);

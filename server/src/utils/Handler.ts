@@ -5,9 +5,10 @@ export const ErrorHandler = (error: unknown) => {
   };
 };
 
-export const SuccessHandler = (data: unknown) => {
+export const SuccessHandler = (data: unknown, message: string) => {
   return {
     status: "ok",
+    message,
     data,
   };
 };
