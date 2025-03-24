@@ -1,12 +1,19 @@
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
 # Windows
 Thumbs.db
-desktop.ini
+Thumbs.db:encryptable
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
 
-# OS X
-.DS_Store
-.Spotlight-V100
-.Trashes
-._*
+# Linux
+*~
+.nfs*
 
-# lock files
-*.lockb
+# Logs
+*.log
+*.lock
