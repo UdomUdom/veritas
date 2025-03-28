@@ -8,8 +8,8 @@ export default function Blog() {
   return (
     <section className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl">News</h1>
-        <Link href="/s/news" className="text-base">
+        <h1 className="text-2xl">Blog</h1>
+        <Link href="/s/blog" className="text-base">
           <p>View All</p>
         </Link>
       </div>
@@ -24,7 +24,6 @@ export default function Blog() {
             <h2 className="text-2xl font-bold">{data[0].title}</h2>
           </div>
         </div>
-
         <div className="md:w-1/3 flex flex-col gap-4 md:gap-2 md:justify-between">
           {data.map((item, index) => (
             <div key={index} className="grid grid-cols-2 gap-4">

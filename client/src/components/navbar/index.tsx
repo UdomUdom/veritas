@@ -17,7 +17,9 @@ export default function Navbar() {
       </div>
       <div className="hidden lg:flex items-center gap-6">
         <More />
-        <button className="font-semibold">Login / Signup</button>
+        <button className="font-semibold cursor-pointer hover:text-base duration-300">
+          Login / Signup
+        </button>
       </div>
     </section>
   );

@@ -29,7 +29,7 @@ export default function More() {
   return (
     <Dropdown menu={{ items }}>
       <a onClick={(e) => e.preventDefault()}>
-        <Space className="font-semibold text-base">
+        <Space className="font-semibold cursor-pointer hover:text-base duration-300">
           <span>More</span>
           <DownOutlined />
         </Space>
