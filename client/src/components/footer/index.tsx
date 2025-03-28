@@ -3,7 +3,7 @@ import Copyright from "./Copyright";
 
 export default function Footer() {
   return (
-    <section className="max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="container py-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
       <Copyright />
       <div className="order-1">
         <h1 className="mb-2 font-semibold">About Us</h1>

@@ -1,0 +1,163 @@
+{
+  "blogs": [
+    {
+      "title": "How to build a simple blog with React and Node.js",
+      "description": "In this blog post, we will learn how to build a simple blog application using React for the frontend and Node.js for the backend. We will cover the basics of setting up a RESTful API with Express and connecting it to a MongoDB database.",
+      "author": "John Doe",
+      "date": "2023-10-01",
+      "tags": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB"
+      ],
+      "image": "https://p-u.popcdn.net/blogs/covers/000/002/406/cover/BlogCover-Mar.jpg"
+    },
+    {
+      "title": "Understanding JavaScript Closures",
+      "description": "This blog post dives deep into JavaScript closures, explaining how they work and why they are important. We will also look at practical examples to solidify your understanding.",
+      "author": "Jane Smith",
+      "date": "2023-09-15",
+      "tags": [
+        "JavaScript",
+        "Closures",
+        "Programming"
+      ],
+      "image": "https://p-u.popcdn.net/blogs/covers/000/002/406/cover/BlogCover-Mar.jpg"
+    },
+    {
+      "title": "A Beginner's Guide to CSS Grid",
+      "description": "Learn how to use CSS Grid to create responsive and modern web layouts. This guide covers the basics of CSS Grid and provides examples to help you get started.",
+      "author": "Alice Johnson",
+      "date": "2023-08-20",
+      "tags": [
+        "CSS",
+        "CSS Grid",
+        "Web Design"
+      ],
+      "image": "https://p-u.popcdn.net/blogs/covers/000/002/406/cover/BlogCover-Mar.jpg"
+    },
+    {
+      "title": "Top 10 Tips for Writing Clean Code",
+      "description": "Writing clean code is essential for maintainable and scalable software. In this blog post, we share 10 tips to help you write cleaner and more efficient code.",
+      "author": "Michael Brown",
+      "date": "2023-07-10",
+      "tags": [
+        "Clean Code",
+        "Best Practices",
+        "Software Development"
+      ],
+      "image": "https://p-u.popcdn.net/blogs/covers/000/002/406/cover/BlogCover-Mar.jpg"
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "Tech Conference 2023",
+      "description": "Annual technology conference focusing on innovation and trends.",
+      "start_date": "2023-11-01",
+      "end_date": "2023-11-03",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "San Francisco, CA"
+    },
+    {
+      "id": 2,
+      "title": "Healthcare Summit",
+      "description": "A summit discussing advancements in healthcare technology.",
+      "start_date": "2023-11-10",
+      "end_date": "2023-11-12",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Boston, MA"
+    },
+    {
+      "id": 3,
+      "title": "AI Expo",
+      "description": "Exploring the latest in artificial intelligence and machine learning.",
+      "start_date": "2023-11-15",
+      "end_date": "2023-11-17",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Seattle, WA"
+    },
+    {
+      "id": 4,
+      "title": "Green Energy Forum",
+      "description": "Forum on sustainable and renewable energy solutions.",
+      "start_date": "2023-11-20",
+      "end_date": "2023-11-22",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Denver, CO"
+    },
+    {
+      "id": 5,
+      "title": "Startup Pitch Night",
+      "description": "An event for startups to pitch their ideas to investors.",
+      "start_date": "2023-11-25",
+      "end_date": "2023-11-25",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Austin, TX"
+    },
+    {
+      "id": 6,
+      "title": "Cybersecurity Workshop",
+      "description": "Description for event 6",
+      "start_date": "2023-10-06",
+      "end_date": "2023-10-16",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Philadelphia, PA"
+    },
+    {
+      "id": 7,
+      "title": "Tech Conference 2023",
+      "description": "Annual technology conference focusing on innovation and trends.",
+      "start_date": "2023-11-01",
+      "end_date": "2023-11-03",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "San Francisco, CA"
+    },
+    {
+      "id": 8,
+      "title": "Healthcare Summit",
+      "description": "A summit discussing advancements in healthcare technology.",
+      "start_date": "2023-11-10",
+      "end_date": "2023-11-12",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Boston, MA"
+    },
+    {
+      "id": 9,
+      "title": "AI Expo",
+      "description": "Exploring the latest in artificial intelligence and machine learning.",
+      "start_date": "2023-11-15",
+      "end_date": "2023-11-17",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Seattle, WA"
+    },
+    {
+      "id": 10,
+      "title": "Green Energy Forum",
+      "description": "Forum on sustainable and renewable energy solutions.",
+      "start_date": "2023-11-20",
+      "end_date": "2023-11-22",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Denver, CO"
+    },
+    {
+      "id": 11,
+      "title": "Startup Pitch Night",
+      "description": "An event for startups to pitch their ideas to investors.",
+      "start_date": "2023-11-25",
+      "end_date": "2023-11-25",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Austin, TX"
+    },
+    {
+      "id": 12,
+      "title": "Cybersecurity Workshop",
+      "description": "Description for event 6",
+      "start_date": "2023-10-06",
+      "end_date": "2023-10-16",
+      "image": "https://p-u.popcdn.net/event_details/posters/000/071/573/medium/b74d0f0adcb3f0844042aa6795525e61c512ba0c.jpg?1736407955",
+      "location": "Philadelphia, PA"
+    }
+  ]
+}
