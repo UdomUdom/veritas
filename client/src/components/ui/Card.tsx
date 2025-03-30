@@ -18,7 +18,7 @@ export default function Card({ data }: CardProps) {
 
   return (
     <div>
-      <Image src={image} alt={title} className="rounded-lg shadow-xl mb-4" />
+      <Image src={image} alt={title} className="rounded-lg shadow-xl" />
       <p className="text-sm text-red-500 mb-2">
         {ShortDate(start_date)} - {ShortDate(end_date)}
       </p>

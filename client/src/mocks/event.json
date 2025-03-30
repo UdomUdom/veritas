@@ -1,68 +1,68 @@
 {
   "hero": [
     {
-      "image": "https://p-u.popcdn.net/hero_images/desktop_images/000/002/929/medium/3eb731f18288656ed4d896dbdf1fe4e6be155e3a.png?1741593311"
+      "image": "https://placehold.co/1440x400?text=Hero+Banner+1"
     },
     {
-      "image": "https://p-u.popcdn.net/hero_images/desktop_images/000/002/962/medium/4e01c81c789926d818442abf00cda2380a4ee0ab.png?1741238697"
+      "image": "https://placehold.co/1440x400?text=Hero+Banner+2"
     },
     {
-      "image": "https://p-u.popcdn.net/hero_images/desktop_images/000/003/193/medium/dae67ac3ea42b5154303db6d2e5dd30e94de23be.jpg?1742582417"
+      "image": "https://placehold.co/1440x400?text=Hero+Banner+3"
     }
   ],
   "card": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Tech Conference 2023",
       "description": "Annual technology conference focusing on innovation and trends.",
       "start_date": "2023-11-01",
       "end_date": "2023-11-03",
-      "image": "https://p-u.popcdn.net/event_details/posters/000/073/321/medium/03aa9977440afb228516ab35889034f06d975d7a.png?1738567953",
+      "image": "https://placehold.co/400x600?text=Card+Image+1",
       "location": "San Francisco, CA"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Healthcare Summit",
       "description": "A summit discussing advancements in healthcare technology.",
       "start_date": "2023-11-10",
       "end_date": "2023-11-12",
-      "image": "https://p-u.popcdn.net/event_details/posters/000/073/321/medium/03aa9977440afb228516ab35889034f06d975d7a.png?1738567953",
+      "image": "https://placehold.co/400x600?text=Card+Image+2",
       "location": "Boston, MA"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "AI Expo",
       "description": "Exploring the latest in artificial intelligence and machine learning.",
       "start_date": "2023-11-15",
       "end_date": "2023-11-17",
-      "image": "https://p-u.popcdn.net/event_details/posters/000/073/321/medium/03aa9977440afb228516ab35889034f06d975d7a.png?1738567953",
+      "image": "https://placehold.co/400x600?text=Card+Image+3",
       "location": "Seattle, WA"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Green Energy Forum",
       "description": "Forum on sustainable and renewable energy solutions.",
       "start_date": "2023-11-20",
       "end_date": "2023-11-22",
-      "image": "https://p-u.popcdn.net/event_details/posters/000/073/321/medium/03aa9977440afb228516ab35889034f06d975d7a.png?1738567953",
+      "image": "https://placehold.co/400x600?text=Card+Image+4",
       "location": "Denver, CO"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Startup Pitch Night",
       "description": "An event for startups to pitch their ideas to investors.",
       "start_date": "2023-11-25",
       "end_date": "2023-11-25",
-      "image": "https://p-u.popcdn.net/event_details/posters/000/073/321/medium/03aa9977440afb228516ab35889034f06d975d7a.png?1738567953",
+      "image": "https://placehold.co/400x600?text=Card+Image+5",
       "location": "Austin, TX"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Cybersecurity Workshop",
       "description": "Description for event 6",
       "start_date": "2023-10-06",
       "end_date": "2023-10-16",
-      "image": "https://p-u.popcdn.net/event_details/posters/000/073/321/medium/03aa9977440afb228516ab35889034f06d975d7a.png?1738567953",
+      "image": "https://placehold.co/400x600?text=Card+Image+6",
       "location": "Philadelphia, PA"
     }
   ]

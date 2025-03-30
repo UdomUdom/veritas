@@ -1,4 +1,3 @@
-import MOCK from "@/mock/ads.json";
 import Wrapper from "@/components/container/Wrapper";
 import Hero from "@/components/hero";
 import Banner from "@/components/ads/Banner";
@@ -10,21 +9,12 @@ import News from "@/components/more/News";
 import CallAction from "@/components/cta/CallAction";
 
 export default function Home() {
-  const ads = {
-    mini: MOCK.mini,
-  };
-
   return (
     <Wrapper>
       <Hero />
-      <div className="container grid grid-cols-1 lg:grid-cols-2">
-        <Banner image={ads.mini} />
-        <Banner image={ads.mini} />
-      </div>
+      <Banner q="1" />
       <Popular />
-      <div className="container">
-        <Banner image={ads.mini} />
-      </div>
+      <Banner q="2" />
       <Upcoming />
       <New />
       <Blog />

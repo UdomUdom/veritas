@@ -1,5 +1,3 @@
-import { Image as Img } from "antd";
-
 interface ImageProps {
   src: string;
   alt: string;
@@ -7,5 +5,5 @@ interface ImageProps {
 }
 
 export default function Image({ src, alt, className }: ImageProps) {
-  return <Img src={src} alt={alt} className={className}></Img>;
+  return <img src={src} alt={alt} className={className}></img>;
 }

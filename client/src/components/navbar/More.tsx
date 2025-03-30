@@ -31,7 +31,7 @@ export default function More() {
       <a onClick={(e) => e.preventDefault()}>
         <Space className="font-semibold cursor-pointer hover:text-base duration-300">
           <span>More</span>
-          <DownOutlined />
+          <DownOutlined style={{ fontSize: "12px" }} />
         </Space>
       </a>
     </Dropdown>
