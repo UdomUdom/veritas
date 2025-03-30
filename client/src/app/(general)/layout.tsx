@@ -10,8 +10,8 @@ const NavbarList = [
     href: "/workshop",
   },
   {
-    name: "Bootcamp",
-    href: "/bootcamp",
+    name: "Instructors",
+    href: "/instructors",
   },
   {
     name: "Blog",

@@ -45,7 +45,7 @@ export default function Login() {
 
   return (
     <section className="container mx-auto">
-      <div className="min-h-screen flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center min-h-screen">
         <h1 className="text-center py-10">
           <span className="text-4xl font-bold text-default-700 drop-shadow-[0px_0px_67px_rgba(255,255,255,0.9)]">
             Login

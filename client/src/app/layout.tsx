@@ -22,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="light">
       <body className={noto.className}>
-        <Providers>{children}</Providers>
-        <Footer />
+        <div className="flex flex-col min-h-screen justify-between">
+          <Providers>{children}</Providers>
+          <Footer />
+        </div>
       </body>
     </html>
   );

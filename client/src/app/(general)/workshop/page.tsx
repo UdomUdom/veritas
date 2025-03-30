@@ -4,6 +4,7 @@ import { ActionCard } from "@/components/Card";
 import { Button, Divider } from "@heroui/react";
 import { SearchInput } from "@/components/SearchInput";
 import { useRouter } from "next/navigation";
+import MockWorkshop from "@/mock/workshop.json";
 
 export default function Workshop() {
   const [list, setList] = useState<
@@ -35,10 +36,18 @@ export default function Workshop() {
   );
 
   const prepareFetchWorkshop = async () => {
-    const response = await fetch(`${process.env.API_URL}/api/workshop`);
-    const data = await response.json();
-    console.log(data);
-    return data.data;
+    try {
+      const response = await fetch(`${process.env.API_URL}/api/workshop`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      console.log(data);
+      return data.data;
+    } catch (error) {
+      console.warn("Fetch error, using mock data:", error);
+      return MockWorkshop;
+    }
   };
 
   useEffect(() => {

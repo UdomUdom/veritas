@@ -1,6 +1,7 @@
 import { BannerCard } from "@/components/Card";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Detail from "@/components/Detail";
+import MockWorkshop from "@/mock/workshop.json";
 
 interface WorkshopInstructor {
   id: string;
@@ -16,14 +17,28 @@ export default async function WorkshopList({
   params: { id: string };
 }) {
   const fetchWorkshop = async (id: string) => {
-    const response = await fetch(
-      `${process.env.API_URL}/api/workshop/${params.id}`
-    );
-    const data = await response.json();
-
-    return data.data;
+    try {
+      const response = await fetch(
+        `${process.env.API_URL}/api/workshop/${params.id}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch workshop data");
+      }
+      const data = await response.json();
+      return data.data;
+    } catch (error) {
+      console.warn("Error fetching workshop data:", error);
+      const mockWorkshopById = MockWorkshop.find(
+        (workshop) => workshop.id === Number(id)
+      );
+      if (mockWorkshopById) {
+        return mockWorkshopById;
+      }
+      return MockWorkshop;
+    }
   };
-  const { id } = await params;
+
+  const { id } = params;
   const data = await fetchWorkshop(id);
 
   if (!data) {

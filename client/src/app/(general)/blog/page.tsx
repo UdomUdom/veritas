@@ -8,7 +8,6 @@ import { ArrowUpRightFromSquare } from "lucide-react";
 import Link from "next/link";
 
 export default function Blog() {
-  // const list = mockBlog;
   const [list, setList] = useState([]);
   const router = useRouter();
 
@@ -17,10 +16,18 @@ export default function Blog() {
   };
 
   const prepareFetchBlog = async () => {
-    const response = await fetch(`${process.env.API_URL}/api/blog`);
-    const data = await response.json();
-    console.log(data);
-    return data.data;
+    try {
+      const response = await fetch(`${process.env.API_URL}/api/blog`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      console.log(data);
+      return data.data;
+    } catch (error) {
+      console.warn("Fetch error, using mock data:", error);
+      return mockBlog;
+    }
   };
 
   useEffect(() => {
