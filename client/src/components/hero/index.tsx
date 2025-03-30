@@ -1,8 +1,7 @@
 import MOCK from "@/mocks/event.json";
 import Fetch from "@/utils/Fetch";
 
-import { Carousel } from "antd";
-import Image from "../ui/Image";
+import Image from "../build/Image";
 
 const prepareFetch = async () => {
   const API =
@@ -26,13 +25,7 @@ export default async function Hero() {
 
   return (
     <section>
-      <Carousel arrows autoplay autoplaySpeed={5000}>
-        {data.map((item: HeroProps, index: number) => (
-          <div key={index}>
-            <Image src={item.image} alt="hero" className="mx-auto" />
-          </div>
-        ))}
-      </Carousel>
+      <h1>Carousel</h1>
     </section>
   );
 }

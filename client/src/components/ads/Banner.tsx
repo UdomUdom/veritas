@@ -2,7 +2,7 @@ import MOCK from "@/mocks/ads.json";
 type MockKeys = keyof typeof MOCK;
 import Fetch from "@/utils/Fetch";
 
-import Image from "../ui/Image";
+import Image from "../build/Image";
 
 interface BannerProps {
   q: string;

@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Noto_Sans } from "next/font/google";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { Poppins } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Veritas",
   description: "Prototype for Veritas",
 };
 
-const noto = Noto_Sans({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+const noto = Poppins({
+  weight: ["300", "400", "600"],
   subsets: ["latin"],
 });
 
@@ -20,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={noto.className}>
-        <AntdRegistry>{children}</AntdRegistry>
-      </body>
+      <body className={noto.className}>{children}</body>
     </html>
   );
 }

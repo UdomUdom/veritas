@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "@/components/ui/Image";
+import Image from "@/components/build/Image";
 import { MapPin } from "lucide-react";
 import { ShortDate } from "@/utils/FormatDate";
 

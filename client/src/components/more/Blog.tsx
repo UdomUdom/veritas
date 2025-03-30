@@ -2,7 +2,7 @@ import MOCK from "@/mocks/more.json";
 import Fetch from "@/utils/Fetch";
 
 import Link from "next/link";
-import Image from "../ui/Image";
+import Image from "../build/Image";
 
 interface BlogData {
   title: string;
