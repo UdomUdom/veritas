@@ -5,7 +5,6 @@ import Popular from "@/components/event/Popular";
 import Upcoming from "@/components/event/Upcoming";
 import New from "@/components/event/New";
 import Blog from "@/components/more/Blog";
-import News from "@/components/more/News";
 import CallAction from "@/components/cta/CallAction";
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
       <Upcoming />
       <New />
       <Blog />
-      <News />
       <CallAction />
     </Wrapper>
   );

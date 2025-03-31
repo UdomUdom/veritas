@@ -48,116 +48,54 @@
         "Software Development"
       ],
       "image": "https://placehold.co/500x250?text=Card+Image+4"
-    }
-  ],
-  "news": [
-    {
-      "id": 1,
-      "title": "Tech Conference 2023",
-      "description": "Annual technology conference focusing on innovation and trends.",
-      "start_date": "2023-11-01",
-      "end_date": "2023-11-03",
-      "image": "https://placehold.co/400x600?text=Card+Image+1",
-      "location": "San Francisco, CA"
     },
     {
-      "id": 2,
-      "title": "Healthcare Summit",
-      "description": "A summit discussing advancements in healthcare technology.",
-      "start_date": "2023-11-10",
-      "end_date": "2023-11-12",
-      "image": "https://placehold.co/400x600?text=Card+Image+2",
-      "location": "Boston, MA"
+      "title": "Mastering TypeScript for Large-Scale Applications",
+      "description": "This blog post explores how TypeScript can help you build large-scale applications with better maintainability and fewer bugs.",
+      "author": "Emily Davis",
+      "date": "2023-06-25",
+      "tags": [
+        "TypeScript",
+        "JavaScript",
+        "Programming"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+5"
     },
     {
-      "id": 3,
-      "title": "AI Expo",
-      "description": "Exploring the latest in artificial intelligence and machine learning.",
-      "start_date": "2023-11-15",
-      "end_date": "2023-11-17",
-      "image": "https://placehold.co/400x600?text=Card+Image+3",
-      "location": "Seattle, WA"
+      "title": "Introduction to Web Accessibility",
+      "description": "Learn the basics of web accessibility and how to make your websites usable for everyone, including people with disabilities.",
+      "author": "Robert Wilson",
+      "date": "2023-05-15",
+      "tags": [
+        "Web Accessibility",
+        "HTML",
+        "Best Practices"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+6"
     },
     {
-      "id": 4,
-      "title": "Green Energy Forum",
-      "description": "Forum on sustainable and renewable energy solutions.",
-      "start_date": "2023-11-20",
-      "end_date": "2023-11-22",
-      "image": "https://placehold.co/400x600?text=Card+Image+4",
-      "location": "Denver, CO"
+      "title": "Building RESTful APIs with Python and Flask",
+      "description": "A step-by-step guide to building RESTful APIs using Python and Flask, including setting up routes, handling requests, and connecting to a database.",
+      "author": "Sophia Martinez",
+      "date": "2023-04-10",
+      "tags": [
+        "Python",
+        "Flask",
+        "APIs"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+7"
     },
     {
-      "id": 5,
-      "title": "Startup Pitch Night",
-      "description": "An event for startups to pitch their ideas to investors.",
-      "start_date": "2023-11-25",
-      "end_date": "2023-11-25",
-      "image": "https://placehold.co/400x600?text=Card+Image+5",
-      "location": "Austin, TX"
-    },
-    {
-      "id": 6,
-      "title": "Cybersecurity Workshop",
-      "description": "Description for event 6",
-      "start_date": "2023-10-06",
-      "end_date": "2023-10-16",
-      "image": "https://placehold.co/400x600?text=Card+Image+6",
-      "location": "Philadelphia, PA"
-    },
-    {
-      "id": 7,
-      "title": "Tech Conference 2023",
-      "description": "Annual technology conference focusing on innovation and trends.",
-      "start_date": "2023-11-01",
-      "end_date": "2023-11-03",
-      "image": "https://placehold.co/400x600?text=Card+Image+7",
-      "location": "San Francisco, CA"
-    },
-    {
-      "id": 8,
-      "title": "Healthcare Summit",
-      "description": "A summit discussing advancements in healthcare technology.",
-      "start_date": "2023-11-10",
-      "end_date": "2023-11-12",
-      "image": "https://placehold.co/400x600?text=Card+Image+8",
-      "location": "Boston, MA"
-    },
-    {
-      "id": 9,
-      "title": "AI Expo",
-      "description": "Exploring the latest in artificial intelligence and machine learning.",
-      "start_date": "2023-11-15",
-      "end_date": "2023-11-17",
-      "image": "https://placehold.co/400x600?text=Card+Image+9",
-      "location": "Seattle, WA"
-    },
-    {
-      "id": 10,
-      "title": "Green Energy Forum",
-      "description": "Forum on sustainable and renewable energy solutions.",
-      "start_date": "2023-11-20",
-      "end_date": "2023-11-22",
-      "image": "https://placehold.co/400x600?text=Card+Image+10",
-      "location": "Denver, CO"
-    },
-    {
-      "id": 11,
-      "title": "Startup Pitch Night",
-      "description": "An event for startups to pitch their ideas to investors.",
-      "start_date": "2023-11-25",
-      "end_date": "2023-11-25",
-      "image": "https://placehold.co/400x600?text=Card+Image+11",
-      "location": "Austin, TX"
-    },
-    {
-      "id": 12,
-      "title": "Cybersecurity Workshop",
-      "description": "Description for event 6",
-      "start_date": "2023-10-06",
-      "end_date": "2023-10-16",
-      "image": "https://placehold.co/400x600?text=Card+Image+12",
-      "location": "Philadelphia, PA"
+      "title": "Getting Started with Docker for Developers",
+      "description": "This blog post introduces Docker and explains how developers can use it to containerize applications for easier deployment and scalability.",
+      "author": "Daniel Lee",
+      "date": "2023-03-05",
+      "tags": [
+        "Docker",
+        "DevOps",
+        "Containers"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+8"
     }
   ]
 }

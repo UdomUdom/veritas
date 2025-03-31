@@ -12,9 +12,15 @@ export interface EventCardProps {
   end_date: string;
 }
 
-export default function EventCard({ data }: { data: EventCardProps }) {
+export default function EventCard({
+  url,
+  data,
+}: {
+  url?: string;
+  data: EventCardProps;
+}) {
   return (
-    <Link href={`/event/${data.id}`} className="flex flex-col gap-4">
+    <Link href={url ? url : `/e/${data.id}`} className="flex flex-col gap-4">
       <Image
         src={data.image}
         alt={data.title}

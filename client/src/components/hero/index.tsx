@@ -2,6 +2,14 @@ import MOCK from "@/mocks/event.json";
 import Fetch from "@/utils/Fetch";
 
 import Image from "../build/Image";
+import { Carousel } from "../build/Carousel";
+import { CarouselItem } from "../ui/carousel";
+import Link from "next/link";
+
+interface HeroData {
+  id: string;
+  image: string;
+}
 
 const prepareFetch = async () => {
   const API =
@@ -16,16 +24,20 @@ const prepareFetch = async () => {
   return MOCK.hero;
 };
 
-interface HeroProps {
-  image: string;
-}
-
 export default async function Hero() {
   const data = await prepareFetch();
 
   return (
     <section>
-      <h1>Carousel</h1>
+      <Carousel>
+        {data.map((item: HeroData, index: number) => (
+          <CarouselItem key={index}>
+            <Link href={`/e/${item.id}` || ""}>
+              <Image src={item.image} alt="hero" className="w-full" />
+            </Link>
+          </CarouselItem>
+        ))}
+      </Carousel>
     </section>
   );
 }

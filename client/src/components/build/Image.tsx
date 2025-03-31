@@ -1,6 +1,6 @@
 interface ImageProps {
   src: string;
-  alt: string;
+  alt?: string;
   className?: string;
 }
 

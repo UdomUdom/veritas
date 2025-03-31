@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "../build/Image";
 
 interface BlogData {
+  id: string;
   title: string;
   image: string;
 }
@@ -34,16 +35,20 @@ export default async function Blog() {
         </Link>
       </div>
       <div className="flex flex-col md:flex-row gap-6 mt-8">
-        <div className="md:w-3/5">
+        <Link href={`/blog/${data[0].id}`} className="md:w-3/5">
           <Image
             src={data[0].image}
             alt={data[0].title}
             className="w-full h-full object-cover rounded-lg"
           />
-        </div>
+        </Link>
         <div className="md:w-1/3 flex flex-col gap-4 md:gap-2 md:justify-between">
           {data.slice(1, 4).map((item: BlogData, index: number) => (
-            <div key={index} className="grid grid-cols-2 gap-4">
+            <Link
+              href={`/blog/${item.id}`}
+              key={index}
+              className="grid grid-cols-2 gap-4"
+            >
               <Image
                 src={item.image}
                 alt={item.title}
@@ -52,7 +57,7 @@ export default async function Blog() {
               <h3 className="text-lg font-semibold line-clamp-2">
                 {item.title}
               </h3>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -62,5 +67,5 @@ export default async function Blog() {
 
 const config = {
   title: "Blog",
-  url: "/c/blog",
+  url: "/blog",
 };

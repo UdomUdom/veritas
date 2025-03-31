@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,6 +7,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+
+const items = [
+  { title: "Events", url: "/e" },
+  { title: "Upcoming", url: "/e/upcoming" },
+  { title: "Blog", url: "/blog" },
+  { title: "Contact", url: "/contact" },
+  { title: "Help Center", url: "/help" },
+];
 
 export default function More() {
   return (
@@ -18,10 +27,11 @@ export default function More() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 border-none shadow-xl">
         <DropdownMenuGroup>
-          <DropdownMenuItem>Blog</DropdownMenuItem>
-          <DropdownMenuItem>News</DropdownMenuItem>
-          <DropdownMenuItem>Contact</DropdownMenuItem>
-          <DropdownMenuItem>Help Center</DropdownMenuItem>
+          {items.map((item, index) => (
+            <Link key={index} href={item.url}>
+              <DropdownMenuItem>{item.title}</DropdownMenuItem>
+            </Link>
+          ))}
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

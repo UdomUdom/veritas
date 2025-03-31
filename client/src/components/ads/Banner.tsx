@@ -2,6 +2,7 @@ import MOCK from "@/mocks/ads.json";
 type MockKeys = keyof typeof MOCK;
 import Fetch from "@/utils/Fetch";
 
+import Link from "next/link";
 import Image from "../build/Image";
 
 interface BannerProps {
@@ -9,6 +10,7 @@ interface BannerProps {
 }
 
 interface BannerData {
+  id: string;
   image: string;
 }
 
@@ -36,7 +38,9 @@ export default async function Banner({ q }: BannerProps) {
         }`}
       >
         {data.map((item: BannerData, index: number) => (
-          <Image key={index} src={item.image} alt="banner" className="p-2" />
+          <Link key={index} href={`/e/${item.id}` || ""} className="m-1">
+            <Image src={item.image} alt="banner" />
+          </Link>
         ))}
       </div>
     </section>
