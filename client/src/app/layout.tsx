@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Noto_Sans } from "next/font/google";
-import { Providers } from "@/provider";
-import Footer from "@/components/Footer";
+import { Poppins } from "next/font/google";
+import Provider from "@/provider";
 
 export const metadata: Metadata = {
   title: "Veritas",
   description: "Prototype for Veritas",
 };
 
-const noto = Noto_Sans({
-  weight: ["300"],
+const noto = Poppins({
+  weight: ["300", "400", "600"],
   subsets: ["latin"],
 });
 
@@ -20,10 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="light">
+    <html lang="en" suppressHydrationWarning>
       <body className={noto.className}>
-        <Providers>{children}</Providers>
-        <Footer />
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

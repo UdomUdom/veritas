@@ -1,13 +1,41 @@
 "use client";
-import { HeroUIProvider } from "@heroui/react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { createContext, useContext } from "react";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+interface ContextType {
+  id: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+  role: string;
+  avatar?: string;
+}
+
+export const Context = createContext<ContextType>({
+  id: "",
+  email: "",
+  firstname: "",
+  lastname: "",
+  role: "",
+  avatar: "",
+});
+
+export default function Provider({ children }: { children: React.ReactNode }) {
   return (
-    <HeroUIProvider>
-      <NextThemesProvider attribute="class" defaultTheme="light">
-        {children}
-      </NextThemesProvider>
-    </HeroUIProvider>
+    <Context.Provider
+      value={
+        {
+          id: "",
+          email: "",
+          firstname: "",
+          lastname: "",
+          role: "",
+          avatar: "",
+        } as ContextType
+      }
+    >
+      {children}
+    </Context.Provider>
   );
 }
+
+export const useContextProvider = () => useContext(Context);

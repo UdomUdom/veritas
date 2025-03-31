@@ -2,30 +2,21 @@
   "name": "veritas",
   "version": "0.0.1",
   "scripts": {
-    "dev": "bun run --watch src/app.ts",
-    "db:push": "bun drizzle-kit push",
-    "db:seed": "bun run src/db/seed.ts",
-    "db:std": "bun drizzle-kit studio --verbose"
+    "dev": "bun run --watch src/app.ts"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
     "@elysiajs/swagger": "^1.2.2",
-    "@supabase/supabase-js": "^2.49.1",
-    "bcrypt": "^5.1.1",
-    "csv-parser": "^3.2.0",
-    "dotenv": "^16.4.7",
+    "@supabase/supabase-js": "^2.49.4",
     "drizzle-orm": "^0.41.0",
-    "drizzle-typebox": "^0.3.0",
-    "elysia": "^1.2.25",
-    "jsonwebtoken": "^9.0.2",
+    "elysia": "latest",
+    "pg": "^8.14.1",
     "postgres": "^3.4.5"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/jsonwebtoken": "^9.0.9",
     "@types/pg": "^8.11.11",
-    "bun-types": "^1.2.5",
-    "drizzle-kit": "^0.30.5",
+    "bun-types": "latest",
+    "drizzle-kit": "^0.30.6",
     "tsx": "^4.19.3"
   },
   "module": "src/index.js"

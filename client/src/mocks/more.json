@@ -1,0 +1,101 @@
+{
+  "blogs": [
+    {
+      "title": "How to build a simple blog with React and Node.js",
+      "description": "In this blog post, we will learn how to build a simple blog application using React for the frontend and Node.js for the backend. We will cover the basics of setting up a RESTful API with Express and connecting it to a MongoDB database.",
+      "author": "John Doe",
+      "date": "2023-10-01",
+      "tags": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+1"
+    },
+    {
+      "title": "Understanding JavaScript Closures",
+      "description": "This blog post dives deep into JavaScript closures, explaining how they work and why they are important. We will also look at practical examples to solidify your understanding.",
+      "author": "Jane Smith",
+      "date": "2023-09-15",
+      "tags": [
+        "JavaScript",
+        "Closures",
+        "Programming"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+2"
+    },
+    {
+      "title": "A Beginner's Guide to CSS Grid",
+      "description": "Learn how to use CSS Grid to create responsive and modern web layouts. This guide covers the basics of CSS Grid and provides examples to help you get started.",
+      "author": "Alice Johnson",
+      "date": "2023-08-20",
+      "tags": [
+        "CSS",
+        "CSS Grid",
+        "Web Design"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+3"
+    },
+    {
+      "title": "Top 10 Tips for Writing Clean Code",
+      "description": "Writing clean code is essential for maintainable and scalable software. In this blog post, we share 10 tips to help you write cleaner and more efficient code.",
+      "author": "Michael Brown",
+      "date": "2023-07-10",
+      "tags": [
+        "Clean Code",
+        "Best Practices",
+        "Software Development"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+4"
+    },
+    {
+      "title": "Mastering TypeScript for Large-Scale Applications",
+      "description": "This blog post explores how TypeScript can help you build large-scale applications with better maintainability and fewer bugs.",
+      "author": "Emily Davis",
+      "date": "2023-06-25",
+      "tags": [
+        "TypeScript",
+        "JavaScript",
+        "Programming"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+5"
+    },
+    {
+      "title": "Introduction to Web Accessibility",
+      "description": "Learn the basics of web accessibility and how to make your websites usable for everyone, including people with disabilities.",
+      "author": "Robert Wilson",
+      "date": "2023-05-15",
+      "tags": [
+        "Web Accessibility",
+        "HTML",
+        "Best Practices"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+6"
+    },
+    {
+      "title": "Building RESTful APIs with Python and Flask",
+      "description": "A step-by-step guide to building RESTful APIs using Python and Flask, including setting up routes, handling requests, and connecting to a database.",
+      "author": "Sophia Martinez",
+      "date": "2023-04-10",
+      "tags": [
+        "Python",
+        "Flask",
+        "APIs"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+7"
+    },
+    {
+      "title": "Getting Started with Docker for Developers",
+      "description": "This blog post introduces Docker and explains how developers can use it to containerize applications for easier deployment and scalability.",
+      "author": "Daniel Lee",
+      "date": "2023-03-05",
+      "tags": [
+        "Docker",
+        "DevOps",
+        "Containers"
+      ],
+      "image": "https://placehold.co/500x250?text=Card+Image+8"
+    }
+  ]
+}
