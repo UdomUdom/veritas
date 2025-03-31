@@ -25,7 +25,7 @@ export default function More() {
           <ChevronDown size={16} />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 border-none shadow-xl">
+      <DropdownMenuContent className="w-56 border-none shadow-xl font-semibold">
         <DropdownMenuGroup>
           {items.map((item, index) => (
             <Link key={index} href={item.url}>

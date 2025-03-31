@@ -1,6 +1,7 @@
 import Logo from "./Logo";
 import More from "./More";
 import Search from "./Search";
+import Profile from "./Profile";
 
 export default function Navbar() {
   return (
@@ -10,16 +11,14 @@ export default function Navbar() {
           <Logo />
           <div className="lg:hidden flex items-center gap-6">
             <More />
-            <button className="font-semibold">Login / Signup</button>
+            <Profile />
           </div>
         </div>
         <Search />
       </div>
       <div className="hidden lg:flex items-center gap-6">
         <More />
-        <button className="font-semibold cursor-pointer hover:text-base duration-300">
-          Login / Signup
-        </button>
+        <Profile />
       </div>
     </section>
   );

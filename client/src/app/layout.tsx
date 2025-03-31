@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import Provider from "@/provider";
 
 export const metadata: Metadata = {
   title: "Veritas",
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={noto.className}>{children}</body>
+      <body className={noto.className}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }
