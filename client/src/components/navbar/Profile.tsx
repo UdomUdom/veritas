@@ -1,8 +1,6 @@
 "use client";
 import { useContextProvider } from "@/provider";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Avatar from "../build/Avatar";
 
 export default function Profile() {
   const user = useContextProvider();
@@ -19,16 +18,11 @@ export default function Profile() {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="w-10 h-10 cursor-pointer">
-            <AvatarImage src={user.avatar || ""} alt="avatar" />
-            <AvatarFallback>
-              <User className="opacity-50" />
-            </AvatarFallback>
-          </Avatar>
+          <Avatar className="w-10 h-10 cursor-pointer" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56 border-none shadow-xl font-semibold">
           <DropdownMenuGroup>
-            <Link href="/profile">
+            <Link href="/order">
               <DropdownMenuItem>My Wallet</DropdownMenuItem>
             </Link>
             <Link href="/profile#setting">
