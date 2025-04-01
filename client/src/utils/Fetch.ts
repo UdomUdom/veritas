@@ -24,11 +24,11 @@ export default async function Fetch(
     const res = await fetch(url, options);
 
     if (!res.ok) {
-      throw new Error(`Error: ${res.status}`);
+      throw new Error(`${res.status} ${res.statusText}`);
     }
 
     return await res.json();
   } catch (error) {
-    console.warn("Fetch error:", error);
+    console.warn(error);
   }
 }

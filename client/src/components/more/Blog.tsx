@@ -54,9 +54,7 @@ export default async function Blog() {
                 alt={item.title}
                 className="w-full h-full object-cover rounded-lg"
               />
-              <h3 className="text-lg font-semibold line-clamp-2">
-                {item.title}
-              </h3>
+              <h3 className="text-lg font-semibold">{item.title}</h3>
             </Link>
           ))}
         </div>

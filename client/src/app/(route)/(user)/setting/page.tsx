@@ -19,7 +19,7 @@ export default function Setting() {
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-8 mb-8">
-            <Avatar className="w-32 h-32" size={40} />
+            <Avatar className="w-32 h-32" />
             <div className="flex flex-col space-y-1.5 items-start gap-4">
               <h2 className="text-xl">Upload Profile Picture</h2>
               <Button onClick={handleImageUpload}>Choose Image</Button>

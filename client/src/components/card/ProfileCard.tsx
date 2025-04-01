@@ -1,18 +1,18 @@
 "use client";
-import { useContextProvider } from "@/provider";
+import { useAuth } from "@/provider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Avatar from "../build/Avatar";
 import Link from "next/link";
 import { FileText, Settings } from "lucide-react";
 
 export default function ProfileCard() {
-  const user = useContextProvider();
+  const user = useAuth();
 
   return (
-    <Card className="col-span-2 border-1 border-slate-100 h-fit min-w-48">
+    <Card className="col-span-2 border-1 border-slate-100 h-fit min-w-auto">
       <CardHeader>
         <CardTitle>
-          <Avatar className="mx-auto w-24 h-24" size={40} />
+          <Avatar className="mx-auto w-20 h-20" />
         </CardTitle>
       </CardHeader>
       <CardContent>

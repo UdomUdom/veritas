@@ -1,25 +1,24 @@
 "use client";
-import { useContextProvider } from "@/provider";
+import { useAuth } from "@/provider";
 import {
   Avatar as Avt,
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
-import { User } from "lucide-react";
 
 interface AvatarProps {
   className?: string;
   size?: number;
 }
 
-export default function Avatar({ className, size }: AvatarProps) {
-  const user = useContextProvider();
+export default function Avatar({ className }: AvatarProps) {
+  const user = useAuth();
 
   return (
     <Avt className={className}>
       <AvatarImage src={user.avatar || ""} alt="avatar" />
-      <AvatarFallback>
-        <User className="opacity-50" size={size} />
+      <AvatarFallback className="select-none">
+        {user.email.split("@")[0].slice(0, 2)}
       </AvatarFallback>
     </Avt>
   );
