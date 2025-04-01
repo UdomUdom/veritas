@@ -1,4 +1,5 @@
 import { CONFIG } from "./config";
+import { logger } from "./utils/Logger";
 import { Elysia } from "elysia";
 import swagger from "@elysiajs/swagger";
 import cors from "@elysiajs/cors";
@@ -32,4 +33,4 @@ const app = new Elysia()
   .use(routes)
   .listen({ port: CONFIG.PORT });
 
-console.log(`Server running at ${app.server?.hostname}:${app.server?.port}`);
+logger.info(`Server running at ${app.server?.url}`);
