@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/provider";
+import { handleSignout } from "@/lib/auth";
 import Link from "next/link";
 import {
   DropdownMenu,
@@ -10,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Avatar from "../build/Avatar";
-import { handleSignout } from "@/utils/Supabase";
 
 export default function Profile() {
   const user = useAuth();

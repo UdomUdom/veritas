@@ -1,7 +1,7 @@
 interface FetchOptions {
   method?: "GET" | "POST" | "PUT" | "DELETE";
   headers?: Record<string, string>;
-  body?: unknown[];
+  body?: unknown;
 }
 
 export default async function Fetch(

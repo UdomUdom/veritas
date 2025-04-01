@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { handleSignin } from "@/utils/Supabase";
+import { handleSignin } from "@/lib/auth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
