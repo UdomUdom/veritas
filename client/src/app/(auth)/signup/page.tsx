@@ -1,5 +1,264 @@
-export default function Signup() {
+"use client";
+import Link from "next/link";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import Fetch from "@/utils/Fetch";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
+import { PhoneInput } from "@/components/ui/phone-input";
+import { DatePicker } from "@/components/ui/datepicker";
+
+const formSchema = z
+  .object({
+    fname: z
+      .string()
+      .min(2, { message: "First name must be at least 2 characters long" }),
+    lname: z
+      .string()
+      .min(2, { message: "Last name must be at least 2 characters long" }),
+    phone: z
+      .string()
+      .min(10, { message: "Phone number must be at least 8 characters long" }),
+    date: z.string().min(1, { message: "Date is required" }),
+    email: z.string().email({ message: "Invalid email address" }),
+    password: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters long" })
+      .regex(/[a-zA-Z0-9]/, { message: "Password must be alphanumeric" }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match",
+  });
+export default function RegisterPreview() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      fname: "",
+      lname: "",
+      date: "",
+      phone: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      // const res = await Fetch("/api/auth/signup", {
+      //   method: "POST",
+      //   body: {
+      //     firstname: values.fname,
+      //     lastname: values.lname,
+      //     birthdate: values.date,
+      //     tel: values.phone,
+      //     email: values.email,
+      //     password: values.password,
+      //   },
+      // });
+      console.log("Response from server", {
+        firstname: values.fname,
+        lastname: values.lname,
+        birthdate: values.date,
+        tel: values.phone,
+        email: values.email,
+        password: values.password,
+      });
+    } catch (error) {
+      alert("Form submission error");
+    }
+  }
+
   return (
-    <div>Signup</div>
-  )
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <Card className="w-full max-w-md p-6 md:bg-white rounded-lg shadow-none md:shadow-md border-0 bg-gray-100">
+        <CardHeader>
+          <CardTitle className="text-2xl">Register</CardTitle>
+          <CardDescription>
+            Enter your email and password to login to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <div className="grid gap-4">
+                <FormField<z.infer<typeof formSchema>>
+                  control={form.control}
+                  name="fname"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-2">
+                      <FormLabel htmlFor="name">First Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          id="fname"
+                          placeholder="John"
+                          {...field}
+                          className="bg-white "
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField<z.infer<typeof formSchema>>
+                  control={form.control}
+                  name="lname"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-2 ">
+                      <FormLabel htmlFor="name">Last Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          id="lname"
+                          placeholder="Doe"
+                          {...field}
+                          className="bg-white "
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-2 ">
+                      <FormLabel htmlFor="date">Birth Date</FormLabel>
+                      <FormControl>
+                        <DatePicker
+                          {...field}
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-2 ">
+                      <FormLabel htmlFor="phone">Phone Number</FormLabel>
+                      <FormControl>
+                        <PhoneInput
+                          {...field}
+                          defaultCountry="TH"
+                          className="bg-white "
+                        />
+                        {/* <Input
+                          id="phone"
+                          placeholder="555-123-4567"
+                          type="tel"
+                          autoComplete="tel"
+                          {...field}
+                        /> */}
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-2">
+                      <FormLabel htmlFor="email">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          id="email"
+                          placeholder="johndoe@mail.com"
+                          type="email"
+                          autoComplete="email"
+                          className="bg-white "
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-2">
+                      <FormLabel htmlFor="password">Password</FormLabel>
+                      <FormControl>
+                        <PasswordInput
+                          id="password"
+                          placeholder="******"
+                          autoComplete="new-password"
+                          className="bg-white "
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-2">
+                      <FormLabel htmlFor="confirmPassword">
+                        Confirm Password
+                      </FormLabel>
+                      <FormControl>
+                        <PasswordInput
+                          id="confirmPassword"
+                          placeholder="******"
+                          autoComplete="new-password"
+                          className="bg-white "
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" className="w-full cursor-pointer">
+                  Register
+                </Button>
+              </div>
+            </form>
+          </Form>
+          <div className="mt-4 text-center text-sm">
+            Already have an account?{" "}
+            <Link href="/signin" className="underline">
+              Login
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
