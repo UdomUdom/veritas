@@ -2,7 +2,7 @@ import db from "@/db";
 import { eq } from "drizzle-orm";
 import { role, user } from "@/db/schema";
 import { UserType } from "@/models/user";
-import { handleSignup } from "@/libs/Auth";
+import { errorSignup, handleSignup } from "@/libs/Auth";
 
 export const signup = async (body: UserType) => {
   const result = await db.transaction(async (tx) => {
@@ -18,7 +18,7 @@ export const signup = async (body: UserType) => {
     const [created] = await tx
       .insert(user)
       .values({
-        auth_id: data.user!.id,
+        id: data.user!.id,
         firstname: body.firstname,
         lastname: body.lastname,
         email: body.email,
@@ -29,6 +29,11 @@ export const signup = async (body: UserType) => {
         role_id: role_user!.id,
       })
       .returning();
+
+    if (!created) {
+      await errorSignup(data.user!.id);
+      throw new Error("User not created");
+    }
 
     return created;
   });

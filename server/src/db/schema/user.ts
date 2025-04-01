@@ -3,8 +3,7 @@ import { relations } from "drizzle-orm";
 import { role } from ".";
 
 export const user = pgTable("user", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  auth_id: text("auth_id").unique().notNull(),
+  id: uuid("id").primaryKey(),
   firstname: text("firstname").notNull(),
   lastname: text("lastname").notNull(),
   email: text("email").unique().notNull(),

@@ -6,4 +6,4 @@ const connectionString = process.env.DATABASE_URL!;
 
 export const client = postgres(connectionString, { prepare: false });
 
-export default drizzle(client, { schema, logger: true });
+export default drizzle(client, { schema, logger: false });
