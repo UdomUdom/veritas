@@ -1,6 +1,4 @@
 "use client";
-import { useRef } from "react";
-
 import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel as Crs,
@@ -10,21 +8,19 @@ import {
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export function Carousel({ children }: { children?: React.ReactNode }) {
-  const plugin = useRef(Autoplay({ delay: 5000 }));
-
   return (
-    <Crs plugins={[plugin.current]} opts={{ loop: true }}>
+    <Crs plugins={[Autoplay({ delay: 5000 })]} opts={{ loop: true }}>
       <div className="relative">
         <CarouselSlide
           slide="prev"
-          className="absolute left-8 z-10 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30"
+          className="absolute left-8 z-10 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30 duration-300"
         >
           <ArrowLeft />
         </CarouselSlide>
         <CarouselContent>{children}</CarouselContent>
         <CarouselSlide
           slide="next"
-          className="absolute right-8 z-10 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30"
+          className="absolute right-8 z-10 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30 duration-300"
         >
           <ArrowRight />
         </CarouselSlide>

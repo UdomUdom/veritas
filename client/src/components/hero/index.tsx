@@ -32,9 +32,26 @@ export default async function Hero() {
       <Carousel>
         {data.map((item: HeroData, index: number) => (
           <CarouselItem key={index}>
-            <Link href={`/e/${item.id}` || ""}>
-              <Image src={item.image} alt="hero" className="w-full" />
-            </Link>
+            <div className="relative min-h-[200px] md:min-h-[300px] lg:min-h-[400px] xl:min-h-[500px] overflow-hidden">
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src={item.image}
+                  alt="hero"
+                  className="w-full h-full object-cover filter blur-lg scale-105"
+                />
+              </div>
+              <div className="absolute inset-0 z-10 flex items-center justify-center">
+                <div className="mx-auto flex justify-center">
+                  <Link href={`/e/${item.id}` || ""} className="relative">
+                    <Image
+                      src={item.image}
+                      alt="hero"
+                      className="container object-contain shadow-xl rounded-lg translate-x-0"
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </CarouselItem>
         ))}
       </Carousel>
