@@ -38,5 +38,5 @@ export const signup = async (body: UserType) => {
     return created;
   });
 
-  return `User ${result.email} created`;
+  return { message: `User ${result.email} created`, data: null };
 };
