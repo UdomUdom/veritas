@@ -22,7 +22,7 @@ export const signup = async (body: UserType) => {
         firstname: body.firstname,
         lastname: body.lastname,
         email: body.email,
-        tel: body.tel,
+        phone: body.phone,
         gender: body.gender,
         birthdate: body.birthdate,
         avatar: body.avatar,
