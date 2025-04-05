@@ -14,7 +14,6 @@ import Avatar from "../build/Avatar";
 
 export default function Profile() {
   const user = useAuth();
-
   if (user.email) {
     return (
       <DropdownMenu>

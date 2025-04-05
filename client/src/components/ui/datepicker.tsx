@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { format, parseISO } from "date-fns";
+import { format, parse } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -20,7 +20,19 @@ interface DatePickerProps {
 
 export function DatePicker({ value, onChange }: DatePickerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const dateValue = value ? parseISO(value) : undefined;
+
+  const dateValue = React.useMemo(() => {
+    if (!value) return undefined;
+    try {
+      // Check if the value is in ISO format (contains "T")
+      if (value.includes("T")) {
+        return new Date(value);
+      }
+      return parse(value, "dd MMMM yyyy", new Date());
+    } catch (e) {
+      return undefined;
+    }
+  }, [value]);
 
   const handleClear = () => {
     onChange(undefined);
@@ -28,7 +40,12 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
   };
 
   const handleSelect = (date: Date | undefined) => {
-    onChange(date?.toISOString());
+    if (date) {
+      const formattedDate = format(date, "dd MMMM yyyy");
+      onChange(formattedDate);
+    } else {
+      onChange(undefined);
+    }
     setIsOpen(false);
   };
 
@@ -45,7 +62,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
           >
             <CalendarIcon className="h-4 w-4" />
             {dateValue ? (
-              format(dateValue, "dd MMMM, yyyy")
+              format(dateValue, "dd MMMM yyyy") //display the date in the format "dd MMMM yyyy"
             ) : (
               <span className="opacity-70">Select a date</span>
             )}

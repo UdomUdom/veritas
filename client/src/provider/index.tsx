@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import Supabase from "@/utils/Supabase";
+import { Toaster } from "@/components/ui/sonner";
 
 interface ContextType {
   id: string;
@@ -65,6 +66,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       }
     >
       {children}
+      <Toaster />
     </Context.Provider>
   );
 }
