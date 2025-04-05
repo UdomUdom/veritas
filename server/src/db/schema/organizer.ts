@@ -1,5 +1,5 @@
-import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { event } from ".";
 
 export const organizer = pgTable("organizer", {
@@ -14,6 +14,7 @@ export const organizer = pgTable("organizer", {
     .defaultNow()
     .notNull()
     .$onUpdate(() => new Date()),
+  deleted_at: timestamp("deleted_at"),
 });
 
 export const organizerRelations = relations(organizer, ({ many }) => ({

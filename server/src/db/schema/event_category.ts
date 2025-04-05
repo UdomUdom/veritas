@@ -1,6 +1,6 @@
 import { pgTable, uuid } from "drizzle-orm/pg-core";
-import { category, event } from ".";
 import { relations } from "drizzle-orm";
+import { category, event } from ".";
 
 export const event_category = pgTable("event_category", {
   id: uuid("id").primaryKey().defaultRandom(),

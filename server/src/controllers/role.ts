@@ -1,92 +1,92 @@
 import Elysia from "elysia";
-import { signup } from "@/services/users/auth";
-import { UserModel } from "@/models/user";
+import { RoleModel } from "@/models/role";
 import {
-  deleteUser,
-  getAllUsers,
-  getUserById,
-  updateUser,
-} from "@/services/users/user";
+  createRole,
+  deleteRole,
+  getAllRole,
+  getRoleById,
+  updateRole,
+} from "@/services/roles/role";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
-const controller = "User";
+const controller = "Role";
 
-export const userController = new Elysia({
+export const roleController = new Elysia({
   detail: {
     tags: [controller],
   },
 }).group(controller, (app) =>
   app
     .post(
-      "/signup",
+      "/",
       async ({ body, error }) => {
         try {
-          const { message, data } = await signup(body);
+          const { message, data } = await createRole(body.name);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Signup" },
-        body: UserModel,
+        detail: { summary: "Create role" },
+        body: RoleModel,
       }
     )
     .get(
       "/",
       async ({ error }) => {
         try {
-          const { message, data } = await getAllUsers();
+          const { message, data } = await getAllRole();
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Get all users" },
+        detail: { summary: "Get all roles" },
       }
     )
     .get(
       "/:id",
       async ({ params, error }) => {
         try {
-          const { message, data } = await getUserById(params.id);
+          const { message, data } = await getRoleById(params.id);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Get user by id" },
+        detail: { summary: "Get role by id" },
       }
     )
     .put(
       "/:id",
       async ({ params, body, error }) => {
         try {
-          const { message, data } = await updateUser(params.id, body);
+          const { message, data } = await updateRole(params.id, body.name);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Update user" },
-        body: UserModel,
+        detail: { summary: "Update role" },
+        body: RoleModel,
       }
     )
     .delete(
       "/:id",
       async ({ params, error }) => {
         try {
-          const { message, data } = await deleteUser(params.id);
+          const { message, data } = await deleteRole(params.id);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Delete user" },
+        detail: { summary: "Delete role" },
       }
     )
 );
