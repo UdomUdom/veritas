@@ -37,10 +37,10 @@ export default async function Hero() {
                 <Image
                   src={item.image}
                   alt="hero"
-                  className="w-full h-full object-cover filter blur-lg scale-105"
+                  className="w-full h-full md:object-cover md:filter md:blur-lg md:scale-105"
                 />
               </div>
-              <div className="absolute inset-0 z-10 flex items-center justify-center">
+              <div className="absolute inset-0 z-10 md:flex items-center justify-center hidden">
                 <div className="mx-auto flex justify-center">
                   <Link href={`/e/${item.id}` || ""} className="relative">
                     <Image
