@@ -13,14 +13,14 @@ export function Carousel({ children }: { children?: React.ReactNode }) {
       <div className="relative">
         <CarouselSlide
           slide="prev"
-          className="absolute left-8 z-10 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30 duration-300"
+          className="absolute left-8 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30"
         >
           <ArrowLeft />
         </CarouselSlide>
         <CarouselContent>{children}</CarouselContent>
         <CarouselSlide
           slide="next"
-          className="absolute right-8 z-10 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30 duration-300"
+          className="absolute right-8 top-1/2 transform -translate-y-1/2 rounded-full bg-opacity-30"
         >
           <ArrowRight />
         </CarouselSlide>

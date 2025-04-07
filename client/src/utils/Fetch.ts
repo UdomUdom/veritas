@@ -23,12 +23,16 @@ export default async function Fetch(
   try {
     const res = await fetch(url, options);
 
-    // if (!res.ok) {
-    //   throw new Error(`${res.status} ${res.statusText}`);
-    // }
+    if (res.statusText === "Not Found") {
+      throw new Error(`${res.status} ${res.statusText}`);
+    }
 
     return await res.json();
-  } catch (error) {
-    console.warn(error);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.warn(error.message);
+    } else {
+      console.error("An unknown error occurred");
+    }
   }
 }

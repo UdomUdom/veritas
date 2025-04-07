@@ -15,6 +15,11 @@ export const signup = async (body: UserType) => {
       where: eq(role.name, "user"),
     });
 
+    if (!role_user) {
+      await errorSignup(data.user!.id);
+      throw new Error("Role not found");
+    }
+
     const [created] = await tx
       .insert(user)
       .values({

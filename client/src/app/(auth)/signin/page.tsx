@@ -22,8 +22,9 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { handleSignin } from "@/lib/auth";
 import { toast } from "sonner";
+import { signin } from "./action";
+import { useAuth } from "@/context/AuthContext";
 
 const formSchema = z.object({
   email: z.string(),
@@ -31,7 +32,9 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+  const { setLoading } = useAuth();
   const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,14 +45,16 @@ export default function Login() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await handleSignin({
+      const data = await signin({
         email: values.email,
         password: values.password,
       });
-      console.log(res);
-      // router.push("/");
-    } catch (error) {
-      toast.error("Invalid email or password");
+
+      toast.success(data);
+      setLoading(true);
+      router.replace("/");
+    } catch (error: unknown) {
+      toast.error(`${error}`);
     }
   }
 

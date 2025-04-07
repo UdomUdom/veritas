@@ -1,27 +1,27 @@
 "use client";
-import { useAuth } from "@/provider";
+import { useAuth } from "@/context/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Avatar from "../build/Avatar";
 import Link from "next/link";
 import { FileText, Settings } from "lucide-react";
 
 export default function ProfileCard() {
-  const user = useAuth();
+  const { user } = useAuth();
 
   return (
     <Card className="col-span-2 border-1 border-slate-100 h-fit min-w-auto">
       <CardHeader>
         <CardTitle>
-          <Avatar className="mx-auto w-20 h-20" />
+          <Avatar className="mx-auto w-20 h-20" user={user} />
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid w-full items-center gap-4">
           <div className="flex flex-col space-y-1.5">
             <h2 className="text-xl font-semibold mx-auto">
-              {user.firstname} {user.lastname}
+              {user?.firstname} {user?.lastname}
             </h2>
-            <p className="mx-auto opacity-50 text-md">{user.email}</p>
+            <p className="mx-auto opacity-50 text-md">{user?.email}</p>
           </div>
         </div>
         <div className="mt-4 flex flex-col space-y-4">

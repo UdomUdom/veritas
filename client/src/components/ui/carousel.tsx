@@ -257,7 +257,7 @@ function CarouselSlide({
     <Button
       onClick={isPrev ? scrollPrev : isNext ? scrollNext : undefined}
       disabled={!canScrollPrev}
-      className={`${className} ${orientation}`}
+      className={`${className} ${orientation} cursor-pointer duration-300 z-10`}
       variant={variant}
       size={size}
       {...props}

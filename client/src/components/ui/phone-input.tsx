@@ -162,11 +162,7 @@ const CountrySelectOption = ({
 const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
   const Flag = flags[country];
 
-  return (
-    <span className="flex h-4 w-6 overflow-hidden rounded-sm bg-foreground/20 [&_svg]:size-full">
-      {Flag && <Flag title={countryName} />}
-    </span>
-  );
+  return <span>{Flag && <Flag title={countryName} />}</span>;
 };
 
 export { PhoneInput };

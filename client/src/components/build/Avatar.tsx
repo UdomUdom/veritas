@@ -1,5 +1,3 @@
-"use client";
-import { useAuth } from "@/provider";
 import {
   Avatar as Avt,
   AvatarFallback,
@@ -7,18 +5,20 @@ import {
 } from "@/components/ui/avatar";
 
 interface AvatarProps {
+  user?: {
+    email: string;
+    avatar: string;
+  };
   className?: string;
   size?: number;
 }
 
-export default function Avatar({ className }: AvatarProps) {
-  const user = useAuth();
-
+export default function Avatar({ user, className }: AvatarProps) {
   return (
     <Avt className={className}>
-      <AvatarImage src={user.avatar || ""} alt="avatar" />
+      <AvatarImage src={user?.avatar || ""} alt="avatar" />
       <AvatarFallback className="select-none">
-        {user.email.split("@")[0].slice(0, 2)}
+        {user?.email.split("@")[0].slice(0, 2)}
       </AvatarFallback>
     </Avt>
   );
