@@ -50,7 +50,7 @@ export default function ProfileForm({ user }: UserProps) {
           placeholder="Gender"
           defaultValue={user?.gender || ""}
         />
-        <DatePicker value={date} onChange={handleDateChange} />
+        {/* <DatePicker value={date} onChange={handleDateChange} /> */}
       </div>
 
       <div className="w-full text-right mt-4">
