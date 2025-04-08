@@ -24,7 +24,6 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
   const dateValue = React.useMemo(() => {
     if (!value) return undefined;
     try {
-      // Check if the value is in ISO format (contains "T")
       if (value.includes("T")) {
         return new Date(value);
       }

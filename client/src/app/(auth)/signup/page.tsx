@@ -27,6 +27,7 @@ import { DatePicker } from "@/components/ui/datepicker";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { formSchema } from "./formSchema";
+import { on } from "events";
 
 export default function RegisterPreview() {
   const router = useRouter();
@@ -60,11 +61,9 @@ export default function RegisterPreview() {
           },
         }
       );
-
       if (res.status === "error") {
         return toast.error(res.message);
       }
-
       toast.success(res.message);
       router.push("/signin");
     } catch {}
