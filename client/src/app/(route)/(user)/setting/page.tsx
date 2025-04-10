@@ -4,8 +4,10 @@ import Avatar from "@/components/build/Avatar";
 import ProfileForm from "@/components/form/ProfileForm";
 import ChangePasswordForm from "@/components/form/ChangePasswordForm";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Setting() {
+  const { user } = useAuth();
   const handleImageUpload = () => {
     alert("Image upload functionality is not implemented yet.");
   };
@@ -25,7 +27,7 @@ export default function Setting() {
               <Button onClick={handleImageUpload}>Choose Image</Button>
             </div>
           </div>
-          <ProfileForm />
+          <ProfileForm user={user} />
         </CardContent>
       </Card>
       <br />

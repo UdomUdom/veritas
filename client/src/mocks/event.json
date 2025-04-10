@@ -64,6 +64,42 @@
       "end_date": "2023-10-16",
       "image": "https://placehold.co/400x600?text=Card+Image+6",
       "location": "Philadelphia, PA"
+    },
+    {
+      "id": "7",
+      "title": "Cybersecurity Workshop",
+      "description": "Description for event 6",
+      "start_date": "2023-10-06",
+      "end_date": "2023-10-16",
+      "image": "https://placehold.co/400x600?text=Card+Image+6",
+      "location": "Philadelphia, PA"
+    },
+    {
+      "id": "8",
+      "title": "Cybersecurity Workshop",
+      "description": "Description for event 6",
+      "start_date": "2023-10-06",
+      "end_date": "2023-10-16",
+      "image": "https://placehold.co/400x600?text=Card+Image+6",
+      "location": "Philadelphia, PA"
+    },
+    {
+      "id": "9",
+      "title": "Cybersecurity Workshop",
+      "description": "Description for event 6",
+      "start_date": "2023-10-06",
+      "end_date": "2023-10-16",
+      "image": "https://placehold.co/400x600?text=Card+Image+6",
+      "location": "Philadelphia, PA"
+    },
+    {
+      "id": "10",
+      "title": "Cybersecurity Workshop",
+      "description": "Description for event 6",
+      "start_date": "2023-10-06",
+      "end_date": "2023-10-16",
+      "image": "https://placehold.co/400x600?text=Card+Image+6",
+      "location": "Philadelphia, PA"
     }
   ]
 }

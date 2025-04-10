@@ -18,6 +18,9 @@ interface AuthContextType {
     lastname: string;
     role: string;
     avatar: string;
+    birthdate?: string;
+    phone?: string;
+    gender?: string;
   };
   signOut: () => Promise<void>;
 }
@@ -48,6 +51,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           lastname: data.lastname,
           role: data.role,
           avatar: data.avatar,
+          birthdate: data.birthdate,
+          phone: data.phone,
+          gender: data.gender,
         });
       }
 
