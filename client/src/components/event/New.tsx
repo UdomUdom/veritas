@@ -38,5 +38,5 @@ export default async function New() {
 
 const config = {
   title: "New Events",
-  url: "/c/new",
+  url: "/e/new",
 };

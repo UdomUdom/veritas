@@ -45,7 +45,7 @@ export default async function Hero() {
                     <Image
                       src={item.banner}
                       alt="hero"
-                      className="container object-contain shadow-xl rounded-lg translate-x-0"
+                      className="container object-contain shadow-xl rounded-lg translate-x-0 min-w-[1150px]"
                     />
                   </Link>
                 </div>

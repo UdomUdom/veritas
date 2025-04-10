@@ -4,8 +4,7 @@ import Fetch from "@/utils/Fetch";
 import EventCard, { EventCardProps } from "@/components/card/EventCard";
 
 const prepareFetch = async () => {
-  const API =
-    process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_MOCK || "";
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/event` || "";
 
   const res = await Fetch(API!);
 
@@ -13,11 +12,11 @@ const prepareFetch = async () => {
     return res;
   }
 
-  return MOCK.card;
+  return { data: MOCK.card };
 };
 
 export default async function Events() {
-  const data = await prepareFetch();
+  const { data } = await prepareFetch();
 
   return (
     <section className="container">

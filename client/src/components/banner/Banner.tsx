@@ -19,7 +19,7 @@ export default function Banner({
         <Image
           src={src}
           alt={alt}
-          className="w-full h-auto max-w-full max-h-[300px] sm:max-h-[400px] md:max-h-[500px] object-cover "
+          className="w-full h-auto max-w-full max-h-[300px] sm:max-h-[400px] md:max-h-[500px] object-cover blur-xs scale-105"
         />
       </div>
       <div className="container">

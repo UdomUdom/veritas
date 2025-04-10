@@ -9,11 +9,10 @@ import {
 import { ChevronDown } from "lucide-react";
 
 const items = [
-  { title: "Events", url: "/e/events" },
+  { title: "Events", url: "/events" },
   { title: "Upcoming", url: "/e/upcoming" },
   { title: "Blog", url: "/blog" },
   { title: "Contact", url: "/contact" },
-  { title: "Help Center", url: "/help" },
 ];
 
 export default function More() {
