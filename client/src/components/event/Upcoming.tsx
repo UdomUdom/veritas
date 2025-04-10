@@ -6,7 +6,7 @@ import EventCard, { EventCardProps } from "../card/EventCard";
 
 const prepareFetch = async () => {
   const API =
-    process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_MOCK || "";
+    `${process.env.NEXT_PUBLIC_API_URL}/api/event/upcoming?limit=6` || "";
 
   const res = await Fetch(API!);
 
@@ -14,11 +14,11 @@ const prepareFetch = async () => {
     return res;
   }
 
-  return MOCK.card;
+  return { data: MOCK.card };
 };
 
 export default async function Upcoming() {
-  const data = await prepareFetch();
+  const { data } = await prepareFetch();
 
   return (
     <section className="container">

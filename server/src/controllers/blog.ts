@@ -1,92 +1,93 @@
 import Elysia from "elysia";
-import { signup } from "@/services/users/auth";
-import { UserModel } from "@/models/user";
+import { BlogModel } from "@/models/blog";
+import { QueryModel } from "@/models/query";
 import {
-  deleteUser,
-  getAllUsers,
-  getUserById,
-  updateUser,
-} from "@/services/users/user";
+  createBlog,
+  deleteBlog,
+  getAllBlogs,
+  getBlogById,
+  updateBlog,
+} from "@/services/blogs/blog";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
-const controller = "user";
+const controller = "blog";
 
-export const userController = new Elysia({
+export const blogController = new Elysia({
   detail: {
     tags: [controller],
   },
 }).group(controller, (app) =>
   app
     .post(
-      "/signup",
+      "/",
       async ({ body, error }) => {
         try {
-          const { message, data } = await signup(body);
+          const { message, data } = await createBlog(body);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Signup" },
-        body: UserModel,
+        body: BlogModel,
       }
     )
     .get(
       "/",
-      async ({ error }) => {
+      async ({ query, error }) => {
         try {
-          const { message, data } = await getAllUsers();
+          const { message, data } = await getAllBlogs(query);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Get all users" },
+        detail: { summary: "Get all blogs" },
+        query: QueryModel,
       }
     )
     .get(
       "/:id",
       async ({ params, error }) => {
         try {
-          const { message, data } = await getUserById(params.id);
+          const { message, data } = await getBlogById(params.id);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Get user by id" },
+        detail: { summary: "Get blog by id" },
       }
     )
     .put(
       "/:id",
       async ({ params, body, error }) => {
         try {
-          const { message, data } = await updateUser(params.id, body);
+          const { message, data } = await updateBlog(params.id, body);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Update user" },
-        body: UserModel,
+        detail: { summary: "Update blog" },
+        body: BlogModel,
       }
     )
     .delete(
       "/:id",
       async ({ params, error }) => {
         try {
-          const { message, data } = await deleteUser(params.id);
+          const { message, data } = await deleteBlog(params.id);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
         }
       },
       {
-        detail: { summary: "Delete user" },
+        detail: { summary: "Delete blog" },
       }
     )
 );

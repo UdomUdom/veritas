@@ -11,8 +11,7 @@ interface BlogData {
 }
 
 const prepareFetch = async () => {
-  const API =
-    process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_MOCK || "";
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/blog?limit=4` || "";
 
   const res = await Fetch(API!);
 
@@ -20,11 +19,11 @@ const prepareFetch = async () => {
     return res;
   }
 
-  return MOCK.blogs;
+  return { data: MOCK.blogs };
 };
 
 export default async function Blog() {
-  const data = await prepareFetch();
+  const { data } = await prepareFetch();
 
   return (
     <section className="container mx-auto">

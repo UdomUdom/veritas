@@ -1,13 +1,13 @@
 {
   "hero": [
     {
-      "image": "https://placehold.co/1440x400?text=Hero+Banner+1"
+      "banner": "https://placehold.co/1440x400?text=Hero+Banner+1"
     },
     {
-      "image": "https://placehold.co/1440x400?text=Hero+Banner+2"
+      "banner": "https://placehold.co/1440x400?text=Hero+Banner+2"
     },
     {
-      "image": "https://placehold.co/1440x400?text=Hero+Banner+3"
+      "banner": "https://placehold.co/1440x400?text=Hero+Banner+3"
     }
   ],
   "card": [

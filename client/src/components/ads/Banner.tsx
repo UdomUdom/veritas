@@ -11,12 +11,11 @@ interface BannerProps {
 
 interface BannerData {
   id: string;
-  image: string;
+  banner: string;
 }
 
 const prepareFetch = async ({ q }: BannerProps) => {
-  const API =
-    process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_MOCK || "";
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/event/new?limit=1` || "";
 
   const res = await Fetch(API!);
 
@@ -24,11 +23,11 @@ const prepareFetch = async ({ q }: BannerProps) => {
     return res;
   }
 
-  return MOCK[q as MockKeys];
+  return { data: MOCK[q as MockKeys] };
 };
 
 export default async function Banner({ q }: BannerProps) {
-  const data = await prepareFetch({ q });
+  const { data } = await prepareFetch({ q });
 
   return (
     <section>
@@ -39,7 +38,7 @@ export default async function Banner({ q }: BannerProps) {
       >
         {data.map((item: BannerData, index: number) => (
           <Link key={index} href={`/e/${item.id}` || ""} className="m-1">
-            <Image src={item.image} alt="banner" />
+            <Image src={item.banner} alt="banner" />
           </Link>
         ))}
       </div>

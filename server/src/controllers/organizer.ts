@@ -9,7 +9,7 @@ import {
 } from "@/services/organizers/organizer";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
-const controller = "Organizer";
+const controller = "organizer";
 
 export const organizerController = new Elysia({
   detail: {

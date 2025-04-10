@@ -1,25 +1,33 @@
 import {
   date,
-  decimal,
+  pgEnum,
   pgTable,
   text,
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { category, organizer, event_category } from ".";
+import { category, organizer, event_category, ticket } from ".";
+
+export const eStatus = pgEnum("status", [
+  "draft",
+  "scheduled",
+  "published",
+  "archived",
+]);
 
 export const event = pgTable("event", {
   id: uuid("id").primaryKey().defaultRandom(),
   title: text("title").notNull(),
   description: text("description"),
-  price: decimal("price").notNull(),
+  image: text("image").notNull(),
+  banner: text("banner").notNull(),
+  location: text("location"),
   start_date: date("start_date").notNull(),
   end_date: date("end_date"),
-  time: text("time"),
-  location: text("location"),
-  image: text("image"),
-  info: text("content"),
+  status: eStatus(),
+  scheduled_publish_at: timestamp("scheduled_publish_at"),
+  info: text("info"),
   category_id: uuid("category_id").references(() => category.id),
   organizer_id: uuid("organizer_id").references(() => organizer.id),
   created_at: timestamp("created_at").defaultNow().notNull(),
@@ -35,4 +43,5 @@ export const eventRelations = relations(event, ({ one, many }) => ({
     fields: [event.organizer_id],
     references: [organizer.id],
   }),
+  ticket: many(ticket),
 }));

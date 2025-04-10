@@ -1,5 +1,5 @@
 "use client";
-import { createClient } from "@/utils/auth";
+import { createClient } from "@/utils/Auth";
 import {
   createContext,
   useCallback,

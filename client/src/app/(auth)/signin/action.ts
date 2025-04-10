@@ -1,5 +1,5 @@
 "use server";
-import { createServer } from "@/utils/auth";
+import { createServer } from "@/utils/Auth";
 
 interface SigninData {
   email: string;

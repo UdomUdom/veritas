@@ -8,12 +8,11 @@ import Link from "next/link";
 
 interface HeroData {
   id: string;
-  image: string;
+  banner: string;
 }
 
 const prepareFetch = async () => {
-  const API =
-    process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_MOCK || "";
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/event/new?limit=6` || "";
 
   const res = await Fetch(API!);
 
@@ -21,11 +20,11 @@ const prepareFetch = async () => {
     return res;
   }
 
-  return MOCK.hero;
+  return { data: MOCK.hero };
 };
 
 export default async function Hero() {
-  const data = await prepareFetch();
+  const { data } = await prepareFetch();
 
   return (
     <section>
@@ -35,7 +34,7 @@ export default async function Hero() {
             <div className="relative min-h-[200px] md:min-h-[300px] lg:min-h-[400px] xl:min-h-[500px] overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <Image
-                  src={item.image}
+                  src={item.banner}
                   alt="hero"
                   className="w-full h-full md:object-cover md:filter md:blur-lg md:scale-105"
                 />
@@ -44,7 +43,7 @@ export default async function Hero() {
                 <div className="mx-auto flex justify-center">
                   <Link href={`/e/${item.id}` || ""} className="relative">
                     <Image
-                      src={item.image}
+                      src={item.banner}
                       alt="hero"
                       className="container object-contain shadow-xl rounded-lg translate-x-0"
                     />

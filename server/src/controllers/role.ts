@@ -9,7 +9,7 @@ import {
 } from "@/services/roles/role";
 import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
-const controller = "Role";
+const controller = "role";
 
 export const roleController = new Elysia({
   detail: {
