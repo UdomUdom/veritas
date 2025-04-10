@@ -8,7 +8,7 @@ export const createBlog = async (body: BlogType) => {
   return { message: "Create blog", data: null };
 };
 
-export const getAllBlogs = async ({ limit, offset }: QueryType = {}) => {
+export const getAllBlog = async ({ limit, offset }: QueryType = {}) => {
   const result = await db.query.blog.findMany({
     limit,
     offset,

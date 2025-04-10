@@ -3,7 +3,7 @@ import { CategoryModel } from "@/models/category";
 import {
   createCategory,
   deleteCategory,
-  getAllCategories,
+  getAllCategory,
   getCategoryById,
   updateCategory,
 } from "@/services/categories/category";
@@ -38,7 +38,7 @@ export const categoryController = new Elysia({
       "/",
       async ({ error }) => {
         try {
-          const { message, data } = await getAllCategories();
+          const { message, data } = await getAllCategory();
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));

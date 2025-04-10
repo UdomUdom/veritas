@@ -3,7 +3,7 @@ import { OrganizerModel } from "@/models/organizer";
 import {
   createOrganizer,
   deleteOrganizer,
-  getAllOrganizers,
+  getAllOrganizer,
   getOrganizerById,
   updateOrganizer,
 } from "@/services/organizers/organizer";
@@ -36,7 +36,7 @@ export const organizerController = new Elysia({
       "/",
       async ({ error }) => {
         try {
-          const { message, data } = await getAllOrganizers();
+          const { message, data } = await getAllOrganizer();
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));

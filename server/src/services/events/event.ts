@@ -8,7 +8,7 @@ export const createEvent = async (body: EventType) => {
   return { message: "Create event", data: null };
 };
 
-export const getAllEvents = async () => {
+export const getAllEvent = async ({ limit, offset }: QueryType = {}) => {
   const reuslt = await db.query.event.findMany();
 
   return { message: "Get all events", data: reuslt };

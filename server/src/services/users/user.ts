@@ -1,13 +1,16 @@
 import db from "@/db";
 import { user } from "@/db/schema";
+import { QueryType } from "@/models/query";
 import { UserType } from "@/models/user";
 import { eq } from "drizzle-orm";
 
-export const getAllUsers = async () => {
+export const getAllUser = async ({ limit, offset }: QueryType) => {
   const result = await db.query.user.findMany({
     with: {
       role: true,
     },
+    limit,
+    offset,
   });
 
   return { message: "Get all users", data: result };
@@ -24,10 +27,10 @@ export const getUserById = async (id: string) => {
   return { message: "Get user by id", data: result };
 };
 
-export const updateUser = async (id: string, data: UserType) => {
+export const updateUser = async (id: string, body: UserType) => {
   const [result] = await db
     .update(user)
-    .set(data)
+    .set(body)
     .where(eq(user.id, id))
     .returning();
 

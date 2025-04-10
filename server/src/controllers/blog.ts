@@ -4,7 +4,7 @@ import { QueryModel } from "@/models/query";
 import {
   createBlog,
   deleteBlog,
-  getAllBlogs,
+  getAllBlog,
   getBlogById,
   updateBlog,
 } from "@/services/blogs/blog";
@@ -36,7 +36,7 @@ export const blogController = new Elysia({
       "/",
       async ({ query, error }) => {
         try {
-          const { message, data } = await getAllBlogs(query);
+          const { message, data } = await getAllBlog(query);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));

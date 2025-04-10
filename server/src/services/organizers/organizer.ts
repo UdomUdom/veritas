@@ -20,7 +20,7 @@ export const createOrganizer = async (body: OrganizerType) => {
   };
 };
 
-export const getAllOrganizers = async () => {
+export const getAllOrganizer = async () => {
   const result = await db.query.organizer.findMany();
 
   return { message: "Get all organizers", data: result };

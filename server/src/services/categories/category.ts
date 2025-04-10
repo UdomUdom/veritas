@@ -13,7 +13,7 @@ export const createCategory = async (name: string) => {
   };
 };
 
-export const getAllCategories = async () => {
+export const getAllCategory = async () => {
   const result = await db.query.category.findMany();
 
   return { message: "Get all categories", data: result };

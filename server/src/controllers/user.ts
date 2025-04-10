@@ -3,7 +3,7 @@ import { signup } from "@/services/users/auth";
 import { UserModel } from "@/models/user";
 import {
   deleteUser,
-  getAllUsers,
+  getAllUser,
   getUserById,
   updateUser,
 } from "@/services/users/user";
@@ -34,9 +34,9 @@ export const userController = new Elysia({
     )
     .get(
       "/",
-      async ({ error }) => {
+      async ({ query, error }) => {
         try {
-          const { message, data } = await getAllUsers();
+          const { message, data } = await getAllUser(query);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));

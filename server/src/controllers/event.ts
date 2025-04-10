@@ -2,7 +2,7 @@ import Elysia from "elysia";
 import {
   createEvent,
   deleteEvent,
-  getAllEvents,
+  getAllEvent,
   getEventById,
   getNewestEvent,
   getUpcomingEvent,
@@ -37,9 +37,9 @@ export const eventController = new Elysia({
     )
     .get(
       "/",
-      async ({ error }) => {
+      async ({ query, error }) => {
         try {
-          const { message, data } = await getAllEvents();
+          const { message, data } = await getAllEvent(query);
           return SuccessHandler({ message, data });
         } catch (err) {
           return error(400, ErrorHandler(err));
@@ -47,6 +47,7 @@ export const eventController = new Elysia({
       },
       {
         detail: { summary: "Get all events" },
+        query: QueryModel,
       }
     )
     .get(
