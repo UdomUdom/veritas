@@ -1,7 +1,7 @@
 import Wrapper from "@/components/container/Wrapper";
 import Hero from "@/components/hero";
 // import Banner from "@/components/ads/Banner";
-import Popular from "@/components/event/Popular";
+import Recommend from "@/components/event/Recommend";
 import Upcoming from "@/components/event/Upcoming";
 import New from "@/components/event/New";
 import Blog from "@/components/blog";
@@ -12,7 +12,7 @@ export default function Home() {
     <Wrapper>
       <Hero />
       {/* <Banner q="1" /> */}
-      <Popular />
+      <Recommend />
       {/* <Banner q="2" /> */}
       <Upcoming />
       <New />

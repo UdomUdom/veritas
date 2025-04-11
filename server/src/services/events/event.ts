@@ -2,7 +2,7 @@ import db from "@/db";
 import { event } from "@/db/schema";
 import { EventType } from "@/models/event";
 import { QueryType } from "@/models/query";
-import { desc, eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 export const createEvent = async (body: EventType) => {
   return { message: "Create event", data: null };
@@ -40,6 +40,16 @@ export const deleteEvent = async (id: string) => {
   if (!result) throw new Error("Failed to delete event");
 
   return { message: `Delete event ${result.title} success`, data: null };
+};
+
+export const getRandomEvent = async ({ limit, offset }: QueryType = {}) => {
+  const result = await db.execute(
+    sql`SELECT * FROM ${event} ORDER BY RANDOM() LIMIT ${limit || 10} OFFSET ${
+      offset || 0
+    }`
+  );
+
+  return { message: "Get random event", data: result };
 };
 
 export const getNewestEvent = async ({ limit, offset }: QueryType = {}) => {

@@ -5,6 +5,7 @@ import {
   getAllEvent,
   getEventById,
   getNewestEvent,
+  getRandomEvent,
   getUpcomingEvent,
   updateEvent,
 } from "@/services/events/event";
@@ -93,6 +94,14 @@ export const eventController = new Elysia({
         detail: { summary: "Delete event" },
       }
     )
+    .get("/random", async ({ query, error }) => {
+      try {
+        const { message, data } = await getRandomEvent(query);
+        return SuccessHandler({ message, data });
+      } catch (err) {
+        return error(400, ErrorHandler(err));
+      }
+    })
     .get(
       "/new",
       async ({ query, error }) => {
