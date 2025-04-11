@@ -1,19 +1,20 @@
-"use client";
-import { createSource } from "@/lib/omise";
+// "use client";
+import Ticket from "@/components/ticket";
+// import { createSource } from "@/lib/omise";
 
 export default function Checkout() {
-  const handleSource = async () => {
-    try {
-      const res = await createSource(100);
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleSource = async () => {
+  //   try {
+  //     const res = await createSource(100);
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div>
-      <button onClick={handleSource}>Checkout</button>
+      <Ticket />
     </div>
   );
 }
