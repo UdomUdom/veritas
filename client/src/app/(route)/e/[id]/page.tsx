@@ -2,10 +2,10 @@ import MarkdownRenderer from "@/components/markdown/MarkdownRenderer";
 import Fetch from "@/utils/Fetch";
 import { redirect } from "next/navigation";
 import Image from "@/components/build/Image";
-import MOCK from "@/mocks/event.json";
 import { Carousel } from "@/components/build/Carousel";
 import { CarouselItem } from "@/components/ui/carousel";
 import Link from "next/link";
+import Banner from "@/components/banner/Banner";
 import { Separator } from "@/components/ui/separator";
 
 const prepareFetch = async (id: string) => {
@@ -55,17 +55,17 @@ export default async function EventList({
       <section className="relative container mx-auto max-w-7xl z-10 px-6 min-h-[calc(100vh_-_64px_-_108px)] mb-12 flex-grow">
         <div className="w-full mt-12 flex flex-col justify-center items-start prose prose-neutral dark:prose-invert">
           <div className="w-full">
-            <div className="text-start font-sans text-lg text-default ">
-              <Image
+            <div className="text-start font-sans text-lg text-default">
+              <Banner
                 src={data.image}
-                className="w-full h-96 object-cover rounded-lg shadow-md transition-transform "
+                alt="hero"
+                className="w-full object-cover rounded-sm shadow-lg"
               />
             </div>
           </div>
-          <h1 className="text-start text-4xl font-bold mt-4">{data.title}</h1>
+          <h1 className="text-start text-4xl font-bold mt-6">{data.title}</h1>
           <div className="text-start font-sans mt-8 text-lg text-default-700">
             <p className="block text-lg mb-4">{data.description}</p>
-
             <div className="block text-lg mt-6 text-default-700">
               <MarkdownRenderer content={data.content} />
             </div>
