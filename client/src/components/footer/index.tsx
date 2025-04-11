@@ -19,8 +19,8 @@ export default function Footer() {
       <div className="order-2">
         <h2 className="mb-2 font-semibold text-xl">Service</h2>
         <ul className="flex flex-col gap-2">
-          <Link href="/help">
-            <li>Help Center</li>
+          <Link href="/events">
+            <li>Events</li>
           </Link>
         </ul>
       </div>

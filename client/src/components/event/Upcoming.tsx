@@ -39,5 +39,5 @@ export default async function Upcoming() {
 
 const config = {
   title: "Upcoming Events",
-  url: "/c/upcoming",
+  url: "/e/upcoming",
 };
