@@ -4,52 +4,63 @@ import { category, role } from "./schema";
 import master from "./master/category.json";
 
 const seed_role = async () => {
-  const result = await db.transaction(async (tx) => {
-    const existing = await tx.query.role.findMany();
+  try {
+    const result = await db.transaction(async (tx) => {
+      const existing = await tx.query.role.findMany();
 
-    if (existing.length > 0) return "Role already exists";
+      if (existing.length > 0) throw "Role already exists";
 
-    logger.warn(`Seeding role...`);
+      const [data] = await tx
+        .insert(role)
+        .values(master.map((item) => ({ name: item })))
+        .returning();
 
-    const [seed_role] = await tx
-      .insert(role)
-      .values(master.map((item) => ({ name: item })))
-      .returning();
+      if (!data) throw new Error("Failed to create role");
 
-    if (!seed_role) throw new Error("Failed to create role");
+      return "Role created";
+    });
 
-    return "Role created";
-  });
-
-  logger.info(result);
+    logger.info(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      logger.error(error.message);
+    } else {
+      logger.warn(error);
+    }
+  }
 };
 
 const seed_category = async () => {
-  const result = await db.transaction(async (tx) => {
-    const existing = await tx.query.category.findMany();
+  try {
+    const result = await db.transaction(async (tx) => {
+      const existing = await tx.query.category.findMany();
 
-    if (existing.length > 0) return "Category already exists";
+      if (existing.length > 0) throw "Category already exists";
 
-    logger.warn(`Seeding category...`);
+      const [data] = await tx
+        .insert(category)
+        .values(master.map((item) => ({ name: item })))
+        .returning();
 
-    const [seed_category] = await tx
-      .insert(category)
-      .values(master.map((item) => ({ name: item })))
-      .returning();
+      if (!data) throw new Error("Failed to create category");
 
-    if (!seed_category) throw new Error("Failed to create category");
+      return "Category created";
+    });
 
-    return "Category created";
-  });
-
-  logger.info(result);
+    logger.info(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      logger.error(error.message);
+    } else {
+      logger.warn(error);
+    }
+  }
 };
 
 (async () => {
   try {
     await seed_role();
     await seed_category();
-    logger.info(`Seeding completed`);
   } catch (error) {
     logger.error(
       `Error seeding: ${error instanceof Error ? error.message : error}`
