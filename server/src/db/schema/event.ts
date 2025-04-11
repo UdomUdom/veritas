@@ -39,6 +39,10 @@ export const event = pgTable("event", {
 
 export const eventRelations = relations(event, ({ one, many }) => ({
   event_category: many(event_category),
+  category: one(category, {
+    fields: [event.category_id],
+    references: [category.id],
+  }),
   organizer: one(organizer, {
     fields: [event.organizer_id],
     references: [organizer.id],

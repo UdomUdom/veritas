@@ -1,6 +1,6 @@
 import db from "@/db";
 import { category } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 
 export const createCategory = async (name: string) => {
   const [result] = await db.insert(category).values({ name }).returning();
@@ -14,7 +14,9 @@ export const createCategory = async (name: string) => {
 };
 
 export const getAllCategory = async () => {
-  const result = await db.query.category.findMany();
+  const result = await db.query.category.findMany({
+    orderBy: [asc(category.name)],
+  });
 
   return { message: "Get all categories", data: result };
 };

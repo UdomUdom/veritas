@@ -1,28 +1,73 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
-import {
   CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
+import Fetch from "@/utils/Fetch";
+import Link from "next/link";
+
+interface CategoryType {
+  name: string;
+}
+
+interface EventType {
+  title: string;
+}
+
+const prepareFetchCategory = async () => {
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/category` || "";
+
+  const res = await Fetch(API!);
+
+  if (res && res.status === "ok") {
+    return res;
+  }
+
+  return { data: [] };
+};
+
+const prepareFetchEvents = async () => {
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/event` || "";
+
+  const res = await Fetch(API!);
+
+  if (res && res.status === "ok") {
+    return res;
+  }
+
+  return { data: [] };
+};
 
 export default function Search() {
   const [open, setOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [events, setEvents] = useState<EventType[]>([]);
+
+  const handleOnChange = (value: string) => {
+    setText(value);
+  };
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await prepareFetchCategory();
+      setCategories(data);
+    };
+
+    fetchCategories();
+
+    const fetchEvents = async () => {
+      const { data } = await prepareFetchEvents();
+      setEvents(data);
+    };
+
+    fetchEvents();
+
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
@@ -46,40 +91,46 @@ export default function Search() {
         </kbd>
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput
+          placeholder="Search..."
+          value={text}
+          onValueChange={(e) => handleOnChange(e)}
+        />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <Calendar />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <Smile />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <Calculator />
-              <span>Calculator</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
-              <User />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <CreditCard />
-              <span>Billing</span>
-              <CommandShortcut>⌘B</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <Settings />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
-            </CommandItem>
+          {text && (
+            <CommandGroup heading="Events">
+              {events.map((event, index) => (
+                <Link
+                  key={index}
+                  href={`/e/${event.title}`}
+                  className="flex items-center gap-2"
+                >
+                  <CommandItem
+                    className="cursor-pointer w-full"
+                    onSelect={() => setOpen(false)}
+                  >
+                    {event.title}
+                  </CommandItem>
+                </Link>
+              ))}
+            </CommandGroup>
+          )}
+          <CommandGroup heading="Explore Categories">
+            {categories.map((cat, index) => (
+              <Link
+                key={index}
+                href={`/c/${cat.name}`}
+                className="flex items-center gap-2"
+              >
+                <CommandItem
+                  className="cursor-pointer w-full"
+                  onSelect={() => setOpen(false)}
+                >
+                  {cat.name}
+                </CommandItem>
+              </Link>
+            ))}
           </CommandGroup>
         </CommandList>
       </CommandDialog>

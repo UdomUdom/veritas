@@ -4,14 +4,17 @@ import {
   deleteEvent,
   getAllEvent,
   getEventById,
+  updateEvent,
+} from "@/services/events/event";
+import { getEventByCategory } from "@/services/events/search";
+import {
   getNewestEvent,
   getRandomEvent,
   getUpcomingEvent,
-  updateEvent,
-} from "@/services/events/event";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+} from "@/services/events/home";
 import { EventModel } from "@/models/event";
 import { QueryModel } from "@/models/query";
+import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
 
 const controller = "event";
 
@@ -94,6 +97,14 @@ export const eventController = new Elysia({
         detail: { summary: "Delete event" },
       }
     )
+    .get("/category/:name", async ({ params, error }) => {
+      try {
+        const { message, data } = await getEventByCategory(params.name);
+        return SuccessHandler({ message, data });
+      } catch (err) {
+        return error(400, ErrorHandler(err));
+      }
+    })
     .get("/random", async ({ query, error }) => {
       try {
         const { message, data } = await getRandomEvent(query);
