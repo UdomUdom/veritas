@@ -6,13 +6,11 @@ import { LucideEdit } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import InputType from "@/components/build/InputType";
-import { Button } from "@/components/ui/button";
+import { UserForm } from "./form";
 
 interface User {
   id: string;
@@ -91,11 +89,8 @@ export const columns: ColumnDef<User>[] = [
               <DialogTitle>Edit User</DialogTitle>
             </DialogHeader>
             <div className="grid gap-4 py-4">
-              <InputType label="Firstname" />
+              <UserForm core={data} />
             </div>
-            <DialogFooter>
-              <Button type="submit">Save changes</Button>
-            </DialogFooter>
           </DialogContent>
         </Dialog>
       );

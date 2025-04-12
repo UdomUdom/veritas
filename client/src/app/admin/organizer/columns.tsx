@@ -1,11 +1,18 @@
 "use client";
 import Avatar from "@/components/build/Avatar";
 import TableColumnHeader from "@/components/table/TableColumnHeader";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { ColumnDef } from "@tanstack/react-table";
 import { LucideEdit } from "lucide-react";
-import Link from "next/link";
+import { OrganizerForm } from "./form";
 
-interface User {
+interface OrganizerType {
   id: string;
   name: string;
   image: string;
@@ -14,7 +21,7 @@ interface User {
   website: string;
 }
 
-export const columns: ColumnDef<User>[] = [
+export const columns: ColumnDef<OrganizerType>[] = [
   {
     accessorKey: "avatar",
     header: ({ column }) => (
@@ -65,9 +72,19 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       const data = row.original;
       return (
-        <Link href="">
-          <LucideEdit className="h-4 w-4" />
-        </Link>
+        <Dialog>
+          <DialogTrigger asChild>
+            <LucideEdit className="h-4 w-4" />
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Edit Organizer</DialogTitle>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <OrganizerForm core={data} />
+            </div>
+          </DialogContent>
+        </Dialog>
       );
     },
   },
