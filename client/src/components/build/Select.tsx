@@ -10,7 +10,10 @@ import {
 interface SelectProps {
   placeholder?: string;
   className?: string;
-  options?: string[];
+  options?: {
+    label: string;
+    value: string;
+  }[];
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   children?: React.ReactNode;
@@ -38,12 +41,12 @@ export default function Select({
           {options?.map((option, index) => (
             <SelectItem
               key={index}
-              value={option}
+              value={option.value}
               onSelect={() => {
-                onValueChange!(option);
+                onValueChange!(option.value);
               }}
             >
-              {option}
+              {option.label}
             </SelectItem>
           ))}
         </SelectGroup>

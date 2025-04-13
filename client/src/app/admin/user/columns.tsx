@@ -21,7 +21,10 @@ interface User {
   gender: string;
   birthdate: string;
   avatar: string;
-  role: string;
+  role: {
+    id: string;
+    name: string;
+  };
 }
 
 export const columns: ColumnDef<User>[] = [
@@ -74,6 +77,10 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "role",
     header: ({ column }) => <TableColumnHeader column={column} title="Role" />,
+    cell: ({ row }) => {
+      const data = row.original;
+      return <p>{data.role.name}</p>;
+    },
   },
   {
     id: "actions",

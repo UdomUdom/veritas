@@ -4,6 +4,7 @@ import Table from "@/components/table";
 
 interface UserType {
   role: {
+    id: string;
     name: string;
   };
 }
@@ -17,7 +18,10 @@ const prepareFetch = async () => {
     return {
       data: res.data.map((user: UserType) => ({
         ...user,
-        role: user.role.name || "",
+        role: {
+          id: user.role.id,
+          name: user.role.name,
+        },
       })),
     };
   }

@@ -27,7 +27,10 @@ interface UserFormProps {
     gender: string;
     birthdate: string;
     avatar: string;
-    role: string;
+    role: {
+      id: string;
+      name: string;
+    };
   };
 }
 
@@ -49,8 +52,22 @@ const prepareFetchRole = async () => {
 };
 
 export function UserForm({ core }: UserFormProps) {
-  const [options, setOptions] = useState<Record<string, string[]>>({
-    gender: ["male", "female"],
+  const [options, setOptions] = useState<{
+    [key in (typeof FieldData)[number]["name"]]?: {
+      value: string;
+      label: string;
+    }[];
+  }>({
+    gender: [
+      {
+        value: "male",
+        label: "male",
+      },
+      {
+        value: "female",
+        label: "female",
+      },
+    ],
   });
 
   const formSchema = z.object({
@@ -74,7 +91,7 @@ export function UserForm({ core }: UserFormProps) {
       gender: core.gender || "",
       birthdate: core.birthdate || "",
       avatar: core.avatar || "",
-      role: core.role || "",
+      role: core.role.id || "",
     },
   });
 
@@ -84,7 +101,10 @@ export function UserForm({ core }: UserFormProps) {
       if (res.status === "ok") {
         setOptions((prev) => ({
           ...prev,
-          role: res.data.map((item: { name: string }) => item.name),
+          role: res.data.map((item: { id: string; name: string }) => ({
+            value: item.id,
+            label: item.name,
+          })),
         }));
       }
     };
