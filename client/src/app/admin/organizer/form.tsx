@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
 
 interface OrganizerFormProps {
-  core: {
+  core?: {
     name: string;
     image: string;
     email: string;
@@ -35,17 +35,17 @@ export function OrganizerForm({ core }: OrganizerFormProps) {
     image: z.string().optional(),
     email: z.string().email({ message: "Invalid email address" }),
     phone: z.string().optional(),
-    website: z.string().url({ message: "Invalid URL" }).optional(),
+    website: z.string().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: core.name || "",
-      image: core.image || "",
-      email: core.email || "",
-      phone: core.phone || "",
-      website: core.website || "",
+      name: core?.name || "",
+      image: core?.image || "",
+      email: core?.email || "",
+      phone: core?.phone || "",
+      website: core?.website || "",
     },
   });
 
