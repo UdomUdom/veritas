@@ -121,7 +121,7 @@ export default function Ticket() {
                 <p className="text-2xl">&#3647; {total.toFixed(2)}</p>
               </div>
               <Button className="cursor-pointer" onClick={handleCheckout}>
-                Buy Tickets
+                Get Tickets
               </Button>
             </div>
           </div>

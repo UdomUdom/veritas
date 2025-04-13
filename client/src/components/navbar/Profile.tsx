@@ -26,7 +26,7 @@ export default function Profile() {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56 border-none shadow-xl font-semibold">
           <DropdownMenuGroup>
-            <Link href="/orders">
+            <Link href="/wallet">
               <DropdownMenuItem>My Wallet</DropdownMenuItem>
             </Link>
             <Link href="/setting">
