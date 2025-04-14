@@ -17,6 +17,6 @@ export const organizer = pgTable("organizer", {
   deleted_at: timestamp("deleted_at"),
 });
 
-export const organizerRelations = relations(organizer, ({ many }) => ({
+export const organizer_relations = relations(organizer, ({ many }) => ({
   event: many(event),
 }));

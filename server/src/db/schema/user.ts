@@ -1,6 +1,6 @@
 import { date, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { role } from ".";
+import { order, role } from ".";
 
 export const user = pgTable("user", {
   id: uuid("id").primaryKey(),
@@ -20,9 +20,10 @@ export const user = pgTable("user", {
   deleted_at: timestamp("deleted_at"),
 });
 
-export const userRelations = relations(user, ({ one }) => ({
+export const user_relations = relations(user, ({ one, many }) => ({
   role: one(role, {
     fields: [user.role_id],
     references: [role.id],
   }),
+  order: many(order),
 }));

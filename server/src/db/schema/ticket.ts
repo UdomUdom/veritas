@@ -1,27 +1,14 @@
-import {
-  date,
-  decimal,
-  integer,
-  pgEnum,
-  pgTable,
-  timestamp,
-  uuid,
-} from "drizzle-orm/pg-core";
+import { integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { order, ticket_types } from ".";
 import { relations } from "drizzle-orm";
-import { event } from ".";
 
-export const eType = pgEnum("type", ["regular", "vip"]);
-
-export const ticket = pgTable("ticket", {
+export const tickets = pgTable("tickets", {
   id: uuid("id").primaryKey().defaultRandom(),
-  event_id: uuid("event_id")
-    .references(() => event.id)
+  order_id: uuid("order_id")
+    .references(() => order.id)
     .notNull(),
-  type: eType().notNull(),
-  price: decimal("price").notNull(),
+  ticket_type_id: uuid("ticket_type_id").references(() => ticket_types.id),
   quantity: integer("quantity").notNull(),
-  sale_start_date: date("sale_start_date").notNull(),
-  sale_end_date: date("sale_end_date"),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()
@@ -29,9 +16,13 @@ export const ticket = pgTable("ticket", {
     .$onUpdate(() => new Date()),
 });
 
-export const ticketRelations = relations(ticket, ({ one }) => ({
-  event: one(event, {
-    fields: [ticket.event_id],
-    references: [event.id],
+export const tickets_relations = relations(tickets, ({ one }) => ({
+  order: one(order, {
+    fields: [tickets.order_id],
+    references: [order.id],
+  }),
+  ticket_types: one(ticket_types, {
+    fields: [tickets.ticket_type_id],
+    references: [ticket_types.id],
   }),
 }));

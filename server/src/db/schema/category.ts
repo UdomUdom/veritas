@@ -7,7 +7,7 @@ export const category = pgTable("category", {
   name: text("name").notNull().unique(),
 });
 
-export const categoryRelations = relations(category, ({ many }) => ({
+export const category_relations = relations(category, ({ many }) => ({
   event: many(event),
   blog: many(blog),
 }));

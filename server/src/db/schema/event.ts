@@ -7,7 +7,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { category, organizer, ticket } from ".";
+import { category, organizer, ticket_types } from ".";
 
 export const eStatus = pgEnum("status", [
   "draft",
@@ -37,7 +37,7 @@ export const event = pgTable("event", {
     .$onUpdate(() => new Date()),
 });
 
-export const eventRelations = relations(event, ({ one, many }) => ({
+export const event_relations = relations(event, ({ one, many }) => ({
   category: one(category, {
     fields: [event.category_id],
     references: [category.id],
@@ -46,5 +46,5 @@ export const eventRelations = relations(event, ({ one, many }) => ({
     fields: [event.organizer_id],
     references: [organizer.id],
   }),
-  ticket: many(ticket),
+  ticket_types: many(ticket_types),
 }));
