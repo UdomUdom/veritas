@@ -4,7 +4,7 @@ import { event } from ".";
 
 export const organizer = pgTable("organizer", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: text("name").notNull(),
+  name: text("name").notNull().unique(),
   image: text("image"),
   email: text("email"),
   phone: text("phone"),

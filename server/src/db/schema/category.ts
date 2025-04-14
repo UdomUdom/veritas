@@ -1,6 +1,6 @@
 import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { event_category } from ".";
+import { blog, event } from ".";
 
 export const category = pgTable("category", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -8,5 +8,6 @@ export const category = pgTable("category", {
 });
 
 export const categoryRelations = relations(category, ({ many }) => ({
-  event_category: many(event_category),
+  event: many(event),
+  blog: many(blog),
 }));
