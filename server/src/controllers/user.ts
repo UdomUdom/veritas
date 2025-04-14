@@ -1,13 +1,13 @@
 import Elysia from "elysia";
 import { signup } from "@/services/users/auth";
-import { UserModel } from "@/models/user";
 import {
   deleteUser,
   getAllUser,
   getUserById,
   updateUser,
-} from "@/services/users/user";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+} from "@/services/users";
+import { UserModel } from "@/models/user";
+import { withHandler } from "@/utils/Control";
 
 const controller = "user";
 
@@ -19,14 +19,7 @@ export const userController = new Elysia({
   app
     .post(
       "/signup",
-      async ({ body, error }) => {
-        try {
-          const { message, data } = await signup(body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ body }) => signup(body)),
       {
         detail: { summary: "Signup" },
         body: UserModel,
@@ -34,42 +27,21 @@ export const userController = new Elysia({
     )
     .get(
       "/",
-      async ({ query, error }) => {
-        try {
-          const { message, data } = await getAllUser(query);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ query }) => getAllUser(query)),
       {
         detail: { summary: "Get all users" },
       }
     )
     .get(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await getUserById(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => getUserById(params.id)),
       {
         detail: { summary: "Get user by id" },
       }
     )
     .put(
       "/:id",
-      async ({ params, body, error }) => {
-        try {
-          const { message, data } = await updateUser(params.id, body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params, body }) => updateUser(params.id, body)),
       {
         detail: { summary: "Update user" },
         body: UserModel,
@@ -77,14 +49,7 @@ export const userController = new Elysia({
     )
     .delete(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await deleteUser(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => deleteUser(params.id)),
       {
         detail: { summary: "Delete user" },
       }

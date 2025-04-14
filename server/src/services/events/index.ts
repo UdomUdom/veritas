@@ -1,15 +1,25 @@
 import db from "@/db";
-import { event } from "@/db/schema";
-import { EventType } from "@/models/event";
-import { QueryType } from "@/models/query";
 import { eq } from "drizzle-orm";
+import { event } from "@/db/schema";
+import { QueryType } from "@/models/query";
+import { EventType } from "@/models/event";
 
 export const createEvent = async (body: EventType) => {
-  return { message: "Create event", data: null };
+  const [result] = await db.insert(event).values(body).returning();
+
+  if (!result) throw new Error("Failed to create event");
+
+  return { message: `Event ${result.title} created successfully`, data: null };
 };
 
 export const getAllEvent = async ({ limit, offset }: QueryType = {}) => {
-  const reuslt = await db.query.event.findMany();
+  const reuslt = await db.query.event.findMany({
+    with: {
+      category: true,
+    },
+    limit,
+    offset,
+  });
 
   return { message: "Get all events", data: reuslt };
 };
@@ -17,6 +27,11 @@ export const getAllEvent = async ({ limit, offset }: QueryType = {}) => {
 export const getEventById = async (id: string) => {
   const result = await db.query.event.findFirst({
     where: eq(event.id, id),
+    with: {
+      category: true,
+      organizer: true,
+      ticket_types: true,
+    },
   });
 
   return { message: "Get event by id", data: result };

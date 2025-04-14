@@ -1,20 +1,20 @@
 import Elysia from "elysia";
 import {
+  getEventByCategory,
+  getNewestEvent,
+  getRandomEvent,
+  getUpcomingEvent,
+} from "@/services/events/get";
+import {
   createEvent,
   deleteEvent,
   getAllEvent,
   getEventById,
   updateEvent,
-} from "@/services/events/event";
-import { getEventByCategory } from "@/services/events/search";
-import {
-  getNewestEvent,
-  getRandomEvent,
-  getUpcomingEvent,
-} from "@/services/events/home";
+} from "@/services/events";
 import { EventModel } from "@/models/event";
 import { QueryModel } from "@/models/query";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+import { withHandler } from "@/utils/Control";
 
 const controller = "event";
 
@@ -26,14 +26,7 @@ export const eventController = new Elysia({
   app
     .post(
       "/",
-      async ({ body, error }) => {
-        try {
-          const { message, data } = await createEvent(body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ body }) => createEvent(body)),
       {
         detail: { summary: "Create event" },
         body: EventModel,
@@ -41,14 +34,7 @@ export const eventController = new Elysia({
     )
     .get(
       "/",
-      async ({ query, error }) => {
-        try {
-          const { message, data } = await getAllEvent(query);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ query }) => getAllEvent(query)),
       {
         detail: { summary: "Get all events" },
         query: QueryModel,
@@ -56,28 +42,14 @@ export const eventController = new Elysia({
     )
     .get(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await getEventById(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => getEventById(params.id)),
       {
         detail: { summary: "Get event by id" },
       }
     )
     .put(
       "/:id",
-      async ({ params, body, error }) => {
-        try {
-          const { message, data } = await updateEvent(params.id, body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params, body }) => updateEvent(params.id, body)),
       {
         detail: { summary: "Update event" },
         body: EventModel,
@@ -85,44 +57,29 @@ export const eventController = new Elysia({
     )
     .delete(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await deleteEvent(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => deleteEvent(params.id)),
       {
         detail: { summary: "Delete event" },
       }
     )
-    .get("/category/:name", async ({ params, error }) => {
-      try {
-        const { message, data } = await getEventByCategory(params.name);
-        return SuccessHandler({ message, data });
-      } catch (err) {
-        return error(400, ErrorHandler(err));
+    .get(
+      "/category/:name",
+      withHandler(({ params }) => getEventByCategory(params.name)),
+      {
+        detail: { summary: "Get event by category" },
       }
-    })
-    .get("/random", async ({ query, error }) => {
-      try {
-        const { message, data } = await getRandomEvent(query);
-        return SuccessHandler({ message, data });
-      } catch (err) {
-        return error(400, ErrorHandler(err));
+    )
+    .get(
+      "/random",
+      withHandler(({ query }) => getRandomEvent(query)),
+      {
+        detail: { summary: "Get random event" },
+        query: QueryModel,
       }
-    })
+    )
     .get(
       "/new",
-      async ({ query, error }) => {
-        try {
-          const { message, data } = await getNewestEvent(query);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ query }) => getNewestEvent(query)),
       {
         detail: { summary: "Get new events" },
         query: QueryModel,
@@ -130,14 +87,7 @@ export const eventController = new Elysia({
     )
     .get(
       "/upcoming",
-      async ({ query, error }) => {
-        try {
-          const { message, data } = await getUpcomingEvent(query);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ query }) => getUpcomingEvent(query)),
       {
         detail: { summary: "Get upcoming events" },
         query: QueryModel,

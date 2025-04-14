@@ -1,13 +1,13 @@
 import Elysia from "elysia";
-import { CategoryModel } from "@/models/category";
 import {
   createCategory,
   deleteCategory,
   getAllCategory,
   getCategoryById,
   updateCategory,
-} from "@/services/categories/category";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+} from "@/services/categories";
+import { CategoryModel } from "@/models/category";
+import { withHandler } from "@/utils/Control";
 
 const controller = "category";
 
@@ -19,14 +19,7 @@ export const categoryController = new Elysia({
   app
     .post(
       "/",
-      async ({ body, error }) => {
-        try {
-          const { message, data } = await createCategory(body.name);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ body }) => createCategory(body.name)),
       {
         detail: {
           summary: "Create category",
@@ -36,42 +29,21 @@ export const categoryController = new Elysia({
     )
     .get(
       "/",
-      async ({ error }) => {
-        try {
-          const { message, data } = await getAllCategory();
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(() => getAllCategory()),
       {
         detail: { summary: "Get all categories" },
       }
     )
     .get(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await getCategoryById(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => getCategoryById(params.id)),
       {
         detail: { summary: "Get category by id" },
       }
     )
     .put(
       "/:id",
-      async ({ params, body, error }) => {
-        try {
-          const { message, data } = await updateCategory(params.id, body.name);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params, body }) => updateCategory(params.id, body.name)),
       {
         detail: { summary: "Update category" },
         body: CategoryModel,
@@ -79,14 +51,7 @@ export const categoryController = new Elysia({
     )
     .delete(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await deleteCategory(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => deleteCategory(params.id)),
       {
         detail: { summary: "Delete category" },
       }

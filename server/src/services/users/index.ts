@@ -1,8 +1,8 @@
 import db from "@/db";
+import { eq } from "drizzle-orm";
 import { user } from "@/db/schema";
 import { QueryType } from "@/models/query";
 import { UserType } from "@/models/user";
-import { eq } from "drizzle-orm";
 
 export const getAllUser = async ({ limit, offset }: QueryType) => {
   const result = await db.query.user.findMany({

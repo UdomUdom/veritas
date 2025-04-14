@@ -1,6 +1,6 @@
 import db from "@/db";
-import { role } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { role } from "@/db/schema";
 
 export const createRole = async (name: string) => {
   const [result] = await db.insert(role).values({ name }).returning();

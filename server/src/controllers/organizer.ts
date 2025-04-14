@@ -1,13 +1,13 @@
 import Elysia from "elysia";
-import { OrganizerModel } from "@/models/organizer";
 import {
   createOrganizer,
   deleteOrganizer,
   getAllOrganizer,
   getOrganizerById,
   updateOrganizer,
-} from "@/services/organizers/organizer";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+} from "@/services/organizers";
+import { OrganizerModel } from "@/models/organizer";
+import { withHandler } from "@/utils/Control";
 
 const controller = "organizer";
 
@@ -19,14 +19,7 @@ export const organizerController = new Elysia({
   app
     .post(
       "/",
-      async ({ body, error }) => {
-        try {
-          const { message, data } = await createOrganizer(body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ body }) => createOrganizer(body)),
       {
         detail: { summary: "Create organizer" },
         body: OrganizerModel,
@@ -34,42 +27,21 @@ export const organizerController = new Elysia({
     )
     .get(
       "/",
-      async ({ error }) => {
-        try {
-          const { message, data } = await getAllOrganizer();
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(() => getAllOrganizer()),
       {
         detail: { summary: "Get all organizers" },
       }
     )
     .get(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await getOrganizerById(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => getOrganizerById(params.id)),
       {
         detail: { summary: "Get organizer by id" },
       }
     )
     .put(
       "/:id",
-      async ({ params, body, error }) => {
-        try {
-          const { message, data } = await updateOrganizer(params.id, body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params, body }) => updateOrganizer(params.id, body)),
       {
         detail: { summary: "Update organizer" },
         body: OrganizerModel,
@@ -77,14 +49,7 @@ export const organizerController = new Elysia({
     )
     .delete(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await deleteOrganizer(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => deleteOrganizer(params.id)),
       {
         detail: { summary: "Delete organizer" },
       }

@@ -1,13 +1,13 @@
 import Elysia from "elysia";
-import { RoleModel } from "@/models/role";
 import {
   createRole,
   deleteRole,
   getAllRole,
   getRoleById,
   updateRole,
-} from "@/services/roles/role";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+} from "@/services/roles";
+import { RoleModel } from "@/models/role";
+import { withHandler } from "@/utils/Control";
 
 const controller = "role";
 
@@ -19,14 +19,7 @@ export const roleController = new Elysia({
   app
     .post(
       "/",
-      async ({ body, error }) => {
-        try {
-          const { message, data } = await createRole(body.name);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ body }) => createRole(body.name)),
       {
         detail: { summary: "Create role" },
         body: RoleModel,
@@ -34,42 +27,21 @@ export const roleController = new Elysia({
     )
     .get(
       "/",
-      async ({ error }) => {
-        try {
-          const { message, data } = await getAllRole();
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(() => getAllRole()),
       {
         detail: { summary: "Get all roles" },
       }
     )
     .get(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await getRoleById(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => getRoleById(params.id)),
       {
         detail: { summary: "Get role by id" },
       }
     )
     .put(
       "/:id",
-      async ({ params, body, error }) => {
-        try {
-          const { message, data } = await updateRole(params.id, body.name);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params, body }) => updateRole(params.id, body.name)),
       {
         detail: { summary: "Update role" },
         body: RoleModel,
@@ -77,14 +49,7 @@ export const roleController = new Elysia({
     )
     .delete(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await deleteRole(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => deleteRole(params.id)),
       {
         detail: { summary: "Delete role" },
       }

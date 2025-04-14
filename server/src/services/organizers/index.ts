@@ -1,16 +1,10 @@
 import db from "@/db";
+import { eq } from "drizzle-orm";
 import { organizer } from "@/db/schema";
 import { OrganizerType } from "@/models/organizer";
-import { eq } from "drizzle-orm";
 
 export const createOrganizer = async (body: OrganizerType) => {
-  const [result] = await db
-    .insert(organizer)
-    .values({
-      name: body.name!,
-      ...body,
-    })
-    .returning();
+  const [result] = await db.insert(organizer).values(body).returning();
 
   if (!result) throw new Error("Failed to create organizer");
 

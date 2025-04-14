@@ -1,14 +1,14 @@
 import Elysia from "elysia";
-import { BlogModel } from "@/models/blog";
-import { QueryModel } from "@/models/query";
 import {
   createBlog,
   deleteBlog,
   getAllBlog,
   getBlogById,
   updateBlog,
-} from "@/services/blogs/blog";
-import { ErrorHandler, SuccessHandler } from "@/utils/Handler";
+} from "@/services/blogs";
+import { BlogModel } from "@/models/blog";
+import { QueryModel } from "@/models/query";
+import { withHandler } from "@/utils/Control";
 
 const controller = "blog";
 
@@ -20,28 +20,14 @@ export const blogController = new Elysia({
   app
     .post(
       "/",
-      async ({ body, error }) => {
-        try {
-          const { message, data } = await createBlog(body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ body }) => createBlog(body)),
       {
         body: BlogModel,
       }
     )
     .get(
       "/",
-      async ({ query, error }) => {
-        try {
-          const { message, data } = await getAllBlog(query);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ query }) => getAllBlog(query)),
       {
         detail: { summary: "Get all blogs" },
         query: QueryModel,
@@ -49,28 +35,14 @@ export const blogController = new Elysia({
     )
     .get(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await getBlogById(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => getBlogById(params.id)),
       {
         detail: { summary: "Get blog by id" },
       }
     )
     .put(
       "/:id",
-      async ({ params, body, error }) => {
-        try {
-          const { message, data } = await updateBlog(params.id, body);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params, body }) => updateBlog(params.id, body)),
       {
         detail: { summary: "Update blog" },
         body: BlogModel,
@@ -78,14 +50,7 @@ export const blogController = new Elysia({
     )
     .delete(
       "/:id",
-      async ({ params, error }) => {
-        try {
-          const { message, data } = await deleteBlog(params.id);
-          return SuccessHandler({ message, data });
-        } catch (err) {
-          return error(400, ErrorHandler(err));
-        }
-      },
+      withHandler(({ params }) => deleteBlog(params.id)),
       {
         detail: { summary: "Delete blog" },
       }

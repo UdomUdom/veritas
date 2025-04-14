@@ -1,10 +1,14 @@
 import db from "@/db";
-import { blog } from "@/db/schema";
-import { BlogType } from "@/models/blog";
-import { QueryType } from "@/models/query";
 import { eq } from "drizzle-orm";
+import { blog } from "@/db/schema";
+import { QueryType } from "@/models/query";
+import { BlogType } from "@/models/blog";
 
 export const createBlog = async (body: BlogType) => {
+  const [result] = await db.insert(blog).values(body).returning();
+
+  if (!result) throw new Error("Failed to create blog");
+
   return { message: "Create blog", data: null };
 };
 
