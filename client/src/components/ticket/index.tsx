@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import Fetch from "@/utils/Fetch";
 
 interface TicketType {
+  event_id: string;
   type: "regular" | "vip";
   price: number;
   quantity: number | 10;
