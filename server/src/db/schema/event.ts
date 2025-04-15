@@ -9,7 +9,7 @@ import {
 import { relations } from "drizzle-orm";
 import { category, organizer, ticket_types } from ".";
 
-export const eStatus = pgEnum("status", [
+export const event_status = pgEnum("event_status", [
   "draft",
   "scheduled",
   "published",
@@ -25,7 +25,7 @@ export const event = pgTable("event", {
   location: text("location"),
   start_date: date("start_date").notNull(),
   end_date: date("end_date"),
-  status: eStatus().default("draft").notNull(),
+  status: event_status().notNull(),
   info: text("info"),
   scheduled_publish_at: timestamp("scheduled_publish_at"),
   category_id: uuid("category_id").references(() => category.id),

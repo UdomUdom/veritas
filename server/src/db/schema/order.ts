@@ -2,7 +2,7 @@ import { pgEnum, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 import { tickets, user } from ".";
 import { relations } from "drizzle-orm";
 
-export const eStatus = pgEnum("status", [
+export const order_status = pgEnum("order_status", [
   "pending",
   "paid",
   "cancelled",
@@ -15,7 +15,7 @@ export const order = pgTable("order", {
   user_id: uuid("user_id")
     .references(() => user.id)
     .notNull(),
-  status: eStatus().notNull(),
+  status: order_status().notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()
