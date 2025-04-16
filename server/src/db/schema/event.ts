@@ -7,7 +7,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { category, organizer, ticket_types } from ".";
+import { category, event_ticket, order, organizer, tickets } from ".";
 
 export const event_status = pgEnum("event_status", [
   "draft",
@@ -46,5 +46,7 @@ export const event_relations = relations(event, ({ one, many }) => ({
     fields: [event.organizer_id],
     references: [organizer.id],
   }),
-  ticket_types: many(ticket_types),
+  order: many(order),
+  event_ticket: many(event_ticket),
+  tickets: many(tickets),
 }));

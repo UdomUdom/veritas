@@ -2,26 +2,32 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Fetch from "@/utils/Fetch";
+import { useAuth } from "@/context/AuthContext";
+
+interface TicketProps {
+  event_id: string;
+}
 
 interface TicketType {
-  event_id: string;
-  type: "regular" | "vip";
+  id: string;
+  type: string;
   price: number;
-  quantity: number | 10;
+  available: number;
   sale_start: string;
   sale_end: string;
 }
 
 interface CartType {
-  type: "regular" | "vip";
+  id: string;
+  type: string;
   price: number;
   quantity: number;
   items: TicketType[];
   total: number;
 }
 
-const prepareFetch = async () => {
-  const API = `${process.env.NEXT_PUBLIC_API_URL}` || "";
+const prepareFetch = async (id: string) => {
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/event/ticket/${id}` || "";
 
   const res = await Fetch(API!);
 
@@ -32,7 +38,8 @@ const prepareFetch = async () => {
   return { data: TicketMock };
 };
 
-export default function Ticket() {
+export default function Ticket({ event_id }: TicketProps) {
+  const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [tickets, setTickets] = useState<TicketType[]>([]);
   const [cart, setCart] = useState<CartType[]>([]);
@@ -55,6 +62,7 @@ export default function Ticket() {
       setCart([
         ...cart,
         {
+          id: ticket?.id,
           type: ticket?.type,
           price: ticket?.price,
           quantity: 1,
@@ -94,6 +102,7 @@ export default function Ticket() {
     } else {
       setCart([
         {
+          id: ticket?.id,
           type: ticket?.type,
           price: ticket?.price,
           quantity: parseInt(e.target.value),
@@ -104,28 +113,34 @@ export default function Ticket() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await prepareFetch();
+      const { data } = await prepareFetch(event_id);
       setTickets(data);
       setLoading(false);
     };
 
     fetchData();
-  }, []);
+  }, [event_id]);
 
-  const handlePlaceOrder = () => {
-    // const orderData = {
-    //   items: cart.map((item: CartType) => ({
-    //     type: item.type,
-    //     quantity: item.quantity,
-    //     pricePerItem: item.price,
-    //     subtotal: item.price * item.quantity,
-    //   })),
-    //   total: calculateTotal(),
-    //   orderDate: new Date().toISOString(),
-    // };
+  const handlePlaceOrder = async () => {
+    const order_items = cart.map((item) => ({
+      event_ticket_id: item.id,
+      quantity: item.quantity,
+    }));
 
-    console.log("Order Items:", cart);
-    console.log("Order Total:", calculateTotal());
+    const res = await Fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/order/placeorder`,
+      {
+        method: "POST",
+        body: {
+          user_id: user?.id,
+          event_id,
+          total: calculateTotal(),
+          items: order_items,
+        },
+      }
+    );
+
+    console.log("Response:", res);
   };
 
   if (loading) return null;
@@ -159,17 +174,17 @@ export default function Ticket() {
                       }
                       onChange={(e) => handleSelectChange(e, ticket.type)}
                     >
-                      {[...Array(Math.min(ticket.quantity, 10) + 1).keys()].map(
-                        (_, index) => (
-                          <option
-                            key={index}
-                            value={index}
-                            className="text-center"
-                          >
-                            {index}
-                          </option>
-                        )
-                      )}
+                      {[
+                        ...Array(Math.min(ticket.available, 10) + 1).keys(),
+                      ].map((_, index) => (
+                        <option
+                          key={index}
+                          value={index}
+                          className="text-center"
+                        >
+                          {index}
+                        </option>
+                      ))}
                     </select>
                     <Button
                       className="text-xl font-bold cursor-pointer"
@@ -198,8 +213,12 @@ export default function Ticket() {
                 <p>Total</p>
                 <p className="text-2xl">&#3647; {calculateTotal()}</p>
               </div>
-              <Button className="cursor-pointer" onClick={handlePlaceOrder}>
-                Get Tickets
+              <Button
+                className="cursor-pointer"
+                onClick={handlePlaceOrder}
+                disabled={cart.length === 0 || event_id === ""}
+              >
+                Place Order
               </Button>
             </div>
           </div>
@@ -211,16 +230,18 @@ export default function Ticket() {
 
 const TicketMock = [
   {
+    id: "1",
     type: "regular",
     price: 100,
-    quantity: 500,
+    available: 500,
     sale_start: "2025-04-01",
     sale_end: "2025-04-20",
   },
   {
+    id: "2",
     type: "vip",
     price: 250,
-    quantity: 100,
+    available: 100,
     sale_start: "2025-04-01",
     sale_end: "2025-04-20",
   },

@@ -1,24 +1,22 @@
 import {
   date,
-  decimal,
+  doublePrecision,
   integer,
-  pgEnum,
   pgTable,
+  text,
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { event, tickets } from ".";
+import { event, order_item } from ".";
 
-export const eType = pgEnum("type", ["regular", "vip"]);
-
-export const ticket_types = pgTable("ticket_types", {
+export const event_ticket = pgTable("event_ticket", {
   id: uuid("id").primaryKey().defaultRandom(),
   event_id: uuid("event_id")
     .references(() => event.id)
     .notNull(),
-  type: eType().notNull(),
-  price: decimal("price").notNull(),
+  type: text().notNull(),
+  price: doublePrecision("price").notNull(),
   available: integer("available").notNull(),
   sale_start: date("sale_start_date").notNull(),
   sale_end: date("sale_end_date"),
@@ -29,13 +27,13 @@ export const ticket_types = pgTable("ticket_types", {
     .$onUpdate(() => new Date()),
 });
 
-export const ticket_types_relations = relations(
-  ticket_types,
+export const event_ticket_relations = relations(
+  event_ticket,
   ({ one, many }) => ({
     event: one(event, {
-      fields: [ticket_types.event_id],
+      fields: [event_ticket.event_id],
       references: [event.id],
     }),
-    tickets: many(tickets),
+    order_item: many(order_item),
   })
 );

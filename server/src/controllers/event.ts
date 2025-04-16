@@ -15,6 +15,7 @@ import {
 import { EventModel } from "@/models/event";
 import { QueryModel } from "@/models/query";
 import { withHandler } from "@/utils/Control";
+import { getTicketByEvent } from "@/services/events/ticket";
 
 const controller = "event";
 
@@ -91,6 +92,13 @@ export const eventController = new Elysia({
       {
         detail: { summary: "Get upcoming events" },
         query: QueryModel,
+      }
+    )
+    .get(
+      "/ticket/:id",
+      withHandler(({ params }) => getTicketByEvent(params.id)),
+      {
+        detail: { summary: "Get ticket by event" },
       }
     )
 );

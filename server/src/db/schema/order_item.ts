@@ -1,13 +1,13 @@
 import { integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
-import { order, ticket_types } from ".";
+import { event_ticket, order, tickets } from ".";
 import { relations } from "drizzle-orm";
 
-export const tickets = pgTable("tickets", {
+export const order_item = pgTable("order_item", {
   id: uuid("id").primaryKey().defaultRandom(),
   order_id: uuid("order_id")
     .references(() => order.id)
     .notNull(),
-  ticket_type_id: uuid("ticket_type_id").references(() => ticket_types.id),
+  event_ticket_id: uuid("ticket_type_id").references(() => event_ticket.id),
   quantity: integer("quantity").notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
@@ -16,13 +16,14 @@ export const tickets = pgTable("tickets", {
     .$onUpdate(() => new Date()),
 });
 
-export const tickets_relations = relations(tickets, ({ one }) => ({
+export const order_item_relations = relations(order_item, ({ one, many }) => ({
   order: one(order, {
-    fields: [tickets.order_id],
+    fields: [order_item.order_id],
     references: [order.id],
   }),
-  ticket_types: one(ticket_types, {
-    fields: [tickets.ticket_type_id],
-    references: [ticket_types.id],
+  event_ticket: one(event_ticket, {
+    fields: [order_item.event_ticket_id],
+    references: [event_ticket.id],
   }),
+  tickets: many(tickets),
 }));
