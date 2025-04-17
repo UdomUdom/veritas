@@ -1,11 +1,11 @@
 import { pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
-import { event, order_item } from ".";
+import { order, order_item } from ".";
 import { relations } from "drizzle-orm";
 
 export const tickets = pgTable("tickets", {
   id: uuid("id").primaryKey().defaultRandom(),
-  event_id: uuid("event_id")
-    .references(() => event.id)
+  order_id: uuid("order_id")
+    .references(() => order.id)
     .notNull(),
   order_item_id: uuid("order_item_id")
     .references(() => order_item.id)
@@ -18,9 +18,9 @@ export const tickets = pgTable("tickets", {
 });
 
 export const tickets_relations = relations(tickets, ({ one }) => ({
-  event: one(event, {
-    fields: [tickets.event_id],
-    references: [event.id],
+  order: one(order, {
+    fields: [tickets.order_id],
+    references: [order.id],
   }),
   order_item: one(order_item, {
     fields: [tickets.order_item_id],

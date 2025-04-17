@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Fetch from "@/utils/Fetch";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 interface TicketProps {
   event_id: string;
@@ -40,6 +41,7 @@ const prepareFetch = async (id: string) => {
 
 export default function Ticket({ event_id }: TicketProps) {
   const { user } = useAuth();
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [tickets, setTickets] = useState<TicketType[]>([]);
   const [cart, setCart] = useState<CartType[]>([]);
@@ -139,6 +141,12 @@ export default function Ticket({ event_id }: TicketProps) {
         },
       }
     );
+
+    if (res.status !== "ok") {
+      return alert("Error: " + res.message);
+    }
+
+    router.push(`/order/${res.data.id}/checkout`);
   };
 
   if (loading) return null;

@@ -25,6 +25,10 @@ export default async function OrderCompletePage({
   const { id } = await params;
   const { data }: { data: OrderType } = await prepareFetch(id);
 
+  if (data.status === "paid") {
+    redirect(`/order/${id}`);
+  }
+
   return (
     <div>
       <OrderProgress progress={100} />

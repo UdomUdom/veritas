@@ -34,4 +34,9 @@ interface OrderType {
       sale_end: string;
     };
   }>;
+  tickets: Array<{
+    id: string;
+    order_id: string;
+    order_item_id: string;
+  }>;
 }

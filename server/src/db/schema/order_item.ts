@@ -7,7 +7,9 @@ export const order_item = pgTable("order_item", {
   order_id: uuid("order_id")
     .references(() => order.id)
     .notNull(),
-  event_ticket_id: uuid("ticket_type_id").references(() => event_ticket.id),
+  event_ticket_id: uuid("ticket_type_id")
+    .references(() => event_ticket.id)
+    .notNull(),
   quantity: integer("quantity").notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")

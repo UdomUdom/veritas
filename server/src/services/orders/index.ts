@@ -18,6 +18,7 @@ export const getOrderById = async (id: string) => {
           event_ticket: true,
         },
       },
+      tickets: true,
     },
   });
 

@@ -1,5 +1,5 @@
 import db from "@/db";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { event } from "@/db/schema";
 import { QueryType } from "@/models/query";
 import { EventType } from "@/models/event";
@@ -23,6 +23,7 @@ export const getAllEvent = async ({ limit, offset }: QueryType = {}) => {
     with: {
       category: true,
     },
+    orderBy: [desc(event.created_at)],
     limit,
     offset,
   });

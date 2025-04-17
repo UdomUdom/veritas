@@ -12,10 +12,12 @@ import Fetch from "@/utils/Fetch";
 import Link from "next/link";
 
 interface CategoryType {
+  id: string;
   name: string;
 }
 
 interface EventType {
+  id: string;
   title: string;
 }
 
@@ -103,7 +105,7 @@ export default function Search() {
               {events.map((event, index) => (
                 <Link
                   key={index}
-                  href={`/e/${event.title}`}
+                  href={`/e/${event.id}`}
                   className="flex items-center gap-2"
                 >
                   <CommandItem

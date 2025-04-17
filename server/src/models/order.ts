@@ -13,3 +13,9 @@ export const PlaceOrderModel = t.Object({
 });
 
 export type PlaceOrderType = typeof PlaceOrderModel.static;
+
+export const CheckoutModel = t.Object({
+  source: t.String(),
+});
+
+export type CheckoutType = typeof CheckoutModel.static;

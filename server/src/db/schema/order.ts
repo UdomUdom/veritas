@@ -5,7 +5,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { event, order_item, user } from ".";
+import { event, order_item, tickets, user } from ".";
 import { relations } from "drizzle-orm";
 
 export const order_status = pgEnum("order_status", [
@@ -44,4 +44,5 @@ export const order_relations = relations(order, ({ one, many }) => ({
     references: [event.id],
   }),
   order_item: many(order_item),
+  tickets: many(tickets),
 }));
