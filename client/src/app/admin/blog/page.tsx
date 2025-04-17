@@ -1,6 +1,8 @@
 import Fetch from "@/utils/Fetch";
 import { columns } from "./columns";
 import Table from "@/components/table";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const prepareFetch = async () => {
   const API = `${process.env.NEXT_PUBLIC_API_URL}/api/blog` || "";
@@ -22,5 +24,13 @@ export default async function Blog() {
     filters: [],
   };
 
-  return <Table data={data} columns={columns} option={options}></Table>;
+  return (
+    <Table data={data} columns={columns} option={options}>
+      <div className="flex w-full items-center justify-end">
+        <Link href="/admin/blog/create">
+          <Button className="cursor-pointer">New Blog</Button>
+        </Link>
+      </div>
+    </Table>
+  );
 }
