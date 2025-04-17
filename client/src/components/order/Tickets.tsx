@@ -139,8 +139,6 @@ export default function Ticket({ event_id }: TicketProps) {
         },
       }
     );
-
-    console.log("Response:", res);
   };
 
   if (loading) return null;
@@ -156,7 +154,12 @@ export default function Ticket({ event_id }: TicketProps) {
                 key={index}
                 className="font-semibold p-4 bg-white flex justify-between items-center h-fit"
               >
-                <h2 className="text-xl">{ticket.type}</h2>
+                <h2 className="text-xl flex">
+                  <span className="hidden sm:inline">{ticket.type}</span>
+                  <span className="sm:hidden">
+                    {String(ticket.type || "").slice(0, 3)}
+                  </span>
+                </h2>
                 <div className="flex items-center gap-4">
                   <h2 className="text-xl">&#3647; {ticket.price.toFixed(2)}</h2>
                   <div className="text-lg ">

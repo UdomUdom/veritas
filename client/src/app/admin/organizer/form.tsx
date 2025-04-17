@@ -13,9 +13,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
+import Fetch from "@/utils/Fetch";
 
 interface OrganizerFormProps {
   core?: {
+    id: string;
     name: string;
     image: string;
     email: string;
@@ -50,7 +52,27 @@ export function OrganizerForm({ core }: OrganizerFormProps) {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const API =
+      `${process.env.NEXT_PUBLIC_API_URL}/api/organizer/${
+        core?.id ? core!.id : ""
+      }` || "";
+
+    const res = await Fetch(API!, {
+      method: core?.id ? "PUT" : "POST",
+      body: {
+        name: values.name,
+        image: values.image,
+        email: values.email,
+        phone: values.phone,
+        website: values.website,
+      },
+    });
+
+    if (res && res.status !== "ok") {
+      return alert("Error: " + res.message);
+    }
+
+    window.location.reload();
   };
 
   return (
@@ -81,7 +103,9 @@ export function OrganizerForm({ core }: OrganizerFormProps) {
           ))}
         </div>
         <div className="flex items-center justify-end space-x-2 pt-6">
-          <Button type="submit">Save changes</Button>
+          <Button type="submit" className="cursor-pointer">
+            Save changes
+          </Button>
         </div>
       </form>
     </Form>
