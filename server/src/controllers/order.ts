@@ -2,7 +2,11 @@ import Elysia from "elysia";
 import { placeOrder } from "@/services/orders/placeorder";
 import { PlaceOrderModel } from "@/models/order";
 import { withHandler } from "@/utils/Control";
-import { checkoutCancel, checkoutConfirm } from "@/services/orders/checkout";
+import {
+  checkoutCancel,
+  checkoutConfirm,
+  paymentOrder,
+} from "@/services/orders/checkout";
 import { getAllOrder, getOrderById } from "@/services/orders";
 
 const controller = "order";
@@ -22,7 +26,7 @@ export const orderController = new Elysia({
       }
     )
     .post(
-      "/checkout/:id",
+      "/:id/checkout",
       withHandler(async ({ params, query }) => {
         switch (query.method) {
           case "confirm":
@@ -33,6 +37,13 @@ export const orderController = new Elysia({
       }),
       {
         detail: { summary: "Checkout Order" },
+      }
+    )
+    .post(
+      "/:id/pay",
+      withHandler(({ params, query }) => paymentOrder(params.id)),
+      {
+        detail: { summary: "Payment Order" },
       }
     )
     .get(

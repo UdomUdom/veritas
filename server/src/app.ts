@@ -1,9 +1,9 @@
-import { CONFIG } from "./config";
-import { logger } from "./utils/Logger";
+// import { logger } from "./utils/Logger";
 import { Elysia } from "elysia";
 import swagger from "@elysiajs/swagger";
 import cors from "@elysiajs/cors";
 import routes from "./routes";
+import type { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
 const app = new Elysia()
   .use(
@@ -30,7 +30,36 @@ const app = new Elysia()
       description: "A simple `Hello Veritas!` endpoint",
     },
   })
-  .use(routes)
-  .listen({ port: CONFIG.PORT });
+  .use(routes);
 
-logger.info(`Server running at ${app.server?.url}`);
+if (process.env.NODE_ENV === "development") {
+  app.listen({ port: process.env.PORT || 3032 });
+}
+
+export const handler = async (
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> => {
+  const method = event.httpMethod;
+  const path = event.path;
+  const headers = event.headers;
+  const body = event.body ? JSON.stringify(event.body) : undefined;
+
+  const response = await app.handle(
+    new Request(`http://localhost${path}`, {
+      method,
+      headers: new Headers(headers as HeadersInit),
+      body,
+    })
+  );
+
+  return {
+    statusCode: response.status,
+    headers: {
+      "Content-Type":
+        response.headers.get("Content-Type") || "application/json",
+    },
+    body: await response.text(),
+  };
+};
+
+// logger.info(`Server running at ${app.server?.url}`);

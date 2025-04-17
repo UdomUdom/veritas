@@ -12,7 +12,6 @@ export const getOrderById = async (id: string) => {
   const result = await db.query.order.findFirst({
     where: eq(order.id, id),
     with: {
-      user: true,
       event: true,
       order_item: {
         with: {
@@ -22,5 +21,5 @@ export const getOrderById = async (id: string) => {
     },
   });
 
-  return { message: `Get role by id`, data: result };
+  return { message: `Get order by id`, data: result };
 };

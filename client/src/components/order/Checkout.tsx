@@ -12,7 +12,7 @@ export default function Checkout({ id }: { id: string }) {
     const omise_res = (await createSource(1)) as { id: string };
 
     const res = await Fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/order/checkout/${id}?method=confirm`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/order/${id}/checkout?method=confirm`,
       {
         method: "POST",
         body: {
@@ -31,7 +31,7 @@ export default function Checkout({ id }: { id: string }) {
 
   const cancelOrder = async () => {
     const res = await Fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/order/checkout/${id}?method=cancel`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/order/${id}/checkout?method=cancel`,
       {
         method: "POST",
       }

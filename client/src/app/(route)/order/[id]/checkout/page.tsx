@@ -10,9 +10,9 @@ const prepareFetch = async (id: string) => {
   const res = await Fetch(API!);
 
   if (res.data.status === "waiting") {
-    redirect(`/test/order/${id}/pay`);
+    redirect(`/order/${id}/pay`);
   } else if (res.data.status === "paid") {
-    redirect(`/test/order/${id}/complete`);
+    redirect(`/order/${id}/complete`);
   }
 
   if (res && res.status === "ok") {

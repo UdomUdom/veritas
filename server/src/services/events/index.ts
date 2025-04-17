@@ -5,7 +5,13 @@ import { QueryType } from "@/models/query";
 import { EventType } from "@/models/event";
 
 export const createEvent = async (body: EventType) => {
-  const [result] = await db.insert(event).values(body).returning();
+  const [result] = await db
+    .insert(event)
+    .values({
+      ...body,
+      status: body.status || "draft",
+    })
+    .returning();
 
   if (!result) throw new Error("Failed to create event");
 
@@ -30,7 +36,7 @@ export const getEventById = async (id: string) => {
     with: {
       category: true,
       organizer: true,
-      ticket_types: true,
+      event_ticket: true,
     },
   });
 

@@ -25,3 +25,7 @@ export const checkoutCancel = async (id: string) => {
 
   return { message: "Checkout Cancelled", data: null };
 };
+
+export const paymentOrder = async (id: string) => {
+  return { message: "Payment Confirmed", data: null };
+};

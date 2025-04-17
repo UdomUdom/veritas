@@ -1,5 +1,5 @@
+import Pay from "@/components/order/Pay";
 import OrderProgress from "@/components/progress/OrderProgress";
-import { Button } from "@/components/ui/button";
 import Fetch from "@/utils/Fetch";
 import { redirect } from "next/navigation";
 
@@ -36,7 +36,7 @@ export default async function PayPage({
             <h2>Amount</h2>
             <h2>&#3647;{data.total.toFixed(2)}</h2>
           </div>
-          <Button className="cursor-pointer">Pay</Button>
+          <Pay id={data.id} amount={data.total} />
         </div>
       </div>
     </div>

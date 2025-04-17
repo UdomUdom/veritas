@@ -4,17 +4,6 @@ interface OrderType {
   event_id: string;
   total: number;
   status: string;
-  user: {
-    id: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    phone: string;
-    gender: string;
-    birthdate: string;
-    avatar: string;
-    role_id: string;
-  };
   event: {
     id: string;
     title: string;

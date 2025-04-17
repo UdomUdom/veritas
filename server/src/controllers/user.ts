@@ -8,6 +8,7 @@ import {
 } from "@/services/users";
 import { UserModel } from "@/models/user";
 import { withHandler } from "@/utils/Control";
+import { getOrderByUserId } from "@/services/users/order";
 
 const controller = "user";
 
@@ -52,6 +53,13 @@ export const userController = new Elysia({
       withHandler(({ params }) => deleteUser(params.id)),
       {
         detail: { summary: "Delete user" },
+      }
+    )
+    .get(
+      "/order/:id",
+      withHandler(({ params }) => getOrderByUserId(params.id)),
+      {
+        detail: { summary: "Get order by user id" },
       }
     )
 );
