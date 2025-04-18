@@ -7,7 +7,6 @@ import { eventController } from "@/controllers/event";
 import { eventTicketController } from "@/controllers/event_ticket";
 import { blogController } from "@/controllers/blog";
 import { orderController } from "@/controllers/order";
-import { ticketController } from "@/controllers/ticket";
 import { webhookController } from "@/controllers/webhook";
 
 export default new Elysia({ prefix: "api" })
@@ -19,5 +18,4 @@ export default new Elysia({ prefix: "api" })
   .use(eventTicketController)
   .use(blogController)
   .use(orderController)
-  .use(ticketController)
   .use(webhookController);
