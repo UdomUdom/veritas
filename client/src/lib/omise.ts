@@ -1,21 +1,21 @@
-import omise from "omise";
+import Omise from "omise";
 
-const o = omise({
+export const omise = Omise({
   publicKey: process.env.NEXT_PUBLIC_OMISE_PUBLIC_KEY,
   omiseVersion: "2019-05-29",
 });
 
 export const createSource = async (amount: number) => {
   return new Promise((resolve, reject) => {
-    return o.sources.create(
+    return omise.sources.create(
       {
-        type: "promptpay",
+        type: "rabbit_linepay",
         amount: amount * 100,
         currency: "THB",
       },
-      (_, res) => {
-        if (!res) {
-          reject(new Error("Failed to create source"));
+      (err, res) => {
+        if (err) {
+          reject(new Error(`Failed to create source > ${err.message}`));
         }
         resolve(res);
       }

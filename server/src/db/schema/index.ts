@@ -1,8 +1,10 @@
-export { role, roleRelations } from "./role";
-export { user, userRelations } from "./user";
-export { category, categoryRelations } from "./category";
-export { event, eventRelations } from "./event";
-export { organizer, organizerRelations } from "./organizer";
-export { event_category, event_category_relations } from "./event_category";
-export { ticket, ticketRelations } from "./ticket";
-export { blog } from "./blog";
+export { role, role_relations } from "./role";
+export { user, user_relations } from "./user";
+export { category, category_relations } from "./category";
+export { event, event_relations } from "./event";
+export { event_ticket, event_ticket_relations } from "./event_ticket";
+export { organizer, organizer_relations } from "./organizer";
+export { order, order_relations } from "./order";
+export { order_item, order_item_relations } from "./order_item";
+export { tickets, tickets_relations } from "./tickets";
+export { blog, blogRelations } from "./blog";

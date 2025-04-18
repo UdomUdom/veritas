@@ -42,18 +42,23 @@ const mocking_event = async () => {
       const [data] = await tx
         .insert(event)
         .values(
-          mock_event.map((item, index) => {
-            return {
-              ...item,
-              status:
-                index % 2 === 0
-                  ? ("scheduled" as "scheduled")
-                  : ("published" as "published"),
-              organizer_id: org?.id,
-              category_id: cat?.id,
-              scheduled_publish_at: new Date(item.scheduled_publish_at),
-            };
-          })
+          mock_event.map((item) => ({
+            title: item.title,
+            description: item.description,
+            image: item.image,
+            banner: item.banner,
+            location: item.location,
+            start_date: item.start_date,
+            end_date: item.end_date,
+            sale_start: item.sale_start,
+            sale_end: item.sale_end,
+            status: ["draft", "scheduled", "published", "archived"][
+              Math.floor(Math.random() * 4)
+            ] as "draft" | "scheduled" | "published" | "archived",
+            info: item.info,
+            category_id: cat?.id,
+            organizer_id: org?.id,
+          }))
         )
         .returning();
 

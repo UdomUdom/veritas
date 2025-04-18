@@ -7,6 +7,6 @@ export const role = pgTable("role", {
   name: text("name").notNull().unique(),
 });
 
-export const roleRelations = relations(role, ({ many }) => ({
+export const role_relations = relations(role, ({ many }) => ({
   user: many(user),
 }));

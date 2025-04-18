@@ -36,7 +36,7 @@ export default async function Organizer() {
       <div className="flex w-full items-center justify-end">
         <Dialog>
           <DialogTrigger asChild>
-            <Button>New Organizer</Button>
+            <Button className="cursor-pointer">New Organizer</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>

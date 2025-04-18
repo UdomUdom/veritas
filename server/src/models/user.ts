@@ -4,7 +4,7 @@ export const UserModel = t.Object({
   firstname: t.String(),
   lastname: t.String(),
   email: t.String(),
-  password: t.String(),
+  password: t.Optional(t.String()),
   phone: t.Optional(t.String()),
   gender: t.Optional(t.String()),
   birthdate: t.Optional(t.String()),

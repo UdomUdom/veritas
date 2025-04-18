@@ -119,7 +119,7 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       const data = row.original;
       return (
-        <Link href="">
+        <Link href={`/admin/event/edit/${data.id}`}>
           <LucideEdit className="h-4 w-4" />
         </Link>
       );

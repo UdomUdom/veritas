@@ -4,7 +4,7 @@ import { event } from ".";
 
 export const organizer = pgTable("organizer", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: text("name").notNull(),
+  name: text("name").notNull().unique(),
   image: text("image"),
   email: text("email"),
   phone: text("phone"),
@@ -17,6 +17,6 @@ export const organizer = pgTable("organizer", {
   deleted_at: timestamp("deleted_at"),
 });
 
-export const organizerRelations = relations(organizer, ({ many }) => ({
+export const organizer_relations = relations(organizer, ({ many }) => ({
   event: many(event),
 }));

@@ -8,7 +8,7 @@ export const signup = async (body: UserType) => {
   const result = await db.transaction(async (tx) => {
     const data = await handleSignup({
       email: body.email,
-      password: body.password,
+      password: body.password!,
     });
 
     const role_user = await tx.query.role.findFirst({
