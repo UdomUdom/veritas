@@ -50,6 +50,8 @@ const mocking_event = async () => {
             location: item.location,
             start_date: item.start_date,
             end_date: item.end_date,
+            sale_start: item.sale_start,
+            sale_end: item.sale_end,
             status: ["draft", "scheduled", "published", "archived"][
               Math.floor(Math.random() * 4)
             ] as "draft" | "scheduled" | "published" | "archived",

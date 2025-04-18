@@ -15,5 +15,7 @@ export const getOrderByUserId = async (id: string) => {
     },
   });
 
+  if (!result) throw new Error("Order not found");
+
   return { message: `Get order by user id`, data: result };
 };

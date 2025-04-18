@@ -1,5 +1,5 @@
 import { integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
-import { event_ticket, order, tickets } from ".";
+import { event_ticket, order } from ".";
 import { relations } from "drizzle-orm";
 
 export const order_item = pgTable("order_item", {
@@ -27,5 +27,4 @@ export const order_item_relations = relations(order_item, ({ one, many }) => ({
     fields: [order_item.event_ticket_id],
     references: [event_ticket.id],
   }),
-  tickets: many(tickets),
 }));

@@ -7,7 +7,7 @@ import {
   getAllEventTicket,
   getEventTicketById,
   updateEventTicket,
-} from "../services/events/ticket";
+} from "../services/event_ticket";
 
 const controller = "event_ticket";
 

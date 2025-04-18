@@ -11,13 +11,10 @@ export const getTicketById = async (id: string) => {
           event: true,
         },
       },
-      order_item: {
-        with: {
-          event_ticket: true,
-        },
-      },
     },
   });
+
+  if (!result) throw new Error("Ticket not found");
 
   return { message: "Ticket by id", data: result };
 };

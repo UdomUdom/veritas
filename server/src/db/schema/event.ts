@@ -25,7 +25,7 @@ export const event = pgTable("event", {
   location: text("location"),
   start_date: date("start_date").notNull(),
   end_date: date("end_date"),
-  sale_start: date("sale_start").notNull(),
+  sale_start: date("sale_start"),
   sale_end: date("sale_end"),
   status: event_status().notNull(),
   info: text("info"),

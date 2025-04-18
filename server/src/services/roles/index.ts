@@ -21,6 +21,8 @@ export const getRoleById = async (id: string) => {
     where: eq(role.id, id),
   });
 
+  if (!result) throw new Error("Role not found");
+
   return { message: `Get role by id`, data: result };
 };
 

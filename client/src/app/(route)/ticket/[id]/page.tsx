@@ -6,7 +6,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const prepareFetch = async (id: string) => {
-  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/ticket/${id}` || "";
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/user/${id}/ticket` || "";
 
   const res = await Fetch(API!);
 

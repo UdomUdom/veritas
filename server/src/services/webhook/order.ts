@@ -3,7 +3,7 @@ import { event_ticket, order, order_item, tickets } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export const orderWebhook = async (body: any) => {
-  const { id, key, data } = body;
+  const { key, data } = body;
 
   if (key === "charge.complete") {
     if (data.status !== "successful") {
@@ -73,14 +73,20 @@ const order_paid = async (id: string) => {
 
     const items = await tx.query.order_item.findMany({
       where: eq(order_item.order_id, id),
+      with: {
+        event_ticket: true,
+      },
     });
 
     items.forEach(async (item) => {
       const new_ticket = [];
       for (let i = 0; i < item.quantity; i++) {
         new_ticket.push({
+          user_id: this_order.user_id,
           order_id: id,
           order_item_id: item.id,
+          type: item.event_ticket.type,
+          price: item.event_ticket.price,
         });
       }
 

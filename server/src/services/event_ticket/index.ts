@@ -6,9 +6,7 @@ import { eq } from "drizzle-orm";
 export const createEventTicket = async (body: EventTicketType) => {
   const [result] = await db.insert(event_ticket).values(body).returning();
 
-  if (!result) {
-    throw new Error("Failed to create event ticket");
-  }
+  if (!result) throw new Error("Failed to create event ticket");
 
   return { message: "Create event ticket", data: result };
 };
@@ -24,6 +22,8 @@ export const getEventTicketById = async (id: string) => {
     where: eq(event_ticket.id, id),
   });
 
+  if (!result) throw new Error("Event ticket not found");
+
   return { message: "Get event ticket by id", data: result };
 };
 
@@ -34,9 +34,7 @@ export const updateEventTicket = async (body: EventTicketType, id: string) => {
     .where(eq(event_ticket.id, id))
     .returning();
 
-  if (!result) {
-    throw new Error("Failed to update event ticket");
-  }
+  if (!result) throw new Error("Failed to update event ticket");
 
   return { message: "Update event ticket", data: result };
 };
@@ -44,9 +42,7 @@ export const updateEventTicket = async (body: EventTicketType, id: string) => {
 export const deleteEventTicket = async (id: string) => {
   const result = await db.delete(event_ticket).where(eq(event_ticket.id, id));
 
-  if (!result) {
-    throw new Error("Failed to delete event ticket");
-  }
+  if (!result) throw new Error("Failed to delete event ticket");
 
   return { message: "Delete event ticket" };
 };

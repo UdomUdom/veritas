@@ -26,6 +26,8 @@ export const getBlogById = async (id: string) => {
     where: eq(blog.id, id),
   });
 
+  if (!result) throw new Error("Blog not found");
+
   return { message: "Get blog by id", data: result };
 };
 
