@@ -5,7 +5,7 @@ import Image from "@/components/build/Image";
 import { Carousel } from "@/components/build/Carousel";
 import { CarouselItem } from "@/components/ui/carousel";
 import Link from "next/link";
-import Banner from "@/components/banner/Banner";
+// import Banner from "@/components/banner/Banner";
 import { Calendar, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -25,9 +25,11 @@ const prepareFetch = async (id: string) => {
 export default async function EventList({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const { data } = await prepareFetch(params.id);
+  const { id } = await params;
+  const { data } = await prepareFetch(id);
+
   return (
     <div className="relative ">
       <Carousel hidden={true}>

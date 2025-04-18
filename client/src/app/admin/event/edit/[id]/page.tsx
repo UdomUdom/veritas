@@ -15,12 +15,10 @@ const prepareFetch = async (id: string) => {
 export default async function EventEdit({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const { data } = await prepareFetch(params.id);
-  return (
-    <div>
-      <EventForm core={data} />
-    </div>
-  );
+  const { id } = await params;
+  const { data } = await prepareFetch(id);
+
+  return <EventForm core={data} />;
 }

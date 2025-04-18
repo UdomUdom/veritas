@@ -23,6 +23,12 @@ export default async function PayPage({
   const { id } = await params;
   const { data }: { data: OrderType } = await prepareFetch(id);
 
+  if (data.status === "pending") {
+    redirect(`/order/${id}/checkout`);
+  } else if (data.status === "paid") {
+    redirect(`/order/${id}/complete`);
+  }
+
   return (
     <div>
       <OrderProgress progress={50} />

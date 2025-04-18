@@ -47,13 +47,13 @@ export default async function TicketPage({
                 <div className="flex flex-col gap-2">
                   <p className="text-gray-400">Type</p>
                   <h2 className="text-xl font-semibold capitalize">
-                    {data.order_item.event_ticket.type}
+                    {data.type}
                   </h2>
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="text-gray-400">Price</p>
                   <h2 className="text-xl font-semibold capitalize">
-                    {data.order_item.event_ticket.price}
+                    {data.price}
                   </h2>
                 </div>
               </div>
