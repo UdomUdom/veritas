@@ -1,5 +1,5 @@
 import db from "@/db";
-import { event_ticket, order, order_item, tickets } from "@/db/schema";
+import { event_ticket, order, order_item } from "@/db/schema";
 import { createCharges } from "@/libs/Omise";
 import { CheckoutType } from "@/models/order";
 import { and, eq, gt } from "drizzle-orm";
