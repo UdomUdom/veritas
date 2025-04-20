@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "bun run --watch src/app.ts",
-    "build": "bun build src/app.ts --outdir dist --target node",
+    "dev": "bun run --watch src/server.ts",
+    "build": "bun build src/app.ts --outfile dist/index.js --target node --external omise",
+    "deploy": "serverless deploy",
+    "start": "node dist/index.js",
     "test": "bun test",
     "package": "zip -r function.zip dist/*",
     "db:push": "bun drizzle-kit push",
@@ -28,7 +30,8 @@
     "@types/node": "^22.14.1",
     "@types/pg": "^8.11.13",
     "bun-types": "^1.2.10",
-    "drizzle-kit": "^0.31.0"
+    "drizzle-kit": "^0.31.0",
+    "serverless": "^4.14.1"
   },
   "module": "src/index.js"
 }

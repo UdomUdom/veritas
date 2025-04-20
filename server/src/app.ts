@@ -1,4 +1,3 @@
-import { logger } from "./utils/Logger";
 import { Elysia } from "elysia";
 import swagger from "@elysiajs/swagger";
 import cors from "@elysiajs/cors";
@@ -31,11 +30,6 @@ const app = new Elysia()
     },
   })
   .use(routes);
-
-if (process.env.NODE_ENV === "development") {
-  app.listen({ port: process.env.PORT || 3032 });
-  logger.info(`Server running at ${app.server?.url}`);
-}
 
 export const handler = async (
   event: APIGatewayProxyEvent

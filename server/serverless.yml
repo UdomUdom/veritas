@@ -1,0 +1,21 @@
+service: veritas-server
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: ap-southeast-1
+  architecture: arm64
+
+functions:
+  app:
+    name: veritas-server
+    handler: dist/index.handler
+    events:
+      - httpApi: "*"
+
+package:
+  individually: true
+  patterns:
+    - dist/**
+    - '!**/*.ts'
+    - '!node_modules/**'
