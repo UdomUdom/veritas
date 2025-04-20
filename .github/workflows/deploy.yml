@@ -29,7 +29,7 @@ jobs:
         run: bun run build
 
       - name: Setup Serverless
-        run: bun add -g serverless
+        run: bun add -g serverless@3
 
       - name: Deploy
         run: bun run deploy
