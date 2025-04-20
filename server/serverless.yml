@@ -9,7 +9,7 @@ provider:
 functions:
   app:
     name: veritas-server
-    handler: dist/index.handler
+    handler: build/dist/index.handler
     events:
       - http:
           path: "{proxy+}"
@@ -20,4 +20,3 @@ package:
   patterns:
     - dist/**
     - "!**/*.ts"
-    - "!node_modules/**"
