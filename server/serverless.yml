@@ -2,7 +2,7 @@ service: veritas-server
 
 provider:
   name: aws
-  runtime: nodejs22.x
+  runtime: nodejs20.x
   region: ap-southeast-1
   architecture: arm64
 
