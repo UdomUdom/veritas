@@ -9,7 +9,7 @@ provider:
 functions:
   app:
     name: veritas-server
-    handler: build/dist/index.handler
+    handler: dist/index.handler
     events:
       - http:
           path: "{proxy+}"
