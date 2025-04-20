@@ -11,11 +11,13 @@ functions:
     name: veritas-server
     handler: dist/index.handler
     events:
-      - httpApi: "*"
+      - http:
+          path: "{proxy+}"
+          method: any
 
 package:
   individually: true
   patterns:
     - dist/**
-    - '!**/*.ts'
-    - '!node_modules/**'
+    - "!**/*.ts"
+    - "!node_modules/**"
