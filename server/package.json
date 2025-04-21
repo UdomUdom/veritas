@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "bun run --watch src/server.ts",
     "build": "bun build src/index.ts --outfile dist/index.js --target node --format esm --external omise",
-    "deploy": "sls deploy",
+    "deploy": "serverless deploy",
     "start": "sls offline",
     "test": "bun test",
     "db:push": "bun drizzle-kit push",
