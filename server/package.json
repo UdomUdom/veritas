@@ -1,6 +1,7 @@
 {
   "name": "veritas",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "bun run --watch src/server.ts",
     "build": "bun build src/index.ts --outfile dist/index.js --target node --external omise",
