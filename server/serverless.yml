@@ -15,10 +15,6 @@ functions:
           path: "{proxy+}"
           method: any
 
-    package:
-      exclude:
-        - node_modules/omise/**
-
 plugins:
   - serverless-offline
 
