@@ -26,5 +26,6 @@ package:
   individually: true
   patterns:
     - "!**"
-    - "src/**"
+    - "!src/**"
     - "node_modules/omise/**"
+    - "dist/**"

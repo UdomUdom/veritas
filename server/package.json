@@ -7,7 +7,6 @@
     "deploy": "sls deploy",
     "start": "sls offline",
     "test": "bun test",
-    "package": "zip -r function.zip dist/*",
     "db:push": "bun drizzle-kit push",
     "db:seed": "bun run src/db/seed.ts",
     "db:mock": "bun run src/db/mock.ts"
