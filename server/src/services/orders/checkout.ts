@@ -1,6 +1,6 @@
 import db from "@/db";
 import { event_ticket, order, order_item } from "@/db/schema";
-import { createCharges } from "@/libs/Omise";
+// import { createCharges } from "@/libs/Omise";
 import { CheckoutType } from "@/models/order";
 import { and, eq, gt } from "drizzle-orm";
 
@@ -73,14 +73,14 @@ export const paymentOrder = async (body: CheckoutType, id: string) => {
 
   if (!this_order) throw new Error("Order not found");
 
-  const omise = (await createCharges(body.source, this_order?.total, id)) as {
-    id: string;
-    authorize_uri: string;
-  };
+  // const omise = (await createCharges(body.source, this_order?.total, id)) as {
+  //   id: string;
+  //   authorize_uri: string;
+  // };
 
-  const data = {
-    authorize_uri: omise.authorize_uri,
-  };
+  // const data = {
+  //   authorize_uri: omise.authorize_uri,
+  // };
 
-  return { message: "Payment Confirmed", data };
+  return { message: "Payment Confirmed", data: [] };
 };
