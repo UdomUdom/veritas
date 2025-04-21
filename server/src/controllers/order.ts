@@ -33,6 +33,8 @@ export const orderController = new Elysia({
             return await checkoutConfirm(params.id);
           case "cancel":
             return await checkoutCancel(params.id);
+          default:
+            return { message: "Invalid method" };
         }
       }),
       {

@@ -16,7 +16,7 @@ export const createCharges = async (
         source,
         amount: amount * 100,
         currency: "THB",
-        return_uri: `http://localhost:3000/order/${order_id}/complete`,
+        return_uri: `${process.env.CLIENT_URL}/order/${order_id}/complete`,
         metadata: {
           order_id,
         },

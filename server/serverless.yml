@@ -14,12 +14,17 @@ functions:
       - http:
           path: "{proxy+}"
           method: any
+
     package:
       exclude:
         - node_modules/omise/**
 
+plugins:
+  - serverless-offline
+
 package:
   individually: true
   patterns:
-    - dist/**
-    - "!**/*.ts"
+    - "!**"
+    - "src/**"
+    - "node_modules/omise/**"
