@@ -28,7 +28,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
         return new Date(value);
       }
       return parse(value, "dd MMMM yyyy", new Date());
-    } catch (e) {
+    } catch {
       return undefined;
     }
   }, [value]);

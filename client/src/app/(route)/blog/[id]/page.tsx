@@ -46,6 +46,7 @@ export default async function BlogList({ params }: { params: { id: string } }) {
             <p className="block text-lg mb-4">{data.description}</p>
             <Image
               src={data.image}
+              alt="Blog Image"
               className="w-full h-96 object-cover rounded-lg shadow-md transition-transform "
             />
             <div className="block text-lg mt-6 text-default-700">

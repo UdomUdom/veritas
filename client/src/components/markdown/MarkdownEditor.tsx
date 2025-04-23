@@ -8,7 +8,7 @@ import MDEditor, {
 interface MDXEditorProps {
   className?: string;
   data?: string;
-  setData?: any;
+  setData?: (value: string) => void;
 }
 
 const Button = () => {
@@ -87,7 +87,9 @@ export default function MarkdownEditor({
         preview="live"
         extraCommands={[codePreview, customButton, commands.fullscreen]}
         onChange={(val) => {
-          setData && setData(val || "");
+          if (setData) {
+            setData(val || "");
+          }
         }}
       />
     </div>

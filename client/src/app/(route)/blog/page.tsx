@@ -2,6 +2,12 @@ import BlogCard from "@/components/card/BlogCard";
 import MOCK from "@/mocks/more.json";
 import Fetch from "@/utils/Fetch";
 
+interface BlogItem {
+  id: string;
+  title: string;
+  image: string;
+}
+
 const prepareFetch = async () => {
   const API = `${process.env.NEXT_PUBLIC_API_URL}/api/blog` || "";
 
@@ -25,7 +31,7 @@ export default async function Blog() {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {data.map((item: any, index: number) => (
+          {data.map((item: BlogItem, index: number) => (
             <div
               key={index}
               className="block group transition-transform duration-300 transform hover:scale-[1.02]"

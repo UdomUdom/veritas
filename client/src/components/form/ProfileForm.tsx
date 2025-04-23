@@ -1,8 +1,6 @@
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { DatePicker } from "../ui/datepicker";
 import { PhoneInput } from "../ui/phone-input";
-import { useState, useEffect } from "react";
 
 interface UserProps {
   user?: {
@@ -16,16 +14,6 @@ interface UserProps {
 }
 
 export default function ProfileForm({ user }: UserProps) {
-  const [date, setDate] = useState(user?.birthdate || "");
-
-  useEffect(() => {
-    setDate(user?.birthdate || "");
-  }, [user?.birthdate]);
-
-  const handleDateChange = (value: string | undefined) => {
-    setDate(value || "");
-  };
-
   return (
     <form className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
