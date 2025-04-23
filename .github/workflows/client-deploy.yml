@@ -24,6 +24,13 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Setup .env.local
+        run: |
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}" >> .env.local
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env.local
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env.local
+          echo "NEXT_PUBLIC_STRIPE_PUBLIC_KEY=${{ secrets.STRIPE_PUBLIC_KEY }}" >> .env.local
+
       - name: Run ESLint
         run: bun run lint
 
