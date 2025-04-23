@@ -29,7 +29,7 @@
     "@types/pg": "^8.11.13",
     "bun-types": "^1.2.10",
     "drizzle-kit": "^0.31.0",
-    "serverless": "^4.14.1",
+    "serverless": "3",
     "serverless-offline": "^14.4.0"
   },
   "module": "src/index.js"
