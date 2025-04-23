@@ -12,11 +12,13 @@ const prepareFetch = async (id: string) => {
 
   return { data: [] };
 };
-export default async function BlogEdit({ params }: { params: { id: string } }) {
-  const { data } = await prepareFetch(params.id);
-  return (
-    <div>
-      <BlogForm core={data} />
-    </div>
-  );
+export default async function BlogEdit({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const { data } = await prepareFetch(id);
+
+  return <BlogForm core={data} />;
 }
