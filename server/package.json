@@ -18,9 +18,9 @@
     "aws-lambda": "^1.0.7",
     "drizzle-orm": "^0.42.0",
     "elysia": "^1.2.25",
-    "omise": "^0.12.1",
     "pg": "^8.14.1",
     "postgres": "^3.4.5",
+    "stripe": "^18.0.0",
     "winston": "^3.17.0"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "@types/pg": "^8.11.13",
     "bun-types": "^1.2.10",
     "drizzle-kit": "^0.31.0",
-    "serverless": "3",
+    "serverless": "^4.14.1",
     "serverless-offline": "^14.4.0"
   },
   "module": "src/index.js"

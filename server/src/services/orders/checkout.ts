@@ -1,7 +1,6 @@
 import db from "@/db";
 import { event_ticket, order, order_item } from "@/db/schema";
-// import { createCharges } from "@/libs/Omise";
-import { CheckoutType } from "@/models/order";
+import { createCheckoutSession } from "@/libs/Stripe";
 import { and, eq, gt } from "drizzle-orm";
 
 export const checkoutConfirm = async (id: string) => {
@@ -66,21 +65,33 @@ export const checkoutCancel = async (id: string) => {
   return { message: "Checkout Cancelled", data: null };
 };
 
-export const paymentOrder = async (body: CheckoutType, id: string) => {
-  const this_order = await db.query.order.findFirst({
-    where: eq(order.id, id),
+export const paymentOrder = async (id: string) => {
+  const result = await db.transaction(async (tx) => {
+    const current_order = await tx.query.order.findFirst({
+      where: eq(order.id, id),
+    });
+
+    if (!current_order) throw new Error("Order not found");
+
+    const session = await createCheckoutSession({
+      id: current_order.id,
+      event_id: current_order.event_id,
+      total: current_order.total,
+    });
+
+    const [updated_order] = await tx
+      .update(order)
+      .set({ session_id: session.id })
+      .where(eq(order.id, id))
+      .returning();
+
+    if (!updated_order) throw new Error("Order not found");
+
+    return {
+      order: updated_order,
+      session_id: session.id,
+    };
   });
 
-  if (!this_order) throw new Error("Order not found");
-
-  // const omise = (await createCharges(body.source, this_order?.total, id)) as {
-  //   id: string;
-  //   authorize_uri: string;
-  // };
-
-  // const data = {
-  //   authorize_uri: omise.authorize_uri,
-  // };
-
-  return { message: "Payment Confirmed", data: [] };
+  return { message: "Payment Confirmed", data: result };
 };

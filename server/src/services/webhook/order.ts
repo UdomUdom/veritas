@@ -1,25 +1,43 @@
 import db from "@/db";
 import { event_ticket, order, order_item, tickets } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import stripe from "stripe";
 
-export const orderWebhook = async (body: any) => {
-  const { key, data } = body;
+const endpointSecret = process.env.STRIPE_WEBHOOK_KEY;
 
-  if (key === "charge.complete") {
-    if (data.status !== "successful") {
-      const result = await order_failed(data.metadata.order_id);
-      return { message: "Payment failed", data: result };
-    } else {
-      const result = await order_paid(data.metadata.order_id);
-      return { message: "Payment successful", data: result };
+export const orderWebhook = async (context: any) => {
+  let event = await context.request.text();
+
+  if (endpointSecret) {
+    const signature = await context.request.headers.get("stripe-signature");
+
+    try {
+      event = await stripe.webhooks.constructEventAsync(
+        event,
+        signature,
+        endpointSecret
+      );
+    } catch (err) {
+      throw new Error("Webhook signature verification failed.");
     }
+  }
+
+  let result;
+
+  switch (event.type) {
+    case "checkout.session.completed":
+      result = await order_paid(event.data.object.id);
+      return { message: "Order paid", data: result };
+    case "checkout.session.expired":
+      result = await order_failed(event.data.object.id);
+      return { message: "Order failed", data: result };
   }
 };
 
 const order_failed = async (id: string) => {
   const result = await db.transaction(async (tx) => {
     const this_order = await tx.query.order.findFirst({
-      where: eq(order.id, id),
+      where: eq(order.session_id, id),
     });
 
     if (!this_order) throw new Error("Order not found");
@@ -27,7 +45,7 @@ const order_failed = async (id: string) => {
     if (this_order.status !== "waiting") throw new Error("Order not waiting");
 
     const items = await tx.query.order_item.findMany({
-      where: eq(order_item.order_id, id),
+      where: eq(order_item.order_id, this_order.id),
     });
 
     items.forEach(async (item) => {
@@ -50,7 +68,7 @@ const order_failed = async (id: string) => {
     const [updated_order] = await tx
       .update(order)
       .set({ status: "failed" })
-      .where(eq(order.id, id))
+      .where(eq(order.id, this_order.id))
       .returning();
 
     if (!updated_order) throw new Error("Order not found");
@@ -64,7 +82,7 @@ const order_failed = async (id: string) => {
 const order_paid = async (id: string) => {
   const result = await db.transaction(async (tx) => {
     const this_order = await tx.query.order.findFirst({
-      where: eq(order.id, id),
+      where: eq(order.session_id, id),
     });
 
     if (!this_order) throw new Error("Order not found");
@@ -72,7 +90,7 @@ const order_paid = async (id: string) => {
     if (this_order.status !== "waiting") throw new Error("Order not waiting");
 
     const items = await tx.query.order_item.findMany({
-      where: eq(order_item.order_id, id),
+      where: eq(order_item.order_id, this_order.id),
       with: {
         event_ticket: true,
       },
@@ -83,7 +101,7 @@ const order_paid = async (id: string) => {
       for (let i = 0; i < item.quantity; i++) {
         new_ticket.push({
           user_id: this_order.user_id,
-          order_id: id,
+          order_id: this_order.id,
           order_item_id: item.id,
           type: item.event_ticket.type,
           price: item.event_ticket.price,
@@ -101,7 +119,7 @@ const order_paid = async (id: string) => {
     const [updated_order] = await tx
       .update(order)
       .set({ status: "paid" })
-      .where(eq(order.id, id))
+      .where(eq(order.id, this_order.id))
       .returning();
 
     return updated_order;

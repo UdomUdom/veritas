@@ -9,17 +9,11 @@ const prepareFetch = async (id: string) => {
 
   const res = await Fetch(API!);
 
-  if (res.data.status === "waiting") {
-    redirect(`/order/${id}/pay`);
-  } else if (res.data.status === "paid") {
-    redirect(`/order/${id}/complete`);
-  }
-
   if (res && res.status === "ok") {
     return res;
   }
 
-  redirect("/");
+  redirect(`/e/${id}`);
 };
 
 export default async function CheckoutPage({
@@ -29,6 +23,14 @@ export default async function CheckoutPage({
 }) {
   const { id } = await params;
   const { data }: { data: OrderType } = await prepareFetch(id);
+
+  if (data.status === "waiting") {
+    redirect(`/order/${id}/pay`);
+  } else if (data.status === "paid") {
+    redirect(`/order/${id}/complete`);
+  } else if (data.status === "failed") {
+    redirect(`/order/${id}/cancel`);
+  }
 
   return (
     <div>

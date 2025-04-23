@@ -12,7 +12,7 @@ const prepareFetch = async (id: string) => {
     return res;
   }
 
-  redirect("/");
+  redirect(`/e/${id}`);
 };
 
 export default async function PayPage({
@@ -27,6 +27,8 @@ export default async function PayPage({
     redirect(`/order/${id}/checkout`);
   } else if (data.status === "paid") {
     redirect(`/order/${id}/complete`);
+  } else if (data.status === "failed") {
+    redirect(`/order/${id}/cancel`);
   }
 
   return (
@@ -42,7 +44,7 @@ export default async function PayPage({
             <h2>Amount</h2>
             <h2>&#3647;{data.total.toFixed(2)}</h2>
           </div>
-          <Pay id={data.id} amount={data.total} />
+          <Pay id={data.id} />
         </div>
       </div>
     </div>

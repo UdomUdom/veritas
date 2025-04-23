@@ -1,6 +1,6 @@
 import Elysia from "elysia";
 import { placeOrder } from "@/services/orders/placeorder";
-import { CheckoutModel, PlaceOrderModel } from "@/models/order";
+import { PlaceOrderModel } from "@/models/order";
 import { withHandler } from "@/utils/Control";
 import {
   checkoutCancel,
@@ -43,10 +43,9 @@ export const orderController = new Elysia({
     )
     .post(
       "/:id/pay",
-      withHandler(({ body, params }) => paymentOrder(body, params.id)),
+      withHandler(({ params }) => paymentOrder(params.id)),
       {
         detail: { summary: "Payment Order" },
-        body: CheckoutModel,
       }
     )
     .get(

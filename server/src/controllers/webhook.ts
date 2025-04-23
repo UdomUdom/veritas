@@ -11,10 +11,9 @@ export const webhookController = new Elysia({
 }).group(controller, (app) =>
   app.post(
     "/order",
-    withHandler(({ body }) => orderWebhook(body)),
+    withHandler((context) => orderWebhook(context)),
     {
       detail: { summary: "Order Webhook" },
-      body: t.Any(),
     }
   )
 );

@@ -57,6 +57,8 @@ export const getEventById = async (id: string) => {
     },
   });
 
+  if (!result) throw new Error("Event not found");
+
   return { message: "Get event by id", data: result };
 };
 

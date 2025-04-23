@@ -22,5 +22,7 @@ export const getOrderById = async (id: string) => {
     },
   });
 
+  if (!result) throw new Error("Order not found");
+
   return { message: `Get order by id`, data: result };
 };

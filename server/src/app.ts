@@ -12,7 +12,7 @@ export const app = new Elysia()
         info: {
           title: "Veritas Open API",
           description: "Bun + ElysiaJS + Supabase",
-          version: "0.0.1",
+          version: "1.0.0",
           license: {
             name: "MIT",
             url: "https://opensource.org/license/mit/",

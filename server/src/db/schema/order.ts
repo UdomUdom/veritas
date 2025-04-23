@@ -2,6 +2,7 @@ import {
   doublePrecision,
   pgEnum,
   pgTable,
+  text,
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
@@ -27,6 +28,7 @@ export const order = pgTable("order", {
     .notNull(),
   total: doublePrecision("total").notNull(),
   status: order_status().notNull(),
+  session_id: text("session_id").unique(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()

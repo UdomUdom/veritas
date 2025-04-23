@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "server/**"
-      - ".github/workflows/deploy.yml"
+      - ".github/workflows/server-deploy.yml"
     branches:
       - main
 
@@ -14,9 +14,8 @@ jobs:
     defaults:
       run:
         working-directory: server
-
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Set up Bun
