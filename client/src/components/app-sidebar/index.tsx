@@ -1,3 +1,4 @@
+"use client";
 import { Home } from "lucide-react";
 import {
   Sidebar,
@@ -8,11 +9,15 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { menus } from "./menu";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AppSidebar() {
+  const { signOut } = useAuth();
   return (
     <Sidebar>
       <SidebarContent>
@@ -39,6 +44,11 @@ export default function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <Button variant="destructive" onClick={signOut}>
+          Logout
+        </Button>
+      </SidebarFooter>
     </Sidebar>
   );
 }

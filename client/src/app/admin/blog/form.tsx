@@ -10,12 +10,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Select from "@/components/build/Select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
 import MarkdownEditor from "@/components/markdown/MarkdownEditor";
 import Fetch from "@/utils/Fetch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DatePicker } from "@/components/ui/datepicker";
 import { redirect } from "next/navigation";
 interface BlogFormProps {
@@ -25,6 +26,7 @@ interface BlogFormProps {
     description: string;
     image: string;
     author: string;
+    category: string;
     content: string;
   };
 }
@@ -40,6 +42,7 @@ export function BlogForm({ core }: BlogFormProps) {
     description: z.string().optional(),
     image: z.string().optional(),
     author: z.string().optional(),
+    category: z.string().optional(),
     content: z.string().optional(),
   });
 
@@ -50,9 +53,33 @@ export function BlogForm({ core }: BlogFormProps) {
       description: core?.description || "",
       image: core?.image || "",
       author: core?.author || "",
+      category: core?.category || "",
       content: core?.content || "",
     },
   });
+  const [options, setOptions] = useState<{
+    [key in (typeof FieldData)[number]["name"]]?: {
+      value: string;
+      label: string;
+    }[];
+  }>({});
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const res = await Fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/category`
+      );
+      if (res && res.status === "ok") {
+        setOptions((prev) => ({
+          ...prev,
+          category: res.data.map((item: { id: string; name: string }) => ({
+            value: item.id,
+            label: item.name,
+          })),
+        }));
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const API =
@@ -67,6 +94,7 @@ export function BlogForm({ core }: BlogFormProps) {
         description: values.description,
         image: values.image,
         author: values.author,
+        category: values.category,
         content: info,
       },
     });
@@ -108,6 +136,17 @@ export function BlogForm({ core }: BlogFormProps) {
                           }
                           onChange={field.onChange}
                         />
+                      ) : data.type === "select" ? (
+                        <Select
+                          {...field}
+                          defaultValue={field.value}
+                          onValueChange={(text: string) => {
+                            if (field.value !== text) {
+                              field.onChange(text);
+                            }
+                          }}
+                          options={options[data.name]}
+                        />
                       ) : data.type === "mdx" ? (
                         <MarkdownEditor
                           className="w-full md:col-span-2 rounded-lg text-center"
@@ -145,6 +184,10 @@ const FieldData = [
   {
     name: "image",
     type: "text",
+  },
+  {
+    name: "category",
+    type: "select",
   },
   {
     name: "author",

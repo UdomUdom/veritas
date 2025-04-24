@@ -1,9 +1,16 @@
 import Link from "next/link";
+import HomeLogo from "@/assets/home_logo.png";
+import Image from "../build/Image";
 
 export default function Logo() {
   return (
     <Link href="/">
-      <h1 className="text-base text-4xl uppercase font-bold">veritas</h1>
+      <Image
+        src={HomeLogo.src}
+        alt="Logo"
+        style={{ maxWidth: "200px", maxHeight: "50px" }}
+        className="text-black dark:text-white overflow-auto"
+      />
     </Link>
   );
 }
