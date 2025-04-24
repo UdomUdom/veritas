@@ -8,7 +8,10 @@ import {
 } from "@/services/users";
 import { UserModel, UserResetPasswordModel } from "@/models/user";
 import { withHandler } from "@/utils/Control";
-import { getOrderByUserId } from "@/services/users/order";
+import {
+  getOrderByUserId,
+  getOrderToPayByUserId,
+} from "@/services/users/order";
 import { getTicketById } from "@/services/users/ticket";
 
 const controller = "user";
@@ -76,6 +79,13 @@ export const userController = new Elysia({
       withHandler(({ params }) => getTicketById(params.id)),
       {
         detail: { summary: "Get ticket by user id" },
+      }
+    )
+    .get(
+      "/:id/order/to-pay",
+      withHandler(({ params }) => getOrderToPayByUserId(params.id)),
+      {
+        detail: { summary: "Get Order By Status" },
       }
     )
 );
