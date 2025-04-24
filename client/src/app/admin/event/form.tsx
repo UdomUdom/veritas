@@ -34,7 +34,7 @@ interface EventFormProps {
     info: string;
     category_id: string;
     organizer_id: string;
-    tickets: [
+    event_ticket: [
       {
         type: string;
         price: number;
@@ -63,7 +63,7 @@ export function EventForm({ core }: EventFormProps) {
     info: z.string().optional(),
     category: z.string().optional(),
     organizer: z.string().optional(),
-    tickets: z
+    event_ticket: z
       .array(
         z.object({
           type: z.string().optional(),
@@ -88,9 +88,9 @@ export function EventForm({ core }: EventFormProps) {
       info: core?.info || "",
       category: core?.category_id || "",
       organizer: core?.organizer_id || "",
-      tickets: core?.tickets || [
+      event_ticket: core?.event_ticket || [
         {
-          type: "",
+          type: " ",
           price: 0,
           available: 0,
         },
@@ -103,7 +103,6 @@ export function EventForm({ core }: EventFormProps) {
       `${process.env.NEXT_PUBLIC_API_URL}/api/event/${
         core?.id ? core!.id : ""
       }` || "";
-
     const res = await Fetch(API!, {
       method: core?.id ? "PUT" : "POST",
       body: {
@@ -118,14 +117,12 @@ export function EventForm({ core }: EventFormProps) {
         info: info,
         category_id: values.category,
         organizer_id: values.organizer,
-        tickets: values.tickets,
+        event_ticket: values.event_ticket,
       },
     });
-
     if (res && res.status !== "ok") {
       return alert("Error: " + res.message);
     }
-
     redirect("/admin/event");
   };
 
@@ -245,16 +242,17 @@ export function EventForm({ core }: EventFormProps) {
           ))}
         </div>
         <div className="grid gap-4 mt-4">
+          <FormLabel className="capitalize">Tickets</FormLabel>
           <div className="flex items-start justify-start space-x-2 gap-4">
-            {form.watch("tickets")?.map((ticket, index) => (
+            {form.watch("event_ticket")?.map((ticket, index) => (
               <div key={index} className="grid gap-4">
                 <FormField
                   control={form.control}
-                  name={`tickets.${index}.type`}
+                  name={`event_ticket.${index}.type`}
                   render={({ field }) => {
                     return (
                       <FormItem>
-                        <FormLabel>Ticket Type</FormLabel>
+                        <FormLabel>Type</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -265,7 +263,7 @@ export function EventForm({ core }: EventFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={`tickets.${index}.price`}
+                  name={`event_ticket.${index}.price`}
                   render={({ field }) => {
                     return (
                       <FormItem>
@@ -286,7 +284,7 @@ export function EventForm({ core }: EventFormProps) {
                 />
                 <FormField
                   control={form.control}
-                  name={`tickets.${index}.available`}
+                  name={`event_ticket.${index}.available`}
                   render={({ field }) => {
                     return (
                       <FormItem>
@@ -308,13 +306,12 @@ export function EventForm({ core }: EventFormProps) {
               </div>
             ))}
           </div>
-
           <div className="flex items-center justify-start gap-4">
             <Button
               type="button"
               onClick={() => {
-                form.setValue("tickets", [
-                  ...(form.getValues("tickets") || []),
+                form.setValue("event_ticket", [
+                  ...(form.getValues("event_ticket") || []),
                   { type: "", price: 0, available: 0 },
                 ]);
               }}
@@ -322,15 +319,14 @@ export function EventForm({ core }: EventFormProps) {
             >
               <Plus className="h-4 w-4" />
             </Button>
-
             <Button
               type="button"
               variant="destructive"
               onClick={() => {
-                const tickets = form.getValues("tickets") || [];
+                const tickets = form.getValues("event_ticket") || [];
                 if (tickets.length > 1) {
                   tickets.pop();
-                  form.setValue("tickets", tickets);
+                  form.setValue("event_ticket", tickets);
                 }
               }}
               className="mt-4"
@@ -370,7 +366,6 @@ const FieldData = [
     type: "text",
     span: 1,
   },
-
   {
     name: "location",
     type: "text",
