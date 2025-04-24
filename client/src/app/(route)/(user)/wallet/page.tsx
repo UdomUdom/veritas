@@ -5,7 +5,7 @@ import Fetch from "@/utils/Fetch";
 import OrderCard from "@/components/card/OrderCard";
 
 const prepareFetch = async (id?: string) => {
-  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/user/order/${id}` || "";
+  const API = `${process.env.NEXT_PUBLIC_API_URL}/api/user/${id}/order` || "";
 
   const res = await Fetch(API!);
 

@@ -1,6 +1,6 @@
 import { date, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { order, role } from ".";
+import { order, role, tickets } from ".";
 
 export const user = pgTable("user", {
   id: uuid("id").primaryKey(),
@@ -26,4 +26,5 @@ export const user_relations = relations(user, ({ one, many }) => ({
     references: [role.id],
   }),
   order: many(order),
+  tickets: many(tickets),
 }));

@@ -24,6 +24,8 @@ export const getUserById = async (id: string) => {
     },
   });
 
+  if (!result) throw new Error("User not found");
+
   return { message: "Get user by id", data: result };
 };
 

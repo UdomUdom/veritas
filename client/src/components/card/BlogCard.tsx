@@ -1,13 +1,6 @@
 import Link from "next/link";
 import Image from "@/components/build/Image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 
 export interface BlogCardProps {
   id: string;

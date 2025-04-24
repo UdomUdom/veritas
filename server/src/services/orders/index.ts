@@ -18,8 +18,11 @@ export const getOrderById = async (id: string) => {
           event_ticket: true,
         },
       },
+      tickets: true,
     },
   });
+
+  if (!result) throw new Error("Order not found");
 
   return { message: `Get order by id`, data: result };
 };

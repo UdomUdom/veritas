@@ -25,6 +25,8 @@ export const getOrganizerById = async (id: string) => {
     where: eq(organizer.id, id),
   });
 
+  if (!result) throw new Error("Organizer not found");
+
   return { message: "Get organizer by id", data: result };
 };
 

@@ -1,6 +1,5 @@
 import db from "@/db";
-import { order, order_item, tickets } from "@/db/schema";
-import { createCharges } from "@/libs/Omise";
+import { order, order_item } from "@/db/schema";
 import { PlaceOrderType } from "@/models/order";
 
 export const placeOrder = async (body: PlaceOrderType) => {
@@ -30,35 +29,7 @@ export const placeOrder = async (body: PlaceOrderType) => {
 
     if (!create_order_items) throw new Error("Failed to create order items");
 
-    // body.ticket_type.forEach(async (item) => {
-    //   if (item.quantity <= 0) throw new Error("Invalid quantity");
-
-    //   let order_items = [];
-
-    //   for (let i = 0; i < item.quantity; i++) {
-    //     order_items.push({
-    //       order_id: place_order.id,
-    //       ticket_type_id: item.ticket_type_id,
-    //     });
-    //   }
-
-    //   const [created] = await tx
-    //     .insert(tickets)
-    //     .values(order_items)
-    //     .returning();
-
-    //   if (!created) throw new Error("Failed to create ticket");
-    // });
-
     return place_order;
-
-    // const omise_res = await createCharges(
-    //   body.source,
-    //   body.amount,
-    //   place_order.id
-    // );
-
-    // return omise_res;
   });
 
   return { message: "Place order", data: result };

@@ -15,7 +15,7 @@ import {
 import { EventModel } from "@/models/event";
 import { QueryModel } from "@/models/query";
 import { withHandler } from "@/utils/Control";
-import { getTicketByEvent } from "@/services/events/ticket";
+import { getTicketByEvent } from "@/services/events/tickets";
 
 const controller = "event";
 

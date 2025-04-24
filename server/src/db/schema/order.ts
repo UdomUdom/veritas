@@ -2,10 +2,11 @@ import {
   doublePrecision,
   pgEnum,
   pgTable,
+  text,
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { event, order_item, user } from ".";
+import { event, order_item, tickets, user } from ".";
 import { relations } from "drizzle-orm";
 
 export const order_status = pgEnum("order_status", [
@@ -27,6 +28,7 @@ export const order = pgTable("order", {
     .notNull(),
   total: doublePrecision("total").notNull(),
   status: order_status().notNull(),
+  session_id: text("session_id").unique(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()
@@ -44,4 +46,5 @@ export const order_relations = relations(order, ({ one, many }) => ({
     references: [event.id],
   }),
   order_item: many(order_item),
+  tickets: many(tickets),
 }));

@@ -8,7 +8,7 @@ interface OrderCardProps {
 
 export default function OrderCard({ data }: OrderCardProps) {
   return (
-    <div className="w-full flex flex-col gap-4 p-4 border border-gray-300">
+    <div className="w-full flex flex-col gap-4 p-4 border border-gray-300 mb-4">
       <div className="pb-2 border-b flex justify-between items-center">
         <p className="font-semibold">Order No. #{data.id}</p>
         <p>{data.status}</p>

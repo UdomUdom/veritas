@@ -1,32 +1,34 @@
 "use client";
-import { createSource } from "@/lib/omise";
 import { Button } from "../ui/button";
 import Fetch from "@/utils/Fetch";
+import { loadStripe } from "@stripe/stripe-js";
 
-const handlePay = async (id: string, amount: number) => {
-  const omise = (await createSource(amount)) as { id: string };
+export default function Pay({ id }: { id: string }) {
+  const handlePay = async (id: string) => {
+    const stripe = await loadStripe(
+      process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
+    );
 
-  const res = await Fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/order/${id}/pay`,
-    {
-      method: "POST",
-      body: {
-        source: omise.id,
-      },
+    if (!stripe) return;
+
+    const res = await Fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/order/${id}/pay`,
+      {
+        method: "POST",
+      }
+    );
+
+    if (res.status !== "ok") {
+      return alert("Failed: Something went wrong!");
     }
-  );
 
-  if (res && res.status === "ok") {
-    // wait for development
-    console.log(res);
-  }
+    stripe.redirectToCheckout({
+      sessionId: res.data.session_id,
+    });
+  };
 
-  return;
-};
-
-export default function Pay({ id, amount }: { id: string; amount: number }) {
   return (
-    <Button onClick={() => handlePay(id, amount)} className="cursor-pointer">
+    <Button onClick={() => handlePay(id)} className="cursor-pointer">
       Pay
     </Button>
   );

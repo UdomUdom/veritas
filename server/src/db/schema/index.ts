@@ -7,4 +7,4 @@ export { organizer, organizer_relations } from "./organizer";
 export { order, order_relations } from "./order";
 export { order_item, order_item_relations } from "./order_item";
 export { tickets, tickets_relations } from "./tickets";
-export { blog } from "./blog";
+export { blog, blogRelations } from "./blog";

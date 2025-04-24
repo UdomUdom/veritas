@@ -33,6 +33,8 @@ export const orderController = new Elysia({
             return await checkoutConfirm(params.id);
           case "cancel":
             return await checkoutCancel(params.id);
+          default:
+            return { message: "Invalid method" };
         }
       }),
       {
@@ -41,7 +43,7 @@ export const orderController = new Elysia({
     )
     .post(
       "/:id/pay",
-      withHandler(({ params, query }) => paymentOrder(params.id)),
+      withHandler(({ params }) => paymentOrder(params.id)),
       {
         detail: { summary: "Payment Order" },
       }

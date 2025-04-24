@@ -1,5 +1,4 @@
 import {
-  date,
   doublePrecision,
   integer,
   pgTable,
@@ -18,8 +17,6 @@ export const event_ticket = pgTable("event_ticket", {
   type: text().notNull(),
   price: doublePrecision("price").notNull(),
   available: integer("available").notNull(),
-  sale_start: date("sale_start_date").notNull(),
-  sale_end: date("sale_end_date"),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at")
     .defaultNow()

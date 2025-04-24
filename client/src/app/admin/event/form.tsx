@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
 import MarkdownEditor from "@/components/markdown/MarkdownEditor";
 import Fetch from "@/utils/Fetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatePicker } from "@/components/ui/datepicker";
 import { redirect } from "next/navigation";
 import { Plus, Minus } from "lucide-react";
@@ -32,6 +32,8 @@ interface EventFormProps {
     end_date: string;
     status: string;
     info: string;
+    category_id: string;
+    organizer_id: string;
     tickets: [
       {
         type: string;
@@ -45,6 +47,7 @@ interface EventFormProps {
 interface FieldDataType {
   name: (typeof FieldData)[number]["name"];
   type: string;
+  span: number;
 }
 
 export function EventForm({ core }: EventFormProps) {
@@ -58,6 +61,8 @@ export function EventForm({ core }: EventFormProps) {
     end_date: z.string().optional(),
     status: z.string().optional(),
     info: z.string().optional(),
+    category: z.string().optional(),
+    organizer: z.string().optional(),
     tickets: z
       .array(
         z.object({
@@ -81,6 +86,8 @@ export function EventForm({ core }: EventFormProps) {
       end_date: core?.end_date || "",
       status: core?.status || "",
       info: core?.info || "",
+      category: core?.category_id || "",
+      organizer: core?.organizer_id || "",
       tickets: core?.tickets || [
         {
           type: "",
@@ -109,6 +116,8 @@ export function EventForm({ core }: EventFormProps) {
         end_date: values.end_date,
         status: values.status,
         info: info,
+        category_id: values.category,
+        organizer_id: values.organizer,
         tickets: values.tickets,
       },
     });
@@ -147,10 +156,44 @@ export function EventForm({ core }: EventFormProps) {
     ],
   });
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const res = await Fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/category`
+      );
+      if (res && res.status === "ok") {
+        setOptions((prev) => ({
+          ...prev,
+          category: res.data.map((item: { id: string; name: string }) => ({
+            value: item.id,
+            label: item.name,
+          })),
+        }));
+      }
+    };
+    fetchCategories();
+
+    const fetchOrganizers = async () => {
+      const res = await Fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/organizer`
+      );
+      if (res && res.status === "ok") {
+        setOptions((prev) => ({
+          ...prev,
+          organizer: res.data.map((item: { id: string; name: string }) => ({
+            value: item.id,
+            label: item.name,
+          })),
+        }));
+      }
+    };
+    fetchOrganizers();
+  }, []);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid gap-4">
+        <div className="grid grid-cols-2 gap-4">
           {FieldData.map((data: FieldDataType, index: number) => (
             <FormField
               key={index}
@@ -158,7 +201,7 @@ export function EventForm({ core }: EventFormProps) {
               name={data.name}
               render={({ field }) => {
                 return (
-                  <FormItem>
+                  <FormItem className={`col-span-${data.span}`}>
                     <FormLabel className="capitalize">{data.name}</FormLabel>
                     <FormControl>
                       {data.type === "text" ? (
@@ -310,38 +353,57 @@ const FieldData = [
   {
     name: "title",
     type: "text",
+    span: 2,
   },
   {
     name: "description",
     type: "text",
+    span: 2,
   },
   {
     name: "image",
     type: "text",
+    span: 1,
   },
   {
     name: "banner",
     type: "text",
+    span: 1,
   },
 
   {
     name: "location",
     type: "text",
+    span: 1,
   },
   {
     name: "start_date",
     type: "date",
+    span: 1,
   },
   {
     name: "end_date",
     type: "date",
+    span: 1,
   },
   {
     name: "status",
     type: "select",
+    span: 1,
+  },
+  {
+    name: "category",
+    type: "select",
+    span: 1,
+  },
+  {
+    name: "organizer",
+    type: "select",
+    span: 1,
   },
   {
     name: "info",
     type: "mdx",
+    span: 2,
   },
 ] as const;

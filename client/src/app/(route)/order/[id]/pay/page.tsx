@@ -12,7 +12,7 @@ const prepareFetch = async (id: string) => {
     return res;
   }
 
-  redirect("/");
+  redirect(`/e/${id}`);
 };
 
 export default async function PayPage({
@@ -22,6 +22,14 @@ export default async function PayPage({
 }) {
   const { id } = await params;
   const { data }: { data: OrderType } = await prepareFetch(id);
+
+  if (data.status === "pending") {
+    redirect(`/order/${id}/checkout`);
+  } else if (data.status === "paid") {
+    redirect(`/order/${id}/complete`);
+  } else if (data.status === "failed") {
+    redirect(`/order/${id}/cancel`);
+  }
 
   return (
     <div>
@@ -36,7 +44,7 @@ export default async function PayPage({
             <h2>Amount</h2>
             <h2>&#3647;{data.total.toFixed(2)}</h2>
           </div>
-          <Pay id={data.id} amount={data.total} />
+          <Pay id={data.id} />
         </div>
       </div>
     </div>

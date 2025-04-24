@@ -26,6 +26,8 @@ export const getCategoryById = async (id: string) => {
     where: eq(category.id, id),
   });
 
+  if (!result) throw new Error("Category not found");
+
   return { message: `Get category by id`, data: result };
 };
 
