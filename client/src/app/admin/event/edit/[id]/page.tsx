@@ -19,6 +19,6 @@ export default async function EventEdit({
 }) {
   const { id } = await params;
   const { data } = await prepareFetch(id);
-
+  console.log("data", data);
   return <EventForm core={data} />;
 }

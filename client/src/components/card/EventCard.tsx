@@ -24,7 +24,7 @@ export default function EventCard({
       <Image
         src={data.image}
         alt={data.title}
-        className="rounded-lg shadow-xl"
+        className="rounded-lg shadow-xl w-full h-66 object-cover"
       />
       <p className="text-sm text-red-500">
         {ShortDate(data.start_date)} - {ShortDate(data.end_date)}
