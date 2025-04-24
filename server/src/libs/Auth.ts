@@ -24,9 +24,20 @@ export const handleSignup = async (body: UserRequest) => {
   return data;
 };
 
-export const handleResetPassword = async (password: string) => {
+export const handleResetPassword = async (
+  email: string,
+  currentPassword: string,
+  newPassword: string
+) => {
+  const { error: signin_error } = await Supabase.auth.signInWithPassword({
+    email,
+    password: currentPassword,
+  });
+
+  if (signin_error) throw new Error(signin_error.message);
+
   const { data, error } = await Supabase.auth.updateUser({
-    password,
+    password: newPassword,
   });
 
   if (error) throw new Error(error.message);

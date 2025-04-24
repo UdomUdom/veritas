@@ -13,3 +13,10 @@ export const UserModel = t.Object({
 });
 
 export type UserType = typeof UserModel.static;
+
+export const UserResetPasswordModel = t.Object({
+  currentPassword: t.String(),
+  newPassword: t.String(),
+});
+
+export type UserResetPasswordType = typeof UserResetPasswordModel.static;

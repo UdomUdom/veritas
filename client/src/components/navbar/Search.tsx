@@ -118,22 +118,24 @@ export default function Search() {
               ))}
             </CommandGroup>
           )}
-          <CommandGroup heading="Explore Categories">
-            {categories.map((cat, index) => (
-              <Link
-                key={index}
-                href={`/c/${cat.name}`}
-                className="flex items-center gap-2"
-              >
-                <CommandItem
-                  className="cursor-pointer w-full"
-                  onSelect={() => setOpen(false)}
+          {categories && (
+            <CommandGroup heading="Explore Categories">
+              {categories.map((cat, index) => (
+                <Link
+                  key={index}
+                  href={`/c/${cat.name}`}
+                  className="flex items-center gap-2"
                 >
-                  {cat.name}
-                </CommandItem>
-              </Link>
-            ))}
-          </CommandGroup>
+                  <CommandItem
+                    className="cursor-pointer w-full"
+                    onSelect={() => setOpen(false)}
+                  >
+                    {cat.name}
+                  </CommandItem>
+                </Link>
+              ))}
+            </CommandGroup>
+          )}
         </CommandList>
       </CommandDialog>
     </div>

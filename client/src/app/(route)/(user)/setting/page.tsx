@@ -1,10 +1,10 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Avatar from "@/components/build/Avatar";
-import ProfileForm from "@/components/form/ProfileForm";
 import ChangePasswordForm from "@/components/form/ChangePasswordForm";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import ProfileForm from "./form";
 
 export default function Setting() {
   const { user } = useAuth();
@@ -27,7 +27,19 @@ export default function Setting() {
               <Button onClick={handleImageUpload}>Choose Image</Button>
             </div>
           </div>
-          <ProfileForm user={user} />
+          {user && (
+            <ProfileForm
+              core={{
+                id: user.id,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                email: user.email,
+                phone: user.phone || "",
+                gender: user.gender || "",
+                birthdate: user.birthdate || "",
+              }}
+            />
+          )}
         </CardContent>
       </Card>
       <br />
@@ -36,11 +48,11 @@ export default function Setting() {
           <CardTitle className="text-xl">Change Password</CardTitle>
         </CardHeader>
         <CardContent>
-          <ChangePasswordForm />
+          <ChangePasswordForm id={user?.id} />
         </CardContent>
       </Card>
       <br />
-      <Card className="w-full border-1 border-slate-100">
+      {/* <Card className="w-full border-1 border-slate-100">
         <CardHeader>
           <CardTitle className="text-xl">Manage Account</CardTitle>
         </CardHeader>
@@ -58,7 +70,7 @@ export default function Setting() {
           </div>
         </CardContent>
       </Card>
-      <br />
+      <br /> */}
     </div>
   );
 }

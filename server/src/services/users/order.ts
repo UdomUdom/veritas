@@ -13,6 +13,7 @@ export const getOrderByUserId = async (id: string) => {
         },
       },
     },
+    orderBy: (order, { desc }) => [desc(order.created_at)],
   });
 
   if (!result) throw new Error("Order not found");

@@ -13,13 +13,13 @@ export default function UserLayout({
       <div className="container">
         <div className="flex gap-4">
           <Link href="/wallet" className="flex items-center space-x-2">
-            <Button variant="link">
+            <Button variant="link" className="cursor-pointer">
               <Wallet />
               <span>Wallet</span>
             </Button>
           </Link>
           <Link href="/setting" className="flex items-center space-x-2">
-            <Button variant="link">
+            <Button variant="link" className="cursor-pointer">
               <Settings />
               <span>Setting</span>
             </Button>
