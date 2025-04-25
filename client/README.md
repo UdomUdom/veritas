@@ -1,1 +1,4 @@
 # Veritas - Client
+
+# Deploy
+- vercel
