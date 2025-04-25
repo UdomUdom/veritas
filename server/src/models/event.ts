@@ -22,7 +22,7 @@ export const EventModel = t.Object({
   scheduled_publish_at: t.Optional(t.Date()),
   category_id: t.Optional(t.String()),
   organizer_id: t.Optional(t.String()),
-  tickets: t.Array(
+  event_ticket: t.Array(
     t.Object({
       type: t.String(),
       price: t.Number(),

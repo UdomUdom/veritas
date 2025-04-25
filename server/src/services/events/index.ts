@@ -16,7 +16,7 @@ export const createEvent = async (body: EventType) => {
 
     if (!created_event) throw new Error("Failed to create event");
 
-    body.tickets?.forEach(async (ticket) => {
+    body.event_ticket?.forEach(async (ticket) => {
       const [created_ticket] = await tx
         .insert(event_ticket)
         .values({
