@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "../ui/button";
 import Fetch from "@/utils/Fetch";
+import { notify } from "@/utils/Notify";
 import { loadStripe } from "@stripe/stripe-js";
 
 export default function Pay({ id }: { id: string }) {
@@ -19,7 +20,7 @@ export default function Pay({ id }: { id: string }) {
     );
 
     if (res.status !== "ok") {
-      return alert("Failed: Something went wrong!");
+      notify.error("Failed: Something went wrong!");
     }
 
     stripe.redirectToCheckout({

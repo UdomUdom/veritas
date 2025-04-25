@@ -3,6 +3,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import Fetch from "@/utils/Fetch";
+import { notify } from "@/utils/Notify";
 
 export default function ChangePasswordForm({ id }: { id: string | undefined }) {
   const [data, setData] = useState({
@@ -25,8 +26,7 @@ export default function ChangePasswordForm({ id }: { id: string | undefined }) {
     e.preventDefault();
 
     if (data.newPassword !== data.confirmPassword) {
-      alert("New password and confirmation do not match");
-      return;
+      return notify.error("New password and confirmation do not match");
     }
 
     const res = await Fetch(
@@ -41,11 +41,11 @@ export default function ChangePasswordForm({ id }: { id: string | undefined }) {
     );
 
     if (res && res.status === "ok") {
-      alert("Password updated successfully");
+      notify.success("Password updated successfully");
       window.location.reload();
     }
 
-    alert(res.message);
+    notify.error(res.message);
     window.location.reload();
   };
 

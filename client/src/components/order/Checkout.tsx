@@ -3,6 +3,7 @@ import Fetch from "@/utils/Fetch";
 import { Button } from "../ui/button";
 import { SquareCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { notify } from "@/utils/Notify";
 
 export default function Checkout({ id }: { id: string }) {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Checkout({ id }: { id: string }) {
     );
 
     if (res.status !== "ok") {
-      return alert("Error: " + res.message);
+      return notify.error(res.message);
     }
 
     router.push(`/order/${id}/pay`);
@@ -31,7 +32,7 @@ export default function Checkout({ id }: { id: string }) {
     );
 
     if (res.status !== "ok") {
-      return alert("Error: " + res.message);
+      return notify.error(res.message);
     }
 
     router.push(`/order/${id}`);

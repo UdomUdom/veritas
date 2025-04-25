@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
 import Fetch from "@/utils/Fetch";
+import { notify } from "@/utils/Notify";
 
 interface OrganizerFormProps {
   core?: {
@@ -69,7 +70,7 @@ export function OrganizerForm({ core }: OrganizerFormProps) {
     });
 
     if (res && res.status !== "ok") {
-      return alert("Error: " + res.message);
+      return notify.error(res.message);
     }
 
     window.location.reload();

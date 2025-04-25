@@ -7,14 +7,14 @@ const url_path = [
     name: "All Tickets",
     url: "/wallet",
   },
-  {
-    name: "Active Tickets",
-    url: "/wallet/active-tickets",
-  },
-  {
-    name: "Past Tickets",
-    url: "/wallet/past-tickets",
-  },
+  // {
+  //   name: "Active Tickets",
+  //   url: "/wallet/active-tickets",
+  // },
+  // {
+  //   name: "Past Tickets",
+  //   url: "/wallet/past-tickets",
+  // },
   {
     name: "To Pay",
     url: "/wallet/to-pay",

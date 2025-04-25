@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { DatePicker } from "@/components/ui/datepicker";
 import Fetch from "@/utils/Fetch";
+import { notify } from "@/utils/Notify";
 
 interface UserFormProps {
   core: {
@@ -123,11 +124,11 @@ export default function ProfileForm({ core }: UserFormProps) {
     );
 
     if (res && res.status === "ok") {
-      alert("Profile updated successfully");
+      notify.success(res.message);
       window.location.reload();
     }
 
-    alert("Failed to update profile");
+    notify.error("Failed to update profile");
     window.location.reload();
   };
 

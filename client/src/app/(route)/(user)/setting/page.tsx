@@ -8,6 +8,7 @@ import ProfileForm from "./form";
 
 export default function Setting() {
   const { user } = useAuth();
+
   const handleImageUpload = () => {
     alert("Image upload functionality is not implemented yet.");
   };

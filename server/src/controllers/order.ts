@@ -8,7 +8,7 @@ import {
   paymentOrder,
 } from "@/services/orders/checkout";
 import { getAllOrder, getOrderById } from "@/services/orders";
-import { getOrderByStatus } from "@/services/orders/status";
+import { getOrderBarChart, getOrderByStatus } from "@/services/orders/status";
 
 const controller = "order";
 
@@ -68,6 +68,13 @@ export const orderController = new Elysia({
       withHandler(({ params }) => getOrderByStatus(params.status)),
       {
         detail: { summary: "Get Order By Status" },
+      }
+    )
+    .get(
+      "/chart/",
+      withHandler(() => getOrderBarChart()),
+      {
+        detail: { summary: "Get Order Bar Chart" },
       }
     )
 );
