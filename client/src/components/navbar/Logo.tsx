@@ -8,6 +8,7 @@ export default function Logo() {
       <Image
         src={HomeLogo.src}
         alt="Logo"
+        width={100}
         style={{ maxWidth: "200px", maxHeight: "50px" }}
         className="text-black dark:text-white overflow-auto"
       />
