@@ -14,9 +14,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Area,
   Bar,
-  Line,
 } from "recharts";
 
 const COLORS = ["#0088FE", "#FFBB28", "#FF8042"];
@@ -37,10 +35,19 @@ export default function Dashboard() {
   const [organizerData, setOrganizerData] = useState<{ length: number } | null>(
     null
   );
-  const [eventData, setEventData] = useState<any[]>([]);
+  interface Event {
+    id: string;
+    name: string;
+    date: string;
+    [key: string]: string | number | boolean | null | undefined;
+  }
+
+  const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [order, setOrder] = useState<any[]>([]);
+  const [order, setOrder] = useState<{ updated_at: string; amount: number }[]>(
+    []
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,30 +80,10 @@ export default function Dashboard() {
           setError("Failed to fetch event data.");
         }
 
-        const orderAPI = `${process.env.NEXT_PUBLIC_API_URL}/api/order/status/paid`;
+        const orderAPI = `${process.env.NEXT_PUBLIC_API_URL}/api/order/chart`;
         const orderRes = await Fetch(orderAPI);
         if (orderRes && orderRes.status === "ok") {
-          const formattedOrderData = orderRes.data.map((item: any) => ({
-            ...item,
-            updated_at: formatDate(item.updated_at),
-          }));
-
-          const aggregatedOrders = formattedOrderData.reduce(
-            (acc: any[], current: { updated_at: string; amount: number }) => {
-              const existingEntry = acc.find(
-                (entry) => entry.updated_at === current.updated_at
-              );
-              if (existingEntry) {
-                existingEntry.amount += current.amount;
-              } else {
-                acc.push({ ...current });
-              }
-              return acc;
-            },
-            [] as any[]
-          );
-
-          setOrder(aggregatedOrders);
+          setOrder(orderRes.data);
         } else {
           setError("Failed to fetch order status");
         }
@@ -110,14 +97,6 @@ export default function Dashboard() {
 
     fetchData();
   }, []);
-
-  const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
 
   const getStatData = () => {
     return [
@@ -231,20 +210,12 @@ export default function Dashboard() {
           <div className="bg-white shadow-xl rounded-lg p-4">
             <h2 className="text-xl font-bold mb-4">Order Status Updates</h2>
             <ResponsiveContainer width="100%" height={300}>
-              <ComposedChart width={730} height={250} data={order}>
-                <XAxis
-                  dataKey="updated_at"
-                  label={{
-                    value: "Updated At",
-                    position: "insideBottom",
-                    offset: -10,
-                  }}
-                />
-                <YAxis />
+              <ComposedChart width={730} height={400} data={order}>
+                <XAxis dataKey="date" />
+                <YAxis tickFormatter={(value) => value.toFixed(0)} />
                 <Tooltip />
                 <Legend />
                 <CartesianGrid stroke="#f5f5f5" />
-
                 <Bar dataKey="amount" barSize={20} fill="#413ea0" />
               </ComposedChart>
             </ResponsiveContainer>
