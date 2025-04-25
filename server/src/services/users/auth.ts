@@ -1,8 +1,8 @@
 import db from "@/db";
 import { eq } from "drizzle-orm";
 import { role, user } from "@/db/schema";
-import { UserType } from "@/models/user";
-import { errorSignup, handleSignup } from "@/libs/Auth";
+import { UserResetPasswordType, UserType } from "@/models/user";
+import { errorSignup, handleResetPassword, handleSignup } from "@/libs/Auth";
 
 export const signup = async (body: UserType) => {
   const result = await db.transaction(async (tx) => {
@@ -44,4 +44,25 @@ export const signup = async (body: UserType) => {
   });
 
   return { message: `User ${result.email} created`, data: null };
+};
+
+export const resetPassword = async (
+  id: string,
+  body: UserResetPasswordType
+) => {
+  const result = await db.query.user.findFirst({
+    where: eq(user.id, id),
+  });
+
+  if (!result) throw new Error("User not found");
+
+  const data = await handleResetPassword(
+    result.email,
+    body.currentPassword,
+    body.newPassword
+  );
+
+  if (!data) throw new Error("Failed to update password");
+
+  return { message: "Password updated", data: null };
 };

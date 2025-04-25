@@ -2,10 +2,6 @@
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
-@theme {
-  --color-base: #2b4acb;
-}
-
 * {
   scroll-behavior: smooth;
 }

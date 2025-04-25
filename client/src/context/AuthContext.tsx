@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const { data, error } = await sup
         .from("user")
-        .select("*")
+        .select("*, role (name)")
         .eq("id", id)
         .single();
 
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           email: data.email,
           firstname: data.firstname,
           lastname: data.lastname,
-          role: data.role,
+          role: data.role.name,
           avatar: data.avatar,
           birthdate: data.birthdate,
           phone: data.phone,

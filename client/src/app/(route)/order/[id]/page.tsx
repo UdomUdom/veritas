@@ -57,12 +57,14 @@ export default async function OrderPage({
                 </div>
               </div>
               <div className="flex flex-col items-center">
-                <Link href={`/ticket/${item.id}`}>
-                  <Button variant="outline" className="cursor-pointer">
-                    View Tickets
-                  </Button>
-                </Link>
-                <div>{qr && <Image src={qr} alt={item.id} />}</div>
+                {qr && (
+                  <div className="flex flex-col justify-center items-center">
+                    <Image src={qr} alt="" />
+                    <Link href={qr} download="my-qr-code.png">
+                      <Button>Download</Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>
