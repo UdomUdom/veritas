@@ -13,8 +13,8 @@ export default function Image({
       src={String(src) || ""}
       alt={alt || "Image"}
       className={className}
-      width={width || 500}
-      height={height || 500}
+      width={typeof width === "string" ? parseInt(width, 10) : width || 500}
+      height={typeof height === "string" ? parseInt(height, 10) : height || 500}
       {...props}
     ></Images>
   );
