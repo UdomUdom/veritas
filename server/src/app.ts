@@ -6,7 +6,6 @@ import routes from "./routes";
 export const app = new Elysia()
   .use(
     swagger({
-      exclude: ["/swagger"],
       autoDarkMode: true,
       documentation: {
         info: {
