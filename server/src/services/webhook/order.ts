@@ -23,13 +23,14 @@ export const orderWebhook = async (context: any) => {
   }
 
   let result;
+  const { id } = event.data.object;
 
   switch (event.type) {
     case "checkout.session.completed":
-      result = await order_paid(event.data.object.id);
+      result = await order_paid(id);
       return { message: "Order paid", data: result };
-    case "checkout.session.expired":
-      result = await order_failed(event.data.object.id);
+    case "payment_intent.payment_failed":
+      result = await order_failed(id);
       return { message: "Order failed", data: result };
   }
 };

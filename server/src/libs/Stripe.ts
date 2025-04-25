@@ -11,7 +11,7 @@ interface ProductData {
 export const createCheckoutSession = async (data: ProductData) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["promptpay"],
+      payment_method_types: ["card"],
       line_items: [
         {
           price_data: {
@@ -31,6 +31,6 @@ export const createCheckoutSession = async (data: ProductData) => {
 
     return session;
   } catch (error) {
-    throw new Error("Failed to create checkout session");
+    throw new Error(`Failed to create checkout session: ${error}`);
   }
 };
