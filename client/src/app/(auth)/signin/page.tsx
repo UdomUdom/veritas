@@ -22,9 +22,9 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { toast } from "sonner";
 import { signin } from "./action";
 import { useAuth } from "@/context/AuthContext";
+import { notify } from "@/utils/Notify";
 
 const formSchema = z.object({
   email: z.string(),
@@ -50,11 +50,11 @@ export default function Login() {
         password: values.password,
       });
 
-      toast.success(data);
+      notify.success(data);
       setLoading(true);
       router.replace("/");
-    } catch (error: unknown) {
-      toast.error(`${error}`);
+    } catch {
+      notify.error("Login failed");
     }
   }
 

@@ -25,8 +25,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { DatePicker } from "@/components/ui/datepicker";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { formSchema } from "./formSchema";
+import { notify } from "@/utils/Notify";
 
 export default function RegisterPreview() {
   const router = useRouter();
@@ -60,10 +60,12 @@ export default function RegisterPreview() {
           },
         }
       );
+
       if (res.status === "error") {
-        return toast.error(res.message);
+        return notify.error(res.message);
       }
-      toast.success(res.message);
+
+      notify.success(res.message);
       router.push("/signin");
     } catch {}
   }

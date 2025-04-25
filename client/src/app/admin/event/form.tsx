@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { DatePicker } from "@/components/ui/datepicker";
 import { redirect } from "next/navigation";
 import { Plus, Minus } from "lucide-react";
+import { notify } from "@/utils/Notify";
 interface EventFormProps {
   core?: {
     id: string;
@@ -121,7 +122,7 @@ export function EventForm({ core }: EventFormProps) {
       },
     });
     if (res && res.status !== "ok") {
-      return alert("Error: " + res.message);
+      return notify.error(res.message);
     }
     redirect("/admin/event");
   };

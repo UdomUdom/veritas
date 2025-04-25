@@ -19,6 +19,7 @@ import Fetch from "@/utils/Fetch";
 import { useState, useEffect } from "react";
 import { DatePicker } from "@/components/ui/datepicker";
 import { redirect } from "next/navigation";
+import { notify } from "@/utils/Notify";
 interface BlogFormProps {
   core?: {
     id: string;
@@ -100,7 +101,7 @@ export function BlogForm({ core }: BlogFormProps) {
     });
 
     if (res && res.status !== "ok") {
-      return alert("Error: " + res.message);
+      return notify.error(res.message);
     }
 
     redirect("/admin/blog");

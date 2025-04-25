@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import Fetch from "@/utils/Fetch";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { notify } from "@/utils/Notify";
 
 interface TicketProps {
   event_id: string;
@@ -143,7 +144,7 @@ export default function Ticket({ event_id }: TicketProps) {
     );
 
     if (res.status !== "ok") {
-      return alert("Error: " + res.message);
+      return notify.error(res.message);
     }
 
     router.push(`/order/${res.data.id}/checkout`);
